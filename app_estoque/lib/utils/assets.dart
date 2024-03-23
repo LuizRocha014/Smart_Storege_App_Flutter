@@ -1,8 +1,8 @@
 class AssetsAplicativo {
   static const String _path = 'assets/';
   static const String _pathPng = '${_path}png';
-  static const String _pathSvg = '${_path}svg';
-  static const String _pathJson = '${_path}json';
+  // static const String _pathSvg = '${_path}svg';
+  // static const String _pathJson = '${_path}json';
 
   //animacoes
   static const String iconEstoque = '$_pathPng/estoque.png';

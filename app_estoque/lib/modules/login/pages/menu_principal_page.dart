@@ -47,7 +47,7 @@ class _LoginPageState extends State<MenuPrincipalPage> {
                 itemCount: controller.listMenuInicial.length,
                 itemBuilder: (BuildContext context, int index) =>
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => controller.acessaPagina(index, context),
                       child: CardListMenuPrincipalWidget(
                           tituloCard: controller.listMenuInicial[index].nome,
                           imageAssets: controller.listMenuInicial[index].image),

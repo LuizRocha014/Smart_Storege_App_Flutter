@@ -5,13 +5,11 @@ import 'package:flutter/widgets.dart';
 
 class BackgroundPrincipal extends StatelessWidget {
   final String titulo;
-  final Widget? childFirt;
   final Widget? childSecund;
   final bool? enableBackButton;
   final Widget? floatingActionButton;
   const BackgroundPrincipal({super.key, 
     required this.titulo,
-     this.childFirt,
      this.childSecund, this.enableBackButton, this.floatingActionButton,
   });
 
@@ -26,7 +24,7 @@ class BackgroundPrincipal extends StatelessWidget {
             Visibility(
               visible: titulo.isNotEmpty,
               child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24, top: 10, bottom: 20),
+                padding: const EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 20),
                 child: Row(
                   children: [
                     Visibility(

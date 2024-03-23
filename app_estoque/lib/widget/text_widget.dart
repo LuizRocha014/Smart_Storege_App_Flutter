@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
@@ -8,8 +6,14 @@ class TextWidget extends StatelessWidget {
   final Color? textColor;
   final double? fontSize;
   final FontWeight? fontWeight;
-  const TextWidget(this.texto,
-      {super.key, this.decoration, this.textColor, this.fontSize, this.fontWeight,});
+  const TextWidget(
+    this.texto, {
+    super.key,
+    this.decoration,
+    this.textColor,
+    this.fontSize,
+    this.fontWeight,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class TextWidget extends StatelessWidget {
           decoration: decoration,
           color: textColor ?? Colors.black,
           fontSize: fontSize,
-          fontWeight: fontWeight ),
+          fontWeight: fontWeight),
     );
   }
 }
