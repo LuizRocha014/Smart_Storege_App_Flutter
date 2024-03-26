@@ -31,21 +31,17 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                     vertical: MediaQuery.of(context).size.height * 0.02),
                 child: Visibility(
                   visible: widget.titulo != null ? true : false,
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: CoresDoAplicativo.branco,
-                        ),
-                        TextWidget(
-                          widget.titulo ?? "",
-                          textColor: CoresDoAplicativo.branco,
-                          fontSize: FontesDoAplicativo.textMedium,
-                        ),
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: CoresDoAplicativo.branco,
+                      ),
+                      TextWidget(
+                        widget.titulo ?? "",
+                        fontSize: FontesDoAplicativo.textMedium,
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -23,7 +23,7 @@ class _LoginPageState extends State<MenuPrincipalPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundPrincipal(
+    return BackgroundWidget(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: CoresDoAplicativo.primaryColor,
@@ -33,9 +33,8 @@ class _LoginPageState extends State<MenuPrincipalPage> {
           height: 30,
         ),
       ),
-      enableBackButton: false,
       titulo: 'Home',
-      childSecund: Align(
+      child: Align(
         alignment: Alignment.topCenter,
         child: ListView(
           children: [

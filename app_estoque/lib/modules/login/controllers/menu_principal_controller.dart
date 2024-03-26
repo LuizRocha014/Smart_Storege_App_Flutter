@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:app_estoque/base/models/list_menu_Iniciar.dart';
+import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
+import 'package:app_estoque/modules/produtos/page/produtos_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +46,11 @@ class MenuPrincipalController extends BaseController {
           break;
         case 'GestureEstoque':
           log("Estoque");
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> const EstoqueProdutosPage()));
           break;
         case 'GestureProdutos':
           log("Produtos");
+           Navigator.push(context, MaterialPageRoute(builder: (context) => const ProdutosPage()));
           break;
         default:
       }

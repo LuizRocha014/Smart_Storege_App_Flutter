@@ -7,4 +7,5 @@ class CoresDoAplicativo {
   static const Color textGray = Color(0xFF4F4F4F);
   static const Color gray = Color(0xFF808080);
   static const Color lightGray = Color(0xFFC0C0C0);
+  static const Color branco = Color(0xFFFFFFFF);
 }
