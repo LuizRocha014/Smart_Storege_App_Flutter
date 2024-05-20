@@ -1,5 +1,4 @@
-import 'package:app_estoque/modules/login/controllers/menu_principal_controller.dart';
-import 'package:app_estoque/modules/login/widget/card_opcoes_menu_widget.dart';
+import 'package:app_estoque/modules/menu/controllers/menu_principal_controller.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
@@ -24,6 +23,7 @@ class _LoginPageState extends State<MenuPrincipalPage> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
+      enableBackButton: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: CoresDoAplicativo.primaryColor,
@@ -43,13 +43,13 @@ class _LoginPageState extends State<MenuPrincipalPage> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
-                itemCount: controller.listMenuInicial.length,
+                //itemCount: controller.listMenuInicial.length,
                 itemBuilder: (BuildContext context, int index) =>
                     GestureDetector(
-                      onTap: () => controller.acessaPagina(index, context),
-                      child: CardListMenuPrincipalWidget(
-                          tituloCard: controller.listMenuInicial[index].nome,
-                          imageAssets: controller.listMenuInicial[index].image),
+//onTap: () => controller.acessaPagina(index, context),
+                     // child: CardListMenuPrincipalWidget(
+                        //  tituloCard: controller.listMenuInicial[index].nome,
+//imageAssets: controller.listMenuInicial[index].image),
                     )),
           ],
         ),

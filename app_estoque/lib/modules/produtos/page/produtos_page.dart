@@ -1,8 +1,10 @@
+import 'package:app_estoque/modules/produtos/page/cadastro_produto_page.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({super.key});
@@ -21,7 +23,7 @@ class _MyWidgetState extends State<ProdutosPage> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => Get.to(const CadastroProduto()),
           backgroundColor: CoresDoAplicativo.primaryColor,
           tooltip: 'Increment Counter',
           child: const Icon(Icons.add)),
@@ -29,11 +31,14 @@ class _MyWidgetState extends State<ProdutosPage> {
       child: ListView(
         children: [
           const Center(
-            child: TextWidget(
-              "PRODUTOS",
-              textColor: CoresDoAplicativo.textGray,
-              fontSize: 28,
-              fontWeight: FontWeight.w500,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: TextWidget(
+                "PRODUTOS",
+                textColor: CoresDoAplicativo.textGray,
+                fontSize: 28,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           Padding(

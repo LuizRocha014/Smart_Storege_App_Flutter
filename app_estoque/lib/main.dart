@@ -1,6 +1,7 @@
-import 'package:app_estoque/modules/login/pages/menu_principal_page.dart';
-import 'package:app_estoque/modules/pagina_teste_page.dart';
+import 'package:app_estoque/modules/login/page/login_page.dart';
+import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +13,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       
       title: 'Flutter Demo',
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.amber,
+          ).copyWith(
+          primary: CoresDoAplicativo.primaryColor,
+          secondary: CoresDoAplicativo.primaryColor,
+        ),
       ),
-      home: const MenuPrincipalPage(),
+      home: const LoginPage(),
     );
   }
 }

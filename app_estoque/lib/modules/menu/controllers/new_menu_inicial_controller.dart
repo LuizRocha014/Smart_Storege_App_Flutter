@@ -3,13 +3,14 @@ import 'dart:developer';
 import 'package:app_estoque/base/models/list_menu_Iniciar.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
+import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
 import 'package:app_estoque/modules/produtos/page/produtos_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
-import 'package:app_estoque/utils/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class MenuPrincipalController extends BaseController {
-  late final List<ListOpcoesMenu> listMenuInicial;
+class NewMenuIncialController extends BaseController {
+ late final List<ListOpcoesMenu> listMenuInicial;
 
   @override
   void iniciaControlador() {
@@ -19,41 +20,47 @@ class MenuPrincipalController extends BaseController {
 
   void carregaDados() {
     try {
+      // listMenuInicial.add(ListOpcoesMenu(
+      //     nome: 'Home',
+      //     gestureCommand: 'GestureHome'));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Vendas',
-          image: AssetsAplicativo.iconVendas,
           gestureCommand: 'GestureVendas'));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Estoque',
-          image: AssetsAplicativo.iconEstoque,
           gestureCommand: 'GestureEstoque'));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Produtos',
-          image: AssetsAplicativo.iconProdutos,
           gestureCommand: 'GestureProdutos'));
+           
 
       
-    } catch (e) {
+    } catch (_) {
     }
   }
 
-  Future<void> acessaPagina(int index, BuildContext context) async {
+  Future<void> acessaPagina(String index, BuildContext context) async {
     try {
-      final objetoList = listMenuInicial[index];
-      switch (objetoList.gestureCommand) {
+      
+      switch (index) {
         case 'GestureVendas':
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const ListaVendasPage()));
+         Get.to(const ListaVendasPage());
+          break;
+           case 'GestureHome':
+        Get.to(const MenuPrincipalPage());
           break;
         case 'GestureEstoque':
           log("Estoque");
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> const EstoqueProdutosPage()));
+           Get.to(const EstoqueProdutosPage());
           break;
         case 'GestureProdutos':
           log("Produtos");
-           Navigator.push(context, MaterialPageRoute(builder: (context) => const ProdutosPage()));
+            Get.to(const ProdutosPage());
           break;
         default:
       }
-    } catch (e) {}
+    } catch (_) {}
   }
+
+  
 }

@@ -1,6 +1,7 @@
 class FontesDoAplicativo {
   
   static const double titloText = 28;
+  static const double titloLogin = 32;
   static const double textCardVenda = 14;
 
 
