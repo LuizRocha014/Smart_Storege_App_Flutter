@@ -1,4 +1,4 @@
-import 'package:app_estoque/modules/pagina_teste_page.dart';
+import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:flutter/cupertino.dart';
 
 class CadastroProduto extends StatelessWidget {
@@ -6,6 +6,8 @@ class CadastroProduto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BackgroundWidget(titulo: "Cadastro de Produto",);
+    return const BackgroundWidget(
+      titulo: "Cadastro de Produto",
+    );
   }
 }
