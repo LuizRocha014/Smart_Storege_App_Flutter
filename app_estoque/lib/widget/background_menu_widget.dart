@@ -1,3 +1,4 @@
+import 'package:app_estoque/modules/login/page/login_page.dart';
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
@@ -63,27 +64,31 @@ class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
                     ),
                   )),
             ),
-            ListView.builder(
-              itemCount: _controller.listMenuInicial.length,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) => Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () => _controller.acessaPagina(
-                        _controller.listMenuInicial[index].gestureCommand,
-                        context),
-                    child: TextWidget(
-                      _controller.listMenuInicial[index].nome,
-                      fontSize: FontesDoAplicativo.textMedium,
-                      fontWeight: FontWeight.w500,
+            Obx(
+              () => ListView.builder(
+                itemCount: _controller.listOpcaoMenu.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () => _controller.acessaPagina(
+                          _controller.listOpcaoMenu[index].gestureCommand,
+                          context),
+                      child: TextWidget(
+                        _controller.listOpcaoMenu[index].nome,
+                        fontSize: FontesDoAplicativo.textMedium,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
             const Spacer(),
-            const TextWidget("SAIR"),
+            GestureDetector(
+                onTap: () => Get.offAll(const LoginPage()),
+                child: const TextWidget("SAIR")),
           ],
         ),
       ),

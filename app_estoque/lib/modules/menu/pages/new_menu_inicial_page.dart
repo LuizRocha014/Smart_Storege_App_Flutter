@@ -1,10 +1,13 @@
-import 'dart:developer';
 
 import 'package:app_estoque/modules/listaVendas/widget/card_vendas_widget.dart';
+import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
+import 'package:app_estoque/utils/assets.dart';
+import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/background_menu_widget.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NewMenuInicialPage extends StatefulWidget {
   const NewMenuInicialPage({super.key});
@@ -22,7 +25,14 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
   @override
   Widget build(BuildContext context) {
     return BackgroundMenuWidget(
-      floatingActionButton: FloatingActionButton(onPressed: () {log("Add new Soled");},),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: CoresDoAplicativo.primaryColor,
+        onPressed: () => Get.to(const NovaVendaPage()),
+        child: Image.asset(
+            height: MediaQuery.of(context).size.width * 0.07,
+            width: MediaQuery.of(context).size.width * 0.07,
+            AssetsAplicativo.iconSuperMarket),
+      ),
       body: ListView(
         children: [
           const Center(

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:app_estoque/base/context/service/icontect.dart';
+import 'package:app_estoque/base/models/acesso/acesso.dart';
+import 'package:app_estoque/base/models/user/user.dart';
 import 'package:app_estoque/utils/base_migration.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
 import 'package:app_estoque/utils/transaction_manager.dart';
@@ -22,17 +24,13 @@ class Context implements IContext {
   static Context? _instance;
 
   factory Context({
-    required String nameDatabase,
-    String? password,
-    required int version,
-    required List<InfosTableDatabase> tables,
     List<BaseMigration> migrations = const [],
   }) {
     _instance ??= Context.nonFactoryConstructor(
-      nameDatabase: nameDatabase,
-      password: password,
-      version: version,
-      tables: tables,
+      nameDatabase: _nameDatabase,
+      password: _namePassowrd,
+      version: _version,
+      tables: _tables,
       migrations: migrations,
     );
     return _instance!;
@@ -59,6 +57,17 @@ class Context implements IContext {
     required this.migrations,
   });
 
+
+  static String get _nameDatabase => "APPESTOQUE";
+  static String get _namePassowrd => "12345678";
+  static int get _version => 1;
+  static List<InfosTableDatabase> get _tables => [
+    User.table,
+    Acessos.table
+  ];
+
+  static List<BaseMigration> get _migrations => [];
+
   //Getters
 
   Future<String> get pathDatabase async {
@@ -66,9 +75,8 @@ class Context implements IContext {
     return "${directory.path}/$nameDatabase.db";
   }
 
-  @override
-  Future<Database> initializeDatabase({String? path}) async {
-    path ??= await pathDatabase;
+  Future<Database> initializeDatabase() async {
+    final path = await pathDatabase;
     log(path, name: "Banco de Dados");
     final database = await openDatabase(
       path,

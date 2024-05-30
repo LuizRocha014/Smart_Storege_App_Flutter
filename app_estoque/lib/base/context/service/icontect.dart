@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
 
 abstract class IContext {
-  Future<Database> initializeDatabase({String? path});
 
   Future<bool> exportDatabase(BuildContext context);
 

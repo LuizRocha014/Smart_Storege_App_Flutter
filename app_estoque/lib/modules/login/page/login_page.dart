@@ -1,3 +1,4 @@
+
 import 'package:app_estoque/modules/login/controllers/login_controller.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
@@ -59,7 +60,8 @@ class _LoginPageState extends State<LoginPage> {
                 right: MediaQuery.of(context).size.height * 0.05),
             child: ButtonWidget(
               "ENTRAR",
-              onPressed: () async => await _controller.login(context),
+              onPressed: () async =>
+                  await _controller.startBarcodeScanStream(context),
             ),
           ),
         ],

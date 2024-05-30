@@ -1,4 +1,6 @@
 import 'package:app_estoque/base/context/app_context.dart';
+import 'package:app_estoque/base/context/context.dart';
+import 'package:app_estoque/base/context/service/icontect.dart';
 import 'package:app_estoque/modules/login/page/login_page.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +11,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  //static const url = '172.16.30.186:5031';
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    AppContext(password: 'App@2024');
+    Get.create(() => Context());
+    Get.find<Context>().initializeDatabase();
+    
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
