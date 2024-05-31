@@ -1,7 +1,5 @@
-import 'package:app_estoque/base/context/app_context.dart';
 import 'package:app_estoque/base/context/context.dart';
-import 'package:app_estoque/base/context/service/icontect.dart';
-import 'package:app_estoque/modules/login/page/login_page.dart';
+import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +29,7 @@ class MyApp extends StatelessWidget {
           secondary: CoresDoAplicativo.primaryColor,
         ),
       ),
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }

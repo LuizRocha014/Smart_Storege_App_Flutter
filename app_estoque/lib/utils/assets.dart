@@ -12,5 +12,6 @@ class AssetsAplicativo {
   static const String iconAdicionarVenda = '$_pathPng/adicionar-ao-carrinho.png';
   static const String iconMore = '$_pathPng/mais.png';
   static const String iconSuperMarket = '$_pathPng/carrinho_superMarket.png';
+  static const String iconApp = '$_pathPng/icon_app.png';
 
 }

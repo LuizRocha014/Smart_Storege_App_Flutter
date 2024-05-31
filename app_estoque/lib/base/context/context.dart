@@ -66,7 +66,6 @@ class Context implements IContext {
     Acessos.table
   ];
 
-  static List<BaseMigration> get _migrations => [];
 
   //Getters
 
