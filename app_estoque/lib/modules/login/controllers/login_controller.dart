@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:app_estoque/base/models/user/user.dart';
+import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/menu/pages/new_menu_inicial_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/utils/fonts.dart';
@@ -39,7 +40,7 @@ class LoginController extends BaseController with ErrorService {
       final retonro = await http.get(uri);
       // if (retonro.body.isEmpty) throw Exception();
       usuarioLogin = User.fromJson(jsonDecode(retonro.body));
-      Get.to(const NewMenuInicialPage());
+      Get.to(const HomePage());
     } catch (_) {
       showModalBottomSheet(
         // ignore: use_build_context_synchronously

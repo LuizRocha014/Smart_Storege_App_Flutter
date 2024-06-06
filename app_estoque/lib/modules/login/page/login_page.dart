@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             child: ButtonWidget(
               "ENTRAR",
               onPressed: () async =>
-                  await _controller.startBarcodeScanStream(context),
+                  _controller.login(context),
             ),
           ),
         ],

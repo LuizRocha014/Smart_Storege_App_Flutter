@@ -9,6 +9,7 @@ import 'package:app_estoque/modules/login/controllers/login_controller.dart';
 import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
 import 'package:app_estoque/modules/produtos/page/produtos_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +22,8 @@ class NewMenuIncialController extends BaseController {
     listMenuInicial = RxList<ListOpcoesMenu>();
     await carregaDados();
   }
-List<ListOpcoesMenu> get listOpcaoMenu  => listMenuInicial;
+
+  List<ListOpcoesMenu> get listOpcaoMenu => listMenuInicial;
   Future<void> carregaDados() async {
     try {
       final controllerLogin = Get.put(LoginController());
@@ -30,34 +32,37 @@ List<ListOpcoesMenu> get listOpcaoMenu  => listMenuInicial;
 
       final retonro = await http.get(uri);
       if (retonro.body.isEmpty) throw Exception();
-      final List<Acessos> acessos =
-          (jsonDecode(retonro.body) as List<dynamic>).map((e) => Acessos.fromJson(e)).toList();
+      final List<Acessos> acessos = (jsonDecode(retonro.body) as List<dynamic>)
+          .map((e) => Acessos.fromJson(e))
+          .toList();
 
       for (var acesso in acessos) {
         switch (acesso.valor) {
-          case "AcessVenderProd":
-            break;
-          case "listaDeVandasAcess":
-            listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Vendas', gestureCommand: 'GestureVendas'));
-            break;
-          case "AcessVenda":
-            break;
           case "AcessEstoque":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Estoque', gestureCommand: 'GestureEstoque'));
+                nome: 'Estoque',
+                gestureCommand: 'GestureEstoque',
+                imageString: AssetsAplicativo.iconEstoque));
             break;
           case "AcessProdutos":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Produtos', gestureCommand: 'GestureProdutos'));
+                nome: 'Produtos',
+                gestureCommand: 'GestureProdutos',
+                imageString: AssetsAplicativo.iconProdutos));
             break;
-             case "AcessTransLoja":
+          case "AcessTransLoja":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Transferencia', gestureCommand: 'GestureTransferencia'));
+                nome: 'Transferencia',
+                gestureCommand: 'GestureTransferencia',
+                imageString: AssetsAplicativo.iconTransferencia));
             break;
           default:
         }
       }
+      listMenuInicial.add(ListOpcoesMenu(
+          nome: 'Outros',
+          gestureCommand: 'GestureOutros',
+          imageString: AssetsAplicativo.iconMoreMenu));
     } catch (_) {}
   }
 
