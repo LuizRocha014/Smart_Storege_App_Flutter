@@ -27,44 +27,47 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CoresDoAplicativo.branco.withOpacity(0.9),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 150,
-          ),
-          const Center(
-            child: TextWidget(
-              "LOGIN",
-              fontSize: FontesDoAplicativo.titloLogin,
-              fontWeight: FontWeight.w500,
-              textColor: CoresDoAplicativo.primaryColor,
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 150,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: TextFieldWidget(
-              titulo: "Usuário",
-              hintText: "Digite seu usuário",
-              controller: _controller.userName,
+            const Center(
+              child: TextWidget(
+                "LOGIN",
+                fontSize: FontesDoAplicativo.titloLogin,
+                fontWeight: FontWeight.w500,
+                textColor: CoresDoAplicativo.primaryColor,
+              ),
             ),
-          ),
-          TextFieldWidget(
-            titulo: "Senha",
-            hintText: "Digite seu senha",
-            controller: _controller.passWord,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.03,
-                left: MediaQuery.of(context).size.height * 0.05,
-                right: MediaQuery.of(context).size.height * 0.05),
-            child: ButtonWidget(
-              "ENTRAR",
-              onPressed: () async =>
-                  _controller.login(context),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: TextFieldWidget(
+                titulo: "Usuário",
+                hintText: "Digite seu usuário",
+                controller: _controller.userName,
+              ),
             ),
-          ),
-        ],
+            TextFieldWidget(
+              titulo: "Senha",
+              hintText: "Digite seu senha",
+              controller: _controller.passWord,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.03,
+                  left: MediaQuery.of(context).size.height * 0.05,
+                  right: MediaQuery.of(context).size.height * 0.05),
+              child: ButtonWidget(
+                "ENTRAR",
+                onPressed: () async =>
+                    _controller.login(context),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
