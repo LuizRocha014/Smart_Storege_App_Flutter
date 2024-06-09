@@ -9,7 +9,7 @@ import 'package:get/state_manager.dart';
 abstract class BaseController extends GetxController  {
   late RxBool _isLoading;
   late final GlobalKey<FormState> _formKey;
-  late final String url  = "192.168.15.11:5031"; 
+  late final String url  = "192.168.15.52:5031"; 
   late User? usuario;
 
   BaseController() {

@@ -26,7 +26,7 @@ class _MyWidgetState extends State<ProdutosPage> {
           onPressed: () => Get.to(const CadastroProduto()),
           backgroundColor: CoresDoAplicativo.primaryColor,
           tooltip: 'Increment Counter',
-          child: const Icon(Icons.add)),
+          child: const Icon(color: CoresDoAplicativo.branco, Icons.add)),
       titulo: "Produtos",
       child: ListView(
         children: [

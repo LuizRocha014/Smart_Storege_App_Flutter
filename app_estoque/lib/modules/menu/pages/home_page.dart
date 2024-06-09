@@ -123,8 +123,8 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               decoration: InputDecoration(
                 filled: true,
-                fillColor: CoresDoAplicativo
-                    .secundaryColor, // Cor de fundo similar à da imagem
+                fillColor: CoresDoAplicativo.secundaryColor
+                    .withOpacity(0.8), // Cor de fundo similar à da imagem
                 hintText: 'Busque uma venda',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: GestureDetector(

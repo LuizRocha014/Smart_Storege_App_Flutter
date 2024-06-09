@@ -42,28 +42,28 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                     child: Row(
                       children: [
                         Visibility(
-                          visible: widget.enableBackButton,
-                          replacement:  Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: TextWidget(
+                            visible: widget.enableBackButton,
+                            replacement: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: TextWidget(
                                 widget.titulo ?? "",
                                 textColor: CoresDoAplicativo.branco,
                                 fontSize: FontesDoAplicativo.textMedium,
                               ),
-                          ),
+                            ),
                             child: Row(
-                          children: [
-                            const Icon(
-                              Icons.arrow_back_ios_new_rounded,
-                              color: CoresDoAplicativo.branco,
-                            ),
-                            TextWidget(
-                              widget.titulo ?? "",
-                              textColor: CoresDoAplicativo.branco,
-                              fontSize: FontesDoAplicativo.textMedium,
-                            ),
-                          ],
-                        ))
+                              children: [
+                                const Icon(
+                                  Icons.arrow_back_ios_new_rounded,
+                                  color: CoresDoAplicativo.branco,
+                                ),
+                                TextWidget(
+                                  widget.titulo ?? "",
+                                  textColor: CoresDoAplicativo.branco,
+                                  fontSize: FontesDoAplicativo.textMedium,
+                                ),
+                              ],
+                            ))
                       ],
                     ),
                   ),

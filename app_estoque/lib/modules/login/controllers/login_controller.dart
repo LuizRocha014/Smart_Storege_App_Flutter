@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:app_estoque/base/models/user/user.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
-import 'package:app_estoque/modules/menu/pages/new_menu_inicial_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/service_erro.dart';
