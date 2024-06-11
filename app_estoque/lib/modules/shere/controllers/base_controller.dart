@@ -6,10 +6,10 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get/state_manager.dart';
 
-abstract class BaseController extends GetxController  {
+abstract class BaseController extends GetxController {
   late RxBool _isLoading;
   late final GlobalKey<FormState> _formKey;
-  late final String url  = "192.168.15.52:5031"; 
+  late final String url = "172.100.20.49:5031";
   late User? usuario;
 
   BaseController() {
@@ -24,7 +24,7 @@ abstract class BaseController extends GetxController  {
   bool get formKeyValidate => formKey.currentState?.validate() ?? false;
   set isLoading(bool value) => _isLoading.value = value;
 
-Future<void> startBarcodeScanStream(BuildContext context) async {
+  Future<void> startBarcodeScanStream(BuildContext context) async {
     FlutterBarcodeScanner.scanBarcode(
       '#f97516',
       'CANCELAR',
@@ -33,7 +33,6 @@ Future<void> startBarcodeScanStream(BuildContext context) async {
     ).then(
       (barcode) async {
         log(barcode);
-      
       },
     );
   }

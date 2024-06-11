@@ -1,4 +1,5 @@
 import 'package:app_estoque/modules/produtos/page/cadastro_produto_page.dart';
+import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
@@ -53,39 +54,15 @@ class _MyWidgetState extends State<ProdutosPage> {
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.05),
             child: ListView.builder(
-              itemCount: 4,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) => Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.02),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.01),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: CoresDoAplicativo.gray),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.04),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextWidget("Pinto de Borracha"),
-                        CustomRich("Cor: ", "preto"),
-                        Divider(),
-                        CustomRich(
-                          "Quantidade: ",
-                          "13",
-                          color: CoresDoAplicativo.preto,
-                          colorSecund: CoresDoAplicativo.gray,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                itemCount: 4,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) =>
+                    const CardProdutoWidget(
+                      categoriaProduto: 'Diversos',
+                      quantidadeProduto: '10',
+                      tituloProduto: 'Abobora com carne',
+                      nomeCampoCorCateg: 'Categoria: ',
+                    )),
           )
         ],
       ),
