@@ -37,7 +37,7 @@ class LoginController extends BaseController with ErrorService {
           {'UserName': userName.text, 'PassWord': passWord.text});
 
       final retonro = await http.get(uri);
-      // if (retonro.body.isEmpty) throw Exception();
+      if (retonro.body.isEmpty) throw Exception();
       usuarioLogin = User.fromJson(jsonDecode(retonro.body));
       Get.to(const HomePage());
     } catch (_) {
@@ -75,6 +75,4 @@ class LoginController extends BaseController with ErrorService {
       );
     }
   }
-
-  
 }

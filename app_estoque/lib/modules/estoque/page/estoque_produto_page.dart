@@ -1,9 +1,5 @@
 import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
-import 'package:app_estoque/utils/cores_do_aplicativo.dart';
-import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/widget/rich_text_widet.dart';
-import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
