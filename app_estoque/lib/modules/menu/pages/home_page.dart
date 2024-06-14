@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
+import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/new_background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(
                           right: MediaQuery.of(context).size.width * 0.04),
                       child: GestureDetector(
-                        onTap: () => Get.to(const NovaVendaPage()),
+                        onTap: () => Get.to(const SelecaoItensPage()),
                         child: Container(
                           height: MediaQuery.of(context).size.height * 0.05,
                           width: MediaQuery.of(context).size.height * 0.05,

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
@@ -8,12 +10,14 @@ class CardProdutoWidget extends StatelessWidget {
   final String categoriaProduto;
   final String quantidadeProduto;
   final String nomeCampoCorCateg;
+  final bool selecionado;
   const CardProdutoWidget(
       {super.key,
       required this.categoriaProduto,
       required this.quantidadeProduto,
       required this.tituloProduto,
-      required this.nomeCampoCorCateg});
+      required this.nomeCampoCorCateg,
+      this.selecionado = false});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +27,9 @@ class CardProdutoWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               vertical: MediaQuery.of(context).size.height * 0.01),
           decoration: BoxDecoration(
+            color: selecionado
+                ? CoresDoAplicativo.primaryColor.withOpacity(0.2)
+                : CoresDoAplicativo.branco,
             border: Border.all(color: CoresDoAplicativo.gray),
             borderRadius: BorderRadius.circular(20),
           ),
