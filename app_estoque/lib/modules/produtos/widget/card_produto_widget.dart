@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
@@ -60,16 +58,18 @@ class CardProdutoWidget extends StatelessWidget {
                       children: [
                         TextWidget(tituloProduto),
                         CustomRich(nomeCampoCorCateg, categoriaProduto),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.002),
-                          child: CustomRich(
-                            "Quantidade: ",
-                            quantidadeProduto,
-                            color: CoresDoAplicativo.preto,
-                            colorSecund: CoresDoAplicativo.gray,
+                        if (quantidadeProduto.isNotEmpty)
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top:
+                                    MediaQuery.of(context).size.height * 0.002),
+                            child: CustomRich(
+                              "Quantidade: ",
+                              quantidadeProduto,
+                              color: CoresDoAplicativo.preto,
+                              colorSecund: CoresDoAplicativo.gray,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

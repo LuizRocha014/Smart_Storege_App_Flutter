@@ -1,8 +1,8 @@
-import 'package:app_estoque/base/context/context.dart';
 import 'package:app_estoque/modules/login/page/login_page.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Get.create(() => Context());
-    Get.find<Context>().initializeDatabase();
-    
+    Get.put(Context());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

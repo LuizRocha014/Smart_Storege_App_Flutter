@@ -32,6 +32,17 @@ class LoginController extends BaseController with ErrorService {
 
   Future<void> login(BuildContext context) async {
     try {
+      // final repos = Get.put(ProdutoRepository());
+      // final produto = Produto(
+      //     nome: "Teste",
+      //     id: const Uuid().v4(),
+      //     inclusao: DateTime.now(),
+      //     cor: "Preto",
+      //     marca: "Logitech",
+      //     codigo: "001",
+      //     quantidade: "10",
+      //     arquivoId: "sad");
+      // repos.db.database.insert(Produto.table.tableName, produto.toJson());
       //
       final uri = Uri.http(url, "api/Usuario/login",
           {'UserName': userName.text, 'PassWord': passWord.text});

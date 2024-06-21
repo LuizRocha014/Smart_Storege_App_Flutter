@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
-import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/new_background_principal.dart';
@@ -38,6 +37,8 @@ class _HomePageState extends State<HomePage> {
                 top: MediaQuery.of(context).size.height * 0.04,
                 left: MediaQuery.of(context).size.height * 0.02),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
                     height: MediaQuery.of(context).size.width * 0.08,
