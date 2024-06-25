@@ -1,14 +1,7 @@
-import 'package:app_estoque/base/context/context.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:app_estoque/base/models/produtos.dart';
+import 'package:app_estoque/base/repository/base_repository.dart';
+import 'package:app_estoque/base/repository/service/iproduto_repository.dart';
 
-class ProdutoRepository {
-  late Database db;
-
-  _initDatabase() async {
-    db = await DB.instance.database;
-  }
-
-  ProdutoRepository() {
-    _initDatabase();
-  }
+class ProdutoRepository extends BaseRepository<Produto> implements IProdutoRepository {
+  ProdutoRepository(super.infosTableDatabase, super.fromJson);
 }

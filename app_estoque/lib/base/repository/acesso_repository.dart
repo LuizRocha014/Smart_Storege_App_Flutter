@@ -1,14 +1,7 @@
-import 'package:app_estoque/base/context/context.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:app_estoque/base/models/acesso/acesso.dart';
+import 'package:app_estoque/base/repository/base_repository.dart';
+import 'package:app_estoque/base/repository/service/iacesso_repository.dart';
 
-class AcessoRepository {
-  late Database database;
-
-  _initState() async {
-    database = await DB.instance.database;
-  }
-
-  AcessoRepository() {
-    _initState();
-  }
+class AcessoRepository extends BaseRepository<Acessos> implements IAcessoRepository {
+  AcessoRepository(super.infosTableDatabase, super.fromJson);
 }

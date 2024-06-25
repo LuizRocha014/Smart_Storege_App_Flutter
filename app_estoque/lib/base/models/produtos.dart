@@ -32,6 +32,17 @@ class Produto extends Core {
     };
   }
 
+  factory Produto.fromJson(Map<String, dynamic> json) => Produto(
+        nome: json['nome'],
+        valor: json['valor'],
+        id: '',
+        inclusao: DateTime.now(),
+        cor: '',
+        marca: '',
+        codigo: '',
+        quantidade: '',
+      );
+
   static InfosTableDatabase get table {
     final columns = {
       "Nome": "TEXT",
