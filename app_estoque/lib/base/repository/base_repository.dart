@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:app_estoque/base/context/service/icontext.dart';
-import 'package:app_estoque/base/repository/service/ibase_repository.dart';
+import 'package:app_estoque/base/repository/interface/ibase_repository.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
-import 'package:get/get.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 
 class BaseRepository<T> implements IBaseRepository<T> {
   @override
@@ -14,7 +14,7 @@ class BaseRepository<T> implements IBaseRepository<T> {
   late final T Function(Map<String, dynamic>) fromJson;
 
   BaseRepository(this.infosTableDatabase, this.fromJson) {
-    context = Get.find<IContext>();
+    context = instanceManager.get<IContext>();
   }
   @override
   Future<List<T>> getAll() async {

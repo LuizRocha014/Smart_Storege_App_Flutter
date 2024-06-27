@@ -10,6 +10,7 @@ abstract class BaseController extends GetxController {
   late RxBool _isLoading;
   late final GlobalKey<FormState> _formKey;
   late final String url = "192.168.15.52:5031";
+  late BuildContext context;
   late User? usuario;
 
   BaseController() {

@@ -3,9 +3,8 @@ import 'package:app_estoque/utils/base_migration.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
 
 class AppContext extends Context {
-  AppContext({
-    required super.password,
-  }) : super.nonFactoryConstructor(
+  AppContext()
+      : super.nonFactoryConstructor(
           nameDatabase: _nameDatabase,
           version: _version,
           tables: _tables,
