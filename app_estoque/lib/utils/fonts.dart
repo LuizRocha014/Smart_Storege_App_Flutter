@@ -1,9 +1,11 @@
-class FontesDoAplicativo {
-  static const double titloText = 28;
-  static const double titloLogin = 32;
-  static const double textCardVenda = 14;
-  static const double textValorProduto = 13;
+import 'package:app_estoque/utils/app_measurements.dart';
 
-  static const double tituloCardVenda = 18;
-  static const double textMedium = 16;
+class FontesDoAplicativo {
+  static double titloText = 28.sp;
+  static double titloLogin = 28.sp;
+  static double textCardVenda = 14.sp;
+  static double textValorProduto = 13.sp;
+
+  static double tituloCardVenda = 18.sp;
+  static double textMedium = 16.sp;
 }

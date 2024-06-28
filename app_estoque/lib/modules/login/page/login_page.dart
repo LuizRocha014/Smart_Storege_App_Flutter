@@ -34,7 +34,7 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
             const SizedBox(
               height: 150,
             ),
-            const Center(
+            Center(
               child: TextWidget(
                 "LOGIN",
                 fontSize: FontesDoAplicativo.titloLogin,

@@ -32,8 +32,8 @@ class LoginController extends BaseController {
   Future<void> login() async {
     try {
       isLoading = true;
-      final retorno = await instanceManager.get<IUserService>().login(userName.text, passWord.text);
-      if (retorno == null) throw Exception();
+      // final retorno = await instanceManager.get<IUserService>().login(userName.text, passWord.text);
+      // if (retorno == null) throw Exception();
       Get.to(const HomePage());
       isLoading = false;
     } catch (_) {
@@ -47,7 +47,7 @@ class LoginController extends BaseController {
             children: [
               Padding(
                 padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
-                child: const TextWidget(
+                child: TextWidget(
                   "Aviso!",
                   fontSize: FontesDoAplicativo.titloText,
                 ),

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:app_estoque/base/models/categoria.dart';
-import 'package:app_estoque/base/models/produtos.dart';
+import 'package:app_estoque/base/models/categoria/categoria.dart';
+import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/modules/produtos/controller/produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:flutter/material.dart';

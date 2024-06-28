@@ -15,30 +15,26 @@ class NovaVendaPage extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.04),
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
             child: ListView(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.04),
-                  child: const TextWidget(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04),
+                  child: TextWidget(
                     "Vendedor",
                     fontWeight: FontWeight.w600,
                     fontSize: FontesDoAplicativo.tituloCardVenda,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "Vendedor",
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "Matricula",
@@ -50,7 +46,7 @@ class NovaVendaPage extends StatelessWidget {
                       vertical: MediaQuery.of(context).size.height * 0.02),
                   child: const Divider(),
                 ),
-                const Row(
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -59,29 +55,26 @@ class NovaVendaPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       fontSize: FontesDoAplicativo.tituloCardVenda,
                     ),
-                    Icon(Icons.add)
+                    const Icon(Icons.add)
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02,
-                      bottom: MediaQuery.of(context).size.height * 0.02),
+                      top: MediaQuery.of(context).size.height * 0.02, bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "Nome",
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "CPF",
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "CEP",

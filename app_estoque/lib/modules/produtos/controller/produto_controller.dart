@@ -1,4 +1,4 @@
-import 'package:app_estoque/base/models/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:get/get.dart';
 

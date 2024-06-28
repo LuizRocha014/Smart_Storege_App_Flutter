@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:app_estoque/base/models/acesso/acesso.dart';
-import 'package:app_estoque/base/models/list_menu_Iniciar.dart';
+import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
 import 'package:app_estoque/modules/login/controllers/login_controller.dart';
@@ -27,28 +27,21 @@ class NewMenuIncialController extends BaseController {
   Future<void> carregaDados() async {
     try {
       final controllerLogin = Get.put(LoginController());
-      final uri = Uri.http(url, "api/Acesso/GetAcessos",
-          {'userId': controllerLogin.usuarioLogin.id});
+      final uri = Uri.http(url, "api/Acesso/GetAcessos", {'userId': controllerLogin.usuarioLogin.id});
 
       final retonro = await http.get(uri);
       if (retonro.body.isEmpty) throw Exception();
-      final List<Acessos> acessos = (jsonDecode(retonro.body) as List<dynamic>)
-          .map((e) => Acessos.fromJson(e))
-          .toList();
+      final List<Acessos> acessos = (jsonDecode(retonro.body) as List<dynamic>).map((e) => Acessos.fromJson(e)).toList();
 
       for (var acesso in acessos) {
         switch (acesso.valor) {
           case "AcessEstoque":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Estoque',
-                gestureCommand: 'GestureEstoque',
-                imageString: AssetsAplicativo.iconEstoque));
+                nome: 'Estoque', gestureCommand: 'GestureEstoque', imageString: AssetsAplicativo.iconEstoque));
             break;
           case "AcessProdutos":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Produtos',
-                gestureCommand: 'GestureProdutos',
-                imageString: AssetsAplicativo.iconProdutos));
+                nome: 'Produtos', gestureCommand: 'GestureProdutos', imageString: AssetsAplicativo.iconProdutos));
             break;
           case "AcessTransLoja":
             listMenuInicial.add(ListOpcoesMenu(
@@ -59,10 +52,8 @@ class NewMenuIncialController extends BaseController {
           default:
         }
       }
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Outros',
-          gestureCommand: 'GestureOutros',
-          imageString: AssetsAplicativo.iconMoreMenu));
+      listMenuInicial
+          .add(ListOpcoesMenu(nome: 'Outros', gestureCommand: 'GestureOutros', imageString: AssetsAplicativo.iconMoreMenu));
     } catch (_) {}
   }
 

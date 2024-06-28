@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CoresDoAplicativo {
-  static const Color primaryColor = Color(0xFF220382);
-  static const Color secundaryColor = Color(0xFFe1fa05);
+  static const Color primaryColor = Color(0xFF243263);
+  static const Color secundaryColor = Color(0xFF87CEFA);
   static const Color transparente = Color(0xFFcccccc);
   static const Color preto = Color(0xFF000000);
   static const Color textGray = Color(0xFF4F4F4F);

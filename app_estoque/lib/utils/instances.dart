@@ -1,5 +1,5 @@
 import 'package:app_estoque/base/models/acesso/acesso.dart';
-import 'package:app_estoque/base/models/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/base/repository/acesso_repository.dart';
 import 'package:app_estoque/base/repository/produto_repository.dart';
 import 'package:app_estoque/base/repository/interface/iacesso_repository.dart';

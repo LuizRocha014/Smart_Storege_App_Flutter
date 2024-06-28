@@ -1,6 +1,6 @@
-
 import 'package:app_estoque/modules/listaVendas/widget/card_vendas_widget.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
+import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
@@ -35,9 +35,9 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
       ),
       body: ListView(
         children: [
-          const Center(
+          Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
+              padding: EdgeInsets.symmetric(vertical: 10.w),
               child: TextWidget(
                 "VENDAS",
                 fontWeight: FontWeight.w500,
@@ -46,17 +46,13 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 2.w),
             child: ListView.builder(
               itemCount: 15,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) =>
-                  const CardVendasWidget(
-                      numVenda: "VENDA N° 225",
-                      nomeVendedor: "Osvaldo Cruz",
-                      dataString: "12/04/2024",
-                      valorVenda: 200),
+              itemBuilder: (BuildContext context, int index) => const CardVendasWidget(
+                  numVenda: "VENDA N° 225", nomeVendedor: "Osvaldo Cruz", dataString: "12/04/2024", valorVenda: 200),
             ),
           )
         ],

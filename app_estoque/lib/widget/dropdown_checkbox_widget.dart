@@ -129,7 +129,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                 // ),
                 decoration: InputDecoration(
                   counterText: '',
-                  helperStyle: const TextStyle(fontSize: FontesDoAplicativo.titloText, color: CoresDoAplicativo.gray),
+                  helperStyle: TextStyle(fontSize: FontesDoAplicativo.titloText, color: CoresDoAplicativo.gray),
                   errorMaxLines: 2,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 2.w,
