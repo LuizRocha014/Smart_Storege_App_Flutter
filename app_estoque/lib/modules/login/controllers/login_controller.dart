@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:app_estoque/base/models/user/user.dart';
-import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:boleto_utils/boleto_utils.dart';
 import 'package:get/get.dart';

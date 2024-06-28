@@ -1,6 +1,10 @@
 import 'package:app_estoque/base/models/core/core.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'produtos.g.dart';
+
+@JsonSerializable()
 class Produto extends Core {
   final String nome;
   final String cor;
@@ -20,28 +24,21 @@ class Produto extends Core {
       required this.quantidade,
       this.arquivoId,
       required this.valor});
-  Map<String, dynamic> toJson() {
-    return {
-      "Nome": nome,
-      "Cor": cor,
-      "Marca": marca,
-      "Codigo": codigo,
-      "Quantidade": quantidade,
-      "ArquivoId": arquivoId,
-      "Valor": valor,
-    };
-  }
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     "Nome": nome,
+  //     "Cor": cor,
+  //     "Marca": marca,
+  //     "Codigo": codigo,
+  //     "Quantidade": quantidade,
+  //     "ArquivoId": arquivoId,
+  //     "Valor": valor,
+  //   };
+  // }
 
-  factory Produto.fromJson(Map<String, dynamic> json) => Produto(
-        nome: json['nome'],
-        valor: json['valor'],
-        id: '',
-        inclusao: DateTime.now(),
-        cor: '',
-        marca: '',
-        codigo: '',
-        quantidade: '',
-      );
+  factory Produto.fromJson(Map<String, dynamic> json) => _$ProdutoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProdutoToJson(this);
 
   static InfosTableDatabase get table {
     final columns = {
