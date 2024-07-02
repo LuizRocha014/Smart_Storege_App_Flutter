@@ -1,18 +1,16 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:app_estoque/base/models/acesso/acesso.dart';
 import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
+import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
-import 'package:app_estoque/modules/login/controllers/login_controller.dart';
 import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
 import 'package:app_estoque/modules/produtos/page/produtos_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/assets.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class NewMenuIncialController extends BaseController {
   late final RxList<ListOpcoesMenu> listMenuInicial;
@@ -26,15 +24,10 @@ class NewMenuIncialController extends BaseController {
   List<ListOpcoesMenu> get listOpcaoMenu => listMenuInicial;
   Future<void> carregaDados() async {
     try {
-      final controllerLogin = Get.put(LoginController());
-      final uri = Uri.http(url, "api/Acesso/GetAcessos", {'userId': controllerLogin.usuarioLogin.id});
-
-      final retonro = await http.get(uri);
-      if (retonro.body.isEmpty) throw Exception();
-      final List<Acessos> acessos = (jsonDecode(retonro.body) as List<dynamic>).map((e) => Acessos.fromJson(e)).toList();
+      final acessos = await instanceManager.get<IUserService>().buscaAcessos();
 
       for (var acesso in acessos) {
-        switch (acesso.valor) {
+        switch (acesso!.valor) {
           case "AcessEstoque":
             listMenuInicial.add(ListOpcoesMenu(
                 nome: 'Estoque', gestureCommand: 'GestureEstoque', imageString: AssetsAplicativo.iconEstoque));
