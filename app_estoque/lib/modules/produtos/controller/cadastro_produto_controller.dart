@@ -18,7 +18,8 @@ class CadastroProdutoController extends BaseController {
   late TextEditingController valorController;
   late ImagePicker camera;
   late File? imagem;
-  final RxBool mostraImagem = false.obs;
+  late RxBool mostraImagem;
+  late List<String> drop;
   @override
   void iniciaControlador() {
     nomeController = TextEditingController();
@@ -27,6 +28,9 @@ class CadastroProdutoController extends BaseController {
     quantController = TextEditingController();
     valorController = TextEditingController();
     camera = ImagePicker();
+    mostraImagem = false.obs;
+    imagem = File("");
+    drop = ["Categoria 1", "Cateogiria 2"];
   }
 
   Future<String?> validaCampos() async {

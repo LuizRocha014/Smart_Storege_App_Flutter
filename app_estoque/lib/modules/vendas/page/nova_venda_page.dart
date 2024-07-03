@@ -1,6 +1,7 @@
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
+import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +30,22 @@ class NovaVendaPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
-                    controller: TextEditingController(),
-                    titulo: "Vendedor",
-                  ),
+                      controller: TextEditingController(),
+                      titulo: "Vendedor",
+                      color: CoresDoAplicativo.preto,
+                      textColor: CoresDoAplicativo.preto,
+                      hintText: '',
+                      labelInterno: ''),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
-                    controller: TextEditingController(),
-                    titulo: "Matricula",
-                  ),
+                      controller: TextEditingController(),
+                      titulo: "Matricula",
+                      color: CoresDoAplicativo.preto,
+                      textColor: CoresDoAplicativo.preto,
+                      hintText: '',
+                      labelInterno: ''),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -64,6 +71,10 @@ class NovaVendaPage extends StatelessWidget {
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "Nome",
+                    labelInterno: '',
+                    color: CoresDoAplicativo.preto,
+                    textColor: CoresDoAplicativo.preto,
+                    hintText: '',
                   ),
                 ),
                 Padding(
@@ -71,14 +82,21 @@ class NovaVendaPage extends StatelessWidget {
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "CPF",
+                    color: CoresDoAplicativo.preto,
+                    textColor: CoresDoAplicativo.preto,
+                    hintText: '',
+                    labelInterno: '',
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
-                    controller: TextEditingController(),
-                    titulo: "CEP",
-                  ),
+                      controller: TextEditingController(),
+                      titulo: "CEP",
+                      color: CoresDoAplicativo.preto,
+                      textColor: CoresDoAplicativo.preto,
+                      hintText: '',
+                      labelInterno: ''),
                 ),
               ],
             ),

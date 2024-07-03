@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:app_estoque/utils/request_manager.dart';
 
 class BaseService {
-  late String url = "http://192.168.56.1:5031";
+  late String url = "http://192.168.14.8:5031";
   late final int pageSize;
   late final Duration timeout;
   late final RequestManager requestManager;
@@ -12,7 +12,7 @@ class BaseService {
     timeout = const Duration(seconds: 30);
     pageSize = 500;
     requestManager = RequestManager();
-    url = "http://192.168.56.1:5031";
+    url = "http://192.168.14.8:5031";
   }
 
   // Future<String> getToken({String? user, String? senha, bool getTokenForcado = false}) async {

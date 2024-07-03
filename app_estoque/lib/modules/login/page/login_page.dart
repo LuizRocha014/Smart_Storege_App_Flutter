@@ -45,16 +45,20 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: TextFieldWidget(
-                titulo: "Usuário",
-                hintText: "Digite seu usuário",
-                controller: controller.userName,
-              ),
+                  titulo: "Usuário",
+                  hintText: "Digite seu usuário",
+                  controller: controller.userName,
+                  color: CoresDoAplicativo.branco,
+                  textColor: CoresDoAplicativo.preto,
+                  labelInterno: ''),
             ),
             TextFieldWidget(
-              titulo: "Senha",
-              hintText: "Digite seu senha",
-              controller: controller.passWord,
-            ),
+                titulo: "Senha",
+                hintText: "Digite seu senha",
+                controller: controller.passWord,
+                color: CoresDoAplicativo.branco,
+                textColor: CoresDoAplicativo.preto,
+                labelInterno: ''),
             Padding(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.03,
