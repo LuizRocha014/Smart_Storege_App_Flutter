@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CoresDoAplicativo {
+mixin CoresDoAplicativo {
   static const Color primaryColor = Color(0xFF243263);
   static const Color secundaryColor = Color(0xFF87CEFA);
   static const Color transparente = Color(0xFFcccccc);

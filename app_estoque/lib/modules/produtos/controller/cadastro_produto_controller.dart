@@ -1,9 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:app_estoque/base/models/arquivo/arquivo.dart';
 import 'package:app_estoque/base/models/categoria/categoria.dart';
 import 'package:app_estoque/base/models/produtos/produtos.dart';
-import 'package:app_estoque/modules/produtos/controller/produto_controller.dart';
+import 'package:app_estoque/base/repository/interface/iarquivo_repository.dart';
+import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/utils/routes.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +21,7 @@ class CadastroProdutoController extends BaseController {
   late TextEditingController corController;
   late TextEditingController quantController;
   late TextEditingController valorController;
+  late String categoriaText;
   late ImagePicker camera;
   late File? imagem;
   late RxBool mostraImagem;
@@ -57,7 +63,7 @@ class CadastroProdutoController extends BaseController {
     } catch (_) {}
   }
 
-  void cadastroProduto(BuildContext context) async {
+  void cadastroProduto() async {
     try {
       if (await validaCampos() == null) {
         final prod = Produto(
@@ -70,12 +76,20 @@ class CadastroProdutoController extends BaseController {
             quantidade: quantController.text,
             arquivoId: null,
             valor: valorController.text);
-        // Get.put(ProdutoRepository())
-        //     .db
-        //     .insert(Produto.table.tableName, prod.toJson());
-        Get.find<ProdutoController>().produtos.add(prod);
+
+        if (imagem != null) {
+          List<int> imageBytes = imagem!.readAsBytesSync();
+          String base64Image = base64Encode(imageBytes);
+          final arquivo = Arquivo(
+              id: const Uuid().v4(),
+              inclusao: DateTime.now(),
+              base64: base64Image);
+          instanceManager.get<IArquivoRepository>().create(arquivo.toJson());
+        }
+        instanceManager.get<IProdutoRepository>().create(prod.toJson());
+
         // ignore: use_build_context_synchronously
-        navigator?.pop(context);
+        context.pop();
       } else {}
     } catch (_) {}
   }

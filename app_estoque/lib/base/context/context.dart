@@ -56,7 +56,7 @@ class Context extends IContext {
   //Getters
 
   Future<String> get pathDatabase async {
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getApplicationCacheDirectory();
     return "${directory.path}/$nameDatabase.db";
   }
 
@@ -77,12 +77,14 @@ class Context extends IContext {
   Future<void> _updgradeDb(Database db, int oldVersion, int newVersion) async {
     try {
       for (int version = oldVersion; version <= newVersion; version++) {
-        final migration = migrations.firstWhereOrNull((m) => m.version == version);
+        final migration =
+            migrations.firstWhereOrNull((m) => m.version == version);
         if (migration != null) {
           await migration.executaMigrations(db);
           log("Migration executada para versão $version", name: "SQLITE");
         } else {
-          log("Nenhuma migration encontrada para versão $version", name: "SQLITE");
+          log("Nenhuma migration encontrada para versão $version",
+              name: "SQLITE");
         }
       }
     } catch (e) {
@@ -153,9 +155,10 @@ class Context extends IContext {
   }
 
   @override
-  Future<List<Map<String, Object?>>> rawQuery(String sql, [List<Object?>? arguments]) {
-    return _transactionManager
-        .runTransaction<List<Map<String, Object?>>>(() async => await database.rawQuery(sql, arguments));
+  Future<List<Map<String, Object?>>> rawQuery(String sql,
+      [List<Object?>? arguments]) {
+    return _transactionManager.runTransaction<List<Map<String, Object?>>>(
+        () async => await database.rawQuery(sql, arguments));
   }
 
   @override
@@ -196,22 +199,26 @@ class Context extends IContext {
 
   @override
   Future<int> rawDelete(String sql, [List<Object?>? arguments]) {
-    return _transactionManager.runTransaction<int>(() async => await database.rawDelete(sql, arguments));
+    return _transactionManager.runTransaction<int>(
+        () async => await database.rawDelete(sql, arguments));
   }
 
   @override
   Future<int> rawUpdate(String sql, [List<Object?>? arguments]) {
-    return _transactionManager.runTransaction<int>(() async => await database.rawUpdate(sql, arguments));
+    return _transactionManager.runTransaction<int>(
+        () async => await database.rawUpdate(sql, arguments));
   }
 
   @override
   Future<void> execute(String sql, [List<Object?>? arguments]) {
-    return _transactionManager.runTransaction<void>(() async => await database.execute(sql, arguments));
+    return _transactionManager.runTransaction<void>(
+        () async => await database.execute(sql, arguments));
   }
 
   @override
   Future<void> transaction<T>(Future<T> Function(Transaction txn) action) {
-    return _transactionManager.runTransaction<void>(() async => await database.transaction(action));
+    return _transactionManager
+        .runTransaction<void>(() async => await database.transaction(action));
   }
 }
 

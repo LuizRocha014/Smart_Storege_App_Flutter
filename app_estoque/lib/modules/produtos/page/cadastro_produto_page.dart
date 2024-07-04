@@ -60,7 +60,9 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                        padding: EdgeInsets.symmetric(
+                            vertical:
+                                MediaQuery.of(context).size.height * 0.01),
                         child: GestureDetector(
                           onTap: () => controller.tiraFoto(ImageSource.camera),
                           child: Container(
@@ -98,7 +100,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
             ),
             const Divider(),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 controller: controller.nomeController,
                 titulo: "Nome",
@@ -110,7 +113,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 labelExterno: "Marca",
                 controller: controller.marcaController,
@@ -127,12 +131,15 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 borderColor: CoresDoAplicativo.gray,
                 hintText: "Text",
                 label: 'Categoria',
-                onChanged: (value) {},
-                itens: controller.drop.map((e) => DropdownItem(id: "", texto: e)).toList(),
+                onChanged: (value) => controller.categoriaText = value!,
+                itens: controller.drop
+                    .map((e) => DropdownItem(id: "", texto: e))
+                    .toList(),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -164,7 +171,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 labelExterno: "Valor",
                 controller: controller.valorController,
@@ -182,7 +190,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               alignment: Alignment.bottomCenter,
               child: ButtonWidget(
                 "SALVAR",
-                onPressed: () => controller.cadastroProduto(context),
+                onPressed: () => controller.cadastroProduto(),
               ),
             )
           ],

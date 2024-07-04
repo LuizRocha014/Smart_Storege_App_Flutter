@@ -51,8 +51,12 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
               itemCount: 15,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) => const CardVendasWidget(
-                  numVenda: "VENDA N° 225", nomeVendedor: "Osvaldo Cruz", dataString: "12/04/2024", valorVenda: 200),
+              itemBuilder: (BuildContext context, int index) =>
+                  const CardVendasWidget(
+                      numVenda: "VENDA N° 225",
+                      nomeVendedor: "Osvaldo Cruz",
+                      dataString: "12/04/2024",
+                      valorVenda: 200),
             ),
           )
         ],
