@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:app_estoque/base/models/core/core.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,9 +15,9 @@ class Arquivo extends Core {
     required super.inclusao,
     required this.base64,
   });
+  Uint8List? get uint => base64Decode(base64);
 
-  factory Arquivo.fromJson(Map<String, dynamic> json) =>
-      _$ArquivoFromJson(json);
+  factory Arquivo.fromJson(Map<String, dynamic> json) => _$ArquivoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ArquivoToJson(this);
 

@@ -49,7 +49,7 @@ class _MyWidgetState extends State<ProdutosPage> {
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
             child: Obx(
               () => ListView.builder(
-                itemCount: controller.produtos.length,
+                itemCount: controller.listProdutos.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) => Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
@@ -81,7 +81,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextWidget(
-                                controller.produtos[index].nome,
+                                controller.listProdutos[index].nome,
                                 fontSize: FontesDoAplicativo.textMedium,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -89,7 +89,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                                 height: MediaQuery.of(context).size.width * 0.05,
                               ),
                               TextWidget(
-                                controller.produtos[index].quantidade,
+                                controller.listProdutos[index].quantidade,
                                 fontSize: FontesDoAplicativo.textValorProduto,
                                 textColor: CoresDoAplicativo.primaryColor,
                                 fontWeight: FontWeight.w600,

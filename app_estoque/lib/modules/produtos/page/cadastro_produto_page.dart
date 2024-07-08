@@ -22,6 +22,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
   @override
   void initState() {
     controller = Get.put(CadastroProdutoController());
+    controller.context = context;
     super.initState();
   }
 
@@ -60,9 +61,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical:
-                                MediaQuery.of(context).size.height * 0.01),
+                        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
                         child: GestureDetector(
                           onTap: () => controller.tiraFoto(ImageSource.camera),
                           child: Container(
@@ -89,8 +88,10 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                             Radius.circular(10),
                           ),
                         ),
-                        child: const Center(
-                          child: TextWidget("Novo Código"),
+                        child: Center(
+                          child: GestureDetector(
+                              onTap: () => controller.startBarcodeScanStream(context),
+                              child: const TextWidget("Novo Código")),
                         ),
                       ),
                     ],
@@ -100,8 +101,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
             ),
             const Divider(),
             Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 controller: controller.nomeController,
                 titulo: "Nome",
@@ -113,8 +113,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 labelExterno: "Marca",
                 controller: controller.marcaController,
@@ -127,19 +126,19 @@ class _CadastroProdutoState extends State<CadastroProduto> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 2.h, left: 1.w, right: 1.w),
-              child: DropDownWidget(
-                borderColor: CoresDoAplicativo.gray,
-                hintText: "Text",
-                label: 'Categoria',
-                onChanged: (value) => controller.categoriaText = value!,
-                itens: controller.drop
-                    .map((e) => DropdownItem(id: "", texto: e))
-                    .toList(),
+              child: Obx(
+                () => DropDownWidget(
+                  borderColor: CoresDoAplicativo.gray,
+                  hintText:
+                      controller.categoriaText.value.isEmpty ? "Selecione uma Categoria" : controller.categoriaNomeString!,
+                  label: 'Categoria',
+                  onChanged: (value) => controller.selectCategoria(value!),
+                  itens: controller.drop.map((e) => DropdownItem(id: e.id, texto: e.nome)).toList(),
+                ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -171,14 +170,14 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 labelExterno: "Valor",
-                controller: controller.valorController,
+                controller: controller.controllerTextValue,
                 hintText: "Digite o valor do produto",
                 titulo: "Valor",
-                labelInterno: 'Digite a qnt',
+                labelInterno: 'Digite o valor',
+                keyboardType: TextInputType.number,
                 color: CoresDoAplicativo.branco,
                 textColor: CoresDoAplicativo.preto,
               ),

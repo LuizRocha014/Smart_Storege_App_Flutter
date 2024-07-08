@@ -4,4 +4,15 @@ import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 
 class ProdutoRepository extends BaseRepository<Produto> implements IProdutoRepository {
   ProdutoRepository(super.infosTableDatabase, super.fromJson);
+
+  @override
+  Future<List<Produto>> getProdutos() async {
+    final query = '''
+      SELECT * FROM ${Produto.table.tableName}
+          ''';
+    final entitiesBanco = await context.rawQuery(query);
+    if (entitiesBanco.isNullOrEmpty) return <Produto>[];
+    final entities = entitiesBanco.map((e) => Produto.fromJson(e)).toList();
+    return entities;
+  }
 }

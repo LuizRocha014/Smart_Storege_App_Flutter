@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:app_estoque/base/models/arquivo/arquivo.dart';
@@ -10,6 +11,7 @@ import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -21,11 +23,16 @@ class CadastroProdutoController extends BaseController {
   late TextEditingController corController;
   late TextEditingController quantController;
   late TextEditingController valorController;
-  late String categoriaText;
+  late RxString categoriaText;
   late ImagePicker camera;
   late File? imagem;
   late RxBool mostraImagem;
-  late List<String> drop;
+  late List<Categoria> drop;
+  final MoneyMaskedTextController controllerTextValue = MoneyMaskedTextController(
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+    leftSymbol: 'R\$ ',
+  );
   @override
   void iniciaControlador() {
     nomeController = TextEditingController();
@@ -36,8 +43,15 @@ class CadastroProdutoController extends BaseController {
     camera = ImagePicker();
     mostraImagem = false.obs;
     imagem = File("");
-    drop = ["Categoria 1", "Cateogiria 2"];
+    categoriaText = ''.obs;
+    drop = [
+      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Eletronicos"),
+      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Fones de Ouvido"),
+      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Smartfones")
+    ];
   }
+
+  String? get categoriaNomeString => categoriaText.value;
 
   Future<String?> validaCampos() async {
     try {
@@ -45,12 +59,20 @@ class CadastroProdutoController extends BaseController {
       if (marcaController.text.isEmpty) return "Insira a marca do Produto";
       if (corController.text.isEmpty) return "Insira a cor do Produto";
       if (quantController.text.isEmpty) return "Insira a quantidade do Produto";
-      if (valorController.text.isEmpty) return "Insira o valor do Produto";
+      if (controllerTextValue.text.isEmpty) return "Insira o valor do Produto";
 
       return null;
-    } catch (_) {
+    } catch (e) {
+      log(e.toString());
       return "";
     }
+  }
+
+  void selectCategoria(String value) {
+    try {
+      categoriaSelect = drop.firstWhere((e) => e.id == value);
+      categoriaText.value = categoriaSelect!.nome;
+    } catch (_) {}
   }
 
   void tiraFoto(ImageSource source) async {
@@ -77,13 +99,10 @@ class CadastroProdutoController extends BaseController {
             arquivoId: null,
             valor: valorController.text);
 
-        if (imagem != null) {
+        if (imagem!.path.isNotEmpty) {
           List<int> imageBytes = imagem!.readAsBytesSync();
           String base64Image = base64Encode(imageBytes);
-          final arquivo = Arquivo(
-              id: const Uuid().v4(),
-              inclusao: DateTime.now(),
-              base64: base64Image);
+          final arquivo = Arquivo(id: const Uuid().v4(), inclusao: DateTime.now(), base64: base64Image);
           instanceManager.get<IArquivoRepository>().create(arquivo.toJson());
         }
         instanceManager.get<IProdutoRepository>().create(prod.toJson());

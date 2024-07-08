@@ -37,6 +37,7 @@ class TextFieldWidget extends StatelessWidget {
   final int? maxLength;
   final bool? autofocus;
   final AutovalidateMode? autovalidateMode;
+  final String? prefixText;
   const TextFieldWidget(
       {super.key,
       required this.controller,
@@ -71,7 +72,8 @@ class TextFieldWidget extends StatelessWidget {
       this.autofocus,
       this.autovalidateMode,
       required String titulo,
-      required String hintText});
+      required String hintText,
+      this.prefixText});
 
   @override
   Widget build(BuildContext context) {
@@ -114,30 +116,30 @@ class TextFieldWidget extends StatelessWidget {
           keyboardType: keyboardType,
           validator: validator,
           decoration: InputDecoration(
-            hintText: labelInterno,
-            counterText: '',
-            errorMaxLines: 2,
-            prefixIcon: prefixIcon == null ? null : Icon(prefixIcon, color: iconColor, size: 1.8.h),
-            suffixIcon: suffixIcon == null
-                ? null
-                : GestureDetector(
-                    onTap: onTapSuffixIcon,
-                    child: Icon(suffixIcon, color: (suffixColor != null) ? suffixColor : iconColor, size: 1.8.h)),
-            hintStyle: TextStyle(
-              color: CoresDoAplicativo.preto,
-              fontSize: hintFontSize,
-              fontWeight: hintFontWeight ?? FontWeight.normal,
-            ),
-            contentPadding: EdgeInsets.symmetric(horizontal: (borderRadius == null) ? (2.w) : 2.w, vertical: 0.5.h),
-            enabledBorder: outlineInputBorder,
-            focusedBorder: outlineInputBorder,
-            border: outlineInputBorder,
-            errorBorder: outlineInputBorder,
-            disabledBorder: outlineInputBorder,
-            focusedErrorBorder: outlineInputBorder,
-            filled: true,
-            fillColor: color,
-          ),
+              hintText: labelInterno,
+              counterText: '',
+              errorMaxLines: 2,
+              prefixIcon: prefixIcon == null ? null : Icon(prefixIcon, color: iconColor, size: 1.8.h),
+              suffixIcon: suffixIcon == null
+                  ? null
+                  : GestureDetector(
+                      onTap: onTapSuffixIcon,
+                      child: Icon(suffixIcon, color: (suffixColor != null) ? suffixColor : iconColor, size: 1.8.h)),
+              hintStyle: TextStyle(
+                color: CoresDoAplicativo.preto,
+                fontSize: hintFontSize,
+                fontWeight: hintFontWeight ?? FontWeight.normal,
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: (borderRadius == null) ? (2.w) : 2.w, vertical: 0.5.h),
+              enabledBorder: outlineInputBorder,
+              focusedBorder: outlineInputBorder,
+              border: outlineInputBorder,
+              errorBorder: outlineInputBorder,
+              disabledBorder: outlineInputBorder,
+              focusedErrorBorder: outlineInputBorder,
+              filled: true,
+              fillColor: color,
+              prefixText: prefixText),
           style: TextStyle(color: textColor, fontSize: fontSize),
         ),
       ],

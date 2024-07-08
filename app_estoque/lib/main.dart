@@ -13,9 +13,7 @@ import 'package:get/get.dart'; // Import necessário para localizações
 
 void main() {
   initInstances();
-  instanceManager.registerLazySingleton<IContext>(() => AppContext());
-  final context = instanceManager.get<IContext>();
-  context.initializeDatabase();
+
   runApp(const MyApp());
 }
 
@@ -27,7 +25,9 @@ class MyApp extends StatelessWidget {
     bool firstFrameAllowed = false;
     debugPaintSizeEnabled = false;
     RendererBinding.instance.deferFirstFrame();
-
+    instanceManager.registerLazySingleton<IContext>(() => AppContext());
+    final context = instanceManager.get<IContext>();
+    context.initializeDatabase();
     return LayoutBuilder(
       builder: (context, constraints) {
         return OrientationBuilder(
