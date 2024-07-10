@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/base/repository/base_repository.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
@@ -12,7 +14,9 @@ class ProdutoRepository extends BaseRepository<Produto> implements IProdutoRepos
           ''';
     final entitiesBanco = await context.rawQuery(query);
     if (entitiesBanco.isNullOrEmpty) return <Produto>[];
-    final entities = entitiesBanco.map((e) => Produto.fromJson(e)).toList();
+    final jsonString = jsonEncode(entitiesBanco);
+    var listJson = jsonDecode(jsonString) as List;
+    final entities = listJson.map((e) => Produto.fromJson(e)).toList();
     return entities;
   }
 }

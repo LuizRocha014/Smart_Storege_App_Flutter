@@ -1,5 +1,6 @@
 import 'package:app_estoque/base/models/core/core.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
+import 'package:app_estoque/utils/mappers.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'produtos.g.dart';
@@ -13,6 +14,7 @@ class Produto extends Core {
   final String quantidade;
   final String? arquivoId;
   final String valor;
+  final String? categoriaId;
 
   Produto(
       {required this.nome,
@@ -23,20 +25,22 @@ class Produto extends Core {
       required this.codigo,
       required this.quantidade,
       this.arquivoId,
+      this.categoriaId,
       required this.valor});
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     "Nome": nome,
-  //     "Cor": cor,
-  //     "Marca": marca,
-  //     "Codigo": codigo,
-  //     "Quantidade": quantidade,
-  //     "ArquivoId": arquivoId,
-  //     "Valor": valor,
-  //   };
-  // }
 
-  factory Produto.fromJson(Map<String, dynamic> json) => _$ProdutoFromJson(json);
+  factory Produto.fromJson(Map<String, dynamic> json) => _$ProdutoFromJson(fromJsonRepository(json));
+
+  Produto fromRepository(Map<String, dynamic> json) => Produto(
+        nome: json['nome'] as String,
+        id: json['id'] as String,
+        inclusao: DateTime.parse(json['inclusao'] as String),
+        cor: json['cor'] as String,
+        marca: json['marca'] as String,
+        codigo: json['codigo'] as String,
+        quantidade: json['quantidade'] as String,
+        arquivoId: json['arquivoId'] as String?,
+        valor: json['valor'] as String,
+      );
 
   Map<String, dynamic> toJson() => _$ProdutoToJson(this);
 
@@ -49,6 +53,7 @@ class Produto extends Core {
       "Quantidade": "TEXT",
       "ArquivoId": "TEXT",
       "Valor": "TEXT",
+      "CategoriaId": "TEXT",
     };
 
     columns.addAll(Core.table.columns);
