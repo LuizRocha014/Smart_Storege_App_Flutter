@@ -1,4 +1,5 @@
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,10 @@ class CardProdutoWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TextWidget(tituloProduto),
+                        TextWidget(
+                          tituloProduto,
+                          fontSize: FontesDoAplicativo.textMedium,
+                        ),
                         CustomRich(nomeCampoCorCateg, categoriaProduto),
                         if (quantidadeProduto.isNotEmpty)
                           Padding(

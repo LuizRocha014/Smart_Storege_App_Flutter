@@ -31,16 +31,21 @@ class _EstoqueProdutosPageState extends State<EstoqueProdutosPage> {
           child: const Icon(color: CoresDoAplicativo.branco, Icons.add)),
       titulo: "Estoque",
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
-        child: ListView.builder(
-            itemCount: controller.produtosEstoque.length,
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) => CardProdutoWidget(
-                  categoriaProduto: controller.produtosEstoque[index].nome,
-                  quantidadeProduto: controller.produtosEstoque[index].quantidade,
-                  tituloProduto: controller.produtosEstoque[index].nome,
-                  nomeCampoCorCateg: 'Categoria: ',
-                )),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05),
+        child: Obx(
+          () => ListView.builder(
+              itemCount: controller.produtosEstoque.length,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) =>
+                  CardProdutoWidget(
+                    categoriaProduto: controller.produtosEstoque[index].nome,
+                    quantidadeProduto:
+                        controller.produtosEstoque[index].quantidade,
+                    tituloProduto: controller.produtosEstoque[index].nome,
+                    nomeCampoCorCateg: 'Categoria: ',
+                  )),
+        ),
       ),
     );
   }
