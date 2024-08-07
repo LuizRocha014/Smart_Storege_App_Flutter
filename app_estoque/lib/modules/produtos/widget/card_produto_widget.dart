@@ -1,5 +1,8 @@
+import 'package:app_estoque/utils/app_measurements.dart';
+import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/widget/image_assets_widget.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +13,17 @@ class CardProdutoWidget extends StatelessWidget {
   final String quantidadeProduto;
   final String nomeCampoCorCateg;
   final bool selecionado;
+  final String? imagem;
+  final String valorProduto;
   const CardProdutoWidget(
       {super.key,
       required this.categoriaProduto,
       required this.quantidadeProduto,
       required this.tituloProduto,
-      required this.nomeCampoCorCateg,
-      this.selecionado = false});
+      this.nomeCampoCorCateg = "",
+      this.selecionado = false,
+      this.imagem,
+      required this.valorProduto});
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +49,17 @@ class CardProdutoWidget extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.02),
                     child: Container(
-                      height: 80,
-                      width: 80,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: CoresDoAplicativo.primaryColor),
+                      child: ImageAsset(
+                        imagem ?? AssetsAplicativo.iconPhonto,
+                        height: 5.h,
+                        color: CoresDoAplicativo.branco,
+                        width: 10.w,
+                      ),
                     ),
                   ),
                   Padding(
@@ -61,7 +74,8 @@ class CardProdutoWidget extends StatelessWidget {
                           tituloProduto,
                           fontSize: FontesDoAplicativo.textMedium,
                         ),
-                        CustomRich(nomeCampoCorCateg, categoriaProduto),
+                        if (nomeCampoCorCateg.isNotEmpty)
+                          CustomRich(nomeCampoCorCateg, categoriaProduto),
                         if (quantidadeProduto.isNotEmpty)
                           Padding(
                             padding: EdgeInsets.only(
@@ -74,6 +88,12 @@ class CardProdutoWidget extends StatelessWidget {
                               colorSecund: CoresDoAplicativo.gray,
                             ),
                           ),
+                        CustomRich(
+                          "Valor: ",
+                          valorProduto,
+                          color: CoresDoAplicativo.lightGray,
+                          colorSecund: CoresDoAplicativo.gray,
+                        ),
                       ],
                     ),
                   ),

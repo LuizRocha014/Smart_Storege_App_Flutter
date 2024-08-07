@@ -1,9 +1,12 @@
 import 'package:app_estoque/base/models/acesso/acesso.dart';
 import 'package:app_estoque/base/models/arquivo/arquivo.dart';
+import 'package:app_estoque/base/models/categoria/categoria.dart';
 import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/base/repository/acesso_repository.dart';
 import 'package:app_estoque/base/repository/arquivo_repository.dart';
+import 'package:app_estoque/base/repository/categoria_repository.dart';
 import 'package:app_estoque/base/repository/interface/iarquivo_repository.dart';
+import 'package:app_estoque/base/repository/interface/icategoria_repository.dart';
 import 'package:app_estoque/base/repository/produto_repository.dart';
 import 'package:app_estoque/base/repository/interface/iacesso_repository.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
@@ -30,6 +33,12 @@ void initInstances() {
       () => ArquivoRepository(
         Arquivo.table,
         Arquivo.fromJson,
+      ),
+    );
+    instanceManager.registerLazySingleton<ICategoriaRepository>(
+      () => CategoriaRepository(
+        Categoria.table,
+        Categoria.fromJson,
       ),
     );
   } catch (_) {}

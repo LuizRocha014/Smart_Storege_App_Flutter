@@ -9,7 +9,7 @@ import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart'; // Import necessário para localizações
+import 'package:get/get.dart';
 
 void main() {
   initInstances();
@@ -25,14 +25,18 @@ class MyApp extends StatelessWidget {
     bool firstFrameAllowed = false;
     debugPaintSizeEnabled = false;
     RendererBinding.instance.deferFirstFrame();
-    instanceManager.registerLazySingleton<IContext>(() => AppContext());
-    final context = instanceManager.get<IContext>();
-    context.initializeDatabase();
+    if (!instanceManager.exists<IContext>()) {
+      instanceManager.registerLazySingleton<IContext>(() => AppContext());
+      final context = instanceManager.get<IContext>();
+      context.initializeDatabase();
+    }
     return LayoutBuilder(
       builder: (context, constraints) {
         return OrientationBuilder(
           builder: (context, orientation) {
-            if (MediaQuery.of(context).size == Size.zero) return const SizedBox();
+            if (MediaQuery.of(context).size == Size.zero) {
+              return const SizedBox();
+            }
             if (!firstFrameAllowed) {
               RendererBinding.instance.allowFirstFrame();
               firstFrameAllowed = true;
@@ -72,7 +76,8 @@ class MyApp extends StatelessWidget {
                   ),
                   elevatedButtonTheme: ElevatedButtonThemeData(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(CoresDoAplicativo.primaryColor),
+                      backgroundColor: WidgetStateProperty.all(
+                          CoresDoAplicativo.primaryColor),
                     ),
                   ),
                   textButtonTheme: TextButtonThemeData(
@@ -99,7 +104,8 @@ class MyApp extends StatelessWidget {
 
 class MyBehavior extends ScrollBehavior {
   @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
     return child;
   }
 }

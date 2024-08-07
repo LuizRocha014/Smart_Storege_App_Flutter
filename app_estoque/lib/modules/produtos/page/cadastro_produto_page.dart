@@ -4,24 +4,25 @@ import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
 import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/dropdown_widget.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CadastroProduto extends StatefulWidget {
-  const CadastroProduto({super.key});
+class CadastroProdutoPage extends StatefulWidget {
+  const CadastroProdutoPage({super.key});
 
   @override
-  State<CadastroProduto> createState() => _CadastroProdutoState();
+  State<CadastroProdutoPage> createState() => _CadastroProdutoState();
 }
 
-class _CadastroProdutoState extends State<CadastroProduto> {
-  late CadastroProdutoController controller;
+class _CadastroProdutoState
+    extends MState<CadastroProdutoPage, CadastroProdutoController> {
   @override
   void initState() {
-    controller = Get.put(CadastroProdutoController());
+    super.registerController(CadastroProdutoController());
     controller.context = context;
     super.initState();
   }
@@ -61,7 +62,9 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                        padding: EdgeInsets.symmetric(
+                            vertical:
+                                MediaQuery.of(context).size.height * 0.01),
                         child: GestureDetector(
                           onTap: () => controller.tiraFoto(ImageSource.camera),
                           child: Container(
@@ -90,7 +93,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                         ),
                         child: Center(
                           child: GestureDetector(
-                              onTap: () => controller.startBarcodeScanStream(context),
+                              onTap: () =>
+                                  controller.startBarcodeScanStream(context),
                               child: const TextWidget("Novo Código")),
                         ),
                       ),
@@ -101,7 +105,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
             ),
             const Divider(),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 controller: controller.nomeController,
                 titulo: "Nome",
@@ -113,7 +118,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 labelExterno: "Marca",
                 controller: controller.marcaController,
@@ -129,16 +135,20 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               child: Obx(
                 () => DropDownWidget(
                   borderColor: CoresDoAplicativo.gray,
-                  hintText:
-                      controller.categoriaText.value.isEmpty ? "Selecione uma Categoria" : controller.categoriaNomeString!,
+                  hintText: controller.categoriaText.value.isEmpty
+                      ? "Selecione uma Categoria"
+                      : controller.categoriaNomeString!,
                   label: 'Categoria',
                   onChanged: (value) => controller.selectCategoria(value!),
-                  itens: controller.drop.map((e) => DropdownItem(id: e.id, texto: e.nome)).toList(),
+                  itens: controller.drop
+                      .map((e) => DropdownItem(id: e.id, texto: e.nome))
+                      .toList(),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -161,6 +171,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                       titulo: "Quantidade",
                       controller: controller.quantController,
                       labelInterno: 'Digite a qnt',
+                      keyboardType: TextInputType.number,
                       color: CoresDoAplicativo.branco,
                       textColor: CoresDoAplicativo.preto,
                       hintText: '',
@@ -170,7 +181,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 labelExterno: "Valor",
                 controller: controller.controllerTextValue,

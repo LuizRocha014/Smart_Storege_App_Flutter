@@ -5,8 +5,8 @@ import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
 import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
-import 'package:app_estoque/modules/produtos/page/produtos_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +30,15 @@ class NewMenuIncialController extends BaseController {
         switch (acesso!.valor) {
           case "AcessEstoque":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Estoque', gestureCommand: 'GestureEstoque', imageString: AssetsAplicativo.iconEstoque));
+                nome: 'Estoque',
+                gestureCommand: 'GestureEstoque',
+                imageString: AssetsAplicativo.iconEstoque));
             break;
           case "AcessProdutos":
             listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Produtos', gestureCommand: 'GestureProdutos', imageString: AssetsAplicativo.iconProdutos));
+                nome: 'Produtos',
+                gestureCommand: 'GestureProdutos',
+                imageString: AssetsAplicativo.iconProdutos));
             break;
           case "AcessTransLoja":
             listMenuInicial.add(ListOpcoesMenu(
@@ -45,8 +49,10 @@ class NewMenuIncialController extends BaseController {
           default:
         }
       }
-      listMenuInicial
-          .add(ListOpcoesMenu(nome: 'Outros', gestureCommand: 'GestureOutros', imageString: AssetsAplicativo.iconMoreMenu));
+      listMenuInicial.add(ListOpcoesMenu(
+          nome: 'Outros',
+          gestureCommand: 'GestureOutros',
+          imageString: AssetsAplicativo.iconMoreMenu));
     } catch (_) {}
   }
 
@@ -65,7 +71,9 @@ class NewMenuIncialController extends BaseController {
           break;
         case 'GestureProdutos':
           log("Produtos");
-          Get.to(const ProdutosPage());
+          Get.to(const SelecaoItensPage(
+            tituloPage: "Produtos",
+          ));
           break;
         default:
       }

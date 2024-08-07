@@ -42,19 +42,24 @@ class _MyWidgetState extends State<ProdutosPage> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Container(
               height: 1,
-              decoration: const BoxDecoration(color: CoresDoAplicativo.lightGray),
+              decoration:
+                  const BoxDecoration(color: CoresDoAplicativo.lightGray),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.05),
             child: Obx(
               () => ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.listProdutos.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) => Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.02),
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.height * 0.01),
                     decoration: BoxDecoration(
                       color: CoresDoAplicativo.branco,
                       border: Border.all(color: CoresDoAplicativo.gray),
@@ -64,12 +69,14 @@ class _MyWidgetState extends State<ProdutosPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.02),
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.02),
                           child: Container(
                             height: 80,
                             width: 80,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10), color: CoresDoAplicativo.primaryColor),
+                                borderRadius: BorderRadius.circular(10),
+                                color: CoresDoAplicativo.primaryColor),
                           ),
                         ),
                         Padding(
@@ -86,7 +93,8 @@ class _MyWidgetState extends State<ProdutosPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.width * 0.05,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.05,
                               ),
                               TextWidget(
                                 controller.listProdutos[index].quantidade,
@@ -103,7 +111,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

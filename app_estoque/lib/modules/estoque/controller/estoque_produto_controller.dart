@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class EstoqueProdutoController extends BaseController {
   late RxList<Produto> _listProdutos;
   @override
-  void iniciaControlador() {
+  Future<void> iniciaControlador() async {
     _listProdutos = RxList();
     carregaDados();
   }
@@ -16,7 +16,9 @@ class EstoqueProdutoController extends BaseController {
 
   Future<void> carregaDados() async {
     try {
-      _listProdutos.value = await instanceManager.get<IProdutoRepository>().getProdutos();
+      _listProdutos.value =
+          await instanceManager.get<IProdutoRepository>().getAll();
+      _listProdutos.refresh();
     } catch (_) {}
   }
 }

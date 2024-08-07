@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SelecaoItensPage extends StatefulWidget {
-  const SelecaoItensPage({super.key});
+  final String tituloPage;
+  const SelecaoItensPage({super.key, required this.tituloPage});
 
   @override
   State<SelecaoItensPage> createState() => _SelecaoItensPageState();
@@ -24,23 +25,26 @@ class _SelecaoItensPageState extends State<SelecaoItensPage> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-        titulo: "Estoque",
+        titulo: widget.tituloPage,
         child: Stack(
           children: [
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.05),
-              child: ListView.builder(
-                itemCount: 10,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) =>
-                    GestureDetector(
-                  onTap: () {},
-                  child: const CardProdutoWidget(
-                    categoriaProduto: 'Diversos',
-                    quantidadeProduto: '10',
-                    tituloProduto: 'Abobora com carne',
-                    nomeCampoCorCateg: 'Categoria: ',
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.listProdutos.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) =>
+                      GestureDetector(
+                    onTap: () {},
+                    child: CardProdutoWidget(
+                      categoriaProduto: controller.listProdutos[index].marca,
+                      quantidadeProduto:
+                          controller.listProdutos[index].quantidade,
+                      tituloProduto: controller.listProdutos[index].nome,
+                      valorProduto: controller.listProdutos[index].valor,
+                    ),
                   ),
                 ),
               ),

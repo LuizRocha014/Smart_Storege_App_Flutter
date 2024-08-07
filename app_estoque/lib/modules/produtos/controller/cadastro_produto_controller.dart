@@ -7,6 +7,7 @@ import 'package:app_estoque/base/models/categoria/categoria.dart';
 import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/base/repository/interface/iarquivo_repository.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
+import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -28,13 +29,14 @@ class CadastroProdutoController extends BaseController {
   late File? imagem;
   late RxBool mostraImagem;
   late List<Categoria> drop;
-  final MoneyMaskedTextController controllerTextValue = MoneyMaskedTextController(
+  final MoneyMaskedTextController controllerTextValue =
+      MoneyMaskedTextController(
     decimalSeparator: ',',
     thousandSeparator: '.',
     leftSymbol: 'R\$ ',
   );
   @override
-  void iniciaControlador() {
+  Future<void> iniciaControlador() async {
     nomeController = TextEditingController();
     marcaController = TextEditingController();
     corController = TextEditingController();
@@ -45,9 +47,14 @@ class CadastroProdutoController extends BaseController {
     imagem = File("");
     categoriaText = ''.obs;
     drop = [
-      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Eletronicos"),
-      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Fones de Ouvido"),
-      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Smartfones")
+      Categoria(
+          id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Eletronicos"),
+      Categoria(
+          id: const Uuid().v4(),
+          inclusao: DateTime.now(),
+          nome: "Fones de Ouvido"),
+      Categoria(
+          id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Smartfones"),
     ];
   }
 
@@ -60,6 +67,7 @@ class CadastroProdutoController extends BaseController {
       if (corController.text.isEmpty) return "Insira a cor do Produto";
       if (quantController.text.isEmpty) return "Insira a quantidade do Produto";
       if (controllerTextValue.text.isEmpty) return "Insira o valor do Produto";
+      if (categoriaSelect == null) return "Insira a categoria do Produto";
 
       return null;
     } catch (e) {
@@ -88,6 +96,16 @@ class CadastroProdutoController extends BaseController {
   void cadastroProduto() async {
     try {
       if (await validaCampos() == null) {
+        late Arquivo arq;
+        if (imagem!.path.isNotEmpty) {
+          List<int> imageBytes = imagem!.readAsBytesSync();
+          String base64Image = base64Encode(imageBytes);
+          arq = Arquivo(
+              id: const Uuid().v4(),
+              inclusao: DateTime.now(),
+              base64: base64Image);
+          instanceManager.get<IArquivoRepository>().create(arq.toJson());
+        }
         final prod = Produto(
             nome: nomeController.text,
             id: const Uuid().v4(),
@@ -96,17 +114,14 @@ class CadastroProdutoController extends BaseController {
             marca: marcaController.text,
             codigo: "",
             quantidade: quantController.text,
-            arquivoId: null,
-            valor: valorController.text);
+            arquivoId: arq.id,
+            categoriaId: categoriaSelect!.id,
+            valor: controllerTextValue.text);
 
-        if (imagem!.path.isNotEmpty) {
-          List<int> imageBytes = imagem!.readAsBytesSync();
-          String base64Image = base64Encode(imageBytes);
-          final arquivo = Arquivo(id: const Uuid().v4(), inclusao: DateTime.now(), base64: base64Image);
-          instanceManager.get<IArquivoRepository>().create(arquivo.toJson());
-        }
         instanceManager.get<IProdutoRepository>().create(prod.toJson());
-
+        final controllerEstoque =
+            instanceManager.get<EstoqueProdutoController>();
+        controllerEstoque.produtosEstoque.add(prod);
         // ignore: use_build_context_synchronously
         context.pop();
       } else {}

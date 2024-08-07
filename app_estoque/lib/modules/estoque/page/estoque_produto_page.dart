@@ -3,6 +3,9 @@ import 'package:app_estoque/modules/produtos/page/cadastro_produto_page.dart';
 import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/navigator.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,11 +16,12 @@ class EstoqueProdutosPage extends StatefulWidget {
   State<EstoqueProdutosPage> createState() => _EstoqueProdutosPageState();
 }
 
-class _EstoqueProdutosPageState extends State<EstoqueProdutosPage> {
-  late EstoqueProdutoController controller;
+class _EstoqueProdutosPageState
+    extends MState<EstoqueProdutosPage, EstoqueProdutoController> {
   @override
   void initState() {
-    controller = Get.put(EstoqueProdutoController());
+    super.registerController(EstoqueProdutoController());
+    controller.context = context;
     super.initState();
   }
 
@@ -25,7 +29,7 @@ class _EstoqueProdutosPageState extends State<EstoqueProdutosPage> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       floatingActionButton: FloatingActionButton(
-          onPressed: () => Get.to(const CadastroProduto()),
+          onPressed: () => Get.to(const CadastroProdutoPage()),
           backgroundColor: CoresDoAplicativo.primaryColor,
           tooltip: 'Increment Counter',
           child: const Icon(color: CoresDoAplicativo.branco, Icons.add)),
@@ -34,17 +38,28 @@ class _EstoqueProdutosPageState extends State<EstoqueProdutosPage> {
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.05),
         child: Obx(
-          () => ListView.builder(
-              itemCount: controller.produtosEstoque.length,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) =>
-                  CardProdutoWidget(
-                    categoriaProduto: controller.produtosEstoque[index].nome,
-                    quantidadeProduto:
-                        controller.produtosEstoque[index].quantidade,
-                    tituloProduto: controller.produtosEstoque[index].nome,
-                    nomeCampoCorCateg: 'Categoria: ',
-                  )),
+          () => Visibility(
+            visible: controller.produtosEstoque.isNotEmpty,
+            replacement: const Center(
+                child: TextWidget(
+              "Nenhum produto encontrado",
+              textColor: CoresDoAplicativo.lightGray,
+            )),
+            child: ListView.builder(
+                itemCount: controller.produtosEstoque.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) => Center(
+                      child: CardProdutoWidget(
+                        categoriaProduto:
+                            controller.produtosEstoque[index].nome,
+                        quantidadeProduto:
+                            controller.produtosEstoque[index].quantidade,
+                        tituloProduto: controller.produtosEstoque[index].nome,
+                        nomeCampoCorCateg: 'Categoria: ',
+                        valorProduto: controller.produtosEstoque[index].valor,
+                      ),
+                    )),
+          ),
         ),
       ),
     );

@@ -71,6 +71,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
               ),
               Expanded(
                 child: Container(
+                  width: double.infinity,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
