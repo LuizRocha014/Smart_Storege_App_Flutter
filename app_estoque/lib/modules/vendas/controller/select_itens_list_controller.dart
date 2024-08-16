@@ -21,4 +21,8 @@ class SelectItensController extends BaseController {
       _listProdutos.refresh();
     } catch (_) {}
   }
+
+  Future<void> adicionaItemCarrinho() async {
+    try {} catch (_) {}
+  }
 }

@@ -7,6 +7,7 @@ import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/new_background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
@@ -20,12 +21,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late NewMenuIncialController controller;
-
+class _HomePageState extends MState<HomePage, NewMenuIncialController> {
   @override
   void initState() {
-    controller = Get.put(NewMenuIncialController());
+    super.registerController(NewMenuIncialController());
     super.initState();
   }
 
@@ -35,22 +34,31 @@ class _HomePageState extends State<HomePage> {
       widgetContainer: ListView(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                  height: MediaQuery.of(context).size.width * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.08,
-                  AssetsAplicativo.iconApp),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.02),
-                child: TextWidget(
-                  "Delivery App",
-                  fontSize: FontesDoAplicativo.textMedium,
-                  textColor: CoresDoAplicativo.branco,
-                ),
+              Row(
+                children: [
+                  Image.asset(
+                      height: MediaQuery.of(context).size.width * 0.08,
+                      width: MediaQuery.of(context).size.width * 0.08,
+                      AssetsAplicativo.iconApp),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.02),
+                    child: TextWidget(
+                      "Bem Vindo Luiz Rocha",
+                      fontSize: FontesDoAplicativo.textMedium,
+                      textColor: CoresDoAplicativo.branco,
+                    ),
+                  ),
+                ],
               ),
+              Icon(
+                Icons.construction_rounded,
+                size: 4.h,
+                color: CoresDoAplicativo.branco,
+              )
             ],
           ),
           Padding(
@@ -81,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                         Align(
                             alignment: Alignment.centerLeft,
                             child: TextWidget(
-                              "R 3.000.00",
+                              "R\$ 3.000.00",
                               fontSize: FontesDoAplicativo.titloText,
                             )),
                       ],
@@ -187,8 +195,8 @@ class _HomePageState extends State<HomePage> {
                         width: MediaQuery.of(context).size.width * 0.01,
                         decoration: BoxDecoration(
                             color: CoresDoAplicativo.branco,
-                            border: Border.all(
-                                color: CoresDoAplicativo.cinzaIperClato),
+                            border:
+                                Border.all(color: CoresDoAplicativo.lightGray),
                             borderRadius: BorderRadius.circular(20)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -215,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.w600,
                 ),
                 const TextWidget("Ver tudo",
-                    textColor: CoresDoAplicativo.cinzaIperClato)
+                    textColor: CoresDoAplicativo.lightGray)
               ],
             ),
             Visibility(

@@ -1,12 +1,13 @@
 import 'package:app_estoque/modules/login/controllers/login_controller.dart';
-import 'package:app_estoque/modules/login/widget/loding_button_widget.dart';
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
+import 'package:app_estoque/utils/app_measurements.dart';
+import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,56 +27,77 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CoresDoAplicativo.branco.withOpacity(0.9),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 150,
-            ),
-            Center(
-              child: TextWidget(
-                "LOGIN",
-                fontSize: FontesDoAplicativo.titloLogin,
-                fontWeight: FontWeight.w500,
-                textColor: CoresDoAplicativo.primaryColor,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: TextFieldWidget(
-                  titulo: "Usuário",
-                  hintText: "Digite seu usuário",
-                  controller: controller.userName,
-                  color: CoresDoAplicativo.branco,
-                  textColor: CoresDoAplicativo.preto,
-                  labelInterno: ''),
-            ),
-            TextFieldWidget(
-                titulo: "Senha",
-                hintText: "Digite seu senha",
-                controller: controller.passWord,
-                color: CoresDoAplicativo.branco,
-                textColor: CoresDoAplicativo.preto,
-                labelInterno: ''),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.03,
-                  left: MediaQuery.of(context).size.height * 0.05,
-                  right: MediaQuery.of(context).size.height * 0.05),
-              child: Obx(
-                () => LoadingButtonWidget(
-                  onPressed: () async => controller.login(),
-                  title: "ENTRAR",
-                  color: CoresDoAplicativo.primaryColor,
-                  mostraTexto: !controller.isLoading,
-                  isLoading: controller.isLoading,
+      backgroundColor: CoresDoAplicativo.fundoLoginColor,
+      body: ListView(
+        children: [
+          Image.asset(
+            AssetsAplicativo.iconLogoLogin,
+            fit: BoxFit.fill,
+            height: 40.h,
+            width: double.infinity,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextWidget(
+                  "LOGIN",
+                  fontSize: FontesDoAplicativo.titloLogin,
+                  fontWeight: FontWeight.w500,
+                  textColor: CoresDoAplicativo.primaryColor,
                 ),
-              ),
+                const TextWidget(
+                  "Crie uma conta ou entre com uma conta já existente",
+                  textColor: CoresDoAplicativo.primaryColor,
+                  fontWeight: FontWeight.w500,
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                TextFieldWidget(
+                    controller: controller.userName,
+                    labelInterno: "Usuário",
+                    color: CoresDoAplicativo.branco,
+                    textColor: CoresDoAplicativo.preto,
+                    titulo: "",
+                    labelExterno: "Usuário",
+                    labelExternoFontWeight: FontWeight.w500,
+                    hintText: ""),
+                SizedBox(
+                  height: 2.h,
+                ),
+                TextFieldWidget(
+                    controller: controller.passWord,
+                    labelInterno: "Senha",
+                    color: CoresDoAplicativo.branco,
+                    textColor: CoresDoAplicativo.preto,
+                    titulo: "",
+                    labelExterno: "Senha",
+                    labelExternoFontWeight: FontWeight.w500,
+                    hintText: ""),
+                SizedBox(
+                  height: 2.h,
+                ),
+                SlideAction(
+                  height: 7.h,
+                  sliderButtonIconSize: 3.h,
+                  sliderButtonIconPadding: 1.h,
+                  outerColor: CoresDoAplicativo.primaryColor,
+                  text: "Arraste para logar",
+                  textStyle: TextStyle(
+                      fontSize: FontesDoAplicativo.textMedium,
+                      color: CoresDoAplicativo.branco),
+                  submittedIcon: const CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: CoresDoAplicativo.branco,
+                  ),
+                  onSubmit: () => controller.login(),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

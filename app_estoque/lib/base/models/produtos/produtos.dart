@@ -15,6 +15,8 @@ class Produto extends Core {
   late final String? arquivoId;
   final String valor;
   final String? categoriaId;
+  @JsonKey(includeToJson: false)
+  late int quantidadeVenda;
 
   Produto(
       {required this.nome,
@@ -26,6 +28,7 @@ class Produto extends Core {
       required this.quantidade,
       this.arquivoId,
       this.categoriaId,
+      this.quantidadeVenda = 0,
       required this.valor});
 
   factory Produto.fromJson(Map<String, dynamic> json) =>

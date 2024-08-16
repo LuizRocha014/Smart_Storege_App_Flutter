@@ -8,7 +8,8 @@ abstract class MStatefulWidget extends StatefulWidget {
   const MStatefulWidget({super.key});
 }
 
-abstract class MState<T extends StatefulWidget, S extends Object> extends State<T> with GlobalListenerMixin {
+abstract class MState<T extends StatefulWidget, S extends Object>
+    extends State<T> with GlobalListenerMixin {
   String? identifier;
   late S controller;
   String? instanceNameTag;
@@ -30,7 +31,8 @@ abstract class MState<T extends StatefulWidget, S extends Object> extends State<
   void registerController(S controllerInstance, {String? tag}) {
     if (S != Null) {
       if (!instanceManager.exists<S>(tag: tag)) {
-        controller = context.registerController<S>(controllerInstance, tag: tag);
+        controller =
+            context.registerController<S>(controllerInstance, tag: tag);
         instanceNameTag = tag;
       } else {
         controller = instanceManager.get<S>(tag: tag);
@@ -82,7 +84,9 @@ class GlobalListener {
   void removeListener(String identifier, Function(void) listener) {
     if (_listenerControllers.containsKey(identifier)) {
       _listenerControllers[identifier]!.stream.drain().then(
-            (_) => _listenerControllers[identifier]!.stream.listen((_) => listener),
+            (_) => _listenerControllers[identifier]!
+                .stream
+                .listen((_) => listener),
           );
     }
   }

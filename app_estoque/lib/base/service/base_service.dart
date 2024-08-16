@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:app_estoque/utils/request_manager.dart';
 
 class BaseService {
-  late String url = "http://192.168.4.140:5031";
+  late String url = "http://192.168.4.48:5031";
   late final int pageSize;
   late final Duration timeout;
   late final RequestManager requestManager;
@@ -13,31 +13,6 @@ class BaseService {
     pageSize = 500;
     requestManager = RequestManager();
   }
-
-  // Future<String> getToken({String? user, String? senha, bool getTokenForcado = false}) async {
-  //   try {
-  //     if (!getTokenForcado) {
-  //       final expiracaoTokenAntigo = expirationToken ??= await secureStorage.readSecureStorage('ExpiracaoToken');
-  //       final tokenAntigo = token ??= await secureStorage.readSecureStorage('Token');
-  //       if (expiracaoTokenAntigo != null && DateTime.parse(expiracaoTokenAntigo).isAfter(DateTime.now())) {
-  //         return tokenAntigo!;
-  //       }
-  //     }
-  //     user ??= login ??= (await secureStorage.readSecureStorage('User'))!;
-  //     senha ??= password ??= (await secureStorage.readSecureStorage('Password'))!;
-  //     final autenticationToken = await instanceManager.get<ILoginService>().loginRetriveToken(user, senha);
-  //     if (autenticationToken == null) throw Exception();
-  //     await secureStorage.writeSecureStorage("Token", autenticationToken);
-  //     await secureStorage.writeSecureStorage(
-  //       "ExpiracaoToken",
-  //       DateTime.now().add(const Duration(hours: 1)).toIso8601String(),
-  //     );
-  //     // await secureStorage.writeSecureStorage("RefreshToken", autentication.refreshToken);
-  //     return autenticationToken;
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
 
   //Override do método post para tratar caso o token não esteja autorizado
   Future<ResponseAPI> post<T>(

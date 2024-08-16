@@ -21,4 +21,12 @@ class EstoqueProdutoController extends BaseController {
       _listProdutos.refresh();
     } catch (_) {}
   }
+
+  void adicionaItemCompra(int index) {
+    try {
+      final item = produtosEstoque[index];
+      item.quantidadeVenda++;
+      _listProdutos.refresh();
+    } catch (_) {}
+  }
 }

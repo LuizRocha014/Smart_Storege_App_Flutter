@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/select_itens_list_controller.dart';
@@ -37,7 +39,9 @@ class _SelecaoItensPageState extends State<SelecaoItensPage> {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) =>
                       GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      log(controller.listProdutos[index].nome);
+                    },
                     child: CardProdutoWidget(
                       categoriaProduto: controller.listProdutos[index].marca,
                       quantidadeProduto:

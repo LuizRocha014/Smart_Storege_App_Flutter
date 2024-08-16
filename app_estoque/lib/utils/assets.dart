@@ -17,5 +17,6 @@ class AssetsAplicativo {
   static const String iconTransferencia = '$_pathPng/transfer.png';
   static const String iconMoreMenu = '$_pathPng/more.png';
   static const String iconItemProduto = '$_pathPng/packaging.png';
-  static const String iconPhonto = '$_pathPng/imagem.png';
+  static const String iconPhonto = '$_pathPng/photo.png';
+  static const String iconLogoLogin = '$_pathPng/logoMarca.png';
 }

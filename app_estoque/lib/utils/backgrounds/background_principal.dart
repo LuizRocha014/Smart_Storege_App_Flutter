@@ -1,3 +1,4 @@
+import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/text_widget.dart';
@@ -8,12 +9,14 @@ class BackgroundWidget extends StatefulWidget {
   final String? titulo;
   final Widget? floatingActionButton;
   final bool enableBackButton;
+  final Color? backgroundColor;
   const BackgroundWidget(
       {super.key,
       this.child,
       this.titulo,
       this.floatingActionButton,
-      this.enableBackButton = true});
+      this.enableBackButton = true,
+      this.backgroundColor});
 
   @override
   State<BackgroundWidget> createState() => _BackgroundWidgetState();
@@ -72,11 +75,12 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20)),
-                      color: CoresDoAplicativo.branco),
+                          topLeft: Radius.circular(3.h),
+                          topRight: Radius.circular(3.h)),
+                      color:
+                          widget.backgroundColor ?? CoresDoAplicativo.branco),
                   child: widget.child,
                 ),
               ),

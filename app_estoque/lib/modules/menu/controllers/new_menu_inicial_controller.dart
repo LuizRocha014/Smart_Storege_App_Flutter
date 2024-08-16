@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
+import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
@@ -14,41 +15,55 @@ import 'package:get/get.dart';
 
 class NewMenuIncialController extends BaseController {
   late final RxList<ListOpcoesMenu> listMenuInicial;
+  late final RxList<Produto> listProduto;
 
   @override
   Future<void> iniciaControlador() async {
     listMenuInicial = RxList<ListOpcoesMenu>();
+    listProduto = RxList<Produto>();
     await carregaDados();
   }
 
   List<ListOpcoesMenu> get listOpcaoMenu => listMenuInicial;
   Future<void> carregaDados() async {
     try {
-      final acessos = await instanceManager.get<IUserService>().buscaAcessos();
+      //final acessos = await instanceManager.get<IUserService>().buscaAcessos();
 
-      for (var acesso in acessos) {
-        switch (acesso!.valor) {
-          case "AcessEstoque":
-            listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Estoque',
-                gestureCommand: 'GestureEstoque',
-                imageString: AssetsAplicativo.iconEstoque));
-            break;
-          case "AcessProdutos":
-            listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Produtos',
-                gestureCommand: 'GestureProdutos',
-                imageString: AssetsAplicativo.iconProdutos));
-            break;
-          case "AcessTransLoja":
-            listMenuInicial.add(ListOpcoesMenu(
-                nome: 'Transferencia',
-                gestureCommand: 'GestureTransferencia',
-                imageString: AssetsAplicativo.iconTransferencia));
-            break;
-          default:
-        }
-      }
+      listMenuInicial.add(ListOpcoesMenu(
+          nome: 'Estoque',
+          gestureCommand: 'GestureEstoque',
+          imageString: AssetsAplicativo.iconEstoque));
+      listMenuInicial.add(ListOpcoesMenu(
+          nome: 'Produtos',
+          gestureCommand: 'GestureProdutos',
+          imageString: AssetsAplicativo.iconProdutos));
+      listMenuInicial.add(ListOpcoesMenu(
+          nome: 'Transferencia',
+          gestureCommand: 'GestureTransferencia',
+          imageString: AssetsAplicativo.iconTransferencia));
+      // for (var acesso in acessos) {
+      //   switch (acesso!.valor) {
+      //     case "AcessEstoque":
+      //       listMenuInicial.add(ListOpcoesMenu(
+      //           nome: 'Estoque',
+      //           gestureCommand: 'GestureEstoque',
+      //           imageString: AssetsAplicativo.iconEstoque));
+      //       break;
+      //     case "AcessProdutos":
+      //       listMenuInicial.add(ListOpcoesMenu(
+      //           nome: 'Produtos',
+      //           gestureCommand: 'GestureProdutos',
+      //           imageString: AssetsAplicativo.iconProdutos));
+      //       break;
+      //     case "AcessTransLoja":
+      //       listMenuInicial.add(ListOpcoesMenu(
+      //           nome: 'Transferencia',
+      //           gestureCommand: 'GestureTransferencia',
+      //           imageString: AssetsAplicativo.iconTransferencia));
+      //       break;
+      //     default:
+      //   }
+      //}
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Outros',
           gestureCommand: 'GestureOutros',

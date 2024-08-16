@@ -1,8 +1,5 @@
 import 'package:app_estoque/utils/app_measurements.dart';
-import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
-import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/widget/image_assets_widget.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,79 +25,110 @@ class CardProdutoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
+      padding: EdgeInsets.symmetric(vertical: 1.h),
       child: Container(
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.01),
-          decoration: BoxDecoration(
-            color: selecionado
-                ? CoresDoAplicativo.primaryColor.withOpacity(0.2)
-                : CoresDoAplicativo.branco,
-            border: Border.all(color: CoresDoAplicativo.gray),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        height: 10.h,
+        decoration: BoxDecoration(
+            border: Border.all(color: CoresDoAplicativo.lightGray),
+            borderRadius: BorderRadius.circular(10)),
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              child: Container(
+                height: 8.h,
+                width: 16.w,
+                decoration: BoxDecoration(
+                    color: CoresDoAplicativo.primaryColor,
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 1.5.h),
+              child: Row(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.02),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: CoresDoAplicativo.primaryColor),
-                      child: ImageAsset(
-                        imagem ?? AssetsAplicativo.iconPhonto,
-                        height: 5.h,
-                        color: CoresDoAplicativo.branco,
-                        width: 10.w,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: MediaQuery.of(context).size.height * 0.01,
-                        horizontal: MediaQuery.of(context).size.width * 0.04),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextWidget(
-                          tituloProduto,
-                          fontSize: FontesDoAplicativo.textMedium,
-                        ),
-                        if (nomeCampoCorCateg.isNotEmpty)
-                          CustomRich(nomeCampoCorCateg, categoriaProduto),
-                        if (quantidadeProduto.isNotEmpty)
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top:
-                                    MediaQuery.of(context).size.height * 0.002),
-                            child: CustomRich(
-                              "Quantidade: ",
-                              quantidadeProduto,
-                              color: CoresDoAplicativo.preto,
-                              colorSecund: CoresDoAplicativo.gray,
-                            ),
-                          ),
-                        CustomRich(
-                          "Valor: ",
-                          valorProduto,
-                          color: CoresDoAplicativo.lightGray,
-                          colorSecund: CoresDoAplicativo.gray,
-                        ),
-                      ],
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(tituloProduto),
+                      CustomRich("Valor: ", valorProduto),
+                    ],
                   ),
                 ],
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
+
+    // return Padding(
+    //   padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
+    //   child: Container(
+    //       padding: EdgeInsets.symmetric(
+    //           vertical: MediaQuery.of(context).size.height * 0.01),
+    //       decoration: BoxDecoration(
+    //         color: selecionado
+    //             ? CoresDoAplicativo.primaryColor.withOpacity(0.2)
+    //             : CoresDoAplicativo.branco,
+    //         border: Border.all(color: CoresDoAplicativo.gray),
+    //         borderRadius: BorderRadius.circular(20),
+    //       ),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           Row(
+    //             children: [
+    //               Padding(
+    //                 padding: EdgeInsets.only(
+    //                     left: MediaQuery.of(context).size.width * 0.02),
+    //                 child: Container(
+    //                   padding:
+    //                       EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+    //                   decoration: BoxDecoration(
+    //                       borderRadius: BorderRadius.circular(10),
+    //                       color: CoresDoAplicativo.primaryColor),
+    //                   child: ImageAsset(
+    //                     imagem ?? AssetsAplicativo.iconPhonto,
+    //                     height: 5.h,
+    //                     color: CoresDoAplicativo.branco,
+    //                     width: 10.w,
+    //                   ),
+    //                 ),
+    //               ),
+    //               Padding(
+    //                 padding: EdgeInsets.symmetric(
+    //                     vertical: MediaQuery.of(context).size.height * 0.01,
+    //                     horizontal: MediaQuery.of(context).size.width * 0.04),
+    //                 child: Column(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   mainAxisAlignment: MainAxisAlignment.start,
+    //                   children: [
+    //                     TextWidget(
+    //                       tituloProduto,
+    //                       fontSize: FontesDoAplicativo.textMedium,
+    //                     ),
+    //                     SizedBox(
+    //                       height: 2.5.h,
+    //                     ),
+    //                     Row(
+    //                       children: [
+    //                         CustomRich(
+    //                           "Valor: ",
+    //                           valorProduto,
+    //                           color: CoresDoAplicativo.gray,
+    //                           colorSecund: CoresDoAplicativo.lightGray,
+    //                         ),
+    //                       ],
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ),
+    //             ],
+    //           ),
+    //         ],
+    //       )),
+    // );
   }
 }

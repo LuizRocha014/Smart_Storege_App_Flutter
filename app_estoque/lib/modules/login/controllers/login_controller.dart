@@ -32,11 +32,12 @@ class LoginController extends BaseController {
   Future<void> login() async {
     try {
       isLoading = true;
-      final retorno = await instanceManager
-          .get<IUserService>()
-          .login(userName.text, passWord.text);
-      if (retorno == null) throw Exception();
-      // ignore: use_build_context_synchronously
+      // final retorno = await instanceManager
+      //     .get<IUserService>()
+      //     .login(userName.text, passWord.text);
+      // if (retorno == null) throw Exception();
+      // // ignore: use_build_context_synchronously
+      Future.delayed(Durations.extralong4);
       context.push(const HomePage());
       isLoading = false;
     } catch (_) {
