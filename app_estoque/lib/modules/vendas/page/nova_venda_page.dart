@@ -13,14 +13,17 @@ class NovaVendaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       titulo: "Nova Venda",
+      tituloButton: "AVANÇAR",
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.04),
             child: ListView(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04),
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.04),
                   child: TextWidget(
                     "Vendedor",
                     fontWeight: FontWeight.w600,
@@ -28,24 +31,26 @@ class NovaVendaPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                       controller: TextEditingController(),
-                      titulo: "Vendedor",
-                      color: CoresDoAplicativo.preto,
+                      labelExterno: "Nome",
+                      titulo: "Nome",
                       textColor: CoresDoAplicativo.preto,
                       hintText: '',
-                      labelInterno: ''),
+                      labelInterno: 'Insira o nome'),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                       controller: TextEditingController(),
                       titulo: "Matricula",
-                      color: CoresDoAplicativo.preto,
+                      labelExterno: "Matricula",
                       textColor: CoresDoAplicativo.preto,
                       hintText: '',
-                      labelInterno: ''),
+                      labelInterno: 'Insira a matricula'),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -67,44 +72,43 @@ class NovaVendaPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02, bottom: MediaQuery.of(context).size.height * 0.02),
+                      top: MediaQuery.of(context).size.height * 0.02,
+                      bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "Nome",
-                    labelInterno: '',
-                    color: CoresDoAplicativo.preto,
+                    labelInterno: 'Insira o nome',
+                    labelExterno: "Nome",
                     textColor: CoresDoAplicativo.preto,
                     hintText: '',
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                     controller: TextEditingController(),
                     titulo: "CPF",
-                    color: CoresDoAplicativo.preto,
+                    labelExterno: "CPF",
                     textColor: CoresDoAplicativo.preto,
                     hintText: '',
-                    labelInterno: '',
+                    labelInterno: 'Insira o CPF',
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.02),
                   child: TextFieldWidget(
                       controller: TextEditingController(),
-                      titulo: "CEP",
-                      color: CoresDoAplicativo.preto,
+                      titulo: "Telefone",
+                      labelExterno: "Telefone",
                       textColor: CoresDoAplicativo.preto,
                       hintText: '',
-                      labelInterno: ''),
+                      labelInterno: 'Insira o Telefone'),
                 ),
               ],
             ),
           ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: ButtonWidget("FINALIZAR"),
-          )
         ],
       ),
     );

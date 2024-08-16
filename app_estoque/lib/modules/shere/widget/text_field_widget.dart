@@ -14,7 +14,7 @@ class TextFieldWidget extends StatelessWidget {
   final IconData? suffixIcon;
   final bool obscureText;
   final void Function()? onTapSuffixIcon;
-  final Color color;
+  final Color? color;
   final Color? iconColor;
   final Color textColor;
   final double? borderRadius;
@@ -47,7 +47,7 @@ class TextFieldWidget extends StatelessWidget {
       this.obscureText = false,
       this.suffixIcon,
       this.onTapSuffixIcon,
-      required this.color,
+      this.color,
       this.iconColor,
       required this.textColor,
       this.borderRadius,
@@ -154,7 +154,8 @@ class TextFieldWidget extends StatelessWidget {
   }
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: CoresDoAplicativo.gray, width: 1),
+        borderSide:
+            const BorderSide(color: CoresDoAplicativo.lightGray, width: 1),
         borderRadius: BorderRadius.circular(borderRadius ?? 2.w),
       );
 }

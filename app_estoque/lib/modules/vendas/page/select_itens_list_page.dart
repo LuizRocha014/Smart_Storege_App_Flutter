@@ -20,8 +20,8 @@ class SelecaoItensPage extends StatefulWidget {
   State<SelecaoItensPage> createState() => _SelecaoItensPageState();
 }
 
-class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensController> {
-  late SelectItensController controller;
+class _SelecaoItensPageState
+    extends MState<SelecaoItensPage, SelectItensController> {
   @override
   void initState() {
     super.registerController(SelectItensController());
@@ -36,7 +36,8 @@ class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensControl
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05),
               child: Obx(
                 () => Visibility(
                   visible: controller.listProdutos.isNotEmpty,
@@ -49,14 +50,15 @@ class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensControl
                     () => ListView.builder(
                       itemCount: controller.listProdutos.length,
                       shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) => CardItemSelectWidget(
+                      itemBuilder: (BuildContext context, int index) =>
+                          CardItemSelectWidget(
                         titulo: controller.listProdutos[index].nome,
                         valor: controller.listProdutos[index].valor,
-                        quantidade: controller.listProdutos[index].quantidadeVenda.toString(),
+                        quantidade: controller
+                            .listProdutos[index].quantidadeVenda
+                            .toString(),
                         onTapMore: () => controller.adicionaItemCompra(index),
-                        onTapless: () {
-                          log("Tira");
-                        },
+                        onTapless: () => controller.removeItemCompra(index),
                       ),
                     ),
                   ),
@@ -65,9 +67,14 @@ class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensControl
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: ButtonWidget(
-                "AVANÇAR",
-                onPressed: () => Get.to(const NovaVendaPage()),
+              child: Obx(
+                () => Visibility(
+                  visible: controller.contador > 0,
+                  child: ButtonWidget(
+                    "(${controller.contador}) AVANÇAR",
+                    onPressed: () => Get.to(const NovaVendaPage()),
+                  ),
+                ),
               ),
             ),
           ],

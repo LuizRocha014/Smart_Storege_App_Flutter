@@ -6,17 +6,21 @@ import 'package:get/get.dart';
 
 class SelectItensController extends BaseController {
   late RxList<Produto> _listProdutos;
+  late RxInt _contador;
   @override
   Future<void> iniciaControlador() async {
     _listProdutos = RxList();
+    _contador = 0.obs;
     carregaLista();
   }
 
   List<Produto> get listProdutos => _listProdutos;
+  int get contador => _contador.value;
 
   Future<void> carregaLista() async {
     try {
-      _listProdutos.value = await instanceManager.get<IProdutoRepository>().getAll();
+      _listProdutos.value =
+          await instanceManager.get<IProdutoRepository>().getAll();
       _listProdutos.refresh();
     } catch (_) {}
   }
@@ -25,6 +29,18 @@ class SelectItensController extends BaseController {
     try {
       final item = listProdutos[index];
       item.quantidadeVenda++;
+      _contador.value++;
+      _listProdutos.refresh();
+    } catch (_) {}
+  }
+
+  void removeItemCompra(int index) {
+    try {
+      final item = listProdutos[index];
+      if (item.quantidadeVenda > 0) {
+        item.quantidadeVenda--;
+        _contador--;
+      }
       _listProdutos.refresh();
     } catch (_) {}
   }
