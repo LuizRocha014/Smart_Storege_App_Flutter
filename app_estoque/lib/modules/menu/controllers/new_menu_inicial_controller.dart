@@ -2,14 +2,12 @@ import 'dart:developer';
 
 import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
 import 'package:app_estoque/base/models/produtos/produtos.dart';
-import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
 import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 import 'package:app_estoque/utils/assets.dart';
-import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,18 +27,12 @@ class NewMenuIncialController extends BaseController {
     try {
       //final acessos = await instanceManager.get<IUserService>().buscaAcessos();
 
+      listMenuInicial
+          .add(ListOpcoesMenu(nome: 'Estoque', gestureCommand: 'GestureEstoque', imageString: AssetsAplicativo.iconEstoque));
+      listMenuInicial.add(
+          ListOpcoesMenu(nome: 'Produtos', gestureCommand: 'GestureProdutos', imageString: AssetsAplicativo.iconProdutos));
       listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Estoque',
-          gestureCommand: 'GestureEstoque',
-          imageString: AssetsAplicativo.iconEstoque));
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Produtos',
-          gestureCommand: 'GestureProdutos',
-          imageString: AssetsAplicativo.iconProdutos));
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Transferencia',
-          gestureCommand: 'GestureTransferencia',
-          imageString: AssetsAplicativo.iconTransferencia));
+          nome: 'Transferencia', gestureCommand: 'GestureTransferencia', imageString: AssetsAplicativo.iconTransferencia));
       // for (var acesso in acessos) {
       //   switch (acesso!.valor) {
       //     case "AcessEstoque":
@@ -64,10 +56,8 @@ class NewMenuIncialController extends BaseController {
       //     default:
       //   }
       //}
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Outros',
-          gestureCommand: 'GestureOutros',
-          imageString: AssetsAplicativo.iconMoreMenu));
+      listMenuInicial
+          .add(ListOpcoesMenu(nome: 'Outros', gestureCommand: 'GestureOutros', imageString: AssetsAplicativo.iconMoreMenu));
     } catch (_) {}
   }
 

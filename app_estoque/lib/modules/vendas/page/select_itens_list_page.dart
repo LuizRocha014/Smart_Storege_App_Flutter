@@ -1,10 +1,14 @@
 import 'dart:developer';
 
+import 'package:app_estoque/modules/estoque/widget/card_item_select_widget.dart';
 import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/select_itens_list_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
+import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/navigator.dart';
+import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,12 +20,13 @@ class SelecaoItensPage extends StatefulWidget {
   State<SelecaoItensPage> createState() => _SelecaoItensPageState();
 }
 
-class _SelecaoItensPageState extends State<SelecaoItensPage> {
+class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensController> {
   late SelectItensController controller;
   @override
   void initState() {
-    controller = Get.put(SelectItensController());
+    super.registerController(SelectItensController());
     super.initState();
+    deleteController = true;
   }
 
   @override
@@ -31,23 +36,28 @@ class _SelecaoItensPageState extends State<SelecaoItensPage> {
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.05),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
               child: Obx(
-                () => ListView.builder(
-                  itemCount: controller.listProdutos.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) =>
-                      GestureDetector(
-                    onTap: () {
-                      log(controller.listProdutos[index].nome);
-                    },
-                    child: CardProdutoWidget(
-                      categoriaProduto: controller.listProdutos[index].marca,
-                      quantidadeProduto:
-                          controller.listProdutos[index].quantidade,
-                      tituloProduto: controller.listProdutos[index].nome,
-                      valorProduto: controller.listProdutos[index].valor,
+                () => Visibility(
+                  visible: controller.listProdutos.isNotEmpty,
+                  replacement: const Center(
+                      child: TextWidget(
+                    "Nenhum produto encontrado",
+                    textColor: CoresDoAplicativo.lightGray,
+                  )),
+                  child: Obx(
+                    () => ListView.builder(
+                      itemCount: controller.listProdutos.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) => CardItemSelectWidget(
+                        titulo: controller.listProdutos[index].nome,
+                        valor: controller.listProdutos[index].valor,
+                        quantidade: controller.listProdutos[index].quantidadeVenda.toString(),
+                        onTapMore: () => controller.adicionaItemCompra(index),
+                        onTapless: () {
+                          log("Tira");
+                        },
+                      ),
                     ),
                   ),
                 ),

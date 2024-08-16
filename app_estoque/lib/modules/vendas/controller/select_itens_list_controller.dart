@@ -16,8 +16,15 @@ class SelectItensController extends BaseController {
 
   Future<void> carregaLista() async {
     try {
-      _listProdutos.value =
-          await instanceManager.get<IProdutoRepository>().getAll();
+      _listProdutos.value = await instanceManager.get<IProdutoRepository>().getAll();
+      _listProdutos.refresh();
+    } catch (_) {}
+  }
+
+  void adicionaItemCompra(int index) {
+    try {
+      final item = listProdutos[index];
+      item.quantidadeVenda++;
       _listProdutos.refresh();
     } catch (_) {}
   }
