@@ -1,15 +1,19 @@
 import 'package:app_estoque/base/models/produtos/produtos.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
+import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:get/get.dart';
 
 class SelectItensController extends BaseController {
   late RxList<Produto> _listProdutos;
+  late List<Produto> _itensSelecionados;
   late RxInt _contador;
   @override
   Future<void> iniciaControlador() async {
     _listProdutos = RxList();
+    _itensSelecionados = [];
     _contador = 0.obs;
     carregaLista();
   }
@@ -45,7 +49,11 @@ class SelectItensController extends BaseController {
     } catch (_) {}
   }
 
-  Future<void> adicionaItemCarrinho() async {
-    try {} catch (_) {}
+  Future<void> avancaPaginaItens() async {
+    try {
+      _itensSelecionados =
+          _listProdutos.where((e) => e.quantidadeVenda > 0).toList();
+      context.push(const NovaVendaPage());
+    } catch (_) {}
   }
 }

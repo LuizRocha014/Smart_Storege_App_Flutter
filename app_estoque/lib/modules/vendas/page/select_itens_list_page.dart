@@ -72,7 +72,7 @@ class _SelecaoItensPageState
                   visible: controller.contador > 0,
                   child: ButtonWidget(
                     "(${controller.contador}) AVANÇAR",
-                    onPressed: () => Get.to(const NovaVendaPage()),
+                    onPressed: () => controller.avancaPaginaItens(),
                   ),
                 ),
               ),

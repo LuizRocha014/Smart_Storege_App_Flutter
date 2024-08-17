@@ -1,13 +1,25 @@
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
+import 'package:app_estoque/modules/vendas/controller/nova_venda_controller.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class NovaVendaPage extends StatelessWidget {
+class NovaVendaPage extends StatefulWidget {
   const NovaVendaPage({super.key});
+
+  @override
+  State<NovaVendaPage> createState() => _NovaVendaPageState();
+}
+
+class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
+  @override
+  void initState() {
+    super.registerController(NovaVendaController());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +79,9 @@ class NovaVendaPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       fontSize: FontesDoAplicativo.tituloCardVenda,
                     ),
-                    const Icon(Icons.add)
+                    GestureDetector(
+                        onTap: controller.selectCliente,
+                        child: const Icon(Icons.add))
                   ],
                 ),
                 Padding(

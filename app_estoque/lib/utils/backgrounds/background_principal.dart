@@ -12,6 +12,8 @@ class BackgroundWidget extends StatefulWidget {
   final bool enableBackButton;
   final Color? backgroundColor;
   final String? tituloButton;
+  final IconData? icon;
+  final void Function()? onTap;
   const BackgroundWidget(
       {super.key,
       this.child,
@@ -19,7 +21,9 @@ class BackgroundWidget extends StatefulWidget {
       this.floatingActionButton,
       this.enableBackButton = true,
       this.backgroundColor,
-      this.tituloButton});
+      this.tituloButton,
+      this.icon,
+      this.onTap});
 
   @override
   State<BackgroundWidget> createState() => _BackgroundWidgetState();
@@ -48,6 +52,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Visibility(
                               visible: widget.enableBackButton,
@@ -72,7 +77,18 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                                   ),
                                 ],
                               ),
-                            )
+                            ),
+                            if (widget.icon != null)
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                child: GestureDetector(
+                                  onTap: widget.onTap,
+                                  child: Icon(
+                                    widget.icon,
+                                    color: CoresDoAplicativo.branco,
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),
