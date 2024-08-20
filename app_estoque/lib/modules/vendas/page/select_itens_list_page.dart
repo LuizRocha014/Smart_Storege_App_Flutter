@@ -48,8 +48,9 @@ class _SelecaoItensPageState
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) =>
                           CardItemSelectWidget(
-                        titulo: controller.listProdutos[index].nome,
-                        valor: controller.listProdutos[index].valor,
+                        titulo: controller.listProdutos[index].name,
+                        valor:
+                            controller.listProdutos[index].salePrice.toString(),
                         quantidade: controller
                             .listProdutos[index].quantidadeVenda
                             .toString(),

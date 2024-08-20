@@ -1,5 +1,6 @@
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/nova_venda_controller.dart';
+import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
@@ -25,105 +26,98 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       titulo: "Nova Venda",
-      tituloButton: "AVANÇAR",
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.04),
-            child: ListView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 4.w),
+        child: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.04),
+              child: TextWidget(
+                "Vendedor",
+                fontWeight: FontWeight.w600,
+                fontSize: FontesDoAplicativo.font_18,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
+              child: TextFieldWidget(
+                  controller: TextEditingController(),
+                  labelExterno: "Nome",
+                  titulo: "Nome",
+                  textColor: CoresDoAplicativo.preto,
+                  hintText: '',
+                  labelInterno: 'Insira o nome'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02),
+              child: TextFieldWidget(
+                  controller: TextEditingController(),
+                  titulo: "Matricula",
+                  labelExterno: "Matricula",
+                  textColor: CoresDoAplicativo.preto,
+                  hintText: '',
+                  labelInterno: 'Insira a matricula'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.height * 0.001,
+                  vertical: MediaQuery.of(context).size.height * 0.02),
+              child: const Divider(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.04),
-                  child: TextWidget(
-                    "Vendedor",
-                    fontWeight: FontWeight.w600,
-                    fontSize: FontesDoAplicativo.font_18,
-                  ),
+                TextWidget(
+                  "Cliente",
+                  fontWeight: FontWeight.w600,
+                  fontSize: FontesDoAplicativo.font_18,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
-                  child: TextFieldWidget(
-                      controller: TextEditingController(),
-                      labelExterno: "Nome",
-                      titulo: "Nome",
-                      textColor: CoresDoAplicativo.preto,
-                      hintText: '',
-                      labelInterno: 'Insira o nome'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
-                  child: TextFieldWidget(
-                      controller: TextEditingController(),
-                      titulo: "Matricula",
-                      labelExterno: "Matricula",
-                      textColor: CoresDoAplicativo.preto,
-                      hintText: '',
-                      labelInterno: 'Insira a matricula'),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.height * 0.001,
-                      vertical: MediaQuery.of(context).size.height * 0.02),
-                  child: const Divider(),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextWidget(
-                      "Cliente",
-                      fontWeight: FontWeight.w600,
-                      fontSize: FontesDoAplicativo.font_18,
-                    ),
-                    GestureDetector(
-                        onTap: controller.selectCliente,
-                        child: const Icon(Icons.add))
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02,
-                      bottom: MediaQuery.of(context).size.height * 0.02),
-                  child: TextFieldWidget(
-                    controller: TextEditingController(),
-                    titulo: "Nome",
-                    labelInterno: 'Insira o nome',
-                    labelExterno: "Nome",
-                    textColor: CoresDoAplicativo.preto,
-                    hintText: '',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.02),
-                  child: TextFieldWidget(
-                    controller: TextEditingController(),
-                    titulo: "CPF",
-                    labelExterno: "CPF",
-                    textColor: CoresDoAplicativo.preto,
-                    hintText: '',
-                    labelInterno: 'Insira o CPF',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.02),
-                  child: TextFieldWidget(
-                      controller: TextEditingController(),
-                      titulo: "Telefone",
-                      labelExterno: "Telefone",
-                      textColor: CoresDoAplicativo.preto,
-                      hintText: '',
-                      labelInterno: 'Insira o Telefone'),
-                ),
+                GestureDetector(
+                    onTap: controller.selectCliente,
+                    child: const Icon(Icons.add))
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.02,
+                  bottom: MediaQuery.of(context).size.height * 0.02),
+              child: TextFieldWidget(
+                controller: TextEditingController(),
+                titulo: "Nome",
+                labelInterno: 'Insira o nome',
+                labelExterno: "Nome",
+                textColor: CoresDoAplicativo.preto,
+                hintText: '',
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.02),
+              child: TextFieldWidget(
+                controller: TextEditingController(),
+                titulo: "CPF",
+                labelExterno: "CPF",
+                textColor: CoresDoAplicativo.preto,
+                hintText: '',
+                labelInterno: 'Insira o CPF',
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.02),
+              child: TextFieldWidget(
+                  controller: TextEditingController(),
+                  titulo: "Telefone",
+                  labelExterno: "Telefone",
+                  textColor: CoresDoAplicativo.preto,
+                  hintText: '',
+                  labelInterno: 'Insira o Telefone'),
+            ),
+          ],
+        ),
       ),
     );
   }

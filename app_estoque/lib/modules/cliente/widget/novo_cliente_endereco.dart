@@ -9,8 +9,7 @@ class NovoClienteEndereco extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
       children: [
         SizedBox(
           height: 2.h,

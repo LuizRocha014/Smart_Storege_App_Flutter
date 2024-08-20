@@ -1,4 +1,4 @@
-import 'package:app_estoque/base/models/produtos/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produto.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -16,7 +16,8 @@ class ProdutoController extends BaseController {
 
   Future<void> carregaDados() async {
     try {
-      _produtos.value = await instanceManager.get<IProdutoRepository>().getProdutos();
+      _produtos.value =
+          await instanceManager.get<IProdutoRepository>().getProdutos();
     } catch (_) {}
   }
 }

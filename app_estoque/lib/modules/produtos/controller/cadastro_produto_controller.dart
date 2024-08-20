@@ -94,37 +94,37 @@ class CadastroProdutoController extends BaseController {
   }
 
   void cadastroProduto() async {
-    try {
-      if (await validaCampos() == null) {
-        late Arquivo arq;
-        if (imagem!.path.isNotEmpty) {
-          List<int> imageBytes = imagem!.readAsBytesSync();
-          String base64Image = base64Encode(imageBytes);
-          arq = Arquivo(
-              id: const Uuid().v4(),
-              inclusao: DateTime.now(),
-              base64: base64Image);
-          instanceManager.get<IArquivoRepository>().create(arq.toJson());
-        }
-        final prod = Produto(
-            nome: nomeController.text,
-            id: const Uuid().v4(),
-            inclusao: DateTime.now(),
-            cor: corController.text,
-            marca: marcaController.text,
-            codigo: "",
-            quantidade: quantController.text,
-            arquivoId: arq.id,
-            categoriaId: categoriaSelect!.id,
-            valor: controllerTextValue.text);
+    // try {
+    //   if (await validaCampos() == null) {
+    //     late Arquivo arq;
+    //     if (imagem!.path.isNotEmpty) {
+    //       List<int> imageBytes = imagem!.readAsBytesSync();
+    //       String base64Image = base64Encode(imageBytes);
+    //       arq = Arquivo(
+    //           id: const Uuid().v4(),
+    //           inclusao: DateTime.now(),
+    //           base64: base64Image);
+    //       instanceManager.get<IArquivoRepository>().create(arq.toJson());
+    //     }
+    //     final prod = Produto(
+    //         nome: nomeController.text,
+    //         id: const Uuid().v4(),
+    //         inclusao: DateTime.now(),
+    //         cor: corController.text,
+    //         marca: marcaController.text,
+    //         codigo: "",
+    //         quantidade: quantController.text,
+    //         arquivoId: arq.id,
+    //         categoriaId: categoriaSelect!.id,
+    //         valor: controllerTextValue.text);
 
-        instanceManager.get<IProdutoRepository>().create(prod.toJson());
-        final controllerEstoque =
-            instanceManager.get<EstoqueProdutoController>();
-        controllerEstoque.produtosEstoque.add(prod);
-        // ignore: use_build_context_synchronously
-        context.pop();
-      } else {}
-    } catch (_) {}
+    //     instanceManager.get<IProdutoRepository>().create(prod.toJson());
+    //     final controllerEstoque =
+    //         instanceManager.get<EstoqueProdutoController>();
+    //     controllerEstoque.produtosEstoque.add(prod);
+    //     // ignore: use_build_context_synchronously
+    //     context.pop();
+    //   } else {}
+    // } catch (_) {}
   }
 }

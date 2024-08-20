@@ -88,7 +88,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextWidget(
-                                controller.listProdutos[index].nome,
+                                controller.listProdutos[index].name,
                                 fontSize: FontesDoAplicativo.font_16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -97,7 +97,8 @@ class _MyWidgetState extends State<ProdutosPage> {
                                     MediaQuery.of(context).size.width * 0.05,
                               ),
                               TextWidget(
-                                controller.listProdutos[index].quantidade,
+                                controller.listProdutos[index].totalAmount
+                                    .toString(),
                                 fontSize: FontesDoAplicativo.font_16,
                                 textColor: CoresDoAplicativo.primaryColor,
                                 fontWeight: FontWeight.w600,

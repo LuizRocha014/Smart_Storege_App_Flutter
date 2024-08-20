@@ -1,4 +1,4 @@
-import 'package:app_estoque/base/models/produtos/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produto.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
@@ -33,7 +33,7 @@ class SelectItensController extends BaseController {
   void adicionaItemCompra(int index) {
     try {
       final item = listProdutos[index];
-      item.quantidadeVenda++;
+      item.numbProduct++;
       _contador.value++;
       _listProdutos.refresh();
     } catch (_) {}
@@ -42,8 +42,8 @@ class SelectItensController extends BaseController {
   void removeItemCompra(int index) {
     try {
       final item = listProdutos[index];
-      if (item.quantidadeVenda > 0) {
-        item.quantidadeVenda--;
+      if (item.numbProduct > 0) {
+        item.numbProduct--;
         _contador--;
       }
       _listProdutos.refresh();
@@ -53,7 +53,7 @@ class SelectItensController extends BaseController {
   Future<void> avancaPaginaItens() async {
     try {
       _itensSelecionados =
-          _listProdutos.where((e) => e.quantidadeVenda > 0).toList();
+          _listProdutos.where((e) => e.numbProduct > 0).toList();
       context.push(const NovaVendaPage());
     } catch (_) {}
   }

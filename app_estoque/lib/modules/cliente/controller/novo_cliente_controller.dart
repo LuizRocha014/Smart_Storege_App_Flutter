@@ -1,4 +1,5 @@
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/state_manager.dart';
 
@@ -14,11 +15,15 @@ class NovoClienteControlle extends BaseController {
   String get textButton => _textButton.value;
 
   Future<void> buttonVoltar() async {
-    pageController.animateToPage(
-      -1,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
+    if (pageController.page == 1) {
+      pageController.animateToPage(
+        -1,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      context.pop();
+    }
   }
 
   Future<void> proximaEtapa(int value) async {

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
-import 'package:app_estoque/base/models/produtos/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produto.dart';
 import 'package:app_estoque/modules/cliente/page/cliente_page.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';

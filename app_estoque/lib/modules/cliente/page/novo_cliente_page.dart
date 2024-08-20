@@ -42,30 +42,26 @@ class _NovoClientePageState
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-            child: Column(
-              children: [
-                Expanded(
-                  child: PageView(
-                    controller: controller.pageController,
-                    children: const [
-                      CadastroInfosBasicasWidget(),
-                      NovoClienteEndereco()
-                    ],
-                  ),
-                ),
+            child: PageView(
+              controller: controller.pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: const [
+                CadastroInfosBasicasWidget(),
+                NovoClienteEndereco()
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Obx(
-              () => ButtonWidget(
-                controller.textButton,
-                onPressed: () =>
-                    goToPage(controller.pageController.initialPage + 1),
+          if (MediaQuery.of(context).viewInsets.bottom == 0)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Obx(
+                () => ButtonWidget(
+                  controller.textButton,
+                  onPressed: () =>
+                      goToPage(controller.pageController.initialPage + 1),
+                ),
               ),
-            ),
-          )
+            )
         ],
       ),
     );

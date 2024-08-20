@@ -1,7 +1,7 @@
 import 'package:app_estoque/base/models/acesso/acesso.dart';
 import 'package:app_estoque/base/models/arquivo/arquivo.dart';
 import 'package:app_estoque/base/models/categoria/categoria.dart';
-import 'package:app_estoque/base/models/produtos/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produto.dart';
 import 'package:app_estoque/base/repository/acesso_repository.dart';
 import 'package:app_estoque/base/repository/arquivo_repository.dart';
 import 'package:app_estoque/base/repository/categoria_repository.dart';

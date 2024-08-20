@@ -2,7 +2,8 @@ import 'package:app_estoque/base/context/context.dart';
 import 'package:app_estoque/base/models/acesso/acesso.dart';
 import 'package:app_estoque/base/models/arquivo/arquivo.dart';
 import 'package:app_estoque/base/models/categoria/categoria.dart';
-import 'package:app_estoque/base/models/produtos/produtos.dart';
+import 'package:app_estoque/base/models/produtos/produto.dart';
+import 'package:app_estoque/modules/cliente/cliente.dart';
 import 'package:app_estoque/utils/base_migration.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
 
@@ -21,6 +22,7 @@ class AppContext extends Context {
         Produto.table,
         Arquivo.table,
         Categoria.table,
+        Cliente.table,
       ];
 
   static List<BaseMigration> get _migrations => [];
