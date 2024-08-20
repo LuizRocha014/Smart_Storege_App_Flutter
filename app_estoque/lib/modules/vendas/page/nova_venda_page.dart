@@ -39,7 +39,7 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                   child: TextWidget(
                     "Vendedor",
                     fontWeight: FontWeight.w600,
-                    fontSize: FontesDoAplicativo.tituloCardVenda,
+                    fontSize: FontesDoAplicativo.font_18,
                   ),
                 ),
                 Padding(
@@ -77,7 +77,7 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                     TextWidget(
                       "Cliente",
                       fontWeight: FontWeight.w600,
-                      fontSize: FontesDoAplicativo.tituloCardVenda,
+                      fontSize: FontesDoAplicativo.font_18,
                     ),
                     GestureDetector(
                         onTap: controller.selectCliente,

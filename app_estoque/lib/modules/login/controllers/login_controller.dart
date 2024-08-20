@@ -48,15 +48,18 @@ class LoginController extends BaseController {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Aviso!",
-                  fontSize: FontesDoAplicativo.titloText,
+                  fontSize: FontesDoAplicativo.font_18,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
-                child: const TextWidget("Login ou senha incorretos, tente novamente!"),
+                padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height * 0.01),
+                child: const TextWidget(
+                    "Login ou senha incorretos, tente novamente!"),
               ),
               const Spacer(),
               ButtonWidget(

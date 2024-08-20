@@ -1,6 +1,7 @@
 import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/fonts.dart';
 import 'package:flutter/material.dart';
 
 class CardItemSelectWidget extends StatefulWidget {
@@ -55,7 +56,8 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                     children: [
                       Text(
                         widget.titulo,
-                        style: const TextStyle(
+                        style: TextStyle(
+                          fontSize: FontesDoAplicativo.font_16,
                           color: CoresDoAplicativo.preto,
                           fontWeight: FontWeight.bold,
                         ),

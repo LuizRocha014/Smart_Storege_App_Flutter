@@ -36,14 +36,17 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.05),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.height * 0.05),
             child: Container(
               height: 1,
-              decoration: const BoxDecoration(color: CoresDoAplicativo.lightGray),
+              decoration:
+                  const BoxDecoration(color: CoresDoAplicativo.lightGray),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.02),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.height * 0.02),
             child: ListView.builder(
               itemCount: 15,
               shrinkWrap: true,
@@ -59,15 +62,20 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+                            padding: EdgeInsets.only(
+                                top:
+                                    MediaQuery.of(context).size.height * 0.025),
                             child: TextWidget(
                               "Aviso!",
-                              fontSize: FontesDoAplicativo.titloText,
+                              fontSize: FontesDoAplicativo.font_18,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
-                            child: const TextWidget("Login ou senha incorretos, tente novamente!"),
+                            padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.height * 0.01),
+                            child: const TextWidget(
+                                "Login ou senha incorretos, tente novamente!"),
                           ),
                           const Spacer(),
                           ButtonWidget(
@@ -81,7 +89,10 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
                   );
                 },
                 child: const CardVendasWidget(
-                    numVenda: "VENDA N° 225", nomeVendedor: "Osvaldo Cruz", dataString: "12/04/2024", valorVenda: 200),
+                    numVenda: "VENDA N° 225",
+                    nomeVendedor: "Osvaldo Cruz",
+                    dataString: "12/04/2024",
+                    valorVenda: 200),
               ),
             ),
           ),

@@ -89,7 +89,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                             children: [
                               TextWidget(
                                 controller.listProdutos[index].nome,
-                                fontSize: FontesDoAplicativo.textMedium,
+                                fontSize: FontesDoAplicativo.font_16,
                                 fontWeight: FontWeight.w600,
                               ),
                               SizedBox(
@@ -98,7 +98,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                               ),
                               TextWidget(
                                 controller.listProdutos[index].quantidade,
-                                fontSize: FontesDoAplicativo.textValorProduto,
+                                fontSize: FontesDoAplicativo.font_16,
                                 textColor: CoresDoAplicativo.primaryColor,
                                 fontWeight: FontWeight.w600,
                               ),

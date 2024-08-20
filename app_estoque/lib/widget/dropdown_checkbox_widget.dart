@@ -33,12 +33,14 @@ class DropDownCheckBoxWidget<T> extends StatefulWidget {
   });
 
   @override
-  State<DropDownCheckBoxWidget<T>> createState() => _DropDownCheckBoxWidgetState<T>();
+  State<DropDownCheckBoxWidget<T>> createState() =>
+      _DropDownCheckBoxWidgetState<T>();
 }
 
 class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
   GlobalKey? dropdownKey = GlobalKey();
-  List<DropdownSelectItem<T>> get selectedItens => widget.itens.where((element) => element.isSelected).toList();
+  List<DropdownSelectItem<T>> get selectedItens =>
+      widget.itens.where((element) => element.isSelected).toList();
 
   @override
   void initState() {
@@ -93,7 +95,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                     widget.label,
                     fontWeight: FontWeight.w600,
                     textColor: widget.externalLabelColor,
-                    fontSize: FontesDoAplicativo.textMedium,
+                    fontSize: FontesDoAplicativo.font_16,
                   ),
                 ),
               ),
@@ -110,7 +112,8 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
               child: DropdownButtonFormField<T>(
                 menuMaxHeight: 30.h,
                 autovalidateMode: widget.autovalidateMode,
-                icon: const Icon(Icons.keyboard_arrow_down, color: CoresDoAplicativo.gray),
+                icon: const Icon(Icons.keyboard_arrow_down,
+                    color: CoresDoAplicativo.gray),
                 dropdownColor: Colors.white,
                 value: selectedItens.isNotEmpty ? selectedItens[0].id : null,
                 validator: widget.validator,
@@ -122,14 +125,16 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                 // hint: TextWidget(
                 //   //widget.hintText,
                 //   //overflow: TextOverflow.ellipsis,
-                //   fontSize: FontesDoAplicativo.textMedium,
+                //   fontSize: FontesDoAplicativo.font_16,
                 //   textColor: CoresDoAplicativo.gray,
                 //   fontWeight: FontWeight.normal,
                 //   //fontFamily: "SegoeUI",
                 // ),
                 decoration: InputDecoration(
                   counterText: '',
-                  helperStyle: TextStyle(fontSize: FontesDoAplicativo.titloText, color: CoresDoAplicativo.gray),
+                  helperStyle: TextStyle(
+                      fontSize: FontesDoAplicativo.font_18,
+                      color: CoresDoAplicativo.gray),
                   errorMaxLines: 2,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 2.w,
@@ -163,7 +168,8 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                             //Método para alteração da cor do checkbox de acordo com o booleano
                             Color getColor(Set<WidgetState> states) {
                               if (e.isSelected) {
-                                return widget.checkboxColor ?? CoresDoAplicativo.preto;
+                                return widget.checkboxColor ??
+                                    CoresDoAplicativo.preto;
                               }
                               return CoresDoAplicativo.branco;
                             }
@@ -181,10 +187,12 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                                   children: [
                                     Checkbox(
                                       value: e.isSelected,
-                                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
                                       visualDensity: VisualDensity.comfortable,
                                       checkColor: CoresDoAplicativo.branco,
-                                      fillColor: WidgetStateColor.resolveWith(getColor),
+                                      fillColor: WidgetStateColor.resolveWith(
+                                          getColor),
                                       onChanged: (value) {
                                         changeIsSelectedItem(value!, e);
                                         setStateSb(() {});
@@ -217,10 +225,14 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                   child: SizedBox(
                     width: double.infinity,
                     child: TextWidget(
-                      selectedItens.isNotEmpty ? selectedItens.map((e) => e.text).join('; ') : "",
+                      selectedItens.isNotEmpty
+                          ? selectedItens.map((e) => e.text).join('; ')
+                          : "",
                       //overflow: TextOverflow.ellipsis,
-                      fontSize: FontesDoAplicativo.titloText,
-                      textColor: selectedItens.isNotEmpty ? CoresDoAplicativo.preto : CoresDoAplicativo.gray,
+                      fontSize: FontesDoAplicativo.font_18,
+                      textColor: selectedItens.isNotEmpty
+                          ? CoresDoAplicativo.preto
+                          : CoresDoAplicativo.gray,
                     ),
                   ),
                 ),
@@ -237,7 +249,8 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
   }
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderSide: BorderSide(color: widget.borderColor ?? CoresDoAplicativo.preto),
+        borderSide:
+            BorderSide(color: widget.borderColor ?? CoresDoAplicativo.preto),
         borderRadius: BorderRadius.all(Radius.circular(2.w)),
       );
 }
@@ -248,5 +261,6 @@ class DropdownSelectItem<T> {
   final String text;
   late bool isSelected;
 
-  DropdownSelectItem({required this.id, required this.text, this.isSelected = false});
+  DropdownSelectItem(
+      {required this.id, required this.text, this.isSelected = false});
 }

@@ -19,6 +19,7 @@ class SelectItensController extends BaseController {
   }
 
   List<Produto> get listProdutos => _listProdutos;
+  List<Produto> get itemSelecionado => _itensSelecionados;
   int get contador => _contador.value;
 
   Future<void> carregaLista() async {

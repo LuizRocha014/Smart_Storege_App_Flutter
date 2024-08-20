@@ -41,7 +41,7 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
               child: TextWidget(
                 "VENDAS",
                 fontWeight: FontWeight.w500,
-                fontSize: FontesDoAplicativo.titloText,
+                fontSize: FontesDoAplicativo.font_18,
               ),
             ),
           ),

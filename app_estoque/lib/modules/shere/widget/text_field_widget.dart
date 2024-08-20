@@ -16,7 +16,7 @@ class TextFieldWidget extends StatelessWidget {
   final void Function()? onTapSuffixIcon;
   final Color? color;
   final Color? iconColor;
-  final Color textColor;
+  final Color? textColor;
   final double? borderRadius;
   final Color? colorLabelExterno;
   final Color? hintTextColor;
@@ -49,7 +49,7 @@ class TextFieldWidget extends StatelessWidget {
       this.onTapSuffixIcon,
       this.color,
       this.iconColor,
-      required this.textColor,
+      this.textColor,
       this.borderRadius,
       this.colorLabelExterno,
       this.hintTextColor,
@@ -88,7 +88,7 @@ class TextFieldWidget extends StatelessWidget {
               children: [
                 TextWidget(labelExterno!,
                     fontSize: labelExternoFontSize,
-                    textColor: colorLabelExterno ?? CoresDoAplicativo.preto,
+                    textColor: colorLabelExterno ?? CoresDoAplicativo.lightGray,
                     fontWeight: labelExternoFontWeight ?? FontWeight.w400),
                 if (onTapInfoIcon != null)
                   IconButtonWidget(

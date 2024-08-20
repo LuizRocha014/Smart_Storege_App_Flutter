@@ -11,7 +11,11 @@ class CardVendasWidget extends StatefulWidget {
   final String dataString;
   final double valorVenda;
   const CardVendasWidget(
-      {super.key, required this.numVenda, required this.nomeVendedor, required this.dataString, required this.valorVenda});
+      {super.key,
+      required this.numVenda,
+      required this.nomeVendedor,
+      required this.dataString,
+      required this.valorVenda});
 
   @override
   State<CardVendasWidget> createState() => _CardVendasWidgetState();
@@ -24,8 +28,9 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
       padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
       child: Container(
         height: 150,
-        decoration:
-            BoxDecoration(border: Border.all(color: CoresDoAplicativo.lightGray), borderRadius: BorderRadius.circular(20)),
+        decoration: BoxDecoration(
+            border: Border.all(color: CoresDoAplicativo.lightGray),
+            borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.03,
@@ -40,7 +45,7 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
                 children: [
                   TextWidget(
                     widget.numVenda,
-                    fontSize: FontesDoAplicativo.tituloCardVenda,
+                    fontSize: FontesDoAplicativo.font_18,
                     textColor: CoresDoAplicativo.textGray,
                   ),
                   const Padding(
@@ -71,13 +76,13 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
                     TextWidget(
                       "Total",
                       fontWeight: FontWeight.bold,
-                      fontSize: FontesDoAplicativo.textMedium,
+                      fontSize: FontesDoAplicativo.font_16,
                     ),
                     const Spacer(),
                     TextWidget(
                       Conversores.formatarValorEmReal(widget.valorVenda),
                       fontWeight: FontWeight.bold,
-                      fontSize: FontesDoAplicativo.textMedium,
+                      fontSize: FontesDoAplicativo.font_16,
                     ),
                   ],
                 ),

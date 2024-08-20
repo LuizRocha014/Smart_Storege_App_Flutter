@@ -73,7 +73,9 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.w),
-                side: widget.borderColor == null ? BorderSide.none : BorderSide(color: widget.borderColor!),
+                side: widget.borderColor == null
+                    ? BorderSide.none
+                    : BorderSide(color: widget.borderColor!),
               ),
               backgroundColor: widget.color ?? CoresDoAplicativo.preto,
               fixedSize: Size(widget.width ?? 60.w, widget.height ?? 5.h),
@@ -94,19 +96,25 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                     duration: const Duration(milliseconds: 250),
                     child: Padding(
                       padding: widget.componentePadding ??
-                          EdgeInsets.symmetric(horizontal: widget.complementoTexto == null ? 0 : 2.w),
+                          EdgeInsets.symmetric(
+                              horizontal:
+                                  widget.complementoTexto == null ? 0 : 2.w),
                       child: Row(
-                        mainAxisAlignment:
-                            widget.complementoTexto == null ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: widget.complementoTexto == null
+                            ? MainAxisAlignment.center
+                            : MainAxisAlignment.spaceBetween,
                         children: [
                           TextWidget(
                             widget.title,
-                            fontSize: widget.fontSize ?? FontesDoAplicativo.textMedium,
-                            textColor: widget.fontColor ?? CoresDoAplicativo.branco,
+                            fontSize:
+                                widget.fontSize ?? FontesDoAplicativo.font_16,
+                            textColor:
+                                widget.fontColor ?? CoresDoAplicativo.branco,
                             fontWeight: widget.fontWeight ?? FontWeight.bold,
                             //textAlign: TextAlign.center,
                           ),
-                          if (widget.complementoTexto != null) widget.complementoTexto!,
+                          if (widget.complementoTexto != null)
+                            widget.complementoTexto!,
                         ],
                       ),
                     ),

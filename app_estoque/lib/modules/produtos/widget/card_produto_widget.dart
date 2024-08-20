@@ -107,7 +107,7 @@ class CardProdutoWidget extends StatelessWidget {
     //                   children: [
     //                     TextWidget(
     //                       tituloProduto,
-    //                       fontSize: FontesDoAplicativo.textMedium,
+    //                       fontSize: FontesDoAplicativo.font_16,
     //                     ),
     //                     SizedBox(
     //                       height: 2.5.h,

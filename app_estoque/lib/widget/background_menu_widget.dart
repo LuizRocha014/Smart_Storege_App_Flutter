@@ -77,7 +77,7 @@ class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
                           context),
                       child: TextWidget(
                         _controller.listOpcaoMenu[index].nome,
-                        fontSize: FontesDoAplicativo.textMedium,
+                        fontSize: FontesDoAplicativo.font_16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

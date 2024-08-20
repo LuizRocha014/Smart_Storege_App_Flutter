@@ -43,13 +43,14 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
               children: [
                 TextWidget(
                   "LOGIN",
-                  fontSize: FontesDoAplicativo.titloLogin,
+                  fontSize: FontesDoAplicativo.font_28,
                   fontWeight: FontWeight.w500,
                   textColor: CoresDoAplicativo.primaryColor,
                 ),
-                const TextWidget(
+                TextWidget(
                   "Crie uma conta ou entre com uma conta já existente",
                   textColor: CoresDoAplicativo.primaryColor,
+                  fontSize: FontesDoAplicativo.font_13,
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(
@@ -86,7 +87,7 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
                   outerColor: CoresDoAplicativo.primaryColor,
                   text: "Arraste para logar",
                   textStyle: TextStyle(
-                      fontSize: FontesDoAplicativo.textMedium,
+                      fontSize: FontesDoAplicativo.font_14,
                       color: CoresDoAplicativo.branco),
                   submittedIcon: const CircularProgressIndicator(
                     strokeWidth: 2,

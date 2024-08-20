@@ -19,4 +19,5 @@ class AssetsAplicativo {
   static const String iconItemProduto = '$_pathPng/packaging.png';
   static const String iconPhonto = '$_pathPng/photo.png';
   static const String iconLogoLogin = '$_pathPng/logoMarca.png';
+  static const String iconCliente = '$_pathPng/patient.png';
 }

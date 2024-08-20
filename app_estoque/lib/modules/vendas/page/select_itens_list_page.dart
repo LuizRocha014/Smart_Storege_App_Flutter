@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:app_estoque/modules/estoque/widget/card_item_select_widget.dart';
-import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/select_itens_list_controller.dart';
-import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/navigator.dart';

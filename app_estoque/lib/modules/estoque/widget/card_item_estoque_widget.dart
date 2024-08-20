@@ -1,6 +1,7 @@
 import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:flutter/material.dart';
 
@@ -58,12 +59,13 @@ class _CardItemSelectWidgetState extends State<CardItemEstoquetWidget> {
                     children: [
                       Text(
                         widget.titulo,
-                        style: const TextStyle(
+                        style: TextStyle(
+                          fontSize: FontesDoAplicativo.font_16,
                           color: CoresDoAplicativo.preto,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: 0.5.h),
                       CustomRich("Marca: ", widget.marca.toString()),
                       CustomRich("Quantidade: ", widget.quantidade.toString()),
                     ],

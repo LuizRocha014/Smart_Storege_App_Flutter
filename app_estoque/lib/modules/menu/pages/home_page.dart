@@ -48,7 +48,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                         left: MediaQuery.of(context).size.width * 0.02),
                     child: TextWidget(
                       "Bem Vindo Luiz Rocha",
-                      fontSize: FontesDoAplicativo.textMedium,
+                      fontSize: FontesDoAplicativo.font_16,
                       textColor: CoresDoAplicativo.branco,
                     ),
                   ),
@@ -90,7 +90,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                             alignment: Alignment.centerLeft,
                             child: TextWidget(
                               "R\$ 3.000.00",
-                              fontSize: FontesDoAplicativo.titloText,
+                              fontSize: FontesDoAplicativo.font_28,
                             )),
                       ],
                     ),
@@ -159,7 +159,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
           children: [
             TextWidget(
               "Funções",
-              fontSize: FontesDoAplicativo.tituloCardVenda,
+              fontSize: FontesDoAplicativo.font_18,
               fontWeight: FontWeight.w600,
             ),
             Obx(
@@ -219,7 +219,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
               children: [
                 TextWidget(
                   "Vendas",
-                  fontSize: FontesDoAplicativo.tituloCardVenda,
+                  fontSize: FontesDoAplicativo.font_18,
                   fontWeight: FontWeight.w600,
                 ),
                 const TextWidget("Ver tudo",
@@ -282,7 +282,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                               TextWidget(
                                 "MM234689",
                                 fontWeight: FontWeight.w500,
-                                fontSize: FontesDoAplicativo.textCardVenda,
+                                fontSize: FontesDoAplicativo.font_16,
                               ),
                               const CustomRich("Cliente: ", "516.219.828.58"),
                             ],

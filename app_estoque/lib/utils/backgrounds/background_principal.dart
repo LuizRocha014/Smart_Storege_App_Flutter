@@ -14,6 +14,7 @@ class BackgroundWidget extends StatefulWidget {
   final String? tituloButton;
   final IconData? icon;
   final void Function()? onTap;
+  final void Function()? onBackButton;
   const BackgroundWidget(
       {super.key,
       this.child,
@@ -23,7 +24,8 @@ class BackgroundWidget extends StatefulWidget {
       this.backgroundColor,
       this.tituloButton,
       this.icon,
-      this.onTap});
+      this.onTap,
+      this.onBackButton});
 
   @override
   State<BackgroundWidget> createState() => _BackgroundWidgetState();
@@ -50,7 +52,8 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                     child: Visibility(
                       visible: widget.titulo != null ? true : false,
                       child: GestureDetector(
-                        onTap: () => Navigator.pop(context),
+                        onTap:
+                            widget.onBackButton ?? () => Navigator.pop(context),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -61,7 +64,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                                 child: TextWidget(
                                   widget.titulo ?? "",
                                   textColor: CoresDoAplicativo.branco,
-                                  fontSize: FontesDoAplicativo.textMedium,
+                                  fontSize: FontesDoAplicativo.font_16,
                                 ),
                               ),
                               child: Row(
@@ -73,7 +76,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                                   TextWidget(
                                     widget.titulo ?? "",
                                     textColor: CoresDoAplicativo.branco,
-                                    fontSize: FontesDoAplicativo.textMedium,
+                                    fontSize: FontesDoAplicativo.font_16,
                                   ),
                                 ],
                               ),
