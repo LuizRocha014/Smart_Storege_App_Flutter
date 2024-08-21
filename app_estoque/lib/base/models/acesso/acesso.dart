@@ -12,7 +12,8 @@ class Acessos {
 
   Acessos({required this.nome, required this.valor, required this.descricao});
 
-  factory Acessos.fromJson(Map<String, dynamic> json) => _$AcessosFromJson(json);
+  factory Acessos.fromJson(Map<String, dynamic> json) =>
+      _$AcessosFromJson(json);
 
   Map<String, dynamic> toJson() => _$AcessosToJson(this);
 

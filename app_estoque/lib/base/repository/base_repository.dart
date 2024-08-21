@@ -28,7 +28,8 @@ class BaseRepository<T> implements IBaseRepository<T> {
   @override
   Future<T?> getById(String id) async {
     try {
-      final query = "SELECT * FROM ${infosTableDatabase.tableName} WHERE Id = '$id' LIMIT 1";
+      final query =
+          "SELECT * FROM ${infosTableDatabase.tableName} WHERE Id = '$id' LIMIT 1";
       final entityBanco = await context.rawQuery(query);
       if (entityBanco.isEmpty) return null;
       final entity = fromJson(entityBanco.first);
@@ -40,7 +41,8 @@ class BaseRepository<T> implements IBaseRepository<T> {
 
   @override
   Future<T?> create(Map<String, dynamic> json) async {
-    final insertEntity = await context.insert(infosTableDatabase.tableName, json);
+    final insertEntity =
+        await context.insert(infosTableDatabase.tableName, json);
     if (insertEntity <= 0) throw Exception();
     final entity = await getById(json['Id'] as String);
     return entity;
@@ -48,7 +50,8 @@ class BaseRepository<T> implements IBaseRepository<T> {
 
   @override
   Future<void> createNoReturn(Map<String, dynamic> json) async {
-    final insertEntity = await context.insert(infosTableDatabase.tableName, json);
+    final insertEntity =
+        await context.insert(infosTableDatabase.tableName, json);
     if (insertEntity <= 0) throw Exception();
   }
 
@@ -60,7 +63,8 @@ class BaseRepository<T> implements IBaseRepository<T> {
       if (entityExists == null) {
         insertEntity = await context.insert(infosTableDatabase.tableName, json);
       } else {
-        insertEntity = await context.update(infosTableDatabase.tableName, json, where: "Id = ?", whereArgs: [json['Id']]);
+        insertEntity = await context.update(infosTableDatabase.tableName, json,
+            where: "Id = ?", whereArgs: [json['Id']]);
       }
       if (insertEntity <= 0) throw Exception();
       final entity = await getById(json['Id'] as String);
@@ -90,7 +94,9 @@ class BaseRepository<T> implements IBaseRepository<T> {
 
   @override
   Future<T?> update(Map<String, dynamic> json) async {
-    final updateEntity = await context.update(infosTableDatabase.tableName, json, where: "Id = ?", whereArgs: [json['Id']]);
+    final updateEntity = await context.update(
+        infosTableDatabase.tableName, json,
+        where: "Id = ?", whereArgs: [json['Id']]);
     if (updateEntity == 0) throw Exception();
     final entity = await getById(json['Id'] as String);
     return entity;

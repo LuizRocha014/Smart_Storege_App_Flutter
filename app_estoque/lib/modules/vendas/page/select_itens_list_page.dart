@@ -51,8 +51,7 @@ class _SelecaoItensPageState
                         titulo: controller.listProdutos[index].name,
                         valor:
                             controller.listProdutos[index].salePrice.toString(),
-                        quantidade: controller
-                            .listProdutos[index].quantidadeVenda
+                        quantidade: controller.listProdutos[index].numbProduct
                             .toString(),
                         onTapMore: () => controller.adicionaItemCompra(index),
                         onTapless: () => controller.removeItemCompra(index),

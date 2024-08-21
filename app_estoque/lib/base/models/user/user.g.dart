@@ -7,11 +7,10 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      sobrenome: json['sobrenome'] as String,
-      userName: json['userName'] as String,
-      senha: json['senha'] as String,
+      name: json['name'] as String,
       email: json['email'] as String,
-      nome: json['nome'] as String,
+      password: json['password'] as String,
+      roleId: (json['roleId'] as num?)?.toInt(),
       id: json['id'] as String,
       inclusao: DateTime.parse(json['inclusao'] as String),
     );
@@ -19,9 +18,8 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'inclusao': instance.inclusao.toIso8601String(),
-      'nome': instance.nome,
-      'sobrenome': instance.sobrenome,
-      'userName': instance.userName,
-      'senha': instance.senha,
+      'name': instance.name,
       'email': instance.email,
+      'password': instance.password,
+      'roleId': instance.roleId,
     };

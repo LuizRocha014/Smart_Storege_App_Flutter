@@ -6,40 +6,29 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User extends Core {
-  final String nome;
-  final String sobrenome;
-  final String userName;
-  final String senha;
-  final String email;
+  String name;
+  String email;
+  String password;
+  int? roleId;
 
-  User(
-      {required this.sobrenome,
-      required this.userName,
-      required this.senha,
-      required this.email,
-      required this.nome,
-      required super.id,
-      required super.inclusao});
-
-  // factory User.fromJson(Map<String, dynamic> json) => User(
-  //       nome: json['nome'],
-  //       inclusao: DateTime.parse(json['inclusao']),
-  //       id: json['id'],
-  //       sobrenome: json['sobrenome'],
-  //       userName: json['userName'],
-  //       senha: json['senha'],
-  //       email: json['email'],
-  //     );
+  User({
+    required this.name,
+    required this.email,
+    required this.password,
+    this.roleId,
+    required super.id,
+    required super.inclusao,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
   static InfosTableDatabase get table {
     final columns = {
-      "Nome": "TEXT",
-      "Sobrenome": "TEXT",
-      "UserName": "TEXT",
-      "Senha": "TEXT",
+      "name": "TEXT",
+      "email": "TEXT",
+      "password": "TEXT",
+      "roleId": "INT",
       "Email": "TEXT",
     };
     columns.addAll(Core.table.columns);

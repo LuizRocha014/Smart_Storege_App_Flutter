@@ -13,6 +13,7 @@ Produto _$ProdutoFromJson(Map<String, dynamic> json) => Produto(
       supplierId: (json['supplierId'] as num?)?.toInt(),
       purchasePrice: (json['purchasePrice'] as num?)?.toDouble(),
       salePrice: (json['salePrice'] as num?)?.toDouble(),
+      codProd: json['codProd'] as String?,
       totalAmount: (json['totalAmount'] as num?)?.toInt(),
       minimumAmount: (json['minimumAmount'] as num?)?.toInt(),
       storageLocation: json['storageLocation'] as String?,
@@ -21,6 +22,8 @@ Produto _$ProdutoFromJson(Map<String, dynamic> json) => Produto(
           : DateTime.parse(json['expiryDate'] as String),
       description: json['description'] as String?,
       additionalInfo: json['additionalInfo'] as String?,
+      categoriaId: json['categoriaId'] as String?,
+      numbProduct: (json['numbProduct'] as num?)?.toInt() ?? 0,
       id: json['id'] as String,
       inclusao: DateTime.parse(json['inclusao'] as String),
     );
@@ -40,4 +43,6 @@ Map<String, dynamic> _$ProdutoToJson(Produto instance) => <String, dynamic>{
       'expiryDate': instance.expiryDate?.toIso8601String(),
       'description': instance.description,
       'additionalInfo': instance.additionalInfo,
+      'codProd': instance.codProd,
+      'categoriaId': instance.categoriaId,
     };
