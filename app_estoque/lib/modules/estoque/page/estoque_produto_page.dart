@@ -17,8 +17,7 @@ class EstoqueProdutosPage extends StatefulWidget {
   State<EstoqueProdutosPage> createState() => _EstoqueProdutosPageState();
 }
 
-class _EstoqueProdutosPageState
-    extends MState<EstoqueProdutosPage, EstoqueProdutoController> {
+class _EstoqueProdutosPageState extends MState<EstoqueProdutosPage, EstoqueProdutoController> {
   int quantity = 1;
   @override
   void initState() {
@@ -38,8 +37,7 @@ class _EstoqueProdutosPageState
           child: const Icon(color: CoresDoAplicativo.branco, Icons.add)),
       titulo: "Estoque",
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.05),
+        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
         child: Obx(
           () => Visibility(
             visible: controller.produtosEstoque.isNotEmpty,
@@ -52,12 +50,11 @@ class _EstoqueProdutosPageState
               () => ListView.builder(
                 itemCount: controller.produtosEstoque.length,
                 shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) =>
-                    CardItemEstoquetWidget(
+                itemBuilder: (BuildContext context, int index) => CardItemEstoquetWidget(
                   titulo: controller.produtosEstoque[index].name,
-                  valor: controller.produtosEstoque[index].name,
-                  quantidade: controller.produtosEstoque[index].name.toString(),
-                  marca: controller.produtosEstoque[index].name,
+                  valor: controller.produtosEstoque[index].salePrice.toString(),
+                  quantidade: controller.produtosEstoque[index].totalAmount.toString(),
+                  marca: controller.produtosEstoque[index].brand,
                   onTapMore: () => controller.adicionaItemCompra(index),
                   onTapless: () {
                     log("Tira");

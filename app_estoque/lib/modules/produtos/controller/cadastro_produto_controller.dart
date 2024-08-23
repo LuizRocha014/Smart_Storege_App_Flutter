@@ -20,17 +20,22 @@ import 'package:uuid/uuid.dart';
 class CadastroProdutoController extends BaseController {
   late TextEditingController nomeController;
   late TextEditingController marcaController;
-  late Categoria? categoriaSelect;
   late TextEditingController corController;
   late TextEditingController quantController;
-  late TextEditingController valorController;
+  late TextEditingController skuController;
+  late String codProduto;
+  late Categoria? categoriaSelect;
   late RxString categoriaText;
   late ImagePicker camera;
   late File? imagem;
   late RxBool mostraImagem;
   late List<Categoria> drop;
-  final MoneyMaskedTextController controllerTextValue =
-      MoneyMaskedTextController(
+  final MoneyMaskedTextController controllerValorCompra = MoneyMaskedTextController(
+    decimalSeparator: ',',
+    thousandSeparator: '.',
+    leftSymbol: 'R\$ ',
+  );
+  final MoneyMaskedTextController controllerValorVenda = MoneyMaskedTextController(
     decimalSeparator: ',',
     thousandSeparator: '.',
     leftSymbol: 'R\$ ',
@@ -41,20 +46,16 @@ class CadastroProdutoController extends BaseController {
     marcaController = TextEditingController();
     corController = TextEditingController();
     quantController = TextEditingController();
-    valorController = TextEditingController();
+    skuController = TextEditingController();
+    codProduto = '';
     camera = ImagePicker();
     mostraImagem = false.obs;
     imagem = File("");
     categoriaText = ''.obs;
     drop = [
-      Categoria(
-          id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Eletronicos"),
-      Categoria(
-          id: const Uuid().v4(),
-          inclusao: DateTime.now(),
-          nome: "Fones de Ouvido"),
-      Categoria(
-          id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Smartfones"),
+      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Eletronicos"),
+      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Fones de Ouvido"),
+      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Smartfones"),
     ];
   }
 
@@ -66,7 +67,7 @@ class CadastroProdutoController extends BaseController {
       if (marcaController.text.isEmpty) return "Insira a marca do Produto";
       if (corController.text.isEmpty) return "Insira a cor do Produto";
       if (quantController.text.isEmpty) return "Insira a quantidade do Produto";
-      if (controllerTextValue.text.isEmpty) return "Insira o valor do Produto";
+      if (controllerValorVenda.text.isEmpty) return "Insira o valor do Produto";
       if (categoriaSelect == null) return "Insira a categoria do Produto";
 
       return null;
@@ -100,10 +101,7 @@ class CadastroProdutoController extends BaseController {
         if (imagem!.path.isNotEmpty) {
           List<int> imageBytes = imagem!.readAsBytesSync();
           String base64Image = base64Encode(imageBytes);
-          arq = Arquivo(
-              id: const Uuid().v4(),
-              inclusao: DateTime.now(),
-              base64: base64Image);
+          arq = Arquivo(id: const Uuid().v4(), inclusao: DateTime.now(), base64: base64Image);
           instanceManager.get<IArquivoRepository>().create(arq.toJson());
         }
         final prod = Produto(
@@ -111,30 +109,26 @@ class CadastroProdutoController extends BaseController {
           id: const Uuid().v4(),
           inclusao: DateTime.now(),
           brand: marcaController.text,
-          codProd: "",
+          codProd: codProduto,
           additionalInfo: "",
           description: "",
           expiryDate: DateTime.now(),
           minimumAmount: 0,
           numbProduct: 0,
-          purchasePrice: 0,
-          sku: "",
+          sku: skuController.text,
           storageLocation: "",
           supplierId: 0,
           totalAmount: int.parse(quantController.text),
           categoriaId: categoriaSelect!.id,
+          purchasePrice: double.parse(
+              controllerValorCompra.text.replaceAll('R', '').replaceAll('\$', '').replaceAll('.', '').replaceAll(',', '')),
           salePrice: double.parse(
-            controllerTextValue.text
-                .replaceAll('R', '')
-                .replaceAll('\$', '')
-                .replaceAll('.', '')
-                .replaceAll(',', ''),
+            controllerValorVenda.text.replaceAll('R', '').replaceAll('\$', '').replaceAll('.', '').replaceAll(',', ''),
           ),
         );
 
         instanceManager.get<IProdutoRepository>().create(prod.toJson());
-        final controllerEstoque =
-            instanceManager.get<EstoqueProdutoController>();
+        final controllerEstoque = instanceManager.get<EstoqueProdutoController>();
         controllerEstoque.produtosEstoque.add(prod);
         // ignore: use_build_context_synchronously
         context.pop();

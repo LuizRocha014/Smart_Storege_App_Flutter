@@ -49,6 +49,7 @@ class DropDownWidget<T> extends StatelessWidget {
                     child: TextWidget(
                       label,
                       fontWeight: FontWeight.w400,
+                      textColor: CoresDoAplicativo.lightGray,
                     ),
                   ),
                 ),
@@ -78,7 +79,7 @@ class DropDownWidget<T> extends StatelessWidget {
                 disabledBorder: outlineInputBorder,
                 focusedErrorBorder: outlineInputBorder,
                 filled: true,
-                fillColor: fillColor ?? CoresDoAplicativo.branco,
+                fillColor: fillColor ?? CoresDoAplicativo.lightGray.withOpacity(0.2),
               ),
               style: const TextStyle(
                 color: CoresDoAplicativo.preto,
@@ -90,6 +91,7 @@ class DropDownWidget<T> extends StatelessWidget {
               hint: TextWidget(
                 hintText,
                 fontWeight: FontWeight.normal,
+                textColor: CoresDoAplicativo.lightGray,
               ),
               icon: showIcon
                   ? Row(
