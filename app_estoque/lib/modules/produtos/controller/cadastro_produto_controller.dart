@@ -5,8 +5,6 @@ import 'dart:io';
 import 'package:app_estoque/base/models/arquivo/arquivo.dart';
 import 'package:app_estoque/base/models/categoria/categoria.dart';
 import 'package:app_estoque/base/models/produtos/produto.dart';
-import 'package:app_estoque/base/repository/interface/iarquivo_repository.dart';
-import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
@@ -30,12 +28,14 @@ class CadastroProdutoController extends BaseController {
   late File? imagem;
   late RxBool mostraImagem;
   late List<Categoria> drop;
-  final MoneyMaskedTextController controllerValorCompra = MoneyMaskedTextController(
+  final MoneyMaskedTextController controllerValorCompra =
+      MoneyMaskedTextController(
     decimalSeparator: ',',
     thousandSeparator: '.',
     leftSymbol: 'R\$ ',
   );
-  final MoneyMaskedTextController controllerValorVenda = MoneyMaskedTextController(
+  final MoneyMaskedTextController controllerValorVenda =
+      MoneyMaskedTextController(
     decimalSeparator: ',',
     thousandSeparator: '.',
     leftSymbol: 'R\$ ',
@@ -52,11 +52,7 @@ class CadastroProdutoController extends BaseController {
     mostraImagem = false.obs;
     imagem = File("");
     categoriaText = ''.obs;
-    drop = [
-      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Eletronicos"),
-      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Fones de Ouvido"),
-      Categoria(id: const Uuid().v4(), inclusao: DateTime.now(), nome: "Smartfones"),
-    ];
+    drop = [];
   }
 
   String? get categoriaNomeString => categoriaText.value;
@@ -80,7 +76,7 @@ class CadastroProdutoController extends BaseController {
   void selectCategoria(String value) {
     try {
       categoriaSelect = drop.firstWhere((e) => e.id == value);
-      categoriaText.value = categoriaSelect!.nome;
+      // categoriaText.value = categoriaSelect!.nome;
     } catch (_) {}
   }
 
@@ -101,8 +97,11 @@ class CadastroProdutoController extends BaseController {
         if (imagem!.path.isNotEmpty) {
           List<int> imageBytes = imagem!.readAsBytesSync();
           String base64Image = base64Encode(imageBytes);
-          arq = Arquivo(id: const Uuid().v4(), inclusao: DateTime.now(), base64: base64Image);
-          instanceManager.get<IArquivoRepository>().create(arq.toJson());
+          arq = Arquivo(
+              id: const Uuid().v4(),
+              inclusao: DateTime.now(),
+              base64: base64Image);
+          //instanceManager.get<IArquivoRepository>().create(arq.toJson());
         }
         final prod = Produto(
           name: nomeController.text,
@@ -120,15 +119,23 @@ class CadastroProdutoController extends BaseController {
           supplierId: 0,
           totalAmount: int.parse(quantController.text),
           categoriaId: categoriaSelect!.id,
-          purchasePrice: double.parse(
-              controllerValorCompra.text.replaceAll('R', '').replaceAll('\$', '').replaceAll('.', '').replaceAll(',', '')),
+          purchasePrice: double.parse(controllerValorCompra.text
+              .replaceAll('R', '')
+              .replaceAll('\$', '')
+              .replaceAll('.', '')
+              .replaceAll(',', '')),
           salePrice: double.parse(
-            controllerValorVenda.text.replaceAll('R', '').replaceAll('\$', '').replaceAll('.', '').replaceAll(',', ''),
+            controllerValorVenda.text
+                .replaceAll('R', '')
+                .replaceAll('\$', '')
+                .replaceAll('.', '')
+                .replaceAll(',', ''),
           ),
         );
 
-        instanceManager.get<IProdutoRepository>().create(prod.toJson());
-        final controllerEstoque = instanceManager.get<EstoqueProdutoController>();
+        // instanceManager.get<IProdutoRepository>().create(prod.toJson());
+        final controllerEstoque =
+            instanceManager.get<EstoqueProdutoController>();
         controllerEstoque.produtosEstoque.add(prod);
         // ignore: use_build_context_synchronously
         context.pop();

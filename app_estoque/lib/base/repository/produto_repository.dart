@@ -19,7 +19,7 @@ class ProdutoRepository extends BaseRepository<Produto>
     if (entitiesBanco.isNullOrEmpty) return <Produto>[];
     final jsonString = jsonEncode(entitiesBanco);
     var listJson = jsonDecode(jsonString) as List;
-    final entities = listJson.map((e) => Produto.fromJson(e)).toList();
-    return entities;
+    //final entities = listJson.map((e) => Produto.fromJson(e)).toList();
+    return [];
   }
 }

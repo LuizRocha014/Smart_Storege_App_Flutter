@@ -1,10 +1,12 @@
 import 'dart:async';
 
-import 'package:app_estoque/base/models/user/user.dart';
+import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
+import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/routes.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:boleto_utils/boleto_utils.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
@@ -24,17 +26,17 @@ class LoginController extends BaseController {
     passWord = TextEditingController();
 
     userName.text = "LuizRocha";
-    passWord.text = "Roch@1204";
+    passWord.text = "Aplicativo@2024";
   }
 
   Future<void> login() async {
     try {
       isLoading = true;
-      // final retorno = await instanceManager
-      //     .get<IUserService>()
-      //     .login(userName.text, passWord.text);
-      // if (retorno == null) throw Exception();
-      // // ignore: use_build_context_synchronously
+      final retorno = await instanceManager
+          .get<IUserService>()
+          .login(userName.text, passWord.text);
+      if (retorno == null) throw Exception();
+      // ignore: use_build_context_synchronously
       Future.delayed(Durations.extralong4);
       context.push(const HomePage());
       isLoading = false;

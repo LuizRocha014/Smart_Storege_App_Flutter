@@ -1,15 +1,6 @@
-import 'package:app_estoque/base/models/acesso/acesso.dart';
-import 'package:app_estoque/base/models/arquivo/arquivo.dart';
-import 'package:app_estoque/base/models/categoria/categoria.dart';
-import 'package:app_estoque/base/models/produtos/produto.dart';
+import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/repository/acesso_repository.dart';
-import 'package:app_estoque/base/repository/arquivo_repository.dart';
-import 'package:app_estoque/base/repository/categoria_repository.dart';
-import 'package:app_estoque/base/repository/interface/iarquivo_repository.dart';
-import 'package:app_estoque/base/repository/interface/icategoria_repository.dart';
-import 'package:app_estoque/base/repository/produto_repository.dart';
 import 'package:app_estoque/base/repository/interface/iacesso_repository.dart';
-import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/base/service/user_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -19,27 +10,27 @@ void initInstances() {
     instanceManager.registerLazySingleton<IUserService>(() => UserService());
     instanceManager.registerLazySingleton<IAcessoRepository>(
       () => AcessoRepository(
-        Acessos.table,
-        Acessos.fromJson,
+        Permission.table,
+        Permission.fromJson,
       ),
     );
-    instanceManager.registerLazySingleton<IProdutoRepository>(
-      () => ProdutoRepository(
-        Produto.table,
-        Produto.fromJson,
-      ),
-    );
-    instanceManager.registerLazySingleton<IArquivoRepository>(
-      () => ArquivoRepository(
-        Arquivo.table,
-        Arquivo.fromJson,
-      ),
-    );
-    instanceManager.registerLazySingleton<ICategoriaRepository>(
-      () => CategoriaRepository(
-        Categoria.table,
-        Categoria.fromJson,
-      ),
-    );
+    // instanceManager.registerLazySingleton<IProdutoRepository>(
+    //   () => ProdutoRepository(
+    //     Produto.table,
+    //     Produto.fromJson,
+    //   ),
+    // );
+    // instanceManager.registerLazySingleton<IArquivoRepository>(
+    //   () => ArquivoRepository(
+    //     Arquivo.table,
+    //     Arquivo.fromJson,
+    //   ),
+    // );
+    // instanceManager.registerLazySingleton<ICategoriaRepository>(
+    //   () => CategoriaRepository(
+    //     Categoria.table,
+    //     Categoria.fromJson,
+    //   ),
+    // );
   } catch (_) {}
 }

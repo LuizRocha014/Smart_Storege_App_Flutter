@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:app_estoque/base/models/user/user.dart';
+import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 // ignore: depend_on_referenced_packages

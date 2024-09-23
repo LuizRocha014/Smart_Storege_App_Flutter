@@ -18,7 +18,8 @@ class CadastroProdutoPage extends StatefulWidget {
   State<CadastroProdutoPage> createState() => _CadastroProdutoState();
 }
 
-class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoController> {
+class _CadastroProdutoState
+    extends MState<CadastroProdutoPage, CadastroProdutoController> {
   @override
   void initState() {
     super.registerController(CadastroProdutoController());
@@ -33,7 +34,10 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.04, left: 5.w, right: 5.w),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.04,
+                  left: 5.w,
+                  right: 5.w),
               child: ListView(
                 children: [
                   Row(
@@ -54,18 +58,24 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width * 0.03,
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.03,
                             vertical: MediaQuery.of(context).size.width * 0.03),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: MediaQuery.of(context).size.height *
+                                      0.01),
                               child: GestureDetector(
-                                onTap: () => controller.tiraFoto(ImageSource.camera),
+                                onTap: () =>
+                                    controller.tiraFoto(ImageSource.camera),
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height * 0.04,
-                                  width: MediaQuery.of(context).size.width * 0.30,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.04,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.30,
                                   decoration: const BoxDecoration(
                                     color: CoresDoAplicativo.brancoFumaca,
                                     borderRadius: BorderRadius.all(
@@ -89,7 +99,8 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
                               ),
                               child: Center(
                                 child: GestureDetector(
-                                    onTap: () => controller.startBarcodeScanStream(context),
+                                    onTap: () => controller
+                                        .startBarcodeScanStream(context),
                                     child: const TextWidget("Novo Código")),
                               ),
                             ),
@@ -100,7 +111,8 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
                   ),
                   const Divider(),
                   Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.02),
                     child: TextFieldWidget(
                       controller: controller.nomeController,
                       titulo: "Nome",
@@ -111,7 +123,8 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.02),
                     child: TextFieldWidget(
                       labelExterno: "Marca",
                       controller: controller.marcaController,
@@ -130,13 +143,17 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
                             ? "Selecione uma Categoria"
                             : controller.categoriaNomeString!,
                         label: 'Categoria',
-                        onChanged: (value) => controller.selectCategoria(value!),
-                        itens: controller.drop.map((e) => DropdownItem(id: e.id, texto: e.nome)).toList(),
+                        onChanged: (value) =>
+                            controller.selectCategoria(value!),
+                        itens: controller.drop
+                            .map((e) => DropdownItem(id: e.id, texto: ""))
+                            .toList(),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.02),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -168,7 +185,8 @@ class _CadastroProdutoState extends MState<CadastroProdutoPage, CadastroProdutoC
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.02),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

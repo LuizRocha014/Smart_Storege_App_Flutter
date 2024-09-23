@@ -1,9 +1,7 @@
-import 'package:app_estoque/base/models/core/core.dart';
+import 'package:app_estoque/base/models/smartStorege/Core/core.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
 import 'package:app_estoque/utils/mappers.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-part 'cliente.g.dart';
 
 @JsonSerializable()
 class Cliente extends Core {
@@ -17,10 +15,10 @@ class Cliente extends Core {
   final String responsiblephone;
   final String segment;
 
-  factory Cliente.fromJson(Map<String, dynamic> json) =>
-      _$ClienteFromJson(fromJsonRepository(json));
+  // factory Cliente.fromJson(Map<String, dynamic> json) =>
+  //     _$ClienteFromJson(fromJsonRepository(json));
 
-  Map<String, dynamic> toJson() => fromJsonRepository(_$ClienteToJson(this));
+  // Map<String, dynamic> toJson() => fromJsonRepository(_$ClienteToJson(this));
 
   Cliente(
     this.nome,
