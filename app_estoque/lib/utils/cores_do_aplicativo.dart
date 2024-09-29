@@ -11,5 +11,6 @@ mixin CoresDoAplicativo {
   static const Color lightGray = Color(0xFFC0C0C0);
   static const Color branco = Color(0xFFFFFFFF);
   static const Color brancoFumaca = Color(0xFFd0d0d0);
+  static const Color bancoSujo = Color(0xFFf2f2f2);
   static const Color cinzaIperClato = Color.fromARGB(255, 112, 30, 30);
 }

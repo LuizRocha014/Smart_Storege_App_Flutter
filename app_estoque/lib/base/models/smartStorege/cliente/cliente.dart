@@ -3,6 +3,8 @@ import 'package:app_estoque/utils/infos_tabela_database.dart';
 import 'package:app_estoque/utils/mappers.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'cliente.g.dart';
+
 @JsonSerializable()
 class Cliente extends Core {
   final String nome;
@@ -15,10 +17,10 @@ class Cliente extends Core {
   final String responsiblephone;
   final String segment;
 
-  // factory Cliente.fromJson(Map<String, dynamic> json) =>
-  //     _$ClienteFromJson(fromJsonRepository(json));
+  factory Cliente.fromJson(Map<String, dynamic> json) =>
+      _$ClienteFromJson(fromJsonRepository(json));
 
-  // Map<String, dynamic> toJson() => fromJsonRepository(_$ClienteToJson(this));
+  Map<String, dynamic> toJson() => fromJsonRepository(_$ClienteToJson(this));
 
   Cliente(
     this.nome,
@@ -31,7 +33,7 @@ class Cliente extends Core {
     this.responsiblephone,
     this.segment, {
     required super.id,
-    required super.inclusao,
+    required super.createdAt,
   });
 
   static InfosTableDatabase get table {

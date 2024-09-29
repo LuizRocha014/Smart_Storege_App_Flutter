@@ -8,7 +8,7 @@ class Arquivo extends Core {
   final String base64;
   Arquivo({
     required super.id,
-    required super.inclusao,
+    required super.createdAt,
     required this.base64,
   });
   Uint8List? get uint => base64Decode(base64);

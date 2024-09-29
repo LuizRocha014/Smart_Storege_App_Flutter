@@ -88,7 +88,7 @@ class TextFieldWidget extends StatelessWidget {
               children: [
                 TextWidget(labelExterno!,
                     fontSize: labelExternoFontSize,
-                    textColor: colorLabelExterno ?? CoresDoAplicativo.lightGray,
+                    textColor: colorLabelExterno ?? CoresDoAplicativo.gray,
                     fontWeight: labelExternoFontWeight ?? FontWeight.w400),
                 if (onTapInfoIcon != null)
                   IconButtonWidget(
@@ -119,18 +119,25 @@ class TextFieldWidget extends StatelessWidget {
               hintText: labelInterno,
               counterText: '',
               errorMaxLines: 2,
-              prefixIcon: prefixIcon == null ? null : Icon(prefixIcon, color: iconColor, size: 1.8.h),
+              prefixIcon: prefixIcon == null
+                  ? null
+                  : Icon(prefixIcon, color: iconColor, size: 1.8.h),
               suffixIcon: suffixIcon == null
                   ? null
                   : GestureDetector(
                       onTap: onTapSuffixIcon,
-                      child: Icon(suffixIcon, color: (suffixColor != null) ? suffixColor : iconColor, size: 1.8.h)),
+                      child: Icon(suffixIcon,
+                          color:
+                              (suffixColor != null) ? suffixColor : iconColor,
+                          size: 1.8.h)),
               hintStyle: TextStyle(
                 color: CoresDoAplicativo.lightGray,
                 fontSize: hintFontSize,
                 fontWeight: hintFontWeight ?? FontWeight.normal,
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: (borderRadius == null) ? (2.w) : 2.w, vertical: 0.5.h),
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: (borderRadius == null) ? (2.w) : 2.w,
+                  vertical: 0.5.h),
               enabledBorder: outlineInputBorder,
               focusedBorder: outlineInputBorder,
               border: outlineInputBorder,
@@ -147,7 +154,8 @@ class TextFieldWidget extends StatelessWidget {
   }
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderSide: const BorderSide(color: CoresDoAplicativo.lightGray, width: 1),
+        borderSide:
+            const BorderSide(color: CoresDoAplicativo.lightGray, width: 1),
         borderRadius: BorderRadius.circular(borderRadius ?? 2.w),
       );
 }

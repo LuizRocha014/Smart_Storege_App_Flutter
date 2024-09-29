@@ -2,13 +2,13 @@ import 'package:app_estoque/utils/infos_tabela_database.dart';
 
 class Core {
   final String id;
-  final DateTime inclusao;
-  final DateTime? alteracao;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
 
-  Core({required this.id, required this.inclusao, this.alteracao});
+  Core({required this.id, required this.createdAt, this.updatedAt});
 
   static InfosTableDatabase get table => InfosTableDatabase(
         tableName: 'Core',
-        columns: {"Id": "TEXT", "Inclusao": "TEXT", "Alteracao": "TEXT"},
+        columns: {"Id": "TEXT", "CreatedAt": "TEXT", "createdAt": "TEXT"},
       );
 }

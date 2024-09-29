@@ -38,7 +38,7 @@ class Produto extends Core {
     this.categoriaId,
     this.numbProduct = 0,
     required super.id,
-    required super.inclusao,
+    required super.createdAt,
   });
 
   static InfosTableDatabase get table {

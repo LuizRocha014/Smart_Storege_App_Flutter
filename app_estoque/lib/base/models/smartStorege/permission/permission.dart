@@ -10,7 +10,8 @@ class Permission extends Core {
   Permission({
     required super.id,
     required this.name,
-    required super.inclusao,
+     super.updatedAt,
+    required super.createdAt,
   });
 
   factory Permission.fromJson(Map<String, dynamic> json) =>

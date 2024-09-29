@@ -37,7 +37,6 @@ class LoginController extends BaseController {
           .login(userName.text, passWord.text);
       if (retorno == null) throw Exception();
       // ignore: use_build_context_synchronously
-      Future.delayed(Durations.extralong4);
       context.push(const HomePage());
       isLoading = false;
     } catch (_) {

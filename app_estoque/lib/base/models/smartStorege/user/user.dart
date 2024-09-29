@@ -16,7 +16,8 @@ class User extends Core {
 
   User({
     required super.id,
-    required super.inclusao,
+    required super.createdAt,
+     super.updatedAt,
     required this.roleId,
     required this.name,
     required this.userName,

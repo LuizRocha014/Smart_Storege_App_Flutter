@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
 import 'package:app_estoque/base/models/produtos/produto.dart';
+import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/modules/cliente/page/cliente_page.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
 import 'package:app_estoque/modules/listaVendas/page/lista_vendas_page.dart';
@@ -9,6 +10,8 @@ import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 import 'package:app_estoque/utils/assets.dart';
+import 'package:app_estoque/utils/instance_manager.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -85,7 +88,8 @@ class NewMenuIncialController extends BaseController {
           break;
         case 'GestureEstoque':
           log("Estoque");
-          Get.to(const EstoqueProdutosPage());
+          //Get.to(const EstoqueProdutosPage());
+          instanceManager.get<ICategoryService>().getAll();
           break;
         case 'GestureProdutos':
           log("Produtos");

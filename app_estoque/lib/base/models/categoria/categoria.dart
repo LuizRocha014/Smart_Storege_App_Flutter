@@ -3,5 +3,5 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class Categoria extends Core {
-  Categoria({required super.id, required super.inclusao});
+  Categoria({required super.id, required super.createdAt});
 }

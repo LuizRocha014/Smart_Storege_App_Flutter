@@ -12,7 +12,7 @@ class UserPermission extends Core {
 
   UserPermission(
       {required super.id,
-      required super.inclusao,
+      required super.createdAt,
       required this.acessoId,
       required this.usuarioId});
 

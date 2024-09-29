@@ -1,23 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_permission.dart';
+part of 'category.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserPermission _$UserPermissionFromJson(Map<String, dynamic> json) =>
-    UserPermission(
+Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       id: json['id'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      acessoId: json['acessoId'] as String,
-      usuarioId: json['usuarioId'] as String,
+      description: json['description'] as String,
     );
 
-Map<String, dynamic> _$UserPermissionToJson(UserPermission instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
-      'usuarioId': instance.usuarioId,
-      'acessoId': instance.acessoId,
+      'description': instance.description,
     };

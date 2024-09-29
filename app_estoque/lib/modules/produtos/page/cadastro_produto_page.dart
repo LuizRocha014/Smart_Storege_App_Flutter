@@ -2,12 +2,15 @@ import 'package:app_estoque/modules/produtos/controller/cadastro_produto_control
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
 import 'package:app_estoque/utils/app_measurements.dart';
+import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/dropdown_widget.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -46,15 +49,19 @@ class _CadastroProdutoState
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
-                          color: CoresDoAplicativo.gray,
+                          color: CoresDoAplicativo.bancoSujo,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Obx(() => Visibility(
-                            visible: controller.mostraImagem.value,
-                            child: Image.file(
-                              controller.imagem!,
-                              fit: BoxFit.fill,
-                            ))),
+                        child: Obx(() => controller.mostraImagem.value
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(2.h),
+                                child: Image.file(
+                                  controller.imagem!,
+                                  fit: BoxFit.fill,
+                                ),
+                              )
+                            : const Center(
+                                child: FaIcon(FontAwesomeIcons.camera))),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -106,6 +113,23 @@ class _CadastroProdutoState
                             ),
                           ],
                         ),
+                      ),
+                      const Spacer(),
+                      Obx(
+                        () => controller.mostraQrCode.value
+                            ? Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 3.w),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(1.w),
+                                  child: Image.memory(
+                                    width: 22.w,
+                                    height: 11.h,
+                                    controller.qrImageBytes!,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              )
+                            : const SizedBox.shrink(),
                       ),
                     ],
                   ),
@@ -213,7 +237,7 @@ class _CadastroProdutoState
                             labelInterno: 'Valor de Venda',
                             textColor: CoresDoAplicativo.preto,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

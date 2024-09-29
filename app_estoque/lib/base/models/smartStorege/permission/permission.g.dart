@@ -9,12 +9,16 @@ part of 'permission.dart';
 Permission _$PermissionFromJson(Map<String, dynamic> json) => Permission(
       id: json['id'] as String,
       name: json['name'] as String,
-      inclusao: DateTime.parse(json['inclusao'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$PermissionToJson(Permission instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'inclusao': instance.inclusao.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
       'name': instance.name,
     };
