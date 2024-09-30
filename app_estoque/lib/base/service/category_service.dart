@@ -3,6 +3,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/icategory_rep
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:uuid/uuid.dart';
 
 class CategoryService extends BaseService implements ICategoryService {
   @override
@@ -21,9 +22,12 @@ class CategoryService extends BaseService implements ICategoryService {
         if (retorno.body == null) return throw Expando();
         var category = (retorno.body as List).map((e) => Category.fromJson(e));
         list.addAll(category);
+        for (var element in list) {
+          await repository.createOrReplace(element.toJson());
+        }
         if (category.length < pageSize) progresso = false;
       } while (progresso);
-      list.map((e) => repository.create(e.toJson()));
+
       return list;
     } catch (_) {
       return [];

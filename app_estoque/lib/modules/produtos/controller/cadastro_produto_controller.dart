@@ -1,13 +1,11 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:app_estoque/base/models/arquivo/arquivo.dart';
-import 'package:app_estoque/base/models/categoria/categoria.dart';
 import 'package:app_estoque/base/models/produtos/produto.dart';
-import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
+import 'package:app_estoque/base/models/smartStorege/category/category.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -27,13 +25,13 @@ class CadastroProdutoController extends BaseController {
   late TextEditingController quantController;
   late TextEditingController skuController;
   late String codProduto;
-  late Categoria? categoriaSelect;
+  late Category? categoriaSelect;
   late RxString categoriaText;
   late ImagePicker camera;
   late File? imagem;
   late RxBool mostraImagem;
   late RxBool mostraQrCode;
-  late List<Categoria> drop;
+  late List<Category> drop;
   late Uint8List? qrImageBytes;
   final MoneyMaskedTextController controllerValorCompra =
       MoneyMaskedTextController(
@@ -61,7 +59,14 @@ class CadastroProdutoController extends BaseController {
     mostraQrCode = false.obs;
     categoriaText = ''.obs;
     drop = [];
+    await carregaDados();
+
     qrImageBytes = Uint8List(0);
+  }
+
+  Future<void> carregaDados() async {
+    drop =
+        await instanceManager.get<ICategoryRepository>().getAllListCategory();
   }
 
   String? get categoriaNomeString => categoriaText.value;
@@ -120,16 +125,6 @@ class CadastroProdutoController extends BaseController {
   void cadastroProduto() async {
     try {
       if (await validaCampos() == null) {
-        late Arquivo? arq;
-        if (imagem!.path.isNotEmpty) {
-          List<int> imageBytes = imagem!.readAsBytesSync();
-          String base64Image = base64Encode(imageBytes);
-          arq = Arquivo(
-              id: const Uuid().v4(),
-              createdAt: DateTime.now(),
-              base64: base64Image);
-          //instanceManager.get<IArquivoRepository>().create(arq.toJson());
-        }
         final prod = Produto(
           name: nomeController.text,
           id: const Uuid().v4(),
@@ -159,11 +154,17 @@ class CadastroProdutoController extends BaseController {
                 .replaceAll(',', ''),
           ),
         );
+        // late Arquivo? arq;
+        // if (imagem!.path.isNotEmpty) {
+        //   List<int> imageBytes = imagem!.readAsBytesSync();
+        //   String base64Image = base64Encode(imageBytes);
+        //   arq = Arquivo(
+        //       id: const Uuid().v4(),
+        //       createdAt: DateTime.now(),
+        //       base64: base64Image);
 
-        // instanceManager.get<IProdutoRepository>().create(prod.toJson());
-        final controllerEstoque =
-            instanceManager.get<EstoqueProdutoController>();
-        controllerEstoque.produtosEstoque.add(prod);
+        //   //instanceManager.get<IArquivoRepository>().create(arq.toJson());
+        // }
         // ignore: use_build_context_synchronously
         context.pop();
       } else {}

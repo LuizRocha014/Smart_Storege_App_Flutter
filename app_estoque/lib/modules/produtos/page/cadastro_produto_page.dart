@@ -170,7 +170,8 @@ class _CadastroProdutoState
                         onChanged: (value) =>
                             controller.selectCategoria(value!),
                         itens: controller.drop
-                            .map((e) => DropdownItem(id: e.id, texto: ""))
+                            .map((e) =>
+                                DropdownItem(id: e.id, texto: e.description))
                             .toList(),
                       ),
                     ),

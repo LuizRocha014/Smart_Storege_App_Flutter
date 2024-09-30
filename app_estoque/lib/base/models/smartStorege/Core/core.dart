@@ -9,6 +9,6 @@ class Core {
 
   static InfosTableDatabase get table => InfosTableDatabase(
         tableName: 'Core',
-        columns: {"Id": "TEXT", "CreatedAt": "TEXT", "createdAt": "TEXT"},
+        columns: {"Id": "TEXT", "UpdatedAt": "TEXT", "CreatedAt": "TEXT"},
       );
 }

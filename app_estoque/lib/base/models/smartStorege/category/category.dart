@@ -15,21 +15,13 @@ class Category extends Core {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
+      _$CategoryFromJson(fromJsonRepository(json));
 
-  Map<String, dynamic> toJson() => fromJsonRepository(_$CategoryToJson(this));
+  Map<String, dynamic> toJson() => toJsonRepository(_$CategoryToJson(this));
 
   static InfosTableDatabase get table {
     final columns = {
-      "Nome": "TEXT",
-      "cnpj": "TEXT",
-      "email": "TEXT",
-      "address": "TEXT",
-      "zipcode": "TEXT",
-      "phone": "TEXT",
-      "responsible": "TEXT",
-      "responsiblephone": "TEXT",
-      "segment": "TEXT",
+      "Description": "TEXT",
     };
     columns.addAll(Core.table.columns);
     return InfosTableDatabase(tableName: 'Category', columns: columns);
