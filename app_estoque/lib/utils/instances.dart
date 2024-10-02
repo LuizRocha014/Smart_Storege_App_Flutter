@@ -1,8 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
-import 'package:app_estoque/base/repository/acesso_repository.dart';
-import 'package:app_estoque/base/repository/interface/iacesso_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ipermission_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iuser_permission_repository.dart';
@@ -29,12 +27,7 @@ void initInstances() {
         () => UserPermissionService());
     instanceManager
         .registerLazySingleton<ICategoryService>(() => CategoryService());
-    instanceManager.registerLazySingleton<IAcessoRepository>(
-      () => AcessoRepository(
-        Permission.table,
-        Permission.fromJson,
-      ),
-    );
+
     //Repository
     instanceManager.registerLazySingleton<ICategoryRepository>(
       () => CategoryRepository(

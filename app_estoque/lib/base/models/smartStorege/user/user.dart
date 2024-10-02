@@ -17,7 +17,7 @@ class User extends Core {
   User({
     required super.id,
     required super.createdAt,
-     super.updatedAt,
+    super.updatedAt,
     required this.roleId,
     required this.name,
     required this.userName,
@@ -25,6 +25,7 @@ class User extends Core {
     required this.emailVerifiedAt,
     required this.password,
     required this.rememberToken,
+    required super.active,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

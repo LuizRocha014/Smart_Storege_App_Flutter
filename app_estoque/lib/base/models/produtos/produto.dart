@@ -39,6 +39,7 @@ class Produto extends Core {
     this.numbProduct = 0,
     required super.id,
     required super.createdAt,
+    required super.active,
   });
 
   static InfosTableDatabase get table {

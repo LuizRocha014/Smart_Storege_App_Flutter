@@ -32,7 +32,7 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 2.h),
             decoration: BoxDecoration(
-              color: CoresDoAplicativo.branco,
+              color: branco,
               borderRadius: BorderRadius.circular(1.h),
             ),
             child: Row(
@@ -41,7 +41,7 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(1.h),
                   child: Image.asset(
-                    AssetsAplicativo.iconPhonto, // Altere para a URL da imagem
+                    iconPhonto, // Altere para a URL da imagem
                     width: 12.w,
                     height: 6.h,
                     fit: BoxFit.cover,
@@ -57,8 +57,8 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                       Text(
                         widget.titulo,
                         style: TextStyle(
-                          fontSize: FontesDoAplicativo.font_16,
-                          color: CoresDoAplicativo.preto,
+                          fontSize: font_16,
+                          color: preto,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -66,7 +66,7 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                       Text(
                         widget.valor,
                         style: const TextStyle(
-                          color: CoresDoAplicativo.primaryColor,
+                          color: primaryColor,
                           fontSize: 16,
                         ),
                       ),
@@ -78,14 +78,12 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.add,
-                          color: CoresDoAplicativo.primaryColor),
+                      icon: const Icon(Icons.add, color: primaryColor),
                       onPressed: widget.onTapMore,
                     ),
                     Text(
                       widget.quantidade ?? "0",
-                      style: const TextStyle(
-                          color: CoresDoAplicativo.preto, fontSize: 16),
+                      style: const TextStyle(color: preto, fontSize: 16),
                     ),
                     IconButton(
                         icon: const Icon(Icons.remove, color: Colors.grey),
@@ -97,7 +95,7 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
           ),
           Divider(
             height: 1.h,
-            color: CoresDoAplicativo.preto,
+            color: preto,
           )
         ],
       ),

@@ -95,7 +95,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                     widget.label,
                     fontWeight: FontWeight.w600,
                     textColor: widget.externalLabelColor,
-                    fontSize: FontesDoAplicativo.font_16,
+                    fontSize: font_16,
                   ),
                 ),
               ),
@@ -112,8 +112,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
               child: DropdownButtonFormField<T>(
                 menuMaxHeight: 30.h,
                 autovalidateMode: widget.autovalidateMode,
-                icon: const Icon(Icons.keyboard_arrow_down,
-                    color: CoresDoAplicativo.gray),
+                icon: const Icon(Icons.keyboard_arrow_down, color: gray),
                 dropdownColor: Colors.white,
                 value: selectedItens.isNotEmpty ? selectedItens[0].id : null,
                 validator: widget.validator,
@@ -125,16 +124,14 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                 // hint: TextWidget(
                 //   //widget.hintText,
                 //   //overflow: TextOverflow.ellipsis,
-                //   fontSize: FontesDoAplicativo.font_16,
-                //   textColor: CoresDoAplicativo.gray,
+                //   fontSize:   font_16,
+                //   textColor:  gray,
                 //   fontWeight: FontWeight.normal,
                 //   //fontFamily: "SegoeUI",
                 // ),
                 decoration: InputDecoration(
                   counterText: '',
-                  helperStyle: TextStyle(
-                      fontSize: FontesDoAplicativo.font_18,
-                      color: CoresDoAplicativo.gray),
+                  helperStyle: TextStyle(fontSize: font_18, color: gray),
                   errorMaxLines: 2,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: 2.w,
@@ -168,10 +165,9 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                             //Método para alteração da cor do checkbox de acordo com o booleano
                             Color getColor(Set<WidgetState> states) {
                               if (e.isSelected) {
-                                return widget.checkboxColor ??
-                                    CoresDoAplicativo.preto;
+                                return widget.checkboxColor ?? preto;
                               }
-                              return CoresDoAplicativo.branco;
+                              return branco;
                             }
 
                             //Recria o tap do item dentro do item no menu
@@ -181,7 +177,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                                 setStateSb(() {});
                               },
                               child: Container(
-                                color: CoresDoAplicativo.branco,
+                                color: branco,
                                 width: double.infinity,
                                 child: Row(
                                   children: [
@@ -190,7 +186,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                                       materialTapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap,
                                       visualDensity: VisualDensity.comfortable,
-                                      checkColor: CoresDoAplicativo.branco,
+                                      checkColor: branco,
                                       fillColor: WidgetStateColor.resolveWith(
                                           getColor),
                                       onChanged: (value) {
@@ -229,10 +225,8 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
                           ? selectedItens.map((e) => e.text).join('; ')
                           : "",
                       //overflow: TextOverflow.ellipsis,
-                      fontSize: FontesDoAplicativo.font_18,
-                      textColor: selectedItens.isNotEmpty
-                          ? CoresDoAplicativo.preto
-                          : CoresDoAplicativo.gray,
+                      fontSize: font_18,
+                      textColor: selectedItens.isNotEmpty ? preto : gray,
                     ),
                   ),
                 ),
@@ -249,8 +243,7 @@ class _DropDownCheckBoxWidgetState<T> extends State<DropDownCheckBoxWidget<T>> {
   }
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderSide:
-            BorderSide(color: widget.borderColor ?? CoresDoAplicativo.preto),
+        borderSide: BorderSide(color: widget.borderColor ?? preto),
         borderRadius: BorderRadius.all(Radius.circular(2.w)),
       );
 }

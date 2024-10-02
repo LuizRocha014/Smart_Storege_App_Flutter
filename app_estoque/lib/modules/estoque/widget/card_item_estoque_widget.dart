@@ -35,7 +35,7 @@ class _CardItemSelectWidgetState extends State<CardItemEstoquetWidget> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 2.h),
             decoration: BoxDecoration(
-              color: CoresDoAplicativo.branco,
+              color: branco,
               borderRadius: BorderRadius.circular(1.h),
             ),
             child: Row(
@@ -44,7 +44,7 @@ class _CardItemSelectWidgetState extends State<CardItemEstoquetWidget> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(1.h),
                   child: Image.asset(
-                    AssetsAplicativo.iconPhonto, // Altere para a URL da imagem
+                    iconPhonto, // Altere para a URL da imagem
                     width: 12.w,
                     height: 6.h,
                     fit: BoxFit.cover,
@@ -60,8 +60,8 @@ class _CardItemSelectWidgetState extends State<CardItemEstoquetWidget> {
                       Text(
                         widget.titulo,
                         style: TextStyle(
-                          fontSize: FontesDoAplicativo.font_16,
-                          color: CoresDoAplicativo.preto,
+                          fontSize: font_16,
+                          color: preto,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -78,7 +78,7 @@ class _CardItemSelectWidgetState extends State<CardItemEstoquetWidget> {
           ),
           Divider(
             height: 1.h,
-            color: CoresDoAplicativo.preto,
+            color: preto,
           )
         ],
       ),

@@ -26,10 +26,10 @@ class _LoginPageState extends State<MenuPrincipalPage> {
       enableBackButton: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: CoresDoAplicativo.primaryColor,
+        backgroundColor: primaryColor,
         tooltip: 'Increment Counter',
         child: Image.asset(
-          AssetsAplicativo.iconAdicionarVenda,
+          iconAdicionarVenda,
           height: 30,
         ),
       ),
@@ -47,10 +47,10 @@ class _LoginPageState extends State<MenuPrincipalPage> {
                 itemBuilder: (BuildContext context, int index) =>
                     GestureDetector(
 //onTap: () => controller.acessaPagina(index, context),
-                     // child: CardListMenuPrincipalWidget(
+                        // child: CardListMenuPrincipalWidget(
                         //  tituloCard: controller.listMenuInicial[index].nome,
 //imageAssets: controller.listMenuInicial[index].image),
-                    )),
+                        )),
           ],
         ),
       ),

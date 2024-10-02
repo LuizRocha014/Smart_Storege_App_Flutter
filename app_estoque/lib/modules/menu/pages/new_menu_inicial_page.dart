@@ -26,12 +26,12 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
   Widget build(BuildContext context) {
     return BackgroundMenuWidget(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: CoresDoAplicativo.primaryColor,
+        backgroundColor: primaryColor,
         onPressed: () => Get.to(const NovaVendaPage()),
         child: Image.asset(
             height: MediaQuery.of(context).size.width * 0.07,
             width: MediaQuery.of(context).size.width * 0.07,
-            AssetsAplicativo.iconSuperMarket),
+            iconSuperMarket),
       ),
       body: ListView(
         children: [
@@ -41,7 +41,7 @@ class _NewMenuInicialPageState extends State<NewMenuInicialPage> {
               child: TextWidget(
                 "VENDAS",
                 fontWeight: FontWeight.w500,
-                fontSize: FontesDoAplicativo.font_18,
+                fontSize: font_18,
               ),
             ),
           ),

@@ -19,7 +19,7 @@ class NovoClienteEndereco extends StatelessWidget {
           child: TextFieldWidget(
             controller: TextEditingController(),
             labelExterno: "CEP",
-            colorLabelExterno: CoresDoAplicativo.preto,
+            colorLabelExterno: preto,
             labelInterno: 'Insira o CEP',
             titulo: 'Nome',
             hintText: '',
@@ -28,7 +28,7 @@ class NovoClienteEndereco extends StatelessWidget {
         TextFieldWidget(
           controller: TextEditingController(),
           labelExterno: "Endereço",
-          colorLabelExterno: CoresDoAplicativo.preto,
+          colorLabelExterno: preto,
           labelInterno: 'Endereço',
           titulo: 'Nome',
           hintText: '',
@@ -38,7 +38,7 @@ class NovoClienteEndereco extends StatelessWidget {
           child: TextFieldWidget(
             controller: TextEditingController(),
             labelExterno: "Bairro",
-            colorLabelExterno: CoresDoAplicativo.preto,
+            colorLabelExterno: preto,
             labelInterno: 'Insira o Bairro',
             titulo: 'Nome',
             hintText: '',
@@ -47,7 +47,7 @@ class NovoClienteEndereco extends StatelessWidget {
         TextFieldWidget(
           controller: TextEditingController(),
           labelExterno: "Ponto de Referencia",
-          colorLabelExterno: CoresDoAplicativo.preto,
+          colorLabelExterno: preto,
           labelInterno: 'Insira o Ponto de Referencia',
           titulo: 'Nome',
           hintText: '',
@@ -59,7 +59,7 @@ class NovoClienteEndereco extends StatelessWidget {
             child: TextFieldWidget(
               controller: TextEditingController(),
               labelExterno: "Número",
-              colorLabelExterno: CoresDoAplicativo.preto,
+              colorLabelExterno: preto,
               labelInterno: 'Insira o Número',
               titulo: 'Nome',
               hintText: '',

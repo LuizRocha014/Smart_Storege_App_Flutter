@@ -19,7 +19,7 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
           child: TextFieldWidget(
             controller: TextEditingController(),
             labelExterno: "Nome",
-            colorLabelExterno: CoresDoAplicativo.preto,
+            colorLabelExterno: preto,
             labelInterno: 'Insira o nome',
             titulo: 'Nome',
             hintText: '',
@@ -28,7 +28,7 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
         TextFieldWidget(
           controller: TextEditingController(),
           labelExterno: "CPF/CNPJ",
-          colorLabelExterno: CoresDoAplicativo.preto,
+          colorLabelExterno: preto,
           labelInterno: 'Insira o CPF/CNPJ',
           titulo: 'Nome',
           hintText: '',
@@ -38,7 +38,7 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
           child: TextFieldWidget(
             controller: TextEditingController(),
             labelExterno: "E-mail",
-            colorLabelExterno: CoresDoAplicativo.preto,
+            colorLabelExterno: preto,
             labelInterno: 'Insira o Email',
             titulo: 'Nome',
             hintText: '',
@@ -47,7 +47,7 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
         TextFieldWidget(
           controller: TextEditingController(),
           labelExterno: "Telefone",
-          colorLabelExterno: CoresDoAplicativo.preto,
+          colorLabelExterno: preto,
           labelInterno: 'Insira o Telefone',
           titulo: 'Nome',
           hintText: '',
@@ -57,7 +57,7 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
           child: TextFieldWidget(
             controller: TextEditingController(),
             labelExterno: "Data de Nascimento",
-            colorLabelExterno: CoresDoAplicativo.preto,
+            colorLabelExterno: preto,
             labelInterno: 'Insira a data de nascimento',
             titulo: 'Nome',
             hintText: '',

@@ -26,7 +26,7 @@ class ButtonWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.6,
           height: MediaQuery.of(context).size.width * 0.1,
           decoration: BoxDecoration(
-            color: CoresDoAplicativo.primaryColor,
+            color: primaryColor,
             borderRadius: BorderRadius.all(
               Radius.circular(MediaQuery.of(context).size.height * 0.02),
             ),
@@ -34,7 +34,7 @@ class ButtonWidget extends StatelessWidget {
           child: Center(
               child: TextWidget(
             titulo,
-            textColor: CoresDoAplicativo.branco,
+            textColor: branco,
             fontWeight: FontWeight.w500,
           )),
         ),

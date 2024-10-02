@@ -27,11 +27,11 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CoresDoAplicativo.fundoLoginColor,
+      backgroundColor: fundoLoginColor,
       body: ListView(
         children: [
           Image.asset(
-            AssetsAplicativo.iconLogoLogin,
+            iconLogoLogin,
             fit: BoxFit.fill,
             height: 40.h,
             width: double.infinity,
@@ -43,14 +43,14 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
               children: [
                 TextWidget(
                   "LOGIN",
-                  fontSize: FontesDoAplicativo.font_28,
+                  fontSize: font_28,
                   fontWeight: FontWeight.w500,
-                  textColor: CoresDoAplicativo.primaryColor,
+                  textColor: primaryColor,
                 ),
                 TextWidget(
                   "Crie uma conta ou entre com uma conta já existente",
-                  textColor: CoresDoAplicativo.primaryColor,
-                  fontSize: FontesDoAplicativo.font_13,
+                  textColor: primaryColor,
+                  fontSize: font_13,
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(
@@ -59,10 +59,10 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
                 TextFieldWidget(
                     controller: controller.userName,
                     labelInterno: "Usuário",
-                    color: CoresDoAplicativo.branco,
-                    textColor: CoresDoAplicativo.preto,
+                    color: branco,
+                    textColor: preto,
                     titulo: "",
-                    colorLabelExterno: CoresDoAplicativo.preto,
+                    colorLabelExterno: preto,
                     labelExterno: "Usuário",
                     labelExternoFontWeight: FontWeight.w500,
                     hintText: ""),
@@ -72,9 +72,9 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
                 TextFieldWidget(
                     controller: controller.passWord,
                     labelInterno: "Senha",
-                    color: CoresDoAplicativo.branco,
-                    textColor: CoresDoAplicativo.preto,
-                    colorLabelExterno: CoresDoAplicativo.preto,
+                    color: branco,
+                    textColor: preto,
+                    colorLabelExterno: preto,
                     titulo: "",
                     labelExterno: "Senha",
                     labelExternoFontWeight: FontWeight.w500,
@@ -86,14 +86,12 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
                   height: 5.5.h,
                   sliderButtonIconSize: 2.h,
                   sliderButtonIconPadding: 1.h,
-                  outerColor: CoresDoAplicativo.primaryColor,
+                  outerColor: primaryColor,
                   text: "Arraste para logar",
-                  textStyle: TextStyle(
-                      fontSize: FontesDoAplicativo.font_14,
-                      color: CoresDoAplicativo.branco),
+                  textStyle: TextStyle(fontSize: font_14, color: branco),
                   submittedIcon: const CircularProgressIndicator(
                     strokeWidth: 1.5,
-                    color: CoresDoAplicativo.branco,
+                    color: branco,
                   ),
                   onSubmit: () => controller.login(),
                 )

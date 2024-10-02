@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_estoque/base/repository/interface/smartStorege/ipermission_repository.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
@@ -11,6 +12,7 @@ import 'package:app_estoque/widget/text_widget.dart';
 import 'package:boleto_utils/boleto_utils.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:app_estoque/utils/infos_statica.dart' as sai;
 
 class LoginController extends BaseController {
   late TextEditingController userName;
@@ -36,8 +38,12 @@ class LoginController extends BaseController {
           .get<IUserService>()
           .login(userName.text, passWord.text);
       if (retorno == null) throw Exception();
+      sai.loggerUser = retorno;
+      final acessoApp = await instanceManager
+          .get<IPermissionRepository>()
+          .validaAcessoUsuario();
       // ignore: use_build_context_synchronously
-      context.push(const HomePage());
+      if (acessoApp) context.push(const HomePage());
       isLoading = false;
     } catch (_) {
       showModalBottomSheet(
@@ -53,7 +59,7 @@ class LoginController extends BaseController {
                     top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Aviso!",
-                  fontSize: FontesDoAplicativo.font_18,
+                  fontSize: font_18,
                 ),
               ),
               Padding(

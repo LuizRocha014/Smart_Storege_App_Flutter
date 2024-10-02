@@ -42,14 +42,14 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                   Image.asset(
                       height: MediaQuery.of(context).size.width * 0.08,
                       width: MediaQuery.of(context).size.width * 0.08,
-                      AssetsAplicativo.iconApp),
+                      iconApp),
                   Padding(
                     padding: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.02),
                     child: TextWidget(
                       "Bem Vindo Luiz Rocha",
-                      fontSize: FontesDoAplicativo.font_16,
-                      textColor: CoresDoAplicativo.branco,
+                      fontSize: font_16,
+                      textColor: branco,
                     ),
                   ),
                 ],
@@ -57,7 +57,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
               Icon(
                 Icons.construction_rounded,
                 size: 4.h,
-                color: CoresDoAplicativo.branco,
+                color: branco,
               )
             ],
           ),
@@ -68,7 +68,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.13,
               decoration: BoxDecoration(
-                color: CoresDoAplicativo.branco,
+                color: branco,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
@@ -84,13 +84,13 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                       children: [
                         const TextWidget(
                           "Minhas Vendas",
-                          textColor: CoresDoAplicativo.lightGray,
+                          textColor: lightGray,
                         ),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: TextWidget(
                               "R\$ 3.000.00",
-                              fontSize: FontesDoAplicativo.font_28,
+                              fontSize: font_28,
                             )),
                       ],
                     ),
@@ -105,15 +105,14 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                           height: MediaQuery.of(context).size.height * 0.05,
                           width: MediaQuery.of(context).size.height * 0.05,
                           decoration: BoxDecoration(
-                            border:
-                                Border.all(color: CoresDoAplicativo.lightGray),
+                            border: Border.all(color: lightGray),
                             borderRadius: BorderRadius.circular(
                                 MediaQuery.of(context).size.height * 0.01),
                           ),
                           child: Image.asset(
                               height: MediaQuery.of(context).size.height * 0.01,
                               width: MediaQuery.of(context).size.width * 0.01,
-                              AssetsAplicativo.iconMore),
+                              iconMore),
                         ),
                       ),
                     )
@@ -128,7 +127,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
             child: TextField(
               decoration: InputDecoration(
                 filled: true,
-                fillColor: CoresDoAplicativo.secundaryColor
+                fillColor: secundaryColor
                     .withOpacity(0.9), // Cor de fundo similar à da imagem
                 hintText: 'Busque uma venda',
                 prefixIcon: const Icon(Icons.search),
@@ -159,7 +158,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
           children: [
             TextWidget(
               "Funções",
-              fontSize: FontesDoAplicativo.font_18,
+              fontSize: font_18,
               fontWeight: FontWeight.w600,
             ),
             Obx(
@@ -171,7 +170,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                     alignment: Alignment.center,
                     child: TextWidget(
                       "Nenhum acesso encontrado",
-                      textColor: CoresDoAplicativo.cinzaIperClato,
+                      textColor: cinzaIperClato,
                     ),
                   ),
                 ),
@@ -194,9 +193,8 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                         height: MediaQuery.of(context).size.height * 0.01,
                         width: MediaQuery.of(context).size.width * 0.01,
                         decoration: BoxDecoration(
-                            color: CoresDoAplicativo.branco,
-                            border:
-                                Border.all(color: CoresDoAplicativo.lightGray),
+                            color: branco,
+                            border: Border.all(color: lightGray),
                             borderRadius: BorderRadius.circular(20)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -219,11 +217,10 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
               children: [
                 TextWidget(
                   "Vendas",
-                  fontSize: FontesDoAplicativo.font_18,
+                  fontSize: font_18,
                   fontWeight: FontWeight.w600,
                 ),
-                const TextWidget("Ver tudo",
-                    textColor: CoresDoAplicativo.lightGray)
+                const TextWidget("Ver tudo", textColor: lightGray)
               ],
             ),
             Visibility(
@@ -233,7 +230,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                 child: const Center(
                     child: TextWidget(
                   "Nenhuma venda encontrado",
-                  textColor: CoresDoAplicativo.lightGray,
+                  textColor: lightGray,
                 )),
               ),
               child: ListView.builder(
@@ -246,11 +243,10 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.11,
                     decoration: BoxDecoration(
-                        color: CoresDoAplicativo.branco,
+                        color: branco,
                         borderRadius: BorderRadius.circular(
                             MediaQuery.of(context).size.height * 0.015),
-                        border: Border.all(
-                            color: CoresDoAplicativo.cinzaIperClato)),
+                        border: Border.all(color: cinzaIperClato)),
                     child: Row(
                       children: [
                         Padding(
@@ -260,16 +256,15 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                           child: Container(
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              color: CoresDoAplicativo.secundaryColor,
+                              color: secundaryColor,
                               borderRadius: BorderRadius.circular(
                                   MediaQuery.of(context).size.height * 0.01),
-                              border: Border.all(
-                                  color: CoresDoAplicativo.secundaryColor),
+                              border: Border.all(color: secundaryColor),
                             ),
                             child: Image.asset(
                                 height:
                                     MediaQuery.of(context).size.height * 0.05,
-                                AssetsAplicativo.iconItemProduto),
+                                iconItemProduto),
                           ),
                         ),
                         Padding(
@@ -282,7 +277,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                               TextWidget(
                                 "MM234689",
                                 fontWeight: FontWeight.w500,
-                                fontSize: FontesDoAplicativo.font_16,
+                                fontSize: font_16,
                               ),
                               const CustomRich("Cliente: ", "516.219.828.58"),
                             ],

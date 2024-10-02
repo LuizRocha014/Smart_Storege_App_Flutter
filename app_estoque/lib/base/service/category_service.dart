@@ -3,7 +3,6 @@ import 'package:app_estoque/base/repository/interface/smartStorege/icategory_rep
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
-import 'package:uuid/uuid.dart';
 
 class CategoryService extends BaseService implements ICategoryService {
   @override

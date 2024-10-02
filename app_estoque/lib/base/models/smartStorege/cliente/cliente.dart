@@ -34,6 +34,7 @@ class Cliente extends Core {
     this.segment, {
     required super.id,
     required super.createdAt,
+    required super.active,
   });
 
   static InfosTableDatabase get table {

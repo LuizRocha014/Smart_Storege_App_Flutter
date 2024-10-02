@@ -12,6 +12,7 @@ class Category extends Core {
     required super.id,
     required super.createdAt,
     required this.description,
+    required super.active,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) =>

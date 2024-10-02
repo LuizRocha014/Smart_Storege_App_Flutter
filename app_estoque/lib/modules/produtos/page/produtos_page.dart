@@ -32,7 +32,7 @@ class _MyWidgetState extends State<ProdutosPage> {
               padding: EdgeInsets.symmetric(vertical: 10),
               child: TextWidget(
                 "PRODUTOS",
-                textColor: CoresDoAplicativo.textGray,
+                textColor: textGray,
                 fontSize: 28,
                 fontWeight: FontWeight.w500,
               ),
@@ -42,8 +42,7 @@ class _MyWidgetState extends State<ProdutosPage> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Container(
               height: 1,
-              decoration:
-                  const BoxDecoration(color: CoresDoAplicativo.lightGray),
+              decoration: const BoxDecoration(color: lightGray),
             ),
           ),
           Padding(
@@ -61,8 +60,8 @@ class _MyWidgetState extends State<ProdutosPage> {
                     padding: EdgeInsets.symmetric(
                         vertical: MediaQuery.of(context).size.height * 0.01),
                     decoration: BoxDecoration(
-                      color: CoresDoAplicativo.branco,
-                      border: Border.all(color: CoresDoAplicativo.gray),
+                      color: branco,
+                      border: Border.all(color: gray),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -76,7 +75,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                             width: 80,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: CoresDoAplicativo.primaryColor),
+                                color: primaryColor),
                           ),
                         ),
                         Padding(
@@ -89,7 +88,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                             children: [
                               TextWidget(
                                 controller.listProdutos[index].name,
-                                fontSize: FontesDoAplicativo.font_16,
+                                fontSize: font_16,
                                 fontWeight: FontWeight.w600,
                               ),
                               SizedBox(
@@ -99,8 +98,8 @@ class _MyWidgetState extends State<ProdutosPage> {
                               TextWidget(
                                 controller.listProdutos[index].totalAmount
                                     .toString(),
-                                fontSize: FontesDoAplicativo.font_16,
-                                textColor: CoresDoAplicativo.primaryColor,
+                                fontSize: font_16,
+                                textColor: primaryColor,
                                 fontWeight: FontWeight.w600,
                               ),
                             ],

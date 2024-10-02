@@ -16,7 +16,7 @@ class NewBackGroundDefault extends StatelessWidget {
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.37,
-              decoration: const BoxDecoration(color: CoresDoAplicativo.primaryColor),
+              decoration: const BoxDecoration(color: primaryColor),
               child: Padding(
                 padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 3.h),
                 child: widgetContainer,

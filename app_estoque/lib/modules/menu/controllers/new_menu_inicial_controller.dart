@@ -30,23 +30,23 @@ class NewMenuIncialController extends BaseController {
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Estoque',
           gestureCommand: 'GestureEstoque',
-          imageString: AssetsAplicativo.iconEstoque));
+          imageString: iconEstoque));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Produtos',
           gestureCommand: 'GestureProdutos',
-          imageString: AssetsAplicativo.iconProdutos));
+          imageString: iconProdutos));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Transferencia',
           gestureCommand: 'GestureTransferencia',
-          imageString: AssetsAplicativo.iconTransferencia));
+          imageString: iconTransferencia));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Cliente',
           gestureCommand: 'GestureCliente',
-          imageString: AssetsAplicativo.iconCliente));
+          imageString: iconCliente));
       listMenuInicial.add(ListOpcoesMenu(
           nome: 'Outros',
           gestureCommand: 'GestureOutros',
-          imageString: AssetsAplicativo.iconMoreMenu));
+          imageString: iconMoreMenu));
     } catch (_) {}
   }
 

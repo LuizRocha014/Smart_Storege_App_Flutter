@@ -153,6 +153,7 @@ class CadastroProdutoController extends BaseController {
                 .replaceAll('.', '')
                 .replaceAll(',', ''),
           ),
+          active: true,
         );
         // late Arquivo? arq;
         // if (imagem!.path.isNotEmpty) {

@@ -40,7 +40,7 @@ class _SelecaoItensPageState
                   replacement: const Center(
                       child: TextWidget(
                     "Nenhum produto encontrado",
-                    textColor: CoresDoAplicativo.lightGray,
+                    textColor: lightGray,
                   )),
                   child: Obx(
                     () => ListView.builder(

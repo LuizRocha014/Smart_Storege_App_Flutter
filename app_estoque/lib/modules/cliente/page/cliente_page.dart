@@ -43,7 +43,7 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                       height: 8.h,
                       width: 16.w,
                       decoration: BoxDecoration(
-                          color: CoresDoAplicativo.primaryColor,
+                          color: primaryColor,
                           borderRadius: BorderRadius.circular(1.h)),
                     ),
                     SizedBox(
@@ -55,7 +55,7 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                         TextWidget(
                           "Evaristo Pereira da Cunha Oliveira",
                           fontWeight: FontWeight.w500,
-                          fontSize: FontesDoAplicativo.font_16,
+                          fontSize: font_16,
                         ),
                         const CustomRich("CPF:", "9999999999"),
                         const CustomRich("Telefone:", "9999999999"),

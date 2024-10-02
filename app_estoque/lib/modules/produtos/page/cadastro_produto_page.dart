@@ -2,14 +2,12 @@ import 'package:app_estoque/modules/produtos/controller/cadastro_produto_control
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
 import 'package:app_estoque/utils/app_measurements.dart';
-import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/dropdown_widget.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -49,7 +47,7 @@ class _CadastroProdutoState
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
-                          color: CoresDoAplicativo.bancoSujo,
+                          color: bancoSujo,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Obx(() => controller.mostraImagem.value
@@ -84,7 +82,7 @@ class _CadastroProdutoState
                                   width:
                                       MediaQuery.of(context).size.width * 0.30,
                                   decoration: const BoxDecoration(
-                                    color: CoresDoAplicativo.brancoFumaca,
+                                    color: brancoFumaca,
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(10),
                                     ),
@@ -99,7 +97,7 @@ class _CadastroProdutoState
                               height: MediaQuery.of(context).size.height * 0.04,
                               width: MediaQuery.of(context).size.width * 0.30,
                               decoration: const BoxDecoration(
-                                color: CoresDoAplicativo.brancoFumaca,
+                                color: brancoFumaca,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
@@ -142,7 +140,7 @@ class _CadastroProdutoState
                       titulo: "Nome",
                       labelExterno: "Nome",
                       labelInterno: 'Digite o nome do produto',
-                      textColor: CoresDoAplicativo.preto,
+                      textColor: preto,
                       hintText: '',
                     ),
                   ),
@@ -154,7 +152,7 @@ class _CadastroProdutoState
                       controller: controller.marcaController,
                       titulo: "Marca",
                       labelInterno: 'Digite o marca do produto',
-                      textColor: CoresDoAplicativo.preto,
+                      textColor: preto,
                       hintText: '',
                     ),
                   ),
@@ -162,7 +160,7 @@ class _CadastroProdutoState
                     padding: EdgeInsets.only(top: 2.h),
                     child: Obx(
                       () => DropDownWidget(
-                        borderColor: CoresDoAplicativo.lightGray,
+                        borderColor: lightGray,
                         hintText: controller.categoriaText.value.isEmpty
                             ? "Selecione uma Categoria"
                             : controller.categoriaNomeString!,
@@ -191,7 +189,7 @@ class _CadastroProdutoState
                             controller: controller.skuController,
                             keyboardType: TextInputType.number,
                             labelInterno: 'Digite o SKU',
-                            textColor: CoresDoAplicativo.preto,
+                            textColor: preto,
                           ),
                         ),
                         SizedBox(
@@ -202,7 +200,7 @@ class _CadastroProdutoState
                             controller: controller.quantController,
                             labelInterno: 'Digite a qnt',
                             keyboardType: TextInputType.number,
-                            textColor: CoresDoAplicativo.preto,
+                            textColor: preto,
                             hintText: '',
                           ),
                         )
@@ -224,7 +222,7 @@ class _CadastroProdutoState
                             controller: controller.controllerValorCompra,
                             labelInterno: 'Valor de compra',
                             keyboardType: TextInputType.number,
-                            textColor: CoresDoAplicativo.preto,
+                            textColor: preto,
                           ),
                         ),
                         SizedBox(
@@ -236,7 +234,7 @@ class _CadastroProdutoState
                             controller: controller.controllerValorVenda,
                             keyboardType: TextInputType.number,
                             labelInterno: 'Valor de Venda',
-                            textColor: CoresDoAplicativo.preto,
+                            textColor: preto,
                           ),
                         ),
                       ],

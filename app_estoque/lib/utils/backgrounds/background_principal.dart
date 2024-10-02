@@ -37,7 +37,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: widget.floatingActionButton,
-        backgroundColor: CoresDoAplicativo.primaryColor,
+        backgroundColor: primaryColor,
         body: Stack(
           children: [
             Padding(
@@ -63,20 +63,20 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                                 padding: const EdgeInsets.only(left: 20),
                                 child: TextWidget(
                                   widget.titulo ?? "",
-                                  textColor: CoresDoAplicativo.branco,
-                                  fontSize: FontesDoAplicativo.font_16,
+                                  textColor: branco,
+                                  fontSize: font_16,
                                 ),
                               ),
                               child: Row(
                                 children: [
                                   const Icon(
                                     Icons.arrow_back_ios_new_rounded,
-                                    color: CoresDoAplicativo.branco,
+                                    color: branco,
                                   ),
                                   TextWidget(
                                     widget.titulo ?? "",
-                                    textColor: CoresDoAplicativo.branco,
-                                    fontSize: FontesDoAplicativo.font_16,
+                                    textColor: branco,
+                                    fontSize: font_16,
                                   ),
                                 ],
                               ),
@@ -88,7 +88,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                                   onTap: widget.onTap,
                                   child: Icon(
                                     widget.icon,
-                                    color: CoresDoAplicativo.branco,
+                                    color: branco,
                                   ),
                                 ),
                               ),
@@ -104,8 +104,7 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(3.h),
                               topRight: Radius.circular(3.h)),
-                          color: widget.backgroundColor ??
-                              CoresDoAplicativo.branco),
+                          color: widget.backgroundColor ?? branco),
                       child: widget.child,
                     ),
                   ),

@@ -19,12 +19,14 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       emailVerifiedAt: DateTime.parse(json['emailVerifiedAt'] as String),
       password: json['password'] as String,
       rememberToken: json['rememberToken'] as String,
+      active: json['active'] as bool?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
+      'active': instance.active,
       'roleId': instance.roleId,
       'name': instance.name,
       'email': instance.email,

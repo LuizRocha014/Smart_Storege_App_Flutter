@@ -49,7 +49,7 @@ class DropDownWidget<T> extends StatelessWidget {
                     child: TextWidget(
                       label,
                       fontWeight: FontWeight.w400,
-                      textColor: CoresDoAplicativo.lightGray,
+                      textColor: lightGray,
                     ),
                   ),
                 ),
@@ -79,10 +79,10 @@ class DropDownWidget<T> extends StatelessWidget {
                 disabledBorder: outlineInputBorder,
                 focusedErrorBorder: outlineInputBorder,
                 filled: true,
-                fillColor: fillColor ?? CoresDoAplicativo.lightGray.withOpacity(0.2),
+                fillColor: fillColor ?? lightGray.withOpacity(0.2),
               ),
               style: const TextStyle(
-                color: CoresDoAplicativo.preto,
+                color: preto,
               ),
               // validator: validator,
               iconSize: 3.h,
@@ -91,7 +91,7 @@ class DropDownWidget<T> extends StatelessWidget {
               hint: TextWidget(
                 hintText,
                 fontWeight: FontWeight.normal,
-                textColor: CoresDoAplicativo.lightGray,
+                textColor: lightGray,
               ),
               icon: showIcon
                   ? Row(
@@ -99,7 +99,7 @@ class DropDownWidget<T> extends StatelessWidget {
                         ...?icon,
                         const Icon(
                           Icons.keyboard_arrow_down_outlined,
-                          color: CoresDoAplicativo.preto,
+                          color: preto,
                           size: 20,
                         ),
                       ],
@@ -111,7 +111,7 @@ class DropDownWidget<T> extends StatelessWidget {
                       value: e.id,
                       child: TextWidget(
                         e.texto,
-                        textColor: CoresDoAplicativo.preto,
+                        textColor: preto,
                       ),
                     ),
                   )
@@ -126,7 +126,7 @@ class DropDownWidget<T> extends StatelessWidget {
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(2.w)),
-        borderSide: BorderSide(color: borderColor ?? CoresDoAplicativo.preto),
+        borderSide: BorderSide(color: borderColor ?? preto),
       );
 }
 

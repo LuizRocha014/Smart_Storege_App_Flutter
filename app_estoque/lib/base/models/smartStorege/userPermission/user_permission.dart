@@ -14,13 +14,14 @@ class UserPermission extends Core {
       {required super.id,
       required super.createdAt,
       required this.acessoId,
-      required this.usuarioId});
+      required this.usuarioId,
+      required super.active});
 
   factory UserPermission.fromJson(Map<String, dynamic> json) =>
-      _$UserPermissionFromJson(toJsonRepository(json));
+      _$UserPermissionFromJson(fromJsonRepository(json));
 
   Map<String, dynamic> toJson() =>
-      fromJsonRepository(_$UserPermissionToJson(this));
+      toJsonRepository(_$UserPermissionToJson(this));
 
   static InfosTableDatabase get table {
     final columns = {

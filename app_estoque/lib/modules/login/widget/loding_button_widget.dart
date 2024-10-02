@@ -77,7 +77,7 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                     ? BorderSide.none
                     : BorderSide(color: widget.borderColor!),
               ),
-              backgroundColor: widget.color ?? CoresDoAplicativo.preto,
+              backgroundColor: widget.color ?? preto,
               fixedSize: Size(widget.width ?? 60.w, widget.height ?? 5.h),
               minimumSize: Size.zero,
               padding: EdgeInsets.zero,
@@ -88,7 +88,7 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                     width: 5.w,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      color: widget.loadingColor ?? CoresDoAplicativo.branco,
+                      color: widget.loadingColor ?? branco,
                     ),
                   )
                 : AnimatedOpacity(
@@ -106,10 +106,8 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                         children: [
                           TextWidget(
                             widget.title,
-                            fontSize:
-                                widget.fontSize ?? FontesDoAplicativo.font_16,
-                            textColor:
-                                widget.fontColor ?? CoresDoAplicativo.branco,
+                            fontSize: widget.fontSize ?? font_16,
+                            textColor: widget.fontColor ?? branco,
                             fontWeight: widget.fontWeight ?? FontWeight.bold,
                             //textAlign: TextAlign.center,
                           ),

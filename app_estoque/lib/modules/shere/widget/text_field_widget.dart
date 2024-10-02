@@ -88,14 +88,14 @@ class TextFieldWidget extends StatelessWidget {
               children: [
                 TextWidget(labelExterno!,
                     fontSize: labelExternoFontSize,
-                    textColor: colorLabelExterno ?? CoresDoAplicativo.gray,
+                    textColor: colorLabelExterno ?? gray,
                     fontWeight: labelExternoFontWeight ?? FontWeight.w400),
                 if (onTapInfoIcon != null)
                   IconButtonWidget(
                       onPressed: onTapInfoIcon,
                       child: Icon(
                         Icons.info_outline_rounded,
-                        color: CoresDoAplicativo.preto,
+                        color: preto,
                         size: 2.h,
                       ))
               ],
@@ -131,7 +131,7 @@ class TextFieldWidget extends StatelessWidget {
                               (suffixColor != null) ? suffixColor : iconColor,
                           size: 1.8.h)),
               hintStyle: TextStyle(
-                color: CoresDoAplicativo.lightGray,
+                color: lightGray,
                 fontSize: hintFontSize,
                 fontWeight: hintFontWeight ?? FontWeight.normal,
               ),
@@ -154,8 +154,7 @@ class TextFieldWidget extends StatelessWidget {
   }
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderSide:
-            const BorderSide(color: CoresDoAplicativo.lightGray, width: 1),
+        borderSide: const BorderSide(color: lightGray, width: 1),
         borderRadius: BorderRadius.circular(borderRadius ?? 2.w),
       );
 }

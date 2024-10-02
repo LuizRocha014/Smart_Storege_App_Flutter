@@ -35,15 +35,15 @@ class _MyWidgetState extends State<CustomRich> {
         TextSpan(
             text: widget.textFirt,
             style: TextStyle(
-                fontSize: widget.fontSize ?? FontesDoAplicativo.font_13,
+                fontSize: widget.fontSize ?? font_13,
                 fontWeight: widget.fontWeight ?? FontWeight.w500,
-                color: widget.color ?? CoresDoAplicativo.gray)),
+                color: widget.color ?? gray)),
         TextSpan(
             text: widget.textSecund,
             style: TextStyle(
-                fontSize: FontesDoAplicativo.font_13,
+                fontSize: font_13,
                 fontWeight: widget.fontWeightSecund,
-                color: widget.colorSecund ?? CoresDoAplicativo.lightGray)),
+                color: widget.colorSecund ?? lightGray)),
       ]),
     );
   }

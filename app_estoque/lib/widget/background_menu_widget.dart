@@ -28,17 +28,17 @@ class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: widget.floatingActionButton,
-      backgroundColor: CoresDoAplicativo.branco,
+      backgroundColor: branco,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: CoresDoAplicativo.branco),
+        iconTheme: const IconThemeData(color: branco),
         title: const TextWidget(
           "",
-          textColor: CoresDoAplicativo.branco,
+          textColor: branco,
         ),
-        backgroundColor: CoresDoAplicativo.primaryColor,
+        backgroundColor: primaryColor,
       ),
       drawer: Drawer(
-        backgroundColor: CoresDoAplicativo.branco,
+        backgroundColor: branco,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -46,7 +46,7 @@ class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
               height: 170,
               width: 400,
               decoration: const BoxDecoration(
-                color: CoresDoAplicativo.primaryColor,
+                color: primaryColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(5),
                   bottomRight: Radius.circular(5),
@@ -60,7 +60,7 @@ class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
                       "MENU",
                       fontSize: 26,
                       fontWeight: FontWeight.w500,
-                      textColor: CoresDoAplicativo.branco,
+                      textColor: branco,
                     ),
                   )),
             ),
@@ -77,7 +77,7 @@ class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
                           context),
                       child: TextWidget(
                         _controller.listOpcaoMenu[index].nome,
-                        fontSize: FontesDoAplicativo.font_16,
+                        fontSize: font_16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

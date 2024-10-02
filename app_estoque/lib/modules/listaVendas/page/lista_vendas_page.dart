@@ -30,7 +30,7 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
           const Center(
             child: TextWidget(
               "VENDAS",
-              textColor: CoresDoAplicativo.textGray,
+              textColor: textGray,
               fontSize: 28,
               fontWeight: FontWeight.w500,
             ),
@@ -40,8 +40,7 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
                 horizontal: MediaQuery.of(context).size.height * 0.05),
             child: Container(
               height: 1,
-              decoration:
-                  const BoxDecoration(color: CoresDoAplicativo.lightGray),
+              decoration: const BoxDecoration(color: lightGray),
             ),
           ),
           Padding(
@@ -67,7 +66,7 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
                                     MediaQuery.of(context).size.height * 0.025),
                             child: TextWidget(
                               "Aviso!",
-                              fontSize: FontesDoAplicativo.font_18,
+                              fontSize: font_18,
                             ),
                           ),
                           Padding(

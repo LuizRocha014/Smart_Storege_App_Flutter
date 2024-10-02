@@ -70,14 +70,13 @@ class MyApp extends StatelessWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                   useMaterial3: false,
                   textSelectionTheme: const TextSelectionThemeData(
-                    cursorColor: CoresDoAplicativo.primaryColor,
-                    selectionColor: CoresDoAplicativo.primaryColor,
-                    selectionHandleColor: CoresDoAplicativo.primaryColor,
+                    cursorColor: primaryColor,
+                    selectionColor: primaryColor,
+                    selectionHandleColor: primaryColor,
                   ),
                   elevatedButtonTheme: ElevatedButtonThemeData(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(
-                          CoresDoAplicativo.primaryColor),
+                      backgroundColor: WidgetStateProperty.all(primaryColor),
                     ),
                   ),
                   textButtonTheme: TextButtonThemeData(
@@ -86,7 +85,7 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   buttonTheme: const ButtonThemeData(
-                    buttonColor: CoresDoAplicativo.primaryColor,
+                    buttonColor: primaryColor,
                   ),
                 ),
                 navigatorObservers: [

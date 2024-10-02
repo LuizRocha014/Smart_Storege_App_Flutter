@@ -29,7 +29,7 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
       child: Container(
         height: 150,
         decoration: BoxDecoration(
-            border: Border.all(color: CoresDoAplicativo.lightGray),
+            border: Border.all(color: lightGray),
             borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: EdgeInsets.only(
@@ -45,14 +45,14 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
                 children: [
                   TextWidget(
                     widget.numVenda,
-                    fontSize: FontesDoAplicativo.font_18,
-                    textColor: CoresDoAplicativo.textGray,
+                    fontSize: font_18,
+                    textColor: textGray,
                   ),
                   const Padding(
                     padding: EdgeInsets.only(right: 10),
                     child: Icon(
                       Icons.keyboard_arrow_right,
-                      color: CoresDoAplicativo.lightGray,
+                      color: lightGray,
                     ),
                   ),
                 ],
@@ -61,7 +61,7 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
                 height: MediaQuery.of(context).size.height * .01,
               ),
               Container(
-                color: CoresDoAplicativo.lightGray,
+                color: lightGray,
                 height: MediaQuery.of(context).size.height * 0.001,
               ),
               const SizedBox(
@@ -76,13 +76,13 @@ class _CardVendasWidgetState extends State<CardVendasWidget> {
                     TextWidget(
                       "Total",
                       fontWeight: FontWeight.bold,
-                      fontSize: FontesDoAplicativo.font_16,
+                      fontSize: font_16,
                     ),
                     const Spacer(),
                     TextWidget(
                       Conversores.formatarValorEmReal(widget.valorVenda),
                       fontWeight: FontWeight.bold,
-                      fontSize: FontesDoAplicativo.font_16,
+                      fontSize: font_16,
                     ),
                   ],
                 ),

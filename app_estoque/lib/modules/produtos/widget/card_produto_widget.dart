@@ -29,7 +29,7 @@ class CardProdutoWidget extends StatelessWidget {
       child: Container(
         height: 10.h,
         decoration: BoxDecoration(
-            border: Border.all(color: CoresDoAplicativo.lightGray),
+            border: Border.all(color: lightGray),
             borderRadius: BorderRadius.circular(10)),
         child: Row(
           children: [
@@ -39,7 +39,7 @@ class CardProdutoWidget extends StatelessWidget {
                 height: 8.h,
                 width: 16.w,
                 decoration: BoxDecoration(
-                    color: CoresDoAplicativo.primaryColor,
+                    color: primaryColor,
                     borderRadius: BorderRadius.circular(10)),
               ),
             ),
@@ -70,9 +70,9 @@ class CardProdutoWidget extends StatelessWidget {
     //           vertical: MediaQuery.of(context).size.height * 0.01),
     //       decoration: BoxDecoration(
     //         color: selecionado
-    //             ? CoresDoAplicativo.primaryColor.withOpacity(0.2)
-    //             : CoresDoAplicativo.branco,
-    //         border: Border.all(color: CoresDoAplicativo.gray),
+    //             ?  primaryColor.withOpacity(0.2)
+    //             :  branco,
+    //         border: Border.all(color:  gray),
     //         borderRadius: BorderRadius.circular(20),
     //       ),
     //       child: Column(
@@ -88,11 +88,11 @@ class CardProdutoWidget extends StatelessWidget {
     //                       EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
     //                   decoration: BoxDecoration(
     //                       borderRadius: BorderRadius.circular(10),
-    //                       color: CoresDoAplicativo.primaryColor),
+    //                       color:  primaryColor),
     //                   child: ImageAsset(
-    //                     imagem ?? AssetsAplicativo.iconPhonto,
+    //                     imagem ??   iconPhonto,
     //                     height: 5.h,
-    //                     color: CoresDoAplicativo.branco,
+    //                     color:  branco,
     //                     width: 10.w,
     //                   ),
     //                 ),
@@ -107,7 +107,7 @@ class CardProdutoWidget extends StatelessWidget {
     //                   children: [
     //                     TextWidget(
     //                       tituloProduto,
-    //                       fontSize: FontesDoAplicativo.font_16,
+    //                       fontSize:   font_16,
     //                     ),
     //                     SizedBox(
     //                       height: 2.5.h,
@@ -117,8 +117,8 @@ class CardProdutoWidget extends StatelessWidget {
     //                         CustomRich(
     //                           "Valor: ",
     //                           valorProduto,
-    //                           color: CoresDoAplicativo.gray,
-    //                           colorSecund: CoresDoAplicativo.lightGray,
+    //                           color:  gray,
+    //                           colorSecund:  lightGray,
     //                         ),
     //                       ],
     //                     ),
