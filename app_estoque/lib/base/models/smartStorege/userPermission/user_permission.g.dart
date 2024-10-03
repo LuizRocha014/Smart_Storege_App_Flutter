@@ -12,7 +12,7 @@ UserPermission _$UserPermissionFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       acessoId: json['acessoId'] as String,
       usuarioId: json['usuarioId'] as String,
-      active: json['active'] as bool?,
+      active: fromJsonBoolean(json['active']),
     );
 
 Map<String, dynamic> _$UserPermissionToJson(UserPermission instance) =>

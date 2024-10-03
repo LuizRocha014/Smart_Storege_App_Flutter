@@ -19,7 +19,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       emailVerifiedAt: DateTime.parse(json['emailVerifiedAt'] as String),
       password: json['password'] as String,
       rememberToken: json['rememberToken'] as String,
-      active: json['active'] as bool?,
+      active: fromJsonBoolean(json['active']),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

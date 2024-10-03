@@ -18,7 +18,7 @@ Cliente _$ClienteFromJson(Map<String, dynamic> json) => Cliente(
       json['segment'] as String,
       id: json['id'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      active: json['active'] as bool?,
+      active: fromJsonBoolean(json['active']),
     );
 
 Map<String, dynamic> _$ClienteToJson(Cliente instance) => <String, dynamic>{

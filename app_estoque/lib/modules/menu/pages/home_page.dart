@@ -7,6 +7,7 @@ import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/new_background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
@@ -47,7 +48,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                     padding: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.02),
                     child: TextWidget(
-                      "Bem Vindo Luiz Rocha",
+                      "Bem Vindo ${loggerUser.name}",
                       fontSize: font_16,
                       textColor: branco,
                     ),

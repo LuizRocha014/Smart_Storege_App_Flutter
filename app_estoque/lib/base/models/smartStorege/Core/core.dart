@@ -1,9 +1,12 @@
 import 'package:app_estoque/utils/infos_tabela_database.dart';
+import 'package:app_estoque/utils/mappers.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 class Core {
   final String id;
   final DateTime createdAt;
   final DateTime? updatedAt;
+  @JsonKey(fromJson: fromJsonBoolean)
   final bool? active;
 
   Core(

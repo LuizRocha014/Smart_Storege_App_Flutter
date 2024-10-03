@@ -6,6 +6,7 @@ import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService extends BaseService implements IUserService {
   @override
@@ -28,8 +29,13 @@ class UserService extends BaseService implements IUserService {
   @override
   Future<List<Permission?>> buscaAcessos() async {
     try {
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       final String urlApi = "$url/api/Permission/GetAcessos";
-      final retorno = await get(urlApi);
+      final ultimaData =
+          sharedPreferences.getString("PermissionServiceUltimaData") ?? "";
+
+      final retorno = await get(urlApi, query: {'ultData': ultimaData});
       if (temErroRequisicao(retorno)) throw Exception();
       final list = (retorno.body as List)
           .map((e) => Permission.fromJson(e as Map<String, dynamic>))
@@ -37,6 +43,8 @@ class UserService extends BaseService implements IUserService {
       instanceManager
           .get<IPermissionRepository>()
           .createList(list.map((e) => e.toJson()));
+      sharedPreferences.setString(
+          "PermissionServiceUltimaData", "${DateTime.now()}");
       return list;
     } catch (_) {
       return [];
@@ -46,8 +54,13 @@ class UserService extends BaseService implements IUserService {
   @override
   Future<List<UserPermission?>> buscaUserPermission(String userId) async {
     try {
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       final String urlApi = "$url/api/UserPermission/GetAll";
-      final retorno = await get(urlApi, query: {'userId': userId});
+      final ultimaData =
+          sharedPreferences.getString("UserPermissionUltimaData") ?? "";
+      final retorno =
+          await get(urlApi, query: {'userId': userId, 'ultData': ultimaData});
       if (temErroRequisicao(retorno)) throw Exception();
       final list = (retorno.body as List)
           .map((e) => UserPermission.fromJson(e as Map<String, dynamic>))
@@ -55,6 +68,8 @@ class UserService extends BaseService implements IUserService {
       instanceManager
           .get<IUserPermissionRepository>()
           .createList(list.map((e) => e.toJson()));
+      sharedPreferences.setString(
+          "UserPermissionUltimaData", "${DateTime.now()}");
       return list;
     } catch (_) {
       return [];

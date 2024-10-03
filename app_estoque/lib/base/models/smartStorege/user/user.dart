@@ -1,5 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/Core/core.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
+import 'package:app_estoque/utils/mappers.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';

@@ -61,6 +61,7 @@ dependencies:
   flutter_masked_text2: ^0.9.1
   slide_to_act: ^2.0.2
   smooth_page_indicator: ^1.2.0+3
+  workmanager: ^0.5.2
 
 dev_dependencies:
   responsive_size: ^0.0.7

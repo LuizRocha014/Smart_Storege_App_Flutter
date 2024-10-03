@@ -13,7 +13,7 @@ Permission _$PermissionFromJson(Map<String, dynamic> json) => Permission(
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       createdAt: DateTime.parse(json['createdAt'] as String),
-      active: json['active'] as bool?,
+      active: fromJsonBoolean(json['active']),
     );
 
 Map<String, dynamic> _$PermissionToJson(Permission instance) =>

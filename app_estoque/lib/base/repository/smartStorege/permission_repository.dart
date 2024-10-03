@@ -10,9 +10,9 @@ class PermissionRepository extends BaseRepository<Permission>
   @override
   Future<bool> validaAcessoUsuario() async {
     try {
-      final query = ''' SELECT * FROM ${Permission.table.tableName} P
+      final query = ''' SELECT p.* FROM ${Permission.table.tableName} P
                 JOIN ${UserPermission.table.tableName} UP ON P.ID = UP.AcessoId
-                WHERE P.Active = 1 and up.Active = 1''';
+                WHERE up.Active = 1''';
 
       final entity = await context.rawQuery(query);
       if (entity.isNullOrEmpty) return false;
