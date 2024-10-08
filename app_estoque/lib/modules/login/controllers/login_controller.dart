@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:app_estoque/base/repository/interface/smartStorege/ipermission_repository.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
@@ -39,11 +38,8 @@ class LoginController extends BaseController {
           .login(userName.text, passWord.text);
       if (retorno == null) throw Exception();
       sai.loggerUser = retorno;
-      final acessoApp = await instanceManager
-          .get<IPermissionRepository>()
-          .validaAcessoUsuario();
       // ignore: use_build_context_synchronously
-      if (acessoApp) context.push(const HomePage());
+      context.push(const HomePage());
       isLoading = false;
     } catch (_) {
       showModalBottomSheet(

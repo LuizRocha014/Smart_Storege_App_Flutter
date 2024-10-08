@@ -21,6 +21,7 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
   void initState() {
     super.registerController(LoginController());
     controller.context = context;
+
     super.initState();
   }
 

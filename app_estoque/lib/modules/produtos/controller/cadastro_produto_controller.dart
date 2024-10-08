@@ -3,8 +3,9 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:app_estoque/base/models/produtos/produto.dart';
+import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
+import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
@@ -31,7 +32,7 @@ class CadastroProdutoController extends BaseController {
   late File? imagem;
   late RxBool mostraImagem;
   late RxBool mostraQrCode;
-  late List<Category> drop;
+  late RxList<Category> drop;
   late Uint8List? qrImageBytes;
   final MoneyMaskedTextController controllerValorCompra =
       MoneyMaskedTextController(
@@ -58,14 +59,14 @@ class CadastroProdutoController extends BaseController {
     mostraImagem = false.obs;
     mostraQrCode = false.obs;
     categoriaText = ''.obs;
-    drop = [];
+    drop = RxList();
     await carregaDados();
 
     qrImageBytes = Uint8List(0);
   }
 
   Future<void> carregaDados() async {
-    drop =
+    drop.value =
         await instanceManager.get<ICategoryRepository>().getAllListCategory();
   }
 
@@ -125,7 +126,7 @@ class CadastroProdutoController extends BaseController {
   void cadastroProduto() async {
     try {
       if (await validaCampos() == null) {
-        final prod = Produto(
+        final prod = Product(
           name: nomeController.text,
           id: const Uuid().v4(),
           createdAt: DateTime.now(),
@@ -141,11 +142,13 @@ class CadastroProdutoController extends BaseController {
           supplierId: 0,
           totalAmount: int.parse(quantController.text),
           categoriaId: categoriaSelect!.id,
-          purchasePrice: double.parse(controllerValorCompra.text
-              .replaceAll('R', '')
-              .replaceAll('\$', '')
-              .replaceAll('.', '')
-              .replaceAll(',', '')),
+          purchasePrice: double.parse(
+            controllerValorCompra.text
+                .replaceAll('R', '')
+                .replaceAll('\$', '')
+                .replaceAll('.', '')
+                .replaceAll(',', ''),
+          ),
           salePrice: double.parse(
             controllerValorVenda.text
                 .replaceAll('R', '')
@@ -155,17 +158,7 @@ class CadastroProdutoController extends BaseController {
           ),
           active: true,
         );
-        // late Arquivo? arq;
-        // if (imagem!.path.isNotEmpty) {
-        //   List<int> imageBytes = imagem!.readAsBytesSync();
-        //   String base64Image = base64Encode(imageBytes);
-        //   arq = Arquivo(
-        //       id: const Uuid().v4(),
-        //       createdAt: DateTime.now(),
-        //       base64: base64Image);
-
-        //   //instanceManager.get<IArquivoRepository>().create(arq.toJson());
-        // }
+        instanceManager.get<IProductRepository>().create(prod.toJson());
         // ignore: use_build_context_synchronously
         context.pop();
       } else {}

@@ -1,4 +1,4 @@
-import 'package:app_estoque/base/models/produtos/produto.dart';
+import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
@@ -7,8 +7,8 @@ import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:get/get.dart';
 
 class SelectItensController extends BaseController {
-  late RxList<Produto> _listProdutos;
-  late List<Produto> _itensSelecionados;
+  late RxList<Product> _listProdutos;
+  late List<Product> _itensSelecionados;
   late RxInt _contador;
   @override
   Future<void> iniciaControlador() async {
@@ -18,14 +18,14 @@ class SelectItensController extends BaseController {
     carregaLista();
   }
 
-  List<Produto> get listProdutos => _listProdutos;
-  List<Produto> get itemSelecionado => _itensSelecionados;
+  List<Product> get listProdutos => _listProdutos;
+  List<Product> get itemSelecionado => _itensSelecionados;
   int get contador => _contador.value;
 
   Future<void> carregaLista() async {
     try {
       _listProdutos.value =
-          await instanceManager.get<IProdutoRepository>().getAll();
+          await instanceManager.get<IProductRepository>().getAll();
       _listProdutos.refresh();
     } catch (_) {}
   }

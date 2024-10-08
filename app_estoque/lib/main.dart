@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
       context.initializeDatabase();
     }
     Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
-    Workmanager().registerOneOffTask("task-identifier", "simpleTask");
 
     return LayoutBuilder(
       builder: (context, constraints) {
