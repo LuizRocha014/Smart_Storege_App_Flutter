@@ -33,29 +33,39 @@ class NewMenuIncialController extends BaseController {
           .get<IUserPermissionRepository>()
           .getPermissionUser();
 
-      switch (listUsuarioAcesso) {
-        default:
+      for (var e in listUsuarioAcesso) {
+        switch (e.name) {
+          case "EstoquePermission":
+            listMenuInicial.add(ListOpcoesMenu(
+                nome: 'Estoque',
+                gestureCommand: 'GestureEstoque',
+                imageString: iconEstoque));
+            break;
+          case "ProdutosPermission":
+            listMenuInicial.add(ListOpcoesMenu(
+                nome: 'Produtos',
+                gestureCommand: 'GestureProdutos',
+                imageString: iconProdutos));
+            break;
+          case "ClientePermission":
+            listMenuInicial.add(ListOpcoesMenu(
+                nome: 'Cliente',
+                gestureCommand: 'GestureCliente',
+                imageString: iconCliente));
+        }
       }
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Estoque',
-          gestureCommand: 'GestureEstoque',
-          imageString: iconEstoque));
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Produtos',
-          gestureCommand: 'GestureProdutos',
-          imageString: iconProdutos));
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Transferencia',
-          gestureCommand: 'GestureTransferencia',
-          imageString: iconTransferencia));
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Cliente',
-          gestureCommand: 'GestureCliente',
-          imageString: iconCliente));
-      listMenuInicial.add(ListOpcoesMenu(
-          nome: 'Outros',
-          gestureCommand: 'GestureOutros',
-          imageString: iconMoreMenu));
+      // listMenuInicial.add(ListOpcoesMenu(
+      //     nome: 'Transferencia',
+      //     gestureCommand: 'GestureTransferencia',
+      //     imageString: iconTransferencia));
+      // listMenuInicial.add(ListOpcoesMenu(
+      //     nome: 'Cliente',
+      //     gestureCommand: 'GestureCliente',
+      //     imageString: iconCliente));
+      // listMenuInicial.add(ListOpcoesMenu(
+      //     nome: 'Outros',
+      //     gestureCommand: 'GestureOutros',
+      //     imageString: iconMoreMenu));
     } catch (_) {}
   }
 

@@ -22,7 +22,7 @@ class UserPermissionService extends BaseService
       final list = (retorno.body as List)
           .map((e) => UserPermission.fromJson(e as Map<String, dynamic>))
           .toList();
-      instanceManager
+      await instanceManager
           .get<IUserPermissionRepository>()
           .createList(list.map((e) => e.toJson()));
       sharedPreferences.setString(

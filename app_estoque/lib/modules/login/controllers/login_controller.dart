@@ -6,6 +6,7 @@ import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/routes.dart';
+import 'package:app_estoque/utils/synchronize.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:boleto_utils/boleto_utils.dart';
@@ -38,6 +39,9 @@ class LoginController extends BaseController {
           .login(userName.text, passWord.text);
       if (retorno == null) throw Exception();
       sai.loggerUser = retorno;
+      await instanceManager
+          .get<Synchronism>()
+          .iniciarSincronismoGets(forcaDataAlteracaoNula: true);
       // ignore: use_build_context_synchronously
       context.push(const HomePage());
       isLoading = false;

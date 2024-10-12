@@ -20,7 +20,7 @@ class PermissionService extends BaseService implements IPermissionService {
       final list = (retorno.body as List)
           .map((e) => Permission.fromJson(e as Map<String, dynamic>))
           .toList();
-      instanceManager
+      await instanceManager
           .get<IPermissionRepository>()
           .createList(list.map((e) => e.toJson()));
       sharedPreferences.setString(

@@ -24,6 +24,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends MState<HomePage, NewMenuIncialController> {
   @override
+  void initState() {
+    super.initState();
+    super.registerController(NewMenuIncialController());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return NewBackGroundDefault(
       widgetContainer: ListView(

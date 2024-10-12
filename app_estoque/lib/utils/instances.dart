@@ -15,10 +15,13 @@ import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/base/service/permission_service.dart';
 import 'package:app_estoque/base/service/user_permission_service.dart';
 import 'package:app_estoque/base/service/user_service.dart';
+import 'package:app_estoque/utils/synchronize.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 
 void initInstances() {
   try {
+    instanceManager.registerSingleton<Synchronism>(Synchronism());
+
     //Service
     instanceManager.registerLazySingleton<IUserService>(() => UserService());
     instanceManager
