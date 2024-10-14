@@ -1,11 +1,14 @@
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
+import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ipermission_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iuser_permission_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/category_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/permission_repository.dart';
+import 'package:app_estoque/base/repository/smartStorege/product_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/user_permission_repository.dart';
 import 'package:app_estoque/base/service/category_service.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
@@ -48,6 +51,12 @@ void initInstances() {
       () => UserPermissionRepository(
         UserPermission.table,
         UserPermission.fromJson,
+      ),
+    );
+    instanceManager.registerLazySingleton<IProductRepository>(
+      () => ProductRepository(
+        Product.table,
+        Product.fromJson,
       ),
     );
   } catch (_) {}

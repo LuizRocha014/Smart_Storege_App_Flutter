@@ -1,5 +1,4 @@
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
-import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/utils/routes.dart';
@@ -24,8 +23,8 @@ class SelectItensController extends BaseController {
 
   Future<void> carregaLista() async {
     try {
-      _listProdutos.value =
-          await instanceManager.get<IProductRepository>().getAll();
+      // _listProdutos.value =
+      //     await instanceManager.get<IProductRepository>().getAll();
       _listProdutos.refresh();
     } catch (_) {}
   }

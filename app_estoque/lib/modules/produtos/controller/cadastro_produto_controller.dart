@@ -5,8 +5,8 @@ import 'dart:ui';
 
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
-import 'package:app_estoque/base/repository/interface/iproduto_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:uuid/uuid.dart';
+import 'package:app_estoque/utils/infos_statica.dart' as sai;
 
 class CadastroProdutoController extends BaseController {
   final PageController pageController = PageController();
@@ -125,7 +126,7 @@ class CadastroProdutoController extends BaseController {
 
   void cadastroProduto() async {
     try {
-      if (await validaCampos() == null) {
+      if (true) {
         final prod = Product(
           name: nomeController.text,
           id: const Uuid().v4(),
@@ -138,7 +139,7 @@ class CadastroProdutoController extends BaseController {
           minimumAmount: 0,
           numbProduct: 0,
           sku: skuController.text,
-          storageLocation: usuario!.roleId,
+          storageLocation: sai.loggerUser.roleId,
           supplierId: 0,
           totalAmount: int.parse(quantController.text),
           categoriaId: categoriaSelect!.id,
@@ -158,10 +159,12 @@ class CadastroProdutoController extends BaseController {
           ),
           active: true,
         );
-        instanceManager.get<IProductRepository>().create(prod.toJson());
+        instanceManager
+            .get<IProductRepository>()
+            .createOrReplace(prod.toJson());
         // ignore: use_build_context_synchronously
         context.pop();
-      } else {}
+      }
     } catch (_) {}
   }
 }

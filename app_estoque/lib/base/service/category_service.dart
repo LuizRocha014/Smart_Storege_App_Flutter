@@ -10,23 +10,13 @@ class CategoryService extends BaseService implements ICategoryService {
     try {
       int page = 1;
       List<Category> list = [];
-      bool progresso = true;
       final repository = instanceManager.get<ICategoryRepository>();
       final String urlApi = "$url/api/Category/GetAll";
-      do {
-        final retorno = await get(urlApi, query: {
-          "page": page,
-          "pageSize": pageSize,
-        });
-        if (retorno.body == null) return throw Expando();
-        var category = (retorno.body as List).map((e) => Category.fromJson(e));
-        list.addAll(category);
-        for (var element in list) {
-          await repository.createOrReplace(element.toJson());
-        }
-        if (category.length < pageSize) progresso = false;
-      } while (progresso);
-
+      final retorno = await get(urlApi, query: {});
+      if (retorno.body == null) return throw Expando();
+      var category = (retorno.body as List).map((e) => Category.fromJson(e));
+      list.addAll(category);
+      await repository.createList(list.map((e) => e.toJson()));
       return list;
     } catch (_) {
       return [];

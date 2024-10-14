@@ -1,6 +1,7 @@
 import 'package:app_estoque/base/context/context.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
+import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
 import 'package:app_estoque/utils/base_migration.dart';
@@ -17,15 +18,11 @@ class AppContext extends Context {
   static String get _nameDatabase => "App_estoque";
   static int get _version => 1;
   static List<InfosTableDatabase> get _tables => [
-        // Acessos.table,
-        // Produto.table,
-        // Arquivo.table,
-        // Categoria.table,
-        // Cliente.table,
         User.table,
         UserPermission.table,
         Permission.table,
-        Category.table
+        Category.table,
+        Product.table
       ];
 
   static List<BaseMigration> get _migrations => [];

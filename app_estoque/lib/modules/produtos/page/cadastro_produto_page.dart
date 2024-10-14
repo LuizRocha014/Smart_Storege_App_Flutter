@@ -43,23 +43,26 @@ class _CadastroProdutoState
                 children: [
                   Row(
                     children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: bancoSujo,
-                          borderRadius: BorderRadius.circular(20),
+                      GestureDetector(
+                        onTap: () => controller.tiraFoto(ImageSource.camera),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: bancoSujo,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Obx(() => controller.mostraImagem.value
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.h),
+                                  child: Image.file(
+                                    controller.imagem!,
+                                    fit: BoxFit.fill,
+                                  ),
+                                )
+                              : const Center(
+                                  child: FaIcon(FontAwesomeIcons.camera))),
                         ),
-                        child: Obx(() => controller.mostraImagem.value
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(2.h),
-                                child: Image.file(
-                                  controller.imagem!,
-                                  fit: BoxFit.fill,
-                                ),
-                              )
-                            : const Center(
-                                child: FaIcon(FontAwesomeIcons.camera))),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(

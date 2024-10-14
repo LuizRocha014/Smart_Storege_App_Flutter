@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
+import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/base/service/interface/ibase_service_get.dart';
 import 'package:app_estoque/base/service/interface/ibase_service_get_post.dart';
+import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
 import 'package:app_estoque/base/service/interface/iuser_permission_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -20,6 +22,7 @@ class Synchronism {
   List<IBaseServiceGet> get serviceGet => [
         instanceManager.get<IUserPermissionService>(),
         instanceManager.get<IPermissionService>(),
+        instanceManager.get<ICategoryService>(),
         ...servicePost,
       ];
 
