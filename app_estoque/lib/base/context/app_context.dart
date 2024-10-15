@@ -1,4 +1,6 @@
 import 'package:app_estoque/base/context/context.dart';
+import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.dart';
+import 'package:app_estoque/base/models/smartStorege/ShopUser/shop_user.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
@@ -22,7 +24,9 @@ class AppContext extends Context {
         UserPermission.table,
         Permission.table,
         Category.table,
-        Product.table
+        Product.table,
+        ShopUser.table,
+        ShopProduct.table,
       ];
 
   static List<BaseMigration> get _migrations => [];
