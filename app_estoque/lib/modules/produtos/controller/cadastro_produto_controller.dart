@@ -1,12 +1,19 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:app_estoque/base/models/smartStorege/File/file.dart';
+import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
+import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/ifile_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -126,45 +133,78 @@ class CadastroProdutoController extends BaseController {
 
   void cadastroProduto() async {
     try {
-      if (true) {
-        final prod = Product(
-          name: nomeController.text,
+      final prodID = const Uuid().v4();
+      if (mostraImagem.value) {
+        final base64 = base64Encode(imagem!.readAsBytesSync());
+        final img = FileIMG(
+            id: const Uuid().v4(),
+            createdAt: DateTime.now(),
+            active: true,
+            fileName: 'ImagemProduto',
+            base64Arquiv: base64);
+        final producIMG = ProductFile(
+            id: const Uuid().v4(),
+            createdAt: DateTime.now(),
+            active: true,
+            productId: prodID,
+            fileId: img.id,
+            description: '');
+        await instanceManager
+            .get<IFileRepository>()
+            .createOrReplace(img.toJson());
+        await instanceManager
+            .get<IProductFileRepository>()
+            .createOrReplace(producIMG.toJson());
+      }
+      final prod = Product(
+        name: nomeController.text,
+        id: prodID,
+        createdAt: DateTime.now(),
+        brand: marcaController.text,
+        codProd: codProduto,
+        additionalInfo: null,
+        description: null,
+        expiryDate: null,
+        minimumAmount: 0,
+        numbProduct: 0,
+        sku: skuController.text,
+        storageLocation: sai.loggerUser.roleId,
+        supplierId: 0,
+        totalAmount: int.parse(quantController.text),
+        categoriaId: categoriaSelect!.id,
+        purchasePrice: double.parse(
+          controllerValorCompra.text
+              .replaceAll('R', '')
+              .replaceAll('\$', '')
+              .replaceAll('.', '')
+              .replaceAll(',', ''),
+        ),
+        salePrice: double.parse(
+          controllerValorVenda.text
+              .replaceAll('R', '')
+              .replaceAll('\$', '')
+              .replaceAll('.', '')
+              .replaceAll(',', ''),
+        ),
+        active: true,
+      );
+      final shopProduct = ShopProduct(
           id: const Uuid().v4(),
           createdAt: DateTime.now(),
-          brand: marcaController.text,
-          codProd: codProduto,
-          additionalInfo: null,
-          description: null,
-          expiryDate: null,
-          minimumAmount: 0,
-          numbProduct: 0,
-          sku: skuController.text,
-          storageLocation: sai.loggerUser.roleId,
-          supplierId: 0,
-          totalAmount: int.parse(quantController.text),
-          categoriaId: categoriaSelect!.id,
-          purchasePrice: double.parse(
-            controllerValorCompra.text
-                .replaceAll('R', '')
-                .replaceAll('\$', '')
-                .replaceAll('.', '')
-                .replaceAll(',', ''),
-          ),
-          salePrice: double.parse(
-            controllerValorVenda.text
-                .replaceAll('R', '')
-                .replaceAll('\$', '')
-                .replaceAll('.', '')
-                .replaceAll(',', ''),
-          ),
           active: true,
-        );
-        instanceManager
-            .get<IProductRepository>()
-            .createOrReplace(prod.toJson());
-        // ignore: use_build_context_synchronously
-        context.pop();
-      }
+          productId: prod.id,
+          shopId: sai.shopUser.shopId,
+          userId: sai.loggerUser.id,
+          totalAmount: int.parse(quantController.text),
+          salePrice: prod.salePrice!);
+      await instanceManager
+          .get<IProductRepository>()
+          .createOrReplace(prod.toJson());
+      await instanceManager
+          .get<IShopProductRepository>()
+          .createOrReplace(shopProduct.toJson());
+      // ignore: use_build_context_synchronously
+      context.pop();
     } catch (_) {}
   }
 }

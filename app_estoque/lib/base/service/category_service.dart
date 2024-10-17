@@ -8,7 +8,6 @@ class CategoryService extends BaseService implements ICategoryService {
   @override
   Future<List<Category>> getAll() async {
     try {
-      int page = 1;
       List<Category> list = [];
       final repository = instanceManager.get<ICategoryRepository>();
       final String urlApi = "$url/api/Category/GetAll";

@@ -32,6 +32,6 @@ class ShopUser extends Core {
       "userMainShop": "INTEGER",
     };
     columns.addAll(Core.table.columns);
-    return InfosTableDatabase(tableName: 'ShopProduct', columns: columns);
+    return InfosTableDatabase(tableName: 'ShopUser', columns: columns);
   }
 }

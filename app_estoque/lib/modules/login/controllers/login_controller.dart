@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_repository.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
@@ -42,6 +43,11 @@ class LoginController extends BaseController {
       await instanceManager
           .get<Synchronism>()
           .iniciarSincronismoGets(forcaDataAlteracaoNula: true);
+
+      final shopUser = await instanceManager
+          .get<IShopUserRepository>()
+          .getShopUserId(retorno.id);
+      sai.shopUser = shopUser;
       // ignore: use_build_context_synchronously
       context.push(const HomePage());
       isLoading = false;

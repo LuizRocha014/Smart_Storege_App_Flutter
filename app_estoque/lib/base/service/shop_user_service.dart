@@ -2,6 +2,7 @@ import 'package:app_estoque/base/models/smartStorege/ShopUser/shop_user.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_repository.dart';
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_user_service.dart';
+import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 
 class ShopUserService extends BaseService implements IShopUserService {
@@ -10,8 +11,8 @@ class ShopUserService extends BaseService implements IShopUserService {
     try {
       List<ShopUser> list = [];
       final repository = instanceManager.get<IShopUserRepository>();
-      final String urlApi = "$url/api/Category/GetAll";
-      final retorno = await get(urlApi, query: {});
+      final String urlApi = "$url/api/ShopUser/GetAll";
+      final retorno = await get(urlApi, query: {'userId': loggerUser.id});
       if (retorno.body == null) return throw Expando();
       var category = (retorno.body as List).map((e) => ShopUser.fromJson(e));
       list.addAll(category);

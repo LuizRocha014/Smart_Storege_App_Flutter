@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/base/service/interface/ibase_service_get.dart';
 import 'package:app_estoque/base/service/interface/ibase_service_get_post.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
+import 'package:app_estoque/base/service/interface/ifile_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
+import 'package:app_estoque/base/service/interface/iproduct_file_service.dart';
+import 'package:app_estoque/base/service/interface/ishop_product_service.dart';
+import 'package:app_estoque/base/service/interface/ishop_service.dart';
+import 'package:app_estoque/base/service/interface/ishop_user_service.dart';
 import 'package:app_estoque/base/service/interface/iuser_permission_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:get/get.dart';
@@ -23,6 +27,11 @@ class Synchronism {
         instanceManager.get<IUserPermissionService>(),
         instanceManager.get<IPermissionService>(),
         instanceManager.get<ICategoryService>(),
+        instanceManager.get<IShopProductService>(),
+        instanceManager.get<IShopUserService>(),
+        instanceManager.get<IShopService>(),
+        // instanceManager.get<IProductFileService>(),
+        // instanceManager.get<IFileService>(),
         ...servicePost,
       ];
 

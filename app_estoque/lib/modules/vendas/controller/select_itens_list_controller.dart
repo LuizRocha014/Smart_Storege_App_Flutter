@@ -2,7 +2,6 @@ import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/utils/routes.dart';
-import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:get/get.dart';
 
 class SelectItensController extends BaseController {
