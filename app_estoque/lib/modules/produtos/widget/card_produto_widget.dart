@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CardProdutoWidget extends StatelessWidget {
   final String tituloProduto;
@@ -12,11 +15,13 @@ class CardProdutoWidget extends StatelessWidget {
   final bool selecionado;
   final String? imagem;
   final String valorProduto;
+  final Uint8List bytes;
   const CardProdutoWidget(
       {super.key,
       required this.categoriaProduto,
       required this.quantidadeProduto,
       required this.tituloProduto,
+      required this.bytes,
       this.nomeCampoCorCateg = "",
       this.selecionado = false,
       this.imagem,
@@ -41,6 +46,14 @@ class CardProdutoWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.circular(10)),
+                child: bytes.isNotEmpty
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(1.h),
+                        child: Image.memory(
+                          bytes,
+                          fit: BoxFit.fill,
+                        ))
+                    : const SizedBox.shrink(),
               ),
             ),
             Padding(

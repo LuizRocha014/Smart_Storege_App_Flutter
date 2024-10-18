@@ -23,6 +23,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       description: json['description'] as String?,
       additionalInfo: json['additionalInfo'] as String?,
       categoriaId: json['categoriaId'] as String?,
+      base64Image: json['base64Image'] as String?,
       numbProduct: (json['numbProduct'] as num?)?.toInt() ?? 0,
       id: json['id'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),

@@ -2,6 +2,7 @@ import 'package:app_estoque/modules/produtos/controller/produto_controller.dart'
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,11 +14,10 @@ class ProdutosPage extends StatefulWidget {
   State<ProdutosPage> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<ProdutosPage> {
-  late ProdutoController controller;
+class _MyWidgetState extends MState<ProdutosPage, ProdutoController> {
   @override
   void initState() {
-    controller = Get.put(ProdutoController());
+    super.registerController(ProdutoController());
     super.initState();
   }
 
@@ -87,7 +87,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextWidget(
-                                controller.listProdutos[index].name,
+                                "", // controller.listProdutos[index].name"",
                                 fontSize: font_16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -96,7 +96,7 @@ class _MyWidgetState extends State<ProdutosPage> {
                                     MediaQuery.of(context).size.width * 0.05,
                               ),
                               TextWidget(
-                                controller.listProdutos[index].totalAmount
+                                "" // controller.listProdutos[index].totalAmount
                                     .toString(),
                                 fontSize: font_16,
                                 textColor: primaryColor,

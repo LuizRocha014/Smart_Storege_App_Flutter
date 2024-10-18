@@ -4,6 +4,7 @@ import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                  controller: TextEditingController(),
+                  controller: TextEditingController(text: loggerUser.name),
                   labelExterno: "Nome",
                   titulo: "Nome",
                   textColor: preto,
@@ -54,7 +55,7 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                  controller: TextEditingController(),
+                  controller: TextEditingController(text: loggerUser.email),
                   titulo: "Matricula",
                   labelExterno: "Matricula",
                   textColor: preto,

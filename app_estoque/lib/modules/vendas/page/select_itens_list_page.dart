@@ -1,8 +1,10 @@
 import 'package:app_estoque/modules/estoque/widget/card_item_select_widget.dart';
 import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/select_itens_list_controller.dart';
+import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,15 +48,49 @@ class _SelecaoItensPageState
                     () => ListView.builder(
                       itemCount: controller.listProdutos.length,
                       shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) =>
-                          CardItemSelectWidget(
-                        titulo: controller.listProdutos[index].name,
-                        valor:
-                            controller.listProdutos[index].salePrice.toString(),
-                        quantidade: controller.listProdutos[index].numbProduct
-                            .toString(),
-                        onTapMore: () => controller.adicionaItemCompra(index),
-                        onTapless: () => controller.removeItemCompra(index),
+                      itemBuilder: (BuildContext context, int index) => Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 2.h),
+                              child: TextWidget(
+                                fontSize: font_16,
+                                fontWeight: FontWeight.w500,
+                                controller.listProdutos[index].categoriaName!,
+                                textColor: preto,
+                              ),
+                            ),
+                          ),
+                          controller.listProdutos[index].listProduct!.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount: controller
+                                      .listProdutos[index].listProduct!.length,
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int indexProd) =>
+                                          CardItemSelectWidget(
+                                    titulo: controller.listProdutos[index]
+                                        .listProduct![indexProd].name,
+                                    valor: controller.listProdutos[index]
+                                        .listProduct![indexProd].salePrice
+                                        .toString(),
+                                    quantidade: controller.listProdutos[index]
+                                        .listProduct![indexProd].numbProduct
+                                        .toString(),
+                                    onTapMore: () => controller
+                                        .adicionaItemCompra(index, indexProd),
+                                    onTapless: () => controller
+                                        .removeItemCompra(index, indexProd),
+                                  ),
+                                )
+                              : const Align(
+                                  alignment: Alignment.center,
+                                  child: TextWidget(
+                                    "Nenhum Produto encontrado",
+                                    textColor: lightGray,
+                                  )),
+                        ],
                       ),
                     ),
                   ),
@@ -77,3 +113,14 @@ class _SelecaoItensPageState
         ));
   }
 }
+
+
+//CardItemSelectWidget(
+                      //   titulo: controller.listProdutos[index].name,
+                      //   valor:
+                      //       controller.listProdutos[index].salePrice.toString(),
+                      //   quantidade: controller.listProdutos[index].numbProduct
+                      //       .toString(),
+                      //   onTapMore: () => controller.adicionaItemCompra(index),
+                      //   onTapless: () => controller.removeItemCompra(index),
+                      // ),

@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
-import 'package:app_estoque/modules/estoque/widget/card_item_estoque_widget.dart';
 import 'package:app_estoque/modules/produtos/page/cadastro_produto_page.dart';
+import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
+import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -52,17 +52,56 @@ class _EstoqueProdutosPageState
               () => ListView.builder(
                 itemCount: controller.produtosEstoque.length,
                 shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) =>
-                    CardItemEstoquetWidget(
-                  titulo: controller.produtosEstoque[index].name,
-                  valor: controller.produtosEstoque[index].salePrice.toString(),
-                  quantidade:
-                      controller.produtosEstoque[index].totalAmount.toString(),
-                  marca: controller.produtosEstoque[index].brand,
-                  onTapMore: () => controller.adicionaItemCompra(index),
-                  onTapless: () {
-                    log("Tira");
-                  },
+                itemBuilder: (BuildContext context, int index) => Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 2.h),
+                        child: TextWidget(
+                          fontSize: font_16,
+                          fontWeight: FontWeight.w500,
+                          controller.produtosEstoque[index].categoriaName!,
+                          textColor: preto,
+                        ),
+                      ),
+                    ),
+                    controller.produtosEstoque[index].listProduct!.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: controller
+                                .produtosEstoque[index].listProduct!.length,
+                            shrinkWrap: true,
+                            itemBuilder:
+                                (BuildContext context, int indexProd) =>
+                                    CardProdutoWidget(
+                                        bytes: controller.produtosEstoque[index]
+                                            .listProduct![indexProd].image!,
+                                        categoriaProduto: controller
+                                            .produtosEstoque[index]
+                                            .listProduct![indexProd]
+                                            .name,
+                                        quantidadeProduto: controller
+                                            .produtosEstoque[index]
+                                            .listProduct![indexProd]
+                                            .totalAmount
+                                            .toString(),
+                                        tituloProduto: controller
+                                            .produtosEstoque[index]
+                                            .listProduct![indexProd]
+                                            .name,
+                                        valorProduto: controller
+                                            .produtosEstoque[index]
+                                            .listProduct![indexProd]
+                                            .salePrice
+                                            .toString()),
+                          )
+                        : const Align(
+                            alignment: Alignment.center,
+                            child: TextWidget(
+                              "Nenhum Produto encontrado",
+                              textColor: lightGray,
+                            )),
+                  ],
                 ),
               ),
             ),

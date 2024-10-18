@@ -14,6 +14,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/ifile_reposit
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
+import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -203,6 +204,7 @@ class CadastroProdutoController extends BaseController {
       await instanceManager
           .get<IShopProductRepository>()
           .createOrReplace(shopProduct.toJson());
+      instanceManager.get<EstoqueProdutoController>().carregaDados();
       // ignore: use_build_context_synchronously
       context.pop();
     } catch (_) {}

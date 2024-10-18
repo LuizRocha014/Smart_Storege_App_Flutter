@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:app_estoque/base/models/smartStorege/Core/core.dart';
 import 'package:app_estoque/utils/infos_tabela_database.dart';
 import 'package:app_estoque/utils/mappers.dart';
@@ -24,6 +26,10 @@ class Product extends Core {
   final String? categoriaId;
   @JsonKey(includeToJson: false)
   late int numbProduct;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  late Uint8List? image;
+  @JsonKey(includeToJson: false)
+  final String? base64Image;
 
   Product({
     required this.name,
@@ -40,6 +46,7 @@ class Product extends Core {
     this.description,
     this.additionalInfo,
     this.categoriaId,
+    this.base64Image,
     this.numbProduct = 0,
     required super.id,
     required super.createdAt,

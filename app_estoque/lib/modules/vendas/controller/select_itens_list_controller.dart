@@ -1,11 +1,16 @@
+import 'dart:developer';
+
+import 'package:app_estoque/base/dto/product_dto/product_dto.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/utils/routes.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:get/get.dart';
 
 class SelectItensController extends BaseController {
-  late RxList<Product> _listProdutos;
+  late RxList<ProdutctDto> _listProdutos;
   late List<Product> _itensSelecionados;
   late RxInt _contador;
   @override
@@ -16,30 +21,30 @@ class SelectItensController extends BaseController {
     carregaLista();
   }
 
-  List<Product> get listProdutos => _listProdutos;
+  List<ProdutctDto> get listProdutos => _listProdutos;
   List<Product> get itemSelecionado => _itensSelecionados;
   int get contador => _contador.value;
 
   Future<void> carregaLista() async {
     try {
-      // _listProdutos.value =
-      //     await instanceManager.get<IProductRepository>().getAll();
+      _listProdutos.value =
+          await instanceManager.get<IProductRepository>().getProdutos();
       _listProdutos.refresh();
     } catch (_) {}
   }
 
-  void adicionaItemCompra(int index) {
+  void adicionaItemCompra(int index, int indexProd) {
     try {
-      final item = listProdutos[index];
+      final item = listProdutos[index].listProduct![indexProd];
       item.numbProduct++;
       _contador.value++;
       _listProdutos.refresh();
     } catch (_) {}
   }
 
-  void removeItemCompra(int index) {
+  void removeItemCompra(int index, int indexProd) {
     try {
-      final item = listProdutos[index];
+      final item = listProdutos[index].listProduct![indexProd];
       if (item.numbProduct > 0) {
         item.numbProduct--;
         _contador--;
@@ -50,9 +55,14 @@ class SelectItensController extends BaseController {
 
   Future<void> avancaPaginaItens() async {
     try {
-      _itensSelecionados =
-          _listProdutos.where((e) => e.numbProduct > 0).toList();
+      for (var categoria in _listProdutos) {
+        for (var element in categoria.listProduct!) {
+          if (element.numbProduct > 0) _itensSelecionados.add(element);
+        }
+      }
       context.push(const NovaVendaPage());
-    } catch (_) {}
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
