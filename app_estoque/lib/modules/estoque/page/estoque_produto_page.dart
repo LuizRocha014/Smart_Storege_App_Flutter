@@ -80,6 +80,8 @@ class _EstoqueProdutosPageState
                                             .produtosEstoque[index]
                                             .listProduct![indexProd]
                                             .name,
+                                        brand: controller.produtosEstoque[index]
+                                            .listProduct![indexProd].brand!,
                                         quantidadeProduto: controller
                                             .produtosEstoque[index]
                                             .listProduct![indexProd]

@@ -2,16 +2,17 @@ import 'dart:typed_data';
 
 import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:app_estoque/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CardProdutoWidget extends StatelessWidget {
   final String tituloProduto;
   final String categoriaProduto;
   final String quantidadeProduto;
   final String nomeCampoCorCateg;
+  final String brand;
   final bool selecionado;
   final String? imagem;
   final String valorProduto;
@@ -25,7 +26,8 @@ class CardProdutoWidget extends StatelessWidget {
       this.nomeCampoCorCateg = "",
       this.selecionado = false,
       this.imagem,
-      required this.valorProduto});
+      required this.valorProduto,
+      required this.brand});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,12 @@ class CardProdutoWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextWidget(tituloProduto),
+                      TextWidget(
+                        tituloProduto,
+                        fontSize: font_14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      CustomRich("Marca: ", brand),
                       CustomRich("Valor: ", valorProduto),
                     ],
                   ),
