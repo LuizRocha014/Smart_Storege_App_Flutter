@@ -30,45 +30,53 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
       titulo: "Cliente",
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) => Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 1.h,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      height: 8.h,
-                      width: 16.w,
-                      decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.circular(1.h)),
-                    ),
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextWidget(
-                          "Evaristo Pereira da Cunha Oliveira",
-                          fontWeight: FontWeight.w500,
-                          fontSize: font_16,
-                        ),
-                        const CustomRich("CPF:", "9999999999"),
-                        const CustomRich("Telefone:", "9999999999"),
-                      ],
-                    )
-                  ],
+        child: controller.listCostumer.isEmpty
+            ? Center(
+                child: TextWidget(
+                "Nenhum cliente encontrado",
+                textColor: lightGray,
+                fontSize: font_14,
+              ))
+            : ListView.builder(
+                itemCount: controller.listCostumer.length,
+                itemBuilder: (BuildContext context, int index) => Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 1.h,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            height: 8.h,
+                            width: 16.w,
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(1.h)),
+                          ),
+                          SizedBox(
+                            width: 2.w,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextWidget(
+                                "Evaristo Pereira da Cunha Oliveira",
+                                fontWeight: FontWeight.w500,
+                                fontSize: font_16,
+                              ),
+                              const CustomRich("CPF:", "9999999999"),
+                              const CustomRich("Telefone:", "9999999999"),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                      const Divider()
+                    ],
+                  ),
                 ),
-                SizedBox(height: 2.h),
-                const Divider()
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }

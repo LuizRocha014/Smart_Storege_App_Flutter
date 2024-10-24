@@ -27,14 +27,6 @@ class _NovoClientePageState
 
   @override
   Widget build(BuildContext context) {
-    void goToPage(int page) {
-      controller.pageController.animateToPage(
-        page,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-
     return BackgroundWidget(
       titulo: "Novo Cliente",
       onBackButton: () => controller.buttonVoltar(),
@@ -57,8 +49,8 @@ class _NovoClientePageState
               child: Obx(
                 () => ButtonWidget(
                   controller.textButton,
-                  onPressed: () =>
-                      goToPage(controller.pageController.initialPage + 1),
+                  onPressed: () => controller
+                      .goToPage(controller.pageController.initialPage + 1),
                 ),
               ),
             )

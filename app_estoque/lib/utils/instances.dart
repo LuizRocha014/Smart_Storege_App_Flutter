@@ -1,3 +1,4 @@
+import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
 import 'package:app_estoque/base/models/smartStorege/Shop/shop.dart';
@@ -7,22 +8,27 @@ import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dar
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
+import 'package:app_estoque/base/models/smartStorege/shopCustomer/shop_costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/icostumer_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ifile_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ipermission_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/ishop_costumer_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/itransaction_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iuser_permission_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/category_repository.dart';
+import 'package:app_estoque/base/repository/smartStorege/costumer_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/file_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/permission_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/product_file_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/product_repository.dart';
+import 'package:app_estoque/base/repository/smartStorege/shop_costumer_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/shop_product_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/shop_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/shop_user_repository.dart';
@@ -122,6 +128,18 @@ void initInstances() {
       () => FileRepository(
         FileIMG.table,
         FileIMG.fromJson,
+      ),
+    );
+    instanceManager.registerLazySingleton<IShopCostumerRepository>(
+      () => ShopCostumerRepository(
+        ShopCostumer.table,
+        ShopCostumer.fromJson,
+      ),
+    );
+    instanceManager.registerLazySingleton<ICostumerRepository>(
+      () => CostumerRepository(
+        Costumer.table,
+        Costumer.fromJson,
       ),
     );
   } catch (_) {}

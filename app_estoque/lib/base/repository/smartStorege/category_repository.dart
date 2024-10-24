@@ -9,7 +9,8 @@ class CategoryRepository extends BaseRepository<Category>
   @override
   Future<List<Category>> getAllListCategory() async {
     try {
-      final query = '''SELECT * FROM ${infosTableDatabase.tableName}''';
+      final query =
+          '''SELECT * FROM ${infosTableDatabase.tableName} order by description asc''';
       final entity = await context.rawQuery(query);
       if (entity.isNullOrEmpty) return <Category>[];
       final list = entity.map((e) => Category.fromJson(e)).toList();
