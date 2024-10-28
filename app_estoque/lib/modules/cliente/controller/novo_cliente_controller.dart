@@ -4,8 +4,8 @@ import 'package:app_estoque/base/repository/interface/smartStorege/icostumer_rep
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_costumer_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/state_manager.dart';
 import 'package:uuid/uuid.dart';
@@ -47,36 +47,29 @@ class NovoClienteControlle extends BaseController {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
+      _textButton.value = 'PROXIMO';
+      _textButton.refresh();
     } else {
       context.pop();
     }
   }
 
-  Future<void> proximaEtapa(int value) async {
-    switch (value) {
-      case 0:
-        pageController.animateToPage(
-          value + 1,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-        break;
-      case 1:
-        await createObj();
-        break;
-      default:
+  Future<void> goToPage(int value) async {
+    if (value == 1 && _textButton.contains('SALVAR')) {
+      createObj();
+    } else {
+      switch (value) {
+        case 1:
+          pageController.animateToPage(
+            value + 1,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+          _textButton.value = 'SALVAR';
+          _textButton.refresh();
+          break;
+      }
     }
-  }
-
-  void goToPage(int page) {
-    if (page == 2) {
-      proximaEtapa(page);
-    }
-    pageController.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
   }
 
   Future<void> createObj() async {
@@ -90,6 +83,7 @@ class NovoClienteControlle extends BaseController {
           addressNumber: controlleraddressNumber.text,
           address: controllerEndereco.text,
           zipCode: controllerCep.text,
+          phone: controllerTelefone.text,
           createdAt: DateTime.now(),
           active: true);
       final shopCostumer = ShopCostumer(
@@ -105,6 +99,8 @@ class NovoClienteControlle extends BaseController {
       await instanceManager
           .get<IShopCostumerRepository>()
           .createOrReplace(shopCostumer.toJson());
+      // ignore: use_build_context_synchronously
+      context.pop();
     } catch (_) {}
   }
 }

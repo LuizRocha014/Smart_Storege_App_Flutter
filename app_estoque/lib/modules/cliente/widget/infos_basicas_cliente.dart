@@ -1,11 +1,12 @@
-import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+import 'package:app_estoque/modules/cliente/controller/novo_cliente_controller.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CadastroInfosBasicasWidget extends StatelessWidget {
-  const CadastroInfosBasicasWidget({super.key});
+  final NovoClienteControlle controller;
+  const CadastroInfosBasicasWidget(this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,50 +18,55 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: TextFieldWidget(
-            controller: TextEditingController(),
-            labelExterno: "Nome",
-            colorLabelExterno: preto,
-            labelInterno: 'Insira o nome',
-            titulo: 'Nome',
-            hintText: '',
+            controller: controller.controllerNome,
+            externalLabel: "Nome",
+            internalLabel: 'Insira o nome',
+            labelInterno: '',
+            externalLabelColor: preto,
+            borderColor: gray,
           ),
         ),
         TextFieldWidget(
-          controller: TextEditingController(),
-          labelExterno: "CPF/CNPJ",
-          colorLabelExterno: preto,
-          labelInterno: 'Insira o CPF/CNPJ',
-          titulo: 'Nome',
-          hintText: '',
+          controller: controller.controllerCnpjCpf,
+          externalLabel: "CPF/CNPJ",
+          externalLabelColor: preto,
+          borderColor: gray,
+          inputFormatters: [MaskCpfCnpj(false)],
+          internalLabel: 'Insira o CPF/CNPJ',
+          labelInterno: '',
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: TextFieldWidget(
-            controller: TextEditingController(),
-            labelExterno: "E-mail",
-            colorLabelExterno: preto,
-            labelInterno: 'Insira o Email',
-            titulo: 'Nome',
-            hintText: '',
+            controller: controller.controllerEmail,
+            externalLabel: "E-mail",
+            externalLabelColor: preto,
+            borderColor: gray,
+            validator: validacaoEmail,
+            internalLabel: 'Insira o Email',
+            labelInterno: '',
           ),
         ),
         TextFieldWidget(
-          controller: TextEditingController(),
-          labelExterno: "Telefone",
-          colorLabelExterno: preto,
-          labelInterno: 'Insira o Telefone',
-          titulo: 'Nome',
-          hintText: '',
+          controller: controller.controllerTelefone,
+          externalLabel: "Telefone",
+          externalLabelColor: preto,
+          borderColor: gray,
+          inputFormatters: [PhoneNumberMask(true)],
+          internalLabel: 'Insira o Telefone',
+          labelInterno: '',
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: TextFieldWidget(
-            controller: TextEditingController(),
-            labelExterno: "Data de Nascimento",
-            colorLabelExterno: preto,
-            labelInterno: 'Insira a data de nascimento',
-            titulo: 'Nome',
-            hintText: '',
+            controller: controller.controllerDataNascimento,
+            externalLabel: "Data de Nascimento",
+            externalLabelColor: preto,
+            borderColor: gray,
+            inputFormatters: [DateFormatter()],
+            validator: validacaoData,
+            internalLabel: 'Insira a data de nascimento',
+            labelInterno: '',
           ),
         ),
         Align(

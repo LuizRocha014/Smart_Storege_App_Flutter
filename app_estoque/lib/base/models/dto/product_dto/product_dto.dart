@@ -1,5 +1,5 @@
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
-import 'package:app_estoque/utils/mappers.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product_dto.g.dart';

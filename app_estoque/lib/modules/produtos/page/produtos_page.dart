@@ -2,8 +2,7 @@ import 'package:app_estoque/modules/produtos/controller/produto_controller.dart'
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/utils/navigator.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

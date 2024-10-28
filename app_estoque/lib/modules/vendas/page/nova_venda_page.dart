@@ -1,12 +1,10 @@
-import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/nova_venda_controller.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
-import 'package:app_estoque/utils/navigator.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class NovaVendaPage extends StatefulWidget {
@@ -44,23 +42,27 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                  controller: TextEditingController(text: loggerUser.name),
-                  labelExterno: "Nome",
-                  titulo: "Nome",
-                  textColor: preto,
-                  hintText: '',
-                  labelInterno: 'Insira o nome'),
+                controller: TextEditingController(text: loggerUser.name),
+                externalLabel: "Nome",
+                textColor: preto,
+                externalLabelColor: preto,
+                borderColor: gray,
+                labelInterno: 'Insira o nome',
+                internalLabel: '',
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                  controller: TextEditingController(text: loggerUser.email),
-                  titulo: "Matricula",
-                  labelExterno: "Matricula",
-                  textColor: preto,
-                  hintText: '',
-                  labelInterno: 'Insira a matricula'),
+                controller: TextEditingController(text: loggerUser.email),
+                externalLabel: "Matricula",
+                textColor: preto,
+                externalLabelColor: preto,
+                borderColor: gray,
+                labelInterno: 'Insira o Matricula',
+                internalLabel: '',
+              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -87,11 +89,12 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                   bottom: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 controller: TextEditingController(),
-                titulo: "Nome",
-                labelInterno: 'Insira o nome',
-                labelExterno: "Nome",
+                externalLabel: "Nome",
+                internalLabel: 'Insira o nome',
                 textColor: preto,
-                hintText: '',
+                labelInterno: '',
+                externalLabelColor: preto,
+                borderColor: gray,
               ),
             ),
             Padding(
@@ -99,23 +102,26 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                   bottom: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
                 controller: TextEditingController(),
-                titulo: "CPF",
-                labelExterno: "CPF",
                 textColor: preto,
-                hintText: '',
-                labelInterno: 'Insira o CPF',
+                externalLabel: "CPF",
+                internalLabel: 'Insira o CPF',
+                labelInterno: '',
+                externalLabelColor: preto,
+                borderColor: gray,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                  controller: TextEditingController(),
-                  titulo: "Telefone",
-                  labelExterno: "Telefone",
-                  textColor: preto,
-                  hintText: '',
-                  labelInterno: 'Insira o Telefone'),
+                controller: TextEditingController(),
+                externalLabel: "Telefone",
+                textColor: preto,
+                internalLabel: 'Insira o Telefone',
+                labelInterno: '',
+                externalLabelColor: preto,
+                borderColor: gray,
+              ),
             ),
           ],
         ),

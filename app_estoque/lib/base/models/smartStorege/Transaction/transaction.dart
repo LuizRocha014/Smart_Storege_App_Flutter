@@ -1,7 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/Core/core.dart';
 import 'package:app_estoque/utils/enuns.dart';
-import 'package:app_estoque/utils/infos_tabela_database.dart';
-import 'package:app_estoque/utils/mappers.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'transaction.g.dart';

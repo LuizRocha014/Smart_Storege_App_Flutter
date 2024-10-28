@@ -1,12 +1,9 @@
 import 'package:app_estoque/modules/produtos/controller/cadastro_produto_controller.dart';
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
-import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
-import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/dropdown_widget.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -140,30 +137,34 @@ class _CadastroProdutoState
                         top: MediaQuery.of(context).size.height * 0.02),
                     child: TextFieldWidget(
                       controller: controller.nomeController,
-                      titulo: "Nome",
-                      labelExterno: "Nome",
-                      labelInterno: 'Digite o nome do produto',
+                      externalLabel: "Nome",
+                      externalLabelColor: preto,
+                      borderColor: gray,
+                      internalLabel: 'Digite o nome do produto',
                       textColor: preto,
-                      hintText: '',
+                      labelInterno: '',
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height * 0.02),
                     child: TextFieldWidget(
-                      labelExterno: "Marca",
+                      externalLabel: "Marca",
+                      externalLabelColor: preto,
+                      borderColor: gray,
                       controller: controller.marcaController,
-                      titulo: "Marca",
-                      labelInterno: 'Digite o marca do produto',
+                      labelInterno: "",
                       textColor: preto,
-                      hintText: '',
+                      internalLabel: 'Digite o marca do produto',
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 2.h),
                     child: Obx(
                       () => DropDownWidget(
-                        borderColor: lightGray,
+                        borderColor: gray,
+                        fillColor: branco,
+                        labelColor: preto,
                         hintText: controller.categoriaText.value.isEmpty
                             ? "Selecione uma Categoria"
                             : controller.categoriaNomeString!,
@@ -186,25 +187,27 @@ class _CadastroProdutoState
                         SizedBox(
                           width: 42.w,
                           child: TextFieldWidget(
-                            titulo: "SKU",
-                            labelExterno: "SKU",
-                            hintText: "Digite o SKU",
+                            externalLabel: "SKU",
+                            externalLabelColor: preto,
+                            borderColor: gray,
                             controller: controller.skuController,
                             keyboardType: TextInputType.number,
-                            labelInterno: 'Digite o SKU',
+                            internalLabel: 'Digite o SKU',
                             textColor: preto,
+                            labelInterno: '',
                           ),
                         ),
                         SizedBox(
                           width: 42.w,
                           child: TextFieldWidget(
-                            labelExterno: "Quantidade",
-                            titulo: "Quantidade",
+                            externalLabel: "Quantidade",
+                            externalLabelColor: preto,
+                            borderColor: gray,
                             controller: controller.quantController,
-                            labelInterno: 'Digite a qnt',
+                            internalLabel: 'Digite a qnt',
                             keyboardType: TextInputType.number,
                             textColor: preto,
-                            hintText: '',
+                            labelInterno: '',
                           ),
                         )
                       ],
@@ -219,21 +222,23 @@ class _CadastroProdutoState
                         SizedBox(
                           width: 42.w,
                           child: TextFieldWidget(
-                            titulo: "Valor Compra",
-                            labelExterno: "Valor de Compra",
-                            hintText: "Digite o valor de compra",
+                            externalLabel: "Valor  Compra",
+                            externalLabelColor: preto,
+                            borderColor: gray,
                             controller: controller.controllerValorCompra,
                             labelInterno: 'Valor de compra',
                             keyboardType: TextInputType.number,
                             textColor: preto,
+                            internalLabel: 'Digite o valor de compra',
                           ),
                         ),
                         SizedBox(
                           width: 42.w,
                           child: TextFieldWidget(
-                            titulo: "Valor Venda",
-                            labelExterno: "Valor de Venda",
-                            hintText: "Digite o valor de compra",
+                            externalLabel: "Valor de Venda",
+                            externalLabelColor: preto,
+                            borderColor: gray,
+                            internalLabel: "Digite o valor de compra",
                             controller: controller.controllerValorVenda,
                             keyboardType: TextInputType.number,
                             labelInterno: 'Valor de Venda',
@@ -252,9 +257,12 @@ class _CadastroProdutoState
             if (MediaQuery.of(context).viewInsets.bottom == 0)
               Align(
                 alignment: Alignment.bottomCenter,
-                child: ButtonWidget(
-                  "SALVAR",
+                child: LoadingButtonWidget(
                   onPressed: () => controller.cadastroProduto(),
+                  title: "SALVAR",
+                  color: primaryColor,
+                  mostraTexto: !controller.isLoading,
+                  isLoading: controller.isLoading,
                 ),
               )
           ],

@@ -2,16 +2,14 @@ import 'dart:developer';
 
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/backgrounds/new_background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
-import 'package:app_estoque/utils/navigator.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

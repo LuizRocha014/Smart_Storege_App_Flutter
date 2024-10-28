@@ -1,10 +1,10 @@
 import 'package:app_estoque/modules/cliente/controller/novo_cliente_controller.dart';
 import 'package:app_estoque/modules/cliente/widget/infos_basicas_cliente.dart';
 import 'package:app_estoque/modules/cliente/widget/novo_cliente_endereco.dart';
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
-import 'package:app_estoque/utils/navigator.dart';
+import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -37,9 +37,9 @@ class _NovoClientePageState
             child: PageView(
               controller: controller.pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                CadastroInfosBasicasWidget(),
-                NovoClienteEndereco()
+              children: [
+                CadastroInfosBasicasWidget(controller),
+                NovoClienteEndereco(controller)
               ],
             ),
           ),
@@ -47,10 +47,13 @@ class _NovoClientePageState
             Align(
               alignment: Alignment.bottomCenter,
               child: Obx(
-                () => ButtonWidget(
-                  controller.textButton,
+                () => LoadingButtonWidget(
+                  title: controller.textButton,
                   onPressed: () => controller
                       .goToPage(controller.pageController.initialPage + 1),
+                  mostraTexto: !controller.isLoading,
+                  isLoading: controller.isLoading,
+                  color: primaryColor,
                 ),
               ),
             )

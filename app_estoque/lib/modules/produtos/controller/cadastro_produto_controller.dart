@@ -16,8 +16,8 @@ import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repo
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
 import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
@@ -134,6 +134,7 @@ class CadastroProdutoController extends BaseController {
 
   void cadastroProduto() async {
     try {
+      isLoading = true;
       final prodID = const Uuid().v4();
       if (mostraImagem.value) {
         final base64 = base64Encode(imagem!.readAsBytesSync());
@@ -207,6 +208,9 @@ class CadastroProdutoController extends BaseController {
       instanceManager.get<EstoqueProdutoController>().carregaDados();
       // ignore: use_build_context_synchronously
       context.pop();
-    } catch (_) {}
+    } catch (_) {
+    } finally {
+      isLoading = false;
+    }
   }
 }

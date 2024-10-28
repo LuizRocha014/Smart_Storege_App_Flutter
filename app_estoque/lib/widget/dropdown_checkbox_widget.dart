@@ -1,7 +1,6 @@
-import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class DropDownCheckBoxWidget<T> extends StatefulWidget {

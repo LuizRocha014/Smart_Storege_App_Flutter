@@ -1,11 +1,10 @@
 import 'dart:developer';
 
 import 'package:app_estoque/modules/listaVendas/widget/card_vendas_widget.dart';
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class ListaVendasPage extends StatefulWidget {
@@ -78,9 +77,8 @@ class _ListaVendasPageState extends State<ListaVendasPage> {
                           ),
                           const Spacer(),
                           ButtonWidget(
-                            "ENTENDI",
-                            peddinVerti: 10,
                             onPressed: () => Navigator.pop(context),
+                            title:  "ENTENDI",
                           ),
                         ],
                       ),

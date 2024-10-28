@@ -1,12 +1,10 @@
 import 'package:app_estoque/modules/estoque/widget/card_item_select_widget.dart';
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/modules/vendas/controller/select_itens_list_controller.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/utils/navigator.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -102,9 +100,14 @@ class _SelecaoItensPageState
               child: Obx(
                 () => Visibility(
                   visible: controller.contador > 0,
-                  child: ButtonWidget(
-                    "(${controller.contador}) AVANÇAR",
-                    onPressed: () => controller.avancaPaginaItens(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1.h),
+                    child: ButtonWidget(
+                      borderRadius: 5.h,
+                      width: 60.w,
+                      onPressed: () => controller.avancaPaginaItens(),
+                      title: '(${controller.contador}) AVANÇAR',
+                    ),
                   ),
                 ),
               ),

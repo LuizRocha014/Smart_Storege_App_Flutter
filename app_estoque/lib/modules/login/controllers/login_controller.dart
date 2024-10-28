@@ -3,15 +3,13 @@ import 'dart:async';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_repository.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/synchronize.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
-import 'package:app_estoque/widget/text_widget.dart';
 import 'package:boleto_utils/boleto_utils.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:app_estoque/utils/infos_statica.dart' as sai;
 
@@ -76,9 +74,8 @@ class LoginController extends BaseController {
               ),
               const Spacer(),
               ButtonWidget(
-                "ENTENDI",
-                peddinVerti: 10,
                 onPressed: () => Navigator.pop(context),
+                title: "ENTENDI",
               ),
             ],
           ),

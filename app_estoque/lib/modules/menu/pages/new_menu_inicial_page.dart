@@ -1,11 +1,11 @@
 import 'package:app_estoque/modules/listaVendas/widget/card_vendas_widget.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/background_menu_widget.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

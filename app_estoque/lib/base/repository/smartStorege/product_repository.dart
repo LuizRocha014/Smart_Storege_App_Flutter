@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:app_estoque/base/dto/product_dto/product_dto.dart';
+import 'package:app_estoque/base/models/dto/product_dto/product_dto.dart';
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
 import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
-import 'package:app_estoque/base/repository/base_repository.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
 

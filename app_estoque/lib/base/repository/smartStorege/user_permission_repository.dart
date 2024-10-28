@@ -1,6 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
-import 'package:app_estoque/base/repository/base_repository.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iuser_permission_repository.dart';
 
 class UserPermissionRepository extends BaseRepository<UserPermission>

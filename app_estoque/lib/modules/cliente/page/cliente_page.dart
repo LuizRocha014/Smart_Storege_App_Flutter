@@ -1,12 +1,12 @@
 import 'package:app_estoque/modules/cliente/controller/cliente_controller.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/utils/navigator.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 
 class ClientePage extends StatefulWidget {
   const ClientePage({super.key});
@@ -30,53 +30,59 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
       titulo: "Cliente",
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
-        child: controller.listCostumer.isEmpty
-            ? Center(
-                child: TextWidget(
-                "Nenhum cliente encontrado",
-                textColor: lightGray,
-                fontSize: font_14,
-              ))
-            : ListView.builder(
-                itemCount: controller.listCostumer.length,
-                itemBuilder: (BuildContext context, int index) => Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 1.h,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            height: 8.h,
-                            width: 16.w,
-                            decoration: BoxDecoration(
-                                color: primaryColor,
-                                borderRadius: BorderRadius.circular(1.h)),
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextWidget(
-                                "Evaristo Pereira da Cunha Oliveira",
-                                fontWeight: FontWeight.w500,
-                                fontSize: font_16,
-                              ),
-                              const CustomRich("CPF:", "9999999999"),
-                              const CustomRich("Telefone:", "9999999999"),
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 2.h),
-                      const Divider()
-                    ],
+        child: Obx(
+          () => controller.listCostumer.isEmpty
+              ? Center(
+                  child: TextWidget(
+                  "Nenhum cliente encontrado",
+                  textColor: lightGray,
+                  fontSize: font_14,
+                ))
+              : ListView.builder(
+                  itemCount: controller.listCostumer.length,
+                  itemBuilder: (BuildContext context, int index) => Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 1.h,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: 8.h,
+                              width: 16.w,
+                              decoration: BoxDecoration(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(1.h)),
+                            ),
+                            SizedBox(
+                              width: 2.w,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextWidget(
+                                  controller.listCostumer[index].nome,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: font_16,
+                                ),
+                                CustomRich("CPF: ",
+                                    controller.listCostumer[index].cnpj),
+                                CustomRich(
+                                    "Telefone: ",
+                                    controller.listCostumer[index].phone ??
+                                        " - "),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 2.h),
+                        const Divider()
+                      ],
+                    ),
                   ),
                 ),
-              ),
+        ),
       ),
     );
   }

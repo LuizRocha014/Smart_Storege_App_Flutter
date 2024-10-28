@@ -2,7 +2,7 @@ import 'package:app_estoque/utils/conversores.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class CardVendasWidget extends StatefulWidget {

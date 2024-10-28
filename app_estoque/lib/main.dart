@@ -1,12 +1,11 @@
 import 'package:app_estoque/base/context/app_context.dart';
-import 'package:app_estoque/base/context/service/icontext.dart';
 import 'package:app_estoque/modules/login/page/login_page.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+
 import 'package:app_estoque/utils/backgroung_process.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/instances.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -92,9 +91,6 @@ class MyApp extends StatelessWidget {
                     buttonColor: primaryColor,
                   ),
                 ),
-                navigatorObservers: [
-                  RouteHistoryObserver(),
-                ],
                 home: const LoginPage(),
               ),
             );

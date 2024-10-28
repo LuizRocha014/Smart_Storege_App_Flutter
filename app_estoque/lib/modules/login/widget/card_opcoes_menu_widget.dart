@@ -1,5 +1,5 @@
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class CardListMenuPrincipalWidget extends StatefulWidget {

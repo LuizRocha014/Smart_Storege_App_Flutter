@@ -1,11 +1,12 @@
-import 'package:app_estoque/modules/shere/widget/text_field_widget.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
+import 'package:app_estoque/modules/cliente/controller/novo_cliente_controller.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class NovoClienteEndereco extends StatelessWidget {
-  const NovoClienteEndereco({super.key});
+  final NovoClienteControlle controller;
+  const NovoClienteEndereco(this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,52 +18,53 @@ class NovoClienteEndereco extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: TextFieldWidget(
-            controller: TextEditingController(),
-            labelExterno: "CEP",
-            colorLabelExterno: preto,
-            labelInterno: 'Insira o CEP',
-            titulo: 'Nome',
-            hintText: '',
+            controller: controller.controllerCep,
+            externalLabel: "CEP",
+            externalLabelColor: preto,
+            borderColor: gray,
+            internalLabel: 'Insira o CEP',
+            labelInterno: '',
+            inputFormatters: [CepInputFormatter()],
           ),
         ),
         TextFieldWidget(
-          controller: TextEditingController(),
-          labelExterno: "Endereço",
-          colorLabelExterno: preto,
-          labelInterno: 'Endereço',
-          titulo: 'Nome',
-          hintText: '',
+          controller: controller.controllerEndereco,
+          externalLabel: "Endereço",
+          externalLabelColor: preto,
+          borderColor: gray,
+          internalLabel: 'Endereço',
+          labelInterno: '',
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: TextFieldWidget(
-            controller: TextEditingController(),
-            labelExterno: "Bairro",
-            colorLabelExterno: preto,
-            labelInterno: 'Insira o Bairro',
-            titulo: 'Nome',
-            hintText: '',
+            controller: controller.controllerBairro,
+            externalLabel: "Bairro",
+            externalLabelColor: preto,
+            borderColor: gray,
+            internalLabel: 'Insira o Bairro',
+            labelInterno: '',
           ),
         ),
         TextFieldWidget(
-          controller: TextEditingController(),
-          labelExterno: "Ponto de Referencia",
-          colorLabelExterno: preto,
-          labelInterno: 'Insira o Ponto de Referencia',
-          titulo: 'Nome',
-          hintText: '',
+          controller: controller.controllerPontoReferencia,
+          externalLabel: "Ponto de Referencia",
+          externalLabelColor: preto,
+          borderColor: gray,
+          internalLabel: 'Insira o Ponto de Referencia',
+          labelInterno: '',
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 2.h),
           child: SizedBox(
             width: 50.w,
             child: TextFieldWidget(
-              controller: TextEditingController(),
-              labelExterno: "Número",
-              colorLabelExterno: preto,
-              labelInterno: 'Insira o Número',
-              titulo: 'Nome',
-              hintText: '',
+              controller: controller.controlleraddressNumber,
+              externalLabel: "Número",
+              externalLabelColor: preto,
+              borderColor: gray,
+              internalLabel: 'Insira o Número',
+              labelInterno: '',
             ),
           ),
         ),

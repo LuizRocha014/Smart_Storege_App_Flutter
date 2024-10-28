@@ -1,8 +1,6 @@
-import 'package:app_estoque/modules/shere/widget/button_widget.dart';
-import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundWidget extends StatefulWidget {
@@ -115,7 +113,10 @@ class _BackgroundWidgetState extends State<BackgroundWidget> {
                 MediaQuery.of(context).viewInsets.bottom == 0)
               Align(
                 alignment: Alignment.bottomCenter,
-                child: ButtonWidget(widget.tituloButton ?? ""),
+                child: ButtonWidget(
+                  title: widget.tituloButton ?? "",
+                  onPressed: () {},
+                ),
               ),
           ],
         ),

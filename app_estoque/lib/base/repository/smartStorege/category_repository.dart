@@ -1,5 +1,5 @@
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
-import 'package:app_estoque/base/repository/base_repository.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 
 class CategoryRepository extends BaseRepository<Category>

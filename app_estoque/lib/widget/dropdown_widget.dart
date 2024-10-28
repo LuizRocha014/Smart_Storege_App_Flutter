@@ -1,6 +1,5 @@
-import 'package:app_estoque/utils/app_measurements.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 
 class DropDownWidget<T> extends StatelessWidget {
@@ -16,6 +15,7 @@ class DropDownWidget<T> extends StatelessWidget {
   final Color? fillColor;
   final String? labelText;
   final bool mandatory;
+  final Color? labelColor;
 
   const DropDownWidget({
     super.key,
@@ -23,6 +23,7 @@ class DropDownWidget<T> extends StatelessWidget {
     required this.label,
     required this.onChanged,
     this.selectedItem,
+    this.labelColor,
     this.itens = const [],
     this.icon,
     this.showIcon = true,
@@ -49,7 +50,7 @@ class DropDownWidget<T> extends StatelessWidget {
                     child: TextWidget(
                       label,
                       fontWeight: FontWeight.w400,
-                      textColor: lightGray,
+                      textColor: labelColor ?? lightGray,
                     ),
                   ),
                 ),

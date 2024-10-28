@@ -2,7 +2,7 @@ import 'package:app_estoque/modules/login/page/login_page.dart';
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
-import 'package:app_estoque/widget/text_widget.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

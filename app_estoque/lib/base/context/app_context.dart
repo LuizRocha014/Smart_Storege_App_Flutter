@@ -1,4 +1,4 @@
-import 'package:app_estoque/base/context/context.dart';
+import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
 import 'package:app_estoque/base/models/smartStorege/Shop/shop.dart';
@@ -10,8 +10,7 @@ import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/shopCustomer/shop_costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
-import 'package:app_estoque/utils/base_migration.dart';
-import 'package:app_estoque/utils/infos_tabela_database.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
 class AppContext extends Context {
   AppContext()
@@ -19,7 +18,6 @@ class AppContext extends Context {
           nameDatabase: _nameDatabase,
           version: _version,
           tables: _tables,
-          migrations: _migrations,
         );
   static String get _nameDatabase => "App_estoque";
   static int get _version => 1;
@@ -35,7 +33,6 @@ class AppContext extends Context {
         FileIMG.table,
         ProductFile.table,
         ShopCostumer.table,
+        Costumer.table
       ];
-
-  static List<BaseMigration> get _migrations => [];
 }

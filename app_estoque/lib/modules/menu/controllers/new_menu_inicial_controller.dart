@@ -10,8 +10,8 @@ import 'package:app_estoque/modules/menu/pages/menu_principal_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 import 'package:app_estoque/utils/assets.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

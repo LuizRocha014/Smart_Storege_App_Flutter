@@ -1,4 +1,4 @@
-import 'package:app_estoque/utils/app_measurements.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
 double font_28 = 28.sp;
 double font_18 = 18.sp;

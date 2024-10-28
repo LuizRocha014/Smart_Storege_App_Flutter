@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:app_estoque/utils/mappers.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'item_dto.g.dart';

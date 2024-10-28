@@ -1,3 +1,6 @@
-import 'package:app_estoque/base/repository/interface/ibase_repository.dart';
+import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
-abstract class ICostumerRepository extends IBaseRepository {}
+abstract class ICostumerRepository extends IBaseRepository<Costumer> {
+  Future<List<Costumer>> getCostumers();
+}

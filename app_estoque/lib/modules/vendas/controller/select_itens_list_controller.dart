@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:app_estoque/base/dto/product_dto/product_dto.dart';
+import 'package:app_estoque/base/models/dto/product_dto/product_dto.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
-import 'package:app_estoque/utils/routes.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:get/get.dart';
 
 class SelectItensController extends BaseController {

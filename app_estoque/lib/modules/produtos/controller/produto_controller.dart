@@ -1,4 +1,4 @@
-import 'package:app_estoque/base/dto/product_dto/product_dto.dart';
+import 'package:app_estoque/base/models/dto/product_dto/product_dto.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
