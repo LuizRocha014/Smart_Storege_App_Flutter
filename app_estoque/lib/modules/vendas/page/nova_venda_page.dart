@@ -47,6 +47,7 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                 textColor: preto,
                 externalLabelColor: preto,
                 borderColor: gray,
+                enabled: false,
                 labelInterno: 'Insira o nome',
                 internalLabel: '',
               ),
@@ -57,6 +58,7 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
               child: TextFieldWidget(
                 controller: TextEditingController(text: loggerUser.email),
                 externalLabel: "Matricula",
+                enabled: false,
                 textColor: preto,
                 externalLabelColor: preto,
                 borderColor: gray,
@@ -88,11 +90,12 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                   top: MediaQuery.of(context).size.height * 0.02,
                   bottom: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                controller: TextEditingController(),
+                controller: controller.controllerNomeCliente,
                 externalLabel: "Nome",
                 internalLabel: 'Insira o nome',
                 textColor: preto,
                 labelInterno: '',
+                enabled: controller.selecionado,
                 externalLabelColor: preto,
                 borderColor: gray,
               ),
@@ -101,11 +104,12 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                controller: TextEditingController(),
+                controller: controller.controlleCPFCliente,
                 textColor: preto,
                 externalLabel: "CPF",
                 internalLabel: 'Insira o CPF',
                 labelInterno: '',
+                enabled: controller.selecionado,
                 externalLabelColor: preto,
                 borderColor: gray,
               ),
@@ -114,11 +118,12 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.02),
               child: TextFieldWidget(
-                controller: TextEditingController(),
+                controller: controller.controllerTelefoneCliente,
                 externalLabel: "Telefone",
                 textColor: preto,
                 internalLabel: 'Insira o Telefone',
                 labelInterno: '',
+                enabled: controller.selecionado,
                 externalLabelColor: preto,
                 borderColor: gray,
               ),

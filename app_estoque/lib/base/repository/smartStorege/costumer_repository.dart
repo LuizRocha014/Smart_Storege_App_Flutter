@@ -12,7 +12,8 @@ class CostumerRepository extends BaseRepository<Costumer>
     try {
       final query = '''SELECT * FROM ${ShopCostumer.table.tableName} sc
                         LEFT JOIN ${Costumer.table.tableName} c on sc.costumerId = c.id
-                        WHERE SC.SHOPID = '${shopUser.shopId}' ''';
+                        WHERE SC.SHOPID = '${shopUser.shopId}'
+                        ORDER BY nome desc''';
       final entity = await context.rawQuery(query);
       if (entity.isEmpty) return [];
       final listEntity = entity.map((e) => Costumer.fromJson(e)).toList();

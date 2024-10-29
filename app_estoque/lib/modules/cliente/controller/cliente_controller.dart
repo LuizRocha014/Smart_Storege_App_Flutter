@@ -8,9 +8,11 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class ClienteController extends BaseController {
   late RxList<Costumer> listCostumer;
+  late Costumer? selectCostumer;
   @override
   void iniciaControlador() {
     isLoading = true;
+    selectCostumer = null;
     listCostumer = RxList();
     carregaDados();
     isLoading = false;
@@ -27,6 +29,12 @@ class ClienteController extends BaseController {
   void novoCliente() {
     try {
       context.push(const NovoClientePage());
+    } catch (_) {}
+  }
+
+  void selectItem(Costumer item) {
+    try {
+      context.pop(item);
     } catch (_) {}
   }
 }

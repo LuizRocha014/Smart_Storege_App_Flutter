@@ -89,7 +89,7 @@ class NewMenuIncialController extends BaseController {
           ));
           break;
         case 'GestureCliente':
-          context.push(const ClientePage());
+          context.push(const ClientePage(false));
           break;
         default:
       }
