@@ -7,6 +7,7 @@ import 'package:app_estoque/base/models/smartStorege/ShopUser/shop_user.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
+import 'package:app_estoque/base/models/smartStorege/sale/sale.dart';
 import 'package:app_estoque/base/models/smartStorege/shopCustomer/shop_costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
@@ -33,6 +34,7 @@ class AppContext extends Context {
         FileIMG.table,
         ProductFile.table,
         ShopCostumer.table,
-        Costumer.table
+        Costumer.table,
+        Sale.table
       ];
 }

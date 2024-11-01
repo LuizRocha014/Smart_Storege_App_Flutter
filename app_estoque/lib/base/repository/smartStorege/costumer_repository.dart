@@ -8,6 +8,7 @@ class CostumerRepository extends BaseRepository<Costumer>
     implements ICostumerRepository {
   CostumerRepository(super.infosTableDatabase, super.fromJson);
 
+  @override
   Future<List<Costumer>> getCostumers() async {
     try {
       final query = '''SELECT * FROM ${ShopCostumer.table.tableName} sc

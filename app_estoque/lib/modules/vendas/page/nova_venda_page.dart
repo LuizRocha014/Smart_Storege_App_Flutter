@@ -1,4 +1,5 @@
 import 'package:app_estoque/modules/vendas/controller/nova_venda_controller.dart';
+import 'package:app_estoque/modules/vendas/page/finalizacao_venda_page.dart';
 
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
@@ -127,6 +128,13 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
                 externalLabelColor: preto,
                 borderColor: gray,
               ),
+            ),
+            LoadingButtonWidget(
+              title: 'PROXIMO',
+              onPressed: () => context.push(const FinalizacaoVendaPage()),
+              color: primaryColor,
+              mostraTexto: true,
+              isLoading: false,
             ),
           ],
         ),

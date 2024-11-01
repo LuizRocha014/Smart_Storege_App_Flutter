@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app_estoque/modules/cliente/controller/cliente_controller.dart';
 
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/modules/cliente/page/cliente_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';

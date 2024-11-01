@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:app_estoque/utils/request_manager.dart';
 
 class BaseService {
-  late String url = "http://192.168.15.66:5000";
+  late String url = "http://172.24.240.1:5000";
   late final int pageSize;
   late final Duration timeout;
   late final RequestManager requestManager;

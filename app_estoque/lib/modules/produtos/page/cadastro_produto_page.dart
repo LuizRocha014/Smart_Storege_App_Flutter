@@ -46,7 +46,7 @@ class _CadastroProdutoState
                           height: 100,
                           width: 100,
                           decoration: BoxDecoration(
-                            color: bancoSujo,
+                            color: brancoSujo,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Obx(() => controller.mostraImagem.value
