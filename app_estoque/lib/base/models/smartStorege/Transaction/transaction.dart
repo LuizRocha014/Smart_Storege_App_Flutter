@@ -7,26 +7,28 @@ part 'transaction.g.dart';
 
 @JsonSerializable()
 class Transaction extends Core {
-  TipoTransacao type;
-  String? supplierId; // Representando Guid como String
-  String? customerId;
-  String productId;
-  String? targetCompany;
-  String? originCompany;
-  String userId;
-  String? paymentMethod;
-  String? notes;
+  final TipoTransacao type; // Enum tipoTransacao
+  final String? supplierId; // Usando String? para representar GUIDs
+  final String? customerId;
+  final String productId;
+  final String saleId;
+  final String? targetCompanyId;
+  final String? originCompanyId;
+  final String userId;
+  final String? paymentMethod;
+  final String? note;
 
   Transaction({
     required this.type,
     this.supplierId,
     this.customerId,
     required this.productId,
-    this.targetCompany,
-    this.originCompany,
+    required this.saleId,
+    this.targetCompanyId,
+    this.originCompanyId,
     required this.userId,
     this.paymentMethod,
-    this.notes,
+    this.note,
     required super.id,
     required super.createdAt,
     required super.active,
@@ -43,11 +45,11 @@ class Transaction extends Core {
       "SupplierId": "TEXT",
       "CustomerId": "TEXT",
       "ProductId": "TEXT",
-      "TargetCompany": "TEXT",
-      "OriginCompany": "TEXT",
+      "TargetCompanyId": "TEXT",
+      "OriginCompanyId": "TEXT",
       "UserId": "TEXT",
       "PaymentMethod": "TEXT",
-      "Notes": "TEXT",
+      "Note": "TEXT",
     };
     columns.addAll(Core.table.columns);
     return InfosTableDatabase(tableName: 'Transaction', columns: columns);
