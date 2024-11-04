@@ -11,11 +11,13 @@ Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       createdAt: DateTime.parse(json['createdAt'] as String),
       description: json['description'] as String,
       active: fromJsonBoolean(json['active']),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'description': instance.description,
     };

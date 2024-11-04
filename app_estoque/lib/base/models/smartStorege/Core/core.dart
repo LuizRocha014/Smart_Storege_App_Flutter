@@ -7,11 +7,14 @@ class Core {
   final DateTime? updatedAt;
   @JsonKey(fromJson: fromJsonBoolean)
   final bool? active;
+  @JsonKey(fromJson: fromJsonBoolean)
+  late bool sync;
 
   Core(
       {required this.id,
       required this.createdAt,
       this.updatedAt,
+      required this.sync,
       required this.active});
 
   static InfosTableDatabase get table => InfosTableDatabase(
@@ -20,7 +23,8 @@ class Core {
           "Id": "TEXT",
           "UpdatedAt": "TEXT",
           "CreatedAt": "TEXT",
-          "Active": "INTEGER"
+          "Active": "INTEGER",
+          "Sync": "INTEGER"
         },
       );
 }

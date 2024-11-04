@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       final context = instanceManager.get<IContext>();
       context.initializeDatabase();
     }
+    // initDotenv();
     Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
 
     return LayoutBuilder(

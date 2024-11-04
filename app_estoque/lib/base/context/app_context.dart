@@ -4,13 +4,14 @@ import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.da
 import 'package:app_estoque/base/models/smartStorege/Shop/shop.dart';
 import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.dart';
 import 'package:app_estoque/base/models/smartStorege/ShopUser/shop_user.dart';
+import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/permission/permission.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
-import 'package:app_estoque/base/models/smartStorege/sale/sale.dart';
 import 'package:app_estoque/base/models/smartStorege/shopCustomer/shop_costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
+import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 
 class AppContext extends Context {
@@ -35,6 +36,7 @@ class AppContext extends Context {
         ProductFile.table,
         ShopCostumer.table,
         Costumer.table,
-        Sale.table
+        Sale.table,
+        Transaction.table
       ];
 }

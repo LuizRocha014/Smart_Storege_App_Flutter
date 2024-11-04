@@ -10,12 +10,14 @@ import 'package:app_estoque/base/models/smartStorege/permission/permission.dart'
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/shopCustomer/shop_costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/userPermission/user_permission.dart';
+import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icostumer_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ifile_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ipermission_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_costumer_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_repository.dart';
@@ -28,6 +30,7 @@ import 'package:app_estoque/base/repository/smartStorege/file_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/permission_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/product_file_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/product_repository.dart';
+import 'package:app_estoque/base/repository/smartStorege/sale_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/shop_costumer_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/shop_product_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/shop_repository.dart';
@@ -35,8 +38,11 @@ import 'package:app_estoque/base/repository/smartStorege/shop_user_repository.da
 import 'package:app_estoque/base/repository/smartStorege/transaction_repository.dart';
 import 'package:app_estoque/base/repository/smartStorege/user_permission_repository.dart';
 import 'package:app_estoque/base/service/category_service.dart';
+import 'package:app_estoque/base/service/custumer_service.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
+import 'package:app_estoque/base/service/interface/icostumer_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
+import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_product_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_user_service.dart';
@@ -50,6 +56,7 @@ import 'package:app_estoque/base/service/user_permission_service.dart';
 import 'package:app_estoque/base/service/user_service.dart';
 import 'package:app_estoque/utils/synchronize.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:app_estoque/base/service/shop_customer_service.dart';
 
 void initInstances() {
   try {
@@ -57,6 +64,10 @@ void initInstances() {
 
     //Service
     instanceManager.registerLazySingleton<IUserService>(() => UserService());
+    instanceManager
+        .registerLazySingleton<ICostumerService>(() => CostumerService());
+    instanceManager.registerLazySingleton<IShopCostumerService>(
+        () => ShopCustomerService());
     instanceManager
         .registerLazySingleton<IPermissionService>(() => PermissionService());
     instanceManager.registerLazySingleton<IUserPermissionService>(
@@ -140,6 +151,12 @@ void initInstances() {
       () => CostumerRepository(
         Costumer.table,
         Costumer.fromJson,
+      ),
+    );
+    instanceManager.registerLazySingleton<ISaleRepository>(
+      () => SaleRepository(
+        Sale.table,
+        Sale.fromJson,
       ),
     );
   } catch (_) {}

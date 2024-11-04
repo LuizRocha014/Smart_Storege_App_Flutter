@@ -16,6 +16,7 @@ class Shop extends Core {
     required this.companyId,
     required this.nome,
     required this.location,
+    required super.sync,
   });
 
   factory Shop.fromJson(Map<String, dynamic> json) =>

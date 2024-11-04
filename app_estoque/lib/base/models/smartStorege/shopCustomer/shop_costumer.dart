@@ -7,12 +7,13 @@ part 'shop_costumer.g.dart';
 @JsonSerializable()
 class ShopCostumer extends Core {
   final String shopId;
-  final String costumerId;
+  final String customerId;
   ShopCostumer(
       {required super.id,
+      required super.sync,
       required super.createdAt,
       required super.active,
-      required this.costumerId,
+      required this.customerId,
       required this.shopId});
 
   factory ShopCostumer.fromJson(Map<String, dynamic> json) =>
@@ -22,7 +23,7 @@ class ShopCostumer extends Core {
 
   static InfosTableDatabase get table {
     final columns = {
-      "CostumerId": "TEXT",
+      "CustomerId": "TEXT",
       "ShopId": "TEXT",
     };
     columns.addAll(Core.table.columns);

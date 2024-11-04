@@ -5,4 +5,17 @@ import 'package:app_estoque/base/repository/interface/smartStorege/ishop_costume
 class ShopCostumerRepository extends BaseRepository<ShopCostumer>
     implements IShopCostumerRepository {
   ShopCostumerRepository(super.infosTableDatabase, super.fromJson);
+  @override
+  Future<List<ShopCostumer>> getShopCustomerSync() async {
+    try {
+      final query = '''SELECT * FROM ${ShopCostumer.table.tableName} 
+                        where Sync = 0''';
+      final entity = await context.rawQuery(query);
+      if (entity.isEmpty) return [];
+      final listEntity = entity.map((e) => ShopCostumer.fromJson(e)).toList();
+      return listEntity;
+    } catch (_) {
+      return [];
+    }
+  }
 }

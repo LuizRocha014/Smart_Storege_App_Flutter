@@ -4,6 +4,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_re
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
+import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/synchronize.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -38,9 +39,7 @@ class LoginController extends BaseController {
           .login(userName.text, passWord.text);
       if (retorno == null) throw Exception();
       sai.loggerUser = retorno;
-      await instanceManager
-          .get<Synchronism>()
-          .iniciarSincronismoGets(forcaDataAlteracaoNula: true);
+      await instanceManager.get<Synchronism>().fullSync(forcaSincronismo: true);
 
       final shopUser = await instanceManager
           .get<IShopUserRepository>()
@@ -53,31 +52,44 @@ class LoginController extends BaseController {
       showModalBottomSheet(
         // ignore: use_build_context_synchronously
         context: context,
-        builder: (context) => SizedBox(
+        backgroundColor: Colors.transparent,
+        builder: (context) => Container(
+          decoration: BoxDecoration(
+              color: branco,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(2.h),
+                  topRight: Radius.circular(2.h))),
           width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.25,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.025),
-                child: TextWidget(
-                  "Aviso!",
-                  fontSize: font_18,
+          height: 20.h,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.025),
+                  child: TextWidget(
+                    "Insira o desconto desejado",
+                    fontSize: font_18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * 0.01),
-                child: const TextWidget(
-                    "Login ou senha incorretos, tente novamente!"),
-              ),
-              const Spacer(),
-              ButtonWidget(
-                onPressed: () => Navigator.pop(context),
-                title: "ENTENDI",
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.025),
+                  child: TextWidget(
+                    "Login ou senha incorretos, tente novamente",
+                    fontSize: font_14,
+                  ),
+                ),
+                const Spacer(),
+                ButtonWidget(
+                  onPressed: () => Navigator.pop(context),
+                  borderRadius: 2.h,
+                  title: "ENTENDI",
+                ),
+              ],
+            ),
           ),
         ),
       );

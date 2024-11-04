@@ -26,6 +26,7 @@ class User extends Core {
     required this.password,
     required this.rememberToken,
     required super.active,
+    required super.sync,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

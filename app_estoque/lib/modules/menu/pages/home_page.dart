@@ -87,9 +87,12 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                         ),
                         Align(
                             alignment: Alignment.centerLeft,
-                            child: TextWidget(
-                              "R\$ 3.000.00",
-                              fontSize: font_28,
+                            child: Obx(
+                              () => TextWidget(
+                                doubleToFormattedReal(double.parse(
+                                    controller.contadorValor.value)),
+                                fontSize: font_28,
+                              ),
                             )),
                       ],
                     ),
@@ -223,7 +226,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
               ],
             ),
             Visibility(
-              visible: false,
+              visible: controller.listSale.isNotEmpty,
               replacement: Padding(
                 padding: EdgeInsets.only(top: 10.h),
                 child: const Center(
@@ -232,57 +235,60 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                   textColor: lightGray,
                 )),
               ),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) => Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.01),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.11,
-                    decoration: BoxDecoration(
-                        color: branco,
-                        borderRadius: BorderRadius.circular(
-                            MediaQuery.of(context).size.height * 0.015),
-                        border: Border.all(color: cinzaIperClato)),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.height * 0.02),
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: secundaryColor,
-                              borderRadius: BorderRadius.circular(
-                                  MediaQuery.of(context).size.height * 0.01),
-                              border: Border.all(color: secundaryColor),
-                            ),
-                            child: Image.asset(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05,
-                                iconItemProduto),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.02),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextWidget(
-                                "MM234689",
-                                fontWeight: FontWeight.w500,
-                                fontSize: font_16,
+              child: Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.listSale.length,
+                  itemBuilder: (BuildContext context, int index) => Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.height * 0.01),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.11,
+                      decoration: BoxDecoration(
+                          color: branco,
+                          borderRadius: BorderRadius.circular(
+                              MediaQuery.of(context).size.height * 0.015),
+                          border: Border.all(color: cinzaIperClato)),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.height * 0.02),
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: secundaryColor,
+                                borderRadius: BorderRadius.circular(
+                                    MediaQuery.of(context).size.height * 0.01),
+                                border: Border.all(color: secundaryColor),
                               ),
-                              const CustomRich("Cliente: ", "516.219.828.58"),
-                            ],
+                              child: Image.asset(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
+                                  iconItemProduto),
+                            ),
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * 0.02),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextWidget(
+                                  controller.listSale[index].codigoVenda
+                                      .toUpperCase(),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: font_14,
+                                ),
+                                const CustomRich("Cliente: ", "516.219.828.58"),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

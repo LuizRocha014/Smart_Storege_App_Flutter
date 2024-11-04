@@ -13,6 +13,7 @@ UserPermission _$UserPermissionFromJson(Map<String, dynamic> json) =>
       acessoId: json['acessoId'] as String,
       usuarioId: json['usuarioId'] as String,
       active: fromJsonBoolean(json['active']),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$UserPermissionToJson(UserPermission instance) =>
@@ -20,6 +21,7 @@ Map<String, dynamic> _$UserPermissionToJson(UserPermission instance) =>
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'usuarioId': instance.usuarioId,
       'acessoId': instance.acessoId,
     };

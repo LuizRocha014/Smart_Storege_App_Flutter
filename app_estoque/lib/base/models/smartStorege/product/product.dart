@@ -50,6 +50,7 @@ class Product extends Core {
     required super.id,
     required super.createdAt,
     required super.active,
+    required super.sync,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>

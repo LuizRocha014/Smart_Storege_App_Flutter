@@ -15,7 +15,8 @@ class ProductFile extends Core {
       required super.active,
       required this.productId,
       required this.fileId,
-      required this.description});
+      required this.description,
+      required super.sync});
 
   factory ProductFile.fromJson(Map<String, dynamic> json) =>
       _$ProductFileFromJson(fromJsonRepository(json));

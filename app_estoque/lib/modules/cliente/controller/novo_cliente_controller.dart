@@ -2,6 +2,7 @@ import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/shopCustomer/shop_costumer.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icostumer_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_costumer_repository.dart';
+import 'package:app_estoque/modules/cliente/controller/cliente_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -84,13 +85,15 @@ class NovoClienteControlle extends BaseController {
           address: controllerEndereco.text,
           zipCode: controllerCep.text,
           phone: controllerTelefone.text,
+          sync: false,
           createdAt: DateTime.now(),
           active: true);
       final shopCostumer = ShopCostumer(
           id: const Uuid().v4(),
+          sync: false,
           createdAt: DateTime.now(),
           active: true,
-          costumerId: clienteId,
+          customerId: clienteId,
           shopId: shopUser.shopId);
 
       await instanceManager
@@ -99,6 +102,7 @@ class NovoClienteControlle extends BaseController {
       await instanceManager
           .get<IShopCostumerRepository>()
           .createOrReplace(shopCostumer.toJson());
+      instanceManager.get<ClienteController>().carregaDados();
       // ignore: use_build_context_synchronously
       context.pop();
     } catch (_) {}

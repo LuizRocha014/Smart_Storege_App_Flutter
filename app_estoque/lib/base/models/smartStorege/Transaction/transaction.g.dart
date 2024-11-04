@@ -10,6 +10,7 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       type: $enumDecode(_$TipoTransacaoEnumMap, json['type']),
       supplierId: json['supplierId'] as String?,
       customerId: json['customerId'] as String?,
+      numberProd: (json['numberProd'] as num).toInt(),
       productId: json['productId'] as String,
       saleId: json['saleId'] as String,
       targetCompanyId: json['targetCompanyId'] as String?,
@@ -20,6 +21,7 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       id: json['id'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       active: fromJsonBoolean(json['active']),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
@@ -27,11 +29,13 @@ Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'type': _$TipoTransacaoEnumMap[instance.type]!,
       'supplierId': instance.supplierId,
       'customerId': instance.customerId,
       'productId': instance.productId,
       'saleId': instance.saleId,
+      'numberProd': instance.numberProd,
       'targetCompanyId': instance.targetCompanyId,
       'originCompanyId': instance.originCompanyId,
       'userId': instance.userId,

@@ -12,6 +12,7 @@ class Transaction extends Core {
   final String? customerId;
   final String productId;
   final String saleId;
+  final int numberProd;
   final String? targetCompanyId;
   final String? originCompanyId;
   final String userId;
@@ -22,6 +23,7 @@ class Transaction extends Core {
     required this.type,
     this.supplierId,
     this.customerId,
+    required this.numberProd,
     required this.productId,
     required this.saleId,
     this.targetCompanyId,
@@ -32,6 +34,7 @@ class Transaction extends Core {
     required super.id,
     required super.createdAt,
     required super.active,
+    required super.sync,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) =>
@@ -48,10 +51,12 @@ class Transaction extends Core {
       "TargetCompanyId": "TEXT",
       "OriginCompanyId": "TEXT",
       "UserId": "TEXT",
+      "SaleId": "TEXT",
       "PaymentMethod": "TEXT",
       "Note": "TEXT",
+      "NumberProd": "INTEGER",
     };
     columns.addAll(Core.table.columns);
-    return InfosTableDatabase(tableName: 'Transaction', columns: columns);
+    return InfosTableDatabase(tableName: 'Transactions', columns: columns);
   }
 }

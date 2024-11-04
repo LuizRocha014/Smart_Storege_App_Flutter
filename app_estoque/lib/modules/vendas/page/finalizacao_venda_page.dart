@@ -84,32 +84,12 @@ class _MyWidgetState
                             ),
                           )),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextWidget(
-                          "Subtotal:",
-                          textColor: branco,
-                          fontSize: font_16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        TextWidget(
-                          doubleToFormattedReal(
-                            double.parse(controller.valorCompra.value),
-                          ),
-                          textColor: branco,
-                          fontSize: font_16,
-                          fontWeight: FontWeight.w400,
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2.h),
-                      child: Row(
+                    Obx(
+                      () => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextWidget(
-                            "Desconto:",
+                            "Subtotal:",
                             textColor: branco,
                             fontSize: font_16,
                             fontWeight: FontWeight.w400,
@@ -125,28 +105,66 @@ class _MyWidgetState
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextWidget(
-                          "Total:",
-                          textColor: branco,
-                          fontSize: font_16,
-                          fontWeight: FontWeight.w400,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2.h),
+                      child: Obx(
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextWidget(
+                              "Desconto:",
+                              textColor: branco,
+                              fontSize: font_16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            TextWidget(
+                              doubleToFormattedReal(
+                                double.parse(controller.valorCompra.value),
+                              ),
+                              textColor: branco,
+                              fontSize: font_16,
+                              fontWeight: FontWeight.w400,
+                            )
+                          ],
                         ),
-                        TextWidget(
-                          doubleToFormattedReal(
-                            double.parse(controller.valorCompra.value),
+                      ),
+                    ),
+                    Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextWidget(
+                            "Total:",
+                            textColor: branco,
+                            fontSize: font_16,
+                            fontWeight: FontWeight.w400,
                           ),
-                          textColor: branco,
-                          fontSize: font_16,
-                          fontWeight: FontWeight.w400,
-                        )
-                      ],
-                    )
+                          TextWidget(
+                            doubleToFormattedReal(
+                              double.parse(controller.valorCompra.value),
+                            ),
+                            textColor: branco,
+                            fontSize: font_16,
+                            fontWeight: FontWeight.w400,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 1.h),
+            child: Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: LoadingButtonWidget(
+                  title: "FINALIZAR",
+                  color: secundaryColor,
+                  onPressed: () => controller.createObj(),
+                  mostraTexto: !controller.isLoading,
+                  isLoading: controller.isLoading),
             ),
           )
         ],

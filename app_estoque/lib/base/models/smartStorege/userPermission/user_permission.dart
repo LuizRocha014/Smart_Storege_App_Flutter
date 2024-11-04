@@ -14,7 +14,8 @@ class UserPermission extends Core {
       required super.createdAt,
       required this.acessoId,
       required this.usuarioId,
-      required super.active});
+      required super.active,
+      required super.sync});
 
   factory UserPermission.fromJson(Map<String, dynamic> json) =>
       _$UserPermissionFromJson(fromJsonRepository(json));

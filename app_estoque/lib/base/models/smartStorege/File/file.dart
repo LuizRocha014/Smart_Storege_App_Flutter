@@ -13,7 +13,8 @@ class FileIMG extends Core {
       required super.createdAt,
       required super.active,
       required this.fileName,
-      required this.base64Arquiv});
+      required this.base64Arquiv,
+      required super.sync});
 
   factory FileIMG.fromJson(Map<String, dynamic> json) =>
       _$FileIMGFromJson(fromJsonRepository(json));

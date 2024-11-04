@@ -30,6 +30,7 @@ class Costumer extends Core {
     required this.address,
     required this.zipCode,
     this.neighborhood,
+    required super.sync,
     this.reference,
     this.phone,
     required super.createdAt,

@@ -19,7 +19,6 @@ import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
@@ -34,6 +33,8 @@ class CadastroProdutoController extends BaseController {
   late TextEditingController corController;
   late TextEditingController quantController;
   late TextEditingController skuController;
+  late TextEditingController controllerValorCompra;
+  late TextEditingController controllerValorVenda;
   late String codProduto;
   late Category? categoriaSelect;
   late RxString categoriaText;
@@ -43,18 +44,7 @@ class CadastroProdutoController extends BaseController {
   late RxBool mostraQrCode;
   late RxList<Category> drop;
   late Uint8List? qrImageBytes;
-  final MoneyMaskedTextController controllerValorCompra =
-      MoneyMaskedTextController(
-    decimalSeparator: ',',
-    thousandSeparator: '.',
-    leftSymbol: 'R\$ ',
-  );
-  final MoneyMaskedTextController controllerValorVenda =
-      MoneyMaskedTextController(
-    decimalSeparator: ',',
-    thousandSeparator: '.',
-    leftSymbol: 'R\$ ',
-  );
+
   @override
   Future<void> iniciaControlador() async {
     nomeController = TextEditingController();
@@ -62,6 +52,8 @@ class CadastroProdutoController extends BaseController {
     corController = TextEditingController();
     quantController = TextEditingController();
     skuController = TextEditingController();
+    controllerValorCompra = TextEditingController();
+    controllerValorVenda = TextEditingController();
     codProduto = '';
     camera = ImagePicker();
     imagem = File("");
@@ -143,13 +135,15 @@ class CadastroProdutoController extends BaseController {
             createdAt: DateTime.now(),
             active: true,
             fileName: 'ImagemProduto',
-            base64Arquiv: base64);
+            base64Arquiv: base64,
+            sync: false);
         final producIMG = ProductFile(
             id: const Uuid().v4(),
             createdAt: DateTime.now(),
             active: true,
             productId: prodID,
             fileId: img.id,
+            sync: false,
             description: '');
         await instanceManager
             .get<IFileRepository>()
@@ -168,6 +162,7 @@ class CadastroProdutoController extends BaseController {
         description: null,
         expiryDate: null,
         minimumAmount: 0,
+        sync: false,
         numbProduct: 0,
         sku: skuController.text,
         storageLocation: sai.loggerUser.roleId,
@@ -196,6 +191,7 @@ class CadastroProdutoController extends BaseController {
           active: true,
           productId: prod.id,
           shopId: sai.shopUser.shopId,
+          sync: false,
           userId: sai.loggerUser.id,
           totalAmount: int.parse(quantController.text),
           salePrice: prod.salePrice!);

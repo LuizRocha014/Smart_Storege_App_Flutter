@@ -17,6 +17,7 @@ class ShopUser extends Core {
     required super.id,
     required super.createdAt,
     required super.active,
+    required super.sync,
   });
 
   factory ShopUser.fromJson(Map<String, dynamic> json) =>

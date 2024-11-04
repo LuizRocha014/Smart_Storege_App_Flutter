@@ -20,6 +20,7 @@ class ShopProduct extends Core {
     required this.userId,
     required this.totalAmount,
     required this.salePrice,
+    required super.sync,
   });
   factory ShopProduct.fromJson(Map<String, dynamic> json) =>
       _$ShopProductFromJson(fromJsonRepository(json));

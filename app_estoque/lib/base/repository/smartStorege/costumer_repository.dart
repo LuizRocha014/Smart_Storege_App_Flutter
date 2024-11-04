@@ -12,9 +12,23 @@ class CostumerRepository extends BaseRepository<Costumer>
   Future<List<Costumer>> getCostumers() async {
     try {
       final query = '''SELECT * FROM ${ShopCostumer.table.tableName} sc
-                        LEFT JOIN ${Costumer.table.tableName} c on sc.costumerId = c.id
+                        LEFT JOIN ${Costumer.table.tableName} c on sc.CustomerId = c.id
                         WHERE SC.SHOPID = '${shopUser.shopId}'
                         ORDER BY nome desc''';
+      final entity = await context.rawQuery(query);
+      if (entity.isEmpty) return [];
+      final listEntity = entity.map((e) => Costumer.fromJson(e)).toList();
+      return listEntity;
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<Costumer>> getCustomerSync() async {
+    try {
+      final query = '''SELECT * FROM ${Costumer.table.tableName}
+                        WHERE Sync = 0''';
       final entity = await context.rawQuery(query);
       if (entity.isEmpty) return [];
       final listEntity = entity.map((e) => Costumer.fromJson(e)).toList();

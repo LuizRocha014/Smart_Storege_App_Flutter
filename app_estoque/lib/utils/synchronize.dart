@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:app_estoque/base/service/interface/ibase_service_get.dart';
 import 'package:app_estoque/base/service/interface/ibase_service_get_post.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
+import 'package:app_estoque/base/service/interface/icostumer_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
+import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_product_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_user_service.dart';
@@ -19,7 +21,10 @@ class Synchronism {
   RxDouble progress = 0.0.obs;
   double progressItemValue = 0.0;
 
-  List<IBaseServiceGetGetAndPost> get servicePost => [];
+  List<IBaseServiceGetGetAndPost> get servicePost => [
+        instanceManager.get<ICostumerService>(),
+        instanceManager.get<IShopCostumerService>()
+      ];
 
   List<IBaseServiceGet> get serviceGet => [
         instanceManager.get<IUserPermissionService>(),

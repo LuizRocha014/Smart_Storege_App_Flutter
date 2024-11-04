@@ -15,6 +15,7 @@ ShopProduct _$ShopProductFromJson(Map<String, dynamic> json) => ShopProduct(
       userId: json['userId'] as String,
       totalAmount: (json['totalAmount'] as num).toInt(),
       salePrice: (json['salePrice'] as num).toDouble(),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$ShopProductToJson(ShopProduct instance) =>
@@ -22,6 +23,7 @@ Map<String, dynamic> _$ShopProductToJson(ShopProduct instance) =>
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'productId': instance.productId,
       'shopId': instance.shopId,
       'userId': instance.userId,

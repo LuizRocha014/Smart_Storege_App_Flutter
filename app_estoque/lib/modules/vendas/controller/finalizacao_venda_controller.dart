@@ -1,9 +1,14 @@
-import 'dart:developer';
+import 'dart:math';
 
-import 'package:app_estoque/base/models/smartStorege/ModelSale/sale.dart';
 import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
+import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/itransaction_repository.dart';
+import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
+import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/modules/vendas/controller/nova_venda_controller.dart';
 import 'package:app_estoque/modules/vendas/controller/select_itens_list_controller.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/enuns.dart';
@@ -50,14 +55,14 @@ class FinalizacaoVendaController extends BaseController {
 
   void calculaValoCompra() {
     try {
+      valorCompra.value = "0";
       for (var element in listProdutosSelecionados) {
         final valor = (element.numbProduct * element.salePrice!);
         valorCompra.value =
             (double.parse(valorCompra.string) + valor).toString();
       }
-    } catch (_) {
-      log(_.toString());
-    }
+      valorCompra.refresh();
+    } catch (_) {}
   }
 
   void inserirDesconto() {
@@ -108,22 +113,48 @@ class FinalizacaoVendaController extends BaseController {
     );
   }
 
-  void createObj() {
+  void createObj() async {
     final sales = Sale(
         id: const Uuid().v4(),
+        sync: false,
         createdAt: DateTime.now(),
+        codigoVenda: gerarCodigoRandomico(),
         active: true,
+        desconto: double.tryParse(valorDesconto.text),
         valor: double.parse(valorCompra.value));
     List<Transaction> list = [];
     for (var element in listProdutosSelecionados) {
       list.add(Transaction(
           type: TipoTransacao.sale,
+          sync: false,
+          customerId:
+              instanceManager.get<NovaVendaController>().costumerSelected?.id,
           productId: element.id,
+          numberProd: element.numbProduct,
           saleId: sales.id,
+          originCompanyId: shopUser.shopId,
           userId: loggerUser.id,
           id: const Uuid().v4(),
           createdAt: DateTime.now(),
           active: true));
     }
+    await instanceManager
+        .get<ISaleRepository>()
+        .createOrReplace(sales.toJson());
+    await instanceManager
+        .get<ITransactionRepository>()
+        .createList(list.map((e) => e.toJson()));
+    instanceManager.get<NewMenuIncialController>().carregaValorVendas();
+    // ignore: use_build_context_synchronously
+    context.pushAndRemoveUntil(const HomePage());
+  }
+
+  String gerarCodigoRandomico() {
+    const caracteres =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    final random = Random();
+
+    return List.generate(
+        8, (index) => caracteres[random.nextInt(caracteres.length)]).join();
   }
 }

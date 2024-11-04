@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:app_estoque/base/models/dto/list_menu_Iniciar.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
+import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
+import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iuser_permission_repository.dart';
 import 'package:app_estoque/modules/cliente/page/cliente_page.dart';
 import 'package:app_estoque/modules/estoque/page/estoque_produto_page.dart';
@@ -18,21 +20,33 @@ import 'package:get/get.dart';
 class NewMenuIncialController extends BaseController {
   late final RxList<ListOpcoesMenu> listMenuInicial;
   late final RxList<Product> listProduto;
+  late final RxList<Sale> listSale;
+  late RxString contadorValor;
 
   @override
   Future<void> iniciaControlador() async {
     listMenuInicial = RxList<ListOpcoesMenu>();
     listProduto = RxList<Product>();
+    listSale = RxList<Sale>();
+    contadorValor = "0".obs;
     await carregaDados();
+  }
+
+  void carregaValorVendas() async {
+    contadorValor.value =
+        await instanceManager.get<ISaleRepository>().getValortotalVendas();
+    listSale.value = await instanceManager.get<ISaleRepository>().getVendas();
+    contadorValor.refresh();
+    listSale.refresh();
   }
 
   List<ListOpcoesMenu> get listOpcaoMenu => listMenuInicial;
   Future<void> carregaDados() async {
     try {
+      carregaValorVendas();
       final listUsuarioAcesso = await instanceManager
           .get<IUserPermissionRepository>()
           .getPermissionUser();
-
       for (var e in listUsuarioAcesso) {
         switch (e.name) {
           case "EstoquePermission":
@@ -54,18 +68,6 @@ class NewMenuIncialController extends BaseController {
                 imageString: iconCliente));
         }
       }
-      // listMenuInicial.add(ListOpcoesMenu(
-      //     nome: 'Transferencia',
-      //     gestureCommand: 'GestureTransferencia',
-      //     imageString: iconTransferencia));
-      // listMenuInicial.add(ListOpcoesMenu(
-      //     nome: 'Cliente',
-      //     gestureCommand: 'GestureCliente',
-      //     imageString: iconCliente));
-      // listMenuInicial.add(ListOpcoesMenu(
-      //     nome: 'Outros',
-      //     gestureCommand: 'GestureOutros',
-      //     imageString: iconMoreMenu));
     } catch (_) {}
   }
 

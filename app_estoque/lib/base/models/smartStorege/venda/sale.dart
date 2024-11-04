@@ -7,12 +7,16 @@ part 'sale.g.dart';
 @JsonSerializable()
 class Sale extends Core {
   final double valor;
-  Sale({
-    required super.id,
-    required super.createdAt,
-    required super.active,
-    required this.valor,
-  });
+  final String codigoVenda;
+  final double? desconto;
+  Sale(
+      {required super.id,
+      required super.createdAt,
+      required super.active,
+      required this.valor,
+      required this.codigoVenda,
+      this.desconto,
+      required super.sync});
   factory Sale.fromJson(Map<String, dynamic> json) =>
       _$SaleFromJson(fromJsonRepository(json));
 
@@ -20,7 +24,9 @@ class Sale extends Core {
 
   static InfosTableDatabase get table {
     final columns = {
-      "valor": "INTEGER",
+      "Valor": "INTEGER",
+      "Desconto": "INTEGER",
+      "CodigoVenda": "TEXT",
     };
     columns.addAll(Core.table.columns);
     return InfosTableDatabase(tableName: 'Sale', columns: columns);

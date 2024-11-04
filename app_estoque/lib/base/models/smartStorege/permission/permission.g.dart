@@ -14,6 +14,7 @@ Permission _$PermissionFromJson(Map<String, dynamic> json) => Permission(
           : DateTime.parse(json['updatedAt'] as String),
       createdAt: DateTime.parse(json['createdAt'] as String),
       active: fromJsonBoolean(json['active']),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$PermissionToJson(Permission instance) =>
@@ -22,5 +23,6 @@ Map<String, dynamic> _$PermissionToJson(Permission instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'name': instance.name,
     };

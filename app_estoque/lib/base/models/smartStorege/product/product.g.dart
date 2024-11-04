@@ -28,12 +28,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       id: json['id'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       active: fromJsonBoolean(json['active']),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'name': instance.name,
       'sku': instance.sku,
       'brand': instance.brand,

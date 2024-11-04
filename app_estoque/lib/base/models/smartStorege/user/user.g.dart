@@ -20,6 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       password: json['password'] as String,
       rememberToken: json['rememberToken'] as String,
       active: fromJsonBoolean(json['active']),
+      sync: fromJsonBoolean(json['sync']),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -27,6 +28,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'active': instance.active,
+      'sync': instance.sync,
       'roleId': instance.roleId,
       'name': instance.name,
       'email': instance.email,
