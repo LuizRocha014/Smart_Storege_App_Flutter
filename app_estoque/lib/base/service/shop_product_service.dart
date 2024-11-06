@@ -22,4 +22,27 @@ class ShopProductService extends BaseService implements IShopProductService {
       return [];
     }
   }
+
+  @override
+  Future<List<ShopProduct>> postMethod() async {
+    try {
+      final repository = instanceManager.get<IShopProductRepository>();
+      final list = await repository.getShopProduct();
+      final String urlApi = "$url/api/ShopProduct/PostAll";
+      if (list.isEmpty) return [];
+      final listMap = list.map((e) => e.toJson()).toList();
+      final retorno = await post(urlApi, listMap);
+      if (temErroRequisicao(retorno)) return [];
+      final retornoBody = retorno.body as List;
+      for (var element in list) {
+        if (!retornoBody.contains(element.id)) {
+          element.sync = true;
+          repository.createOrReplace(element.toJson());
+        }
+      }
+      return [];
+    } catch (_) {
+      return [];
+    }
+  }
 }

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:app_estoque/utils/request_manager.dart';
 
 class BaseService {
-  late String url = "http://172.24.240.1:5000";
+  late String url = "http://192.168.114.24:5000";
   late final int pageSize;
   late final Duration timeout;
   late final RequestManager requestManager;
@@ -22,10 +22,8 @@ class BaseService {
     Map<String, String>? headers,
     Map<String, dynamic>? query,
   }) async {
-    final queryString =
-        query?.entries.map((e) => "${e.key}=${e.value}").join("&");
-    final urlUri =
-        Uri.parse(url + (queryString != null ? "?$queryString" : ""));
+    final queryString = query?.entries.map((e) => "${e.key}=${e.value}").join("&");
+    final urlUri = Uri.parse(url + (queryString != null ? "?$queryString" : ""));
     headers ??= {};
     if (body != null) {
       headers.addAll({"Content-Type": contentType ?? "application/json"});
@@ -72,10 +70,8 @@ class BaseService {
     Map<String, String>? headers,
     Map<String, dynamic>? query,
   }) async {
-    final queryString =
-        query?.entries.map((e) => "${e.key}=${e.value}").join("&");
-    final urlUri =
-        Uri.parse(url + (queryString != null ? "?$queryString" : ""));
+    final queryString = query?.entries.map((e) => "${e.key}=${e.value}").join("&");
+    final urlUri = Uri.parse(url + (queryString != null ? "?$queryString" : ""));
     headers ??= {};
     final response = await requestManager.put(
       urlUri,
@@ -101,10 +97,8 @@ class BaseService {
     Map<String, dynamic>? query,
     int priority = 0,
   }) async {
-    final queryString =
-        query?.entries.map((e) => "${e.key}=${e.value}").join("&");
-    final urlUri =
-        Uri.parse(url + (queryString != null ? "?$queryString" : ""));
+    final queryString = query?.entries.map((e) => "${e.key}=${e.value}").join("&");
+    final urlUri = Uri.parse(url + (queryString != null ? "?$queryString" : ""));
     headers ??= {};
     final response = await requestManager
         .get(

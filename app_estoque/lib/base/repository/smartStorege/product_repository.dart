@@ -10,15 +10,10 @@ import 'package:componentes_lr/componentes_lr.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
 
-class ProductRepository extends BaseRepository<Product>
-    implements IProductRepository {
+class ProductRepository extends BaseRepository<Product> implements IProductRepository {
   ProductRepository(super.infosTableDatabase, super.fromJson);
 
-  String _getCategoriaProdutos(
-      {String selectItens = "",
-      String where = "",
-      groupBy = "",
-      String orderBy = ""}) {
+  String _getCategoriaProdutos({String selectItens = "", String where = "", groupBy = "", String orderBy = ""}) {
     final query = ''' SELECT $selectItens FROM ${Category.table.tableName} CT
                         JOIN ${Product.table.tableName} P ON CT.ID = P.CategoriaId
                         JOIN ${ShopProduct.table.tableName} SP ON SP.productId = P.ID
@@ -32,8 +27,7 @@ class ProductRepository extends BaseRepository<Product>
   }
 
   String _getCategorias() {
-    final query =
-        ''' SELECT ct.description as categoriaName, ct.id as categoriaId FROM ${Category.table.tableName} 
+    final query = ''' SELECT ct.description as categoriaName, ct.id as categoriaId FROM ${Category.table.tableName} 
         ct order by ct.description ASC''';
     return query;
   }
@@ -43,8 +37,7 @@ class ProductRepository extends BaseRepository<Product>
     try {
       final entityCategory = await context.rawQuery(_getCategorias());
       if (entityCategory.isEmpty) return [];
-      final listCategory =
-          entityCategory.map((e) => ProdutctDto.fromJson(e)).toList();
+      final listCategory = entityCategory.map((e) => ProdutctDto.fromJson(e)).toList();
 
       for (var element in listCategory) {
         final entity = await context.rawQuery(_getCategoriaProdutos(
@@ -53,8 +46,7 @@ class ProductRepository extends BaseRepository<Product>
               " WHERE SP.USERID = '${loggerUser.id}' AND SP.SHOPID = '${shopUser.shopId}' and ct.Id = '${element.categoriaId}' ",
         ));
         if (entity.isNotEmpty) {
-          final entityProdutct = element.listProduct =
-              entity.map((e) => Product.fromJson(e)).toList();
+          final entityProdutct = element.listProduct = entity.map((e) => Product.fromJson(e)).toList();
           for (var prod in entityProdutct) {
             prod.image = base64Decode(prod.base64Image ?? "");
           }
@@ -62,6 +54,19 @@ class ProductRepository extends BaseRepository<Product>
       }
 
       return listCategory;
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<Product>> getProdutoSync() async {
+    try {
+      final query = '''SELECT * FROM ${infosTableDatabase.tableName} where Sync = 0 ''';
+      final entiry = await context.rawQuery(query);
+      if (entiry.isEmpty) return [];
+      final entityList = entiry.map((e) => Product.fromJson(e)).toList();
+      return entityList;
     } catch (_) {
       return [];
     }
