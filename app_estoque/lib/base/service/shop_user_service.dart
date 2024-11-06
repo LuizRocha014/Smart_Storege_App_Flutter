@@ -11,7 +11,7 @@ class ShopUserService extends BaseService implements IShopUserService {
     try {
       List<ShopUser> list = [];
       final repository = instanceManager.get<IShopUserRepository>();
-      final String urlApi = "$url/api/ShopUser/GetAll";
+      final String urlApi = "$url/api/ShopUser/GetAllId";
       final retorno = await get(urlApi, query: {'userId': loggerUser.id});
       if (retorno.body == null) return throw Expando();
       var category = (retorno.body as List).map((e) => ShopUser.fromJson(e));
