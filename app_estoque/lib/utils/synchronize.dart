@@ -6,6 +6,7 @@ import 'package:app_estoque/base/service/interface/ibase_service_get_post.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/base/service/interface/icostumer_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
+import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_product_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_service.dart';
@@ -23,7 +24,8 @@ class Synchronism {
 
   List<IBaseServiceGetGetAndPost> get servicePost => [
         instanceManager.get<ICostumerService>(),
-        instanceManager.get<IShopCostumerService>()
+        instanceManager.get<IShopCostumerService>(),
+        instanceManager.get<IProductService>(),
       ];
 
   List<IBaseServiceGet> get serviceGet => [
