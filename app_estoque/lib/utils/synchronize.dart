@@ -25,6 +25,7 @@ class Synchronism {
   List<IBaseServiceGetGetAndPost> get servicePost => [
         instanceManager.get<ICostumerService>(),
         instanceManager.get<IShopCostumerService>(),
+        instanceManager.get<IShopProductService>(),
         instanceManager.get<IProductService>(),
       ];
 
@@ -35,14 +36,10 @@ class Synchronism {
         instanceManager.get<IShopProductService>(),
         instanceManager.get<IShopUserService>(),
         instanceManager.get<IShopService>(),
-        // instanceManager.get<IProductFileService>(),
-        // instanceManager.get<IFileService>(),
         ...servicePost,
       ];
 
-  Future<void> fullSync(
-      {bool forcaDataAlteracaoNula = false,
-      bool forcaSincronismo = false}) async {
+  Future<void> fullSync({bool forcaDataAlteracaoNula = false, bool forcaSincronismo = false}) async {
     try {
       if (busy != null) {
         await busy!.future;
@@ -121,15 +118,11 @@ class Synchronism {
     bool forcaDataAlteracaoNula = false,
     bool forcaSincronismo = false,
   }) async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     try {
-      final lastSincDate = DateTime.tryParse(
-          sharedPreferences.getString('LastTimeUpdated') ?? "");
-      if (!forcaSincronismo &&
-          lastSincDate != null &&
-          lastSincDate.difference(DateTime.now()).inMinutes.abs() < 10) {
+      final lastSincDate = DateTime.tryParse(sharedPreferences.getString('LastTimeUpdated') ?? "");
+      if (!forcaSincronismo && lastSincDate != null && lastSincDate.difference(DateTime.now()).inMinutes.abs() < 10) {
         log("Sincronismo não necessário, foram ${lastSincDate.difference(DateTime.now()).inMinutes} de 10 minutos");
         return;
       }
@@ -141,6 +134,7 @@ class Synchronism {
           //   alteracao: DateTime.now(),
           //   service: item.runtimeType.toString(),
           // );
+          progress.value += progressItemValue;
           try {
             await item.postMethod();
             //sincronismo.sucesso = true;
@@ -154,8 +148,7 @@ class Synchronism {
           // listaSincronismo.add(sincronismo);
         }
       }
-      await iniciarSincronismoGets(
-          forcaDataAlteracaoNula: forcaDataAlteracaoNula);
+      await iniciarSincronismoGets(forcaDataAlteracaoNula: forcaDataAlteracaoNula);
       //await secureStorage.writeSecureStorage('LastTimeUpdated', DateTime.now().toString());
     } catch (e) {
       //implementar logica de erro
@@ -172,8 +165,7 @@ class Synchronism {
   //   log("=============================================");
   // }
 
-  Future<void> iniciarSincronismoGets(
-      {bool forcaDataAlteracaoNula = false}) async {
+  Future<void> iniciarSincronismoGets({bool forcaDataAlteracaoNula = false}) async {
     try {
       await Future.wait(
         serviceGet.map((item) {
