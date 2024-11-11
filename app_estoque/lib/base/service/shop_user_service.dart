@@ -7,7 +7,7 @@ import 'package:app_estoque/utils/utils_exports.dart';
 
 class ShopUserService extends BaseService implements IShopUserService {
   @override
-  Future<List<ShopUser>> getAll() async {
+  Future<List<ShopUser>> getAll({bool alteracaoNula = false}) async {
     try {
       List<ShopUser> list = [];
       final repository = instanceManager.get<IShopUserRepository>();

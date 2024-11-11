@@ -69,9 +69,9 @@ class _SelecaoItensPageState
                                       (BuildContext context, int indexProd) =>
                                           CardItemSelectWidget(
                                     titulo: controller.listProdutos[index]
-                                        .listProduct![indexProd].name,
+                                        .listProduct![indexProd].description,
                                     valor: controller.listProdutos[index]
-                                        .listProduct![indexProd].salePrice
+                                        .listProduct![indexProd].price
                                         .toString(),
                                     quantidade: controller.listProdutos[index]
                                         .listProduct![indexProd].numbProduct

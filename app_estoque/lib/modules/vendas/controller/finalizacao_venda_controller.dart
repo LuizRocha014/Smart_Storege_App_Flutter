@@ -57,7 +57,7 @@ class FinalizacaoVendaController extends BaseController {
     try {
       valorCompra.value = "0";
       for (var element in listProdutosSelecionados) {
-        final valor = (element.numbProduct * element.salePrice!);
+        final valor = (element.numbProduct * element.price!);
         valorCompra.value =
             (double.parse(valorCompra.string) + valor).toString();
       }

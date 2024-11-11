@@ -20,7 +20,7 @@ class ProductRepository extends BaseRepository<Product>
       groupBy = "",
       String orderBy = ""}) {
     final query = ''' SELECT $selectItens FROM ${Category.table.tableName} CT
-                        JOIN ${Product.table.tableName} P ON CT.ID = P.CategoriaId
+                        JOIN ${Product.table.tableName} P ON CT.ID = P.categoryId
                         JOIN ${ShopProduct.table.tableName} SP ON SP.productId = P.ID
                         LEFT JOIN ${ProductFile.table.tableName} PDF ON PDF.productId = P.ID
                         LEFT JOIN ${FileIMG.table.tableName} F ON PDF.fileId = F.ID
@@ -62,6 +62,20 @@ class ProductRepository extends BaseRepository<Product>
       }
 
       return listCategory;
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<Product>> getItensAsync() async {
+    try {
+      final query =
+          '''SELECT * FROM ${Product.table.tableName} WHERE Sync = 0''';
+      final entity = await context.rawQuery(query);
+      if (entity.isEmpty) return [];
+      final entityList = entity.map((e) => Product.fromJson(e)).toList();
+      return entityList;
     } catch (_) {
       return [];
     }

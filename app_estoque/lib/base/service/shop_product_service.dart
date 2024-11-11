@@ -7,7 +7,7 @@ import 'package:app_estoque/utils/utils_exports.dart';
 
 class ShopProductService extends BaseService implements IShopProductService {
   @override
-  Future<List<ShopProduct>> getAll() async {
+  Future<List<ShopProduct>> getAll({bool alteracaoNula = false}) async {
     try {
       List<ShopProduct> list = [];
       final repository = instanceManager.get<IShopProductRepository>();
@@ -21,5 +21,10 @@ class ShopProductService extends BaseService implements IShopProductService {
     } catch (_) {
       return [];
     }
+  }
+
+  @override
+  Future<bool> postMethod() async {
+    return false;
   }
 }

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PermissionService extends BaseService implements IPermissionService {
   @override
-  Future<List<Permission>> getAll() async {
+  Future<List<Permission>> getAll({bool alteracaoNula = false}) async {
     try {
       final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();

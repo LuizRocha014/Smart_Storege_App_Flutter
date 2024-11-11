@@ -4,12 +4,14 @@ import 'dart:typed_data';
 import 'package:app_estoque/utils/request_manager.dart';
 
 class BaseService {
+  // late String url =
+  //     "https://tcc-abcwcefdhghvcjdq.brazilsouth-01.azurewebsites.net";
   late String url = "http://172.24.240.1:5000";
   late final int pageSize;
   late final Duration timeout;
   late final RequestManager requestManager;
   BaseService() {
-    timeout = const Duration(seconds: 30);
+    timeout = const Duration(seconds: 60);
     pageSize = 500;
     requestManager = RequestManager();
   }

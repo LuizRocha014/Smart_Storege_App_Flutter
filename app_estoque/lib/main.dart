@@ -1,7 +1,6 @@
 import 'package:app_estoque/base/context/app_context.dart';
 import 'package:app_estoque/modules/login/page/login_page.dart';
 
-import 'package:app_estoque/utils/backgroung_process.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/instances.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:workmanager/workmanager.dart';
 
 void main() {
   initInstances();
@@ -30,9 +28,9 @@ class MyApp extends StatelessWidget {
       instanceManager.registerLazySingleton<IContext>(() => AppContext());
       final context = instanceManager.get<IContext>();
       context.initializeDatabase();
+      initAppInfos();
     }
     // initDotenv();
-    Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
 
     return LayoutBuilder(
       builder: (context, constraints) {

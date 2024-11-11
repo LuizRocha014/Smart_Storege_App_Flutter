@@ -6,7 +6,7 @@ import 'package:app_estoque/utils/utils_exports.dart';
 
 class CategoryService extends BaseService implements ICategoryService {
   @override
-  Future<List<Category>> getAll() async {
+  Future<List> getAll({bool alteracaoNula = false}) async {
     try {
       List<Category> list = [];
       final repository = instanceManager.get<ICategoryRepository>();
@@ -21,4 +21,8 @@ class CategoryService extends BaseService implements ICategoryService {
       return [];
     }
   }
+  // @override
+  // Future<List<Category>> getAll() async {
+
+  // }
 }

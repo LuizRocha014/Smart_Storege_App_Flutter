@@ -1,3 +1,3 @@
-import 'package:app_estoque/base/service/interface/ibase_service_get.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
 abstract class IUserPermissionService extends IBaseServiceGet {}
