@@ -58,8 +58,7 @@ class FinalizacaoVendaController extends BaseController {
       valorCompra.value = "0";
       for (var element in listProdutosSelecionados) {
         final valor = (element.numbProduct * element.price!);
-        valorCompra.value =
-            (double.parse(valorCompra.string) + valor).toString();
+        valorCompra.value = (double.parse(valorCompra.string) + valor).toString();
       }
       valorCompra.refresh();
     } catch (_) {}
@@ -72,26 +71,22 @@ class FinalizacaoVendaController extends BaseController {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-            color: branco,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
+            color: branco, borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: 27.h,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 4.w),
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.025),
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Insira o desconto desejado",
                   fontSize: font_18,
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.01),
+                  padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
                   child: TextFieldWidget(
                       controller: valorDesconto,
                       internalLabel: "Insira o desconto",
@@ -127,8 +122,7 @@ class FinalizacaoVendaController extends BaseController {
       list.add(Transaction(
           type: TipoTransacao.sale,
           sync: false,
-          customerId:
-              instanceManager.get<NovaVendaController>().costumerSelected?.id,
+          customerId: instanceManager.get<NovaVendaController>().costumerSelected?.id,
           productId: element.id,
           numberProd: element.numbProduct,
           saleId: sales.id,
@@ -138,23 +132,66 @@ class FinalizacaoVendaController extends BaseController {
           createdAt: DateTime.now(),
           active: true));
     }
-    await instanceManager
-        .get<ISaleRepository>()
-        .createOrReplace(sales.toJson());
-    await instanceManager
-        .get<ITransactionRepository>()
-        .createList(list.map((e) => e.toJson()));
+    await instanceManager.get<ISaleRepository>().createOrReplace(sales.toJson());
+    await instanceManager.get<ITransactionRepository>().createList(list.map((e) => e.toJson()));
     instanceManager.get<NewMenuIncialController>().carregaValorVendas();
     // ignore: use_build_context_synchronously
     context.pushAndRemoveUntil(const HomePage());
   }
 
   String gerarCodigoRandomico() {
-    const caracteres =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     final random = Random();
 
-    return List.generate(
-        8, (index) => caracteres[random.nextInt(caracteres.length)]).join();
+    return List.generate(8, (index) => caracteres[random.nextInt(caracteres.length)]).join();
+  }
+
+  void selectTypeBuy() {
+    showModalBottomSheet(
+      // ignore: use_build_context_synchronously
+      context: context,
+      isDismissible: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+            color: branco, borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
+        width: double.infinity,
+        height: 40.h,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+                child: TextWidget(
+                  "Selecione a forma de pagamento",
+                  fontSize: font_18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              ...TipoPagamento.values.map((e) => Column(
+                    children: [
+                      const Divider(),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 1.h),
+                            child: TextWidget(e.name),
+                          )
+                        ],
+                      )
+                    ],
+                  )),
+              const Spacer(),
+              ButtonWidget(
+                onPressed: () => Navigator.pop(context),
+                borderRadius: 2.h,
+                title: "ENTENDI",
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

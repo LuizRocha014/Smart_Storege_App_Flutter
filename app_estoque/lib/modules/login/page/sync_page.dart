@@ -1,15 +1,10 @@
 import 'package:app_estoque/modules/login/controllers/sync_controller.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
-import 'package:app_estoque/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 import 'package:app_estoque/utils/assets.dart';
-import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:componentes_lr/componentes_lr.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:lottie/lottie.dart';
 
