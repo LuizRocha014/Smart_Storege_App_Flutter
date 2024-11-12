@@ -1,7 +1,7 @@
 const String _path = 'assets/';
 const String _pathPng = '${_path}png';
+const String _pathJson = '${_path}json';
 // static const String _pathSvg = '${_path}svg';
-// static const String _pathJson = '${_path}json';
 
 //animacoes
 const String iconEstoque = '$_pathPng/estoque.png';
@@ -18,3 +18,7 @@ const String iconItemProduto = '$_pathPng/packaging.png';
 const String iconPhonto = '$_pathPng/photo.png';
 const String iconLogoLogin = '$_pathPng/logoMarca.png';
 const String iconCliente = '$_pathPng/patient.png';
+
+//Json
+const gifSinc = '$_pathJson/gifsinc.json';
+const gifCheckJson = '$_pathJson/checkAnimation.json';
