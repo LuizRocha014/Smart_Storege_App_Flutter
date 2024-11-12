@@ -16,6 +16,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repo
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
 import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
+import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
@@ -153,22 +154,21 @@ class CadastroProdutoController extends BaseController {
             .createOrReplace(producIMG.toJson());
       }
       final prod = Product(
-        name: nomeController.text,
+        description: nomeController.text,
         id: prodID,
         createdAt: DateTime.now(),
         brand: marcaController.text,
-        codProd: codProduto,
-        additionalInfo: null,
-        description: null,
+        codProduct: codProduto,
+        additionalInfo: "",
         expiryDate: null,
         minimumAmount: 0,
         sync: false,
+        storedlocation: shopUser.shopId,
         numbProduct: 0,
         sku: skuController.text,
-        storageLocation: sai.loggerUser.roleId,
-        supplierId: 0,
-        totalAmount: int.parse(quantController.text),
-        categoriaId: categoriaSelect!.id,
+        supplierId: null,
+        totalValue: double.parse(quantController.text),
+        categoryId: categoriaSelect!.id,
         purchasePrice: double.parse(
           controllerValorCompra.text
               .replaceAll('R', '')
@@ -176,7 +176,7 @@ class CadastroProdutoController extends BaseController {
               .replaceAll('.', '')
               .replaceAll(',', ''),
         ),
-        salePrice: double.parse(
+        price: double.parse(
           controllerValorVenda.text
               .replaceAll('R', '')
               .replaceAll('\$', '')
@@ -194,7 +194,7 @@ class CadastroProdutoController extends BaseController {
           sync: false,
           userId: sai.loggerUser.id,
           totalAmount: int.parse(quantController.text),
-          salePrice: prod.salePrice!);
+          salePrice: prod.price!);
       await instanceManager
           .get<IProductRepository>()
           .createOrReplace(prod.toJson());

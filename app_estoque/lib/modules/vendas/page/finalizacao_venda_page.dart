@@ -41,9 +41,9 @@ class _MyWidgetState
                   itemBuilder: (BuildContext context, int index) => Padding(
                     padding: EdgeInsets.symmetric(vertical: 2.h),
                     child: CardItemSelectWidget(
-                      titulo: controller.listProdutosSelecionados[index].name,
-                      valor: controller
-                          .listProdutosSelecionados[index].salePrice
+                      titulo: controller
+                          .listProdutosSelecionados[index].description,
+                      valor: controller.listProdutosSelecionados[index].price
                           .toString(),
                       quantidade: controller
                           .listProdutosSelecionados[index].numbProduct
@@ -119,7 +119,7 @@ class _MyWidgetState
                             ),
                             TextWidget(
                               doubleToFormattedReal(
-                                double.parse(controller.valorCompra.value),
+                                double.parse(0.toString()),
                               ),
                               textColor: branco,
                               fontSize: font_16,

@@ -78,22 +78,22 @@ class _EstoqueProdutosPageState
                                         categoriaProduto: controller
                                             .produtosEstoque[index]
                                             .listProduct![indexProd]
-                                            .name,
+                                            .description,
                                         brand: controller.produtosEstoque[index]
-                                            .listProduct![indexProd].brand!,
+                                            .listProduct![indexProd].brand,
                                         quantidadeProduto: controller
                                             .produtosEstoque[index]
                                             .listProduct![indexProd]
-                                            .totalAmount
+                                            .totalValue
                                             .toString(),
                                         tituloProduto: controller
                                             .produtosEstoque[index]
                                             .listProduct![indexProd]
-                                            .name,
+                                            .description,
                                         valorProduto: controller
                                             .produtosEstoque[index]
                                             .listProduct![indexProd]
-                                            .salePrice
+                                            .price
                                             .toString()),
                           )
                         : const Align(

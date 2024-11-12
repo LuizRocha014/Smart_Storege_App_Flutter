@@ -11,12 +11,12 @@ class ShopCustomerService extends BaseService implements IShopCostumerService {
     try {
       final repository = instanceManager.get<IShopCostumerRepository>();
       final String urlApi = "$url/api/ShopCustomer/GetAll";
+      //final shopId = sharedPreferences.getString("ShopId");
+      if (shopUser.shopId.isEmpty) return [];
       final retorno = await get(urlApi, query: {'shopId': shopUser.shopId});
-      if (retorno.body == null) return throw Expando();
-      var category =
-          (retorno.body as List).map((e) => ShopCostumer.fromJson(e));
-      category.map((e) => e.sync = true);
-      await repository.createList(category.map((e) => e.toJson()));
+      var itens = (retorno.body as List).map((e) => ShopCostumer.fromJson(e));
+      itens.map((e) => e.sync = true);
+      await repository.createList(itens.map((e) => e.toJson()));
       return [];
     } catch (_) {
       return [];
@@ -24,14 +24,15 @@ class ShopCustomerService extends BaseService implements IShopCostumerService {
   }
 
   @override
-  Future<List<ShopCostumer>> postMethod() async {
+  Future<bool> postMethod() async {
     try {
       final repository = instanceManager.get<IShopCostumerRepository>();
       final list = await repository.getShopCustomerSync();
-      final listMap = list.map((e) => e.toJson()).toList();
       final String urlApi = "$url/api/ShopCustomer/PostAll";
+      if (list.isEmpty) return false;
+      final listMap = list.map((e) => e.toJson()).toList();
       final retorno = await post(urlApi, listMap);
-      if (temErroRequisicao(retorno)) return [];
+      if (temErroRequisicao(retorno)) return false;
       final retornoBody = retorno.body as List;
       for (var element in list) {
         if (!retornoBody.contains(element.id)) {
@@ -39,9 +40,9 @@ class ShopCustomerService extends BaseService implements IShopCostumerService {
           repository.createOrReplace(element.toJson());
         }
       }
-      return [];
+      return true;
     } catch (_) {
-      return [];
+      return true;
     }
   }
 }

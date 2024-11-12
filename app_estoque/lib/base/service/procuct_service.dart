@@ -6,26 +6,41 @@ import 'package:app_estoque/utils/utils_exports.dart';
 
 class ProductService extends BaseService implements IProductService {
   @override
-  Future<List<Product>> getAll() async {
-    return [];
+  Future<List<Product>> getAll({bool alteracaoNula = false}) async {
+    try {
+      final repository = instanceManager.get<IProductRepository>();
+      final String urlApi = "$url/api/Product/GetAll";
+      final retorno = await get(urlApi, query: {});
+      var itens = (retorno.body as List).map((e) => Product.fromJson(e));
+      itens.map((e) => e.sync = true);
+      await repository.createList(itens.map((e) => e.toJson()));
+      return [];
+    } catch (_) {
+      return [];
+    }
   }
 
   @override
-  Future<List<Product>> postMethod() async {
-    final repository = instanceManager.get<IProductRepository>();
-    final list = await repository.getProdutoSync();
-    final String urlApi = "$url/api/Product/PostAll";
-    if (list.isEmpty) return [];
-    final listMap = list.map((e) => e.toJson()).toList();
-    final retorno = await post(urlApi, listMap);
-    if (temErroRequisicao(retorno)) return [];
-    final retornoBody = retorno.body as List;
-    for (var element in list) {
-      if (!retornoBody.contains(element.id)) {
-        element.sync = true;
-        repository.createOrReplace(element.toJson());
-      }
+  Future<bool> postMethod() async {
+    try {
+      final repository = instanceManager.get<IProductRepository>();
+      final list = await repository.getItensAsync();
+      if (list.isEmpty) return false;
+      final String urlApi = "$url/api/Product/PostAll";
+      Future.wait(list.map((e) {
+        return post(
+          urlApi,
+          e.toJson(),
+        ).then((retorno) {
+          if (!temErroRequisicao(retorno)) {
+            e.sync = true;
+            repository.createOrReplace(e.toJson());
+          }
+        });
+      }));
+      return true;
+    } catch (_) {
+      return false;
     }
-    return [];
   }
 }

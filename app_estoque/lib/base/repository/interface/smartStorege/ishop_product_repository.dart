@@ -2,5 +2,5 @@ import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.da
 import 'package:componentes_lr/componentes_lr.dart';
 
 abstract class IShopProductRepository extends IBaseRepository<ShopProduct> {
-  Future<List<ShopProduct>> getShopProduct();
+  Future<List<ShopProduct>> getItensSync();
 }

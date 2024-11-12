@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:app_estoque/base/service/interface/ibase_service_get.dart';
-import 'package:app_estoque/base/service/interface/ibase_service_get_post.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/base/service/interface/icostumer_service.dart';
+import 'package:app_estoque/base/service/interface/ifile_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
@@ -13,33 +12,38 @@ import 'package:app_estoque/base/service/interface/ishop_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_user_service.dart';
 import 'package:app_estoque/base/service/interface/iuser_permission_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Synchronism {
   Completer<void>? busy;
   RxDouble progress = 0.0.obs;
   double progressItemValue = 0.0;
 
-  List<IBaseServiceGetGetAndPost> get servicePost => [
-        instanceManager.get<ICostumerService>(),
+  List<IBaseServicePostAndGet> get servicePost => [
         instanceManager.get<IShopCostumerService>(),
-        instanceManager.get<IShopProductService>(),
+        instanceManager.get<ICostumerService>(),
         instanceManager.get<IProductService>(),
+        instanceManager.get<IShopProductService>(),
+        instanceManager.get<IFileService>(),
       ];
 
   List<IBaseServiceGet> get serviceGet => [
+        instanceManager.get<IShopUserService>(),
         instanceManager.get<IUserPermissionService>(),
         instanceManager.get<IPermissionService>(),
         instanceManager.get<ICategoryService>(),
         instanceManager.get<IShopProductService>(),
-        instanceManager.get<IShopUserService>(),
         instanceManager.get<IShopService>(),
+        // instanceManager.get<IProductFileService>(),
+        // instanceManager.get<IFileService>(),
         ...servicePost,
       ];
 
-  Future<void> fullSync({bool forcaDataAlteracaoNula = false, bool forcaSincronismo = false}) async {
+  Future<void> fullSync(
+      {bool forcaDataAlteracaoNula = false,
+      bool forcaSincronismo = false}) async {
     try {
       if (busy != null) {
         await busy!.future;
@@ -114,15 +118,16 @@ class Synchronism {
   // // }
 
   Future<void> startSync(
-    List<IBaseServiceGetGetAndPost>? servicesPost, {
+    List<IBaseServicePostAndGet>? servicesPost, {
     bool forcaDataAlteracaoNula = false,
     bool forcaSincronismo = false,
   }) async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
     try {
-      final lastSincDate = DateTime.tryParse(sharedPreferences.getString('LastTimeUpdated') ?? "");
-      if (!forcaSincronismo && lastSincDate != null && lastSincDate.difference(DateTime.now()).inMinutes.abs() < 10) {
+      final lastSincDate = DateTime.tryParse(
+          sharedPreferences.getString('LastTimeUpdated') ?? "");
+      if (!forcaSincronismo &&
+          lastSincDate != null &&
+          lastSincDate.difference(DateTime.now()).inMinutes.abs() < 10) {
         log("Sincronismo não necessário, foram ${lastSincDate.difference(DateTime.now()).inMinutes} de 10 minutos");
         return;
       }
@@ -134,7 +139,6 @@ class Synchronism {
           //   alteracao: DateTime.now(),
           //   service: item.runtimeType.toString(),
           // );
-          progress.value += progressItemValue;
           try {
             await item.postMethod();
             //sincronismo.sucesso = true;
@@ -148,7 +152,9 @@ class Synchronism {
           // listaSincronismo.add(sincronismo);
         }
       }
-      await iniciarSincronismoGets(forcaDataAlteracaoNula: forcaDataAlteracaoNula);
+      await iniciarSincronismoGets(
+          forcaDataAlteracaoNula: forcaDataAlteracaoNula);
+      sharedPreferences.setString("LastTimeUpdated", DateTime.now().toString());
       //await secureStorage.writeSecureStorage('LastTimeUpdated', DateTime.now().toString());
     } catch (e) {
       //implementar logica de erro
@@ -165,7 +171,8 @@ class Synchronism {
   //   log("=============================================");
   // }
 
-  Future<void> iniciarSincronismoGets({bool forcaDataAlteracaoNula = false}) async {
+  Future<void> iniciarSincronismoGets(
+      {bool forcaDataAlteracaoNula = false}) async {
     try {
       await Future.wait(
         serviceGet.map((item) {

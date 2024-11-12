@@ -7,31 +7,14 @@ import 'package:app_estoque/utils/utils_exports.dart';
 
 class CostumerService extends BaseService implements ICostumerService {
   @override
-  Future<List<Costumer>> getAll() async {
-    try {
-      final repository = instanceManager.get<ICostumerRepository>();
-      final String urlApi = "$url/api/Costumer/GetAll";
-      final retorno = await get(urlApi, query: {'shopId': shopUser.shopId});
-      if (retorno.body == null) return throw Expando();
-      var category =
-          (retorno.body as List).map((e) => Costumer.fromJson(e)).toList();
-      category.map((e) => e.sync = true);
-      await repository.createList(category.map((e) => e.toJson()));
-      return [];
-    } catch (_) {
-      return [];
-    }
-  }
-
-  @override
-  Future<List<Costumer>> postMethod() async {
+  Future<bool> postMethod() async {
     try {
       final repository = instanceManager.get<ICostumerRepository>();
       final list = await repository.getCustomerSync();
       final listMap = list.map((e) => e.toJson()).toList();
       final String urlApi = "$url/api/Costumer/PostAll";
       final retorno = await post(urlApi, listMap);
-      if (temErroRequisicao(retorno)) return [];
+      if (temErroRequisicao(retorno)) return false;
       final retornoBody = retorno.body as List;
       for (var element in list) {
         if (!retornoBody.contains(element.id)) {
@@ -39,6 +22,24 @@ class CostumerService extends BaseService implements ICostumerService {
           repository.createOrReplace(element.toJson());
         }
       }
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<List<Costumer>> getAll({bool alteracaoNula = false}) async {
+    try {
+      final repository = instanceManager.get<ICostumerRepository>();
+      final String urlApi = "$url/api/Costumer/GetAllShopId";
+      final retorno = await get(urlApi, query: {'shopId': shopUser.shopId});
+      if (retorno.body == null) return throw Expando();
+      var category =
+          (retorno.body as List).map((e) => Costumer.fromJson(e)).toList();
+      category.map((e) => e.sync = true);
+      await repository.createList(category.map((e) => e.toJson()));
+
       return [];
     } catch (_) {
       return [];

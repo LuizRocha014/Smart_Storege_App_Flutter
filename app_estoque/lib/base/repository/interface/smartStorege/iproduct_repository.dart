@@ -4,5 +4,5 @@ import 'package:componentes_lr/componentes_lr.dart';
 
 abstract class IProductRepository extends IBaseRepository<Product> {
   Future<List<ProdutctDto>> getProdutos();
-  Future<List<Product>> getProdutoSync();
+  Future<List<Product>> getItensAsync();
 }
