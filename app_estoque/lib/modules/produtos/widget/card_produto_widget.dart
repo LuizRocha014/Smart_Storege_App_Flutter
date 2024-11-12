@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
@@ -45,8 +46,7 @@ class CardProdutoWidget extends StatelessWidget {
                 height: 8.h,
                 width: 16.w,
                 decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(10)),
+                    color: branco, borderRadius: BorderRadius.circular(10)),
                 child: bytes.isNotEmpty
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(1.h),
@@ -54,7 +54,15 @@ class CardProdutoWidget extends StatelessWidget {
                           bytes,
                           fit: BoxFit.fill,
                         ))
-                    : const SizedBox.shrink(),
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(1.h),
+                        child: Image.asset(
+                          iconPhonto, // Altere para a URL da imagem
+                          width: 8.w,
+                          height: 4.h,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
               ),
             ),
             Padding(

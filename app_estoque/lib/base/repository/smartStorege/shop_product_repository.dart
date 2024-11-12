@@ -5,4 +5,18 @@ import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product
 class ShopProductRepository extends BaseRepository<ShopProduct>
     implements IShopProductRepository {
   ShopProductRepository(super.infosTableDatabase, super.fromJson);
+
+  @override
+  Future<List<ShopProduct>> getItensSync() async {
+    try {
+      final query =
+          '''SELECT * FROM ${ShopProduct.table.tableName} WHERE Sync = 0''';
+      final entity = await context.rawQuery(query);
+      if (entity.isEmpty) return [];
+      final entityList = entity.map((e) => ShopProduct.fromJson(e)).toList();
+      return entityList;
+    } catch (_) {
+      return [];
+    }
+  }
 }

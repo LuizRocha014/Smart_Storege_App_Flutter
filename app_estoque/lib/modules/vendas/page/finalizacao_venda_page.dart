@@ -119,7 +119,7 @@ class _MyWidgetState
                             ),
                             TextWidget(
                               doubleToFormattedReal(
-                                double.parse(controller.valorCompra.value),
+                                double.parse(0.toString()),
                               ),
                               textColor: branco,
                               fontSize: font_16,

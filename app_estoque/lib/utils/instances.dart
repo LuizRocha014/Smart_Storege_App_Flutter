@@ -39,8 +39,10 @@ import 'package:app_estoque/base/repository/smartStorege/transaction_repository.
 import 'package:app_estoque/base/repository/smartStorege/user_permission_repository.dart';
 import 'package:app_estoque/base/service/category_service.dart';
 import 'package:app_estoque/base/service/custumer_service.dart';
+import 'package:app_estoque/base/service/file_service.dart';
 import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/base/service/interface/icostumer_service.dart';
+import 'package:app_estoque/base/service/interface/ifile_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
@@ -83,6 +85,7 @@ void initInstances() {
         .registerLazySingleton<IShopProductService>(() => ShopProductService());
     instanceManager
         .registerLazySingleton<IShopUserService>(() => ShopUserService());
+    instanceManager.registerLazySingleton<IFileService>(() => FileService());
 
     //Repository
     instanceManager.registerLazySingleton<ICategoryRepository>(

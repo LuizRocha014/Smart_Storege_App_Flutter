@@ -7,7 +7,17 @@ import 'package:app_estoque/utils/utils_exports.dart';
 class ProductService extends BaseService implements IProductService {
   @override
   Future<List<Product>> getAll({bool alteracaoNula = false}) async {
-    return [];
+    try {
+      final repository = instanceManager.get<IProductRepository>();
+      final String urlApi = "$url/api/Product/GetAll";
+      final retorno = await get(urlApi, query: {});
+      var itens = (retorno.body as List).map((e) => Product.fromJson(e));
+      itens.map((e) => e.sync = true);
+      await repository.createList(itens.map((e) => e.toJson()));
+      return [];
+    } catch (_) {
+      return [];
+    }
   }
 
   @override
