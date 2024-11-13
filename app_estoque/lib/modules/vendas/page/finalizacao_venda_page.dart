@@ -15,8 +15,7 @@ class FinalizacaoVendaPage extends StatefulWidget {
   State<FinalizacaoVendaPage> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState
-    extends MState<FinalizacaoVendaPage, FinalizacaoVendaController> {
+class _MyWidgetState extends MState<FinalizacaoVendaPage, FinalizacaoVendaController> {
   @override
   void initState() {
     super.registerController(FinalizacaoVendaController());
@@ -42,13 +41,9 @@ class _MyWidgetState
                     padding: EdgeInsets.symmetric(vertical: 2.h),
                     child: CardItemSelectWidget(
                       imagem: controller.listProdutosSelecionados[index].image,
-                      titulo: controller
-                          .listProdutosSelecionados[index].description,
-                      valor: controller.listProdutosSelecionados[index].price
-                          .toString(),
-                      quantidade: controller
-                          .listProdutosSelecionados[index].numbProduct
-                          .toString(),
+                      titulo: controller.listProdutosSelecionados[index].description,
+                      valor: controller.listProdutosSelecionados[index].price.toString(),
+                      quantidade: controller.listProdutosSelecionados[index].numbProduct.toString(),
                       onTapMore: () => controller.adicionaItemCompra(index),
                       onTapless: () => controller.removeItemCompra(index),
                     ),
@@ -65,9 +60,7 @@ class _MyWidgetState
               decoration: BoxDecoration(
                   color: primaryColor,
                   border: Border.all(color: primaryColor),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(2.h),
-                      topRight: Radius.circular(2.h))),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
               child: Padding(
                 padding: EdgeInsets.only(top: 2.h, left: 5.w, right: 5.w),
                 child: Column(
@@ -155,23 +148,36 @@ class _MyWidgetState
                     const Divider(
                       color: branco,
                     ),
-                    GestureDetector(
-                      onTap: () => controller.selectTypeBuy(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextWidget(
-                            "PIX",
-                            textColor: branco,
-                            fontSize: font_16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          Icon(
-                            FontAwesomeIcons.chevronRight,
-                            size: font_13,
-                            color: branco,
-                          ),
-                        ],
+                    Obx(
+                      () => GestureDetector(
+                        onTap: () => controller.selectTypeBuy(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  controller.tipoPagamentoSelect.value.icon,
+                                  height: 4.h,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 2.w),
+                                  child: TextWidget(
+                                    controller.tipoPagamentoSelect.value.name,
+                                    textColor: branco,
+                                    fontSize: font_16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              FontAwesomeIcons.chevronRight,
+                              size: font_13,
+                              color: branco,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

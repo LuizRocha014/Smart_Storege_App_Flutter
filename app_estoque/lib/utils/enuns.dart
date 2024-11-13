@@ -1,3 +1,4 @@
+import 'package:app_estoque/utils/assets.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 enum TipoTransacao {
@@ -7,13 +8,13 @@ enum TipoTransacao {
 
 enum TipoPagamento {
   @JsonValue(0)
-  pix("PIX", ""),
+  pix("PIX", iconPix),
   @JsonValue(1)
-  dinheiro("DINHEIRO", ""),
+  dinheiro("DINHEIRO", iconDinheiro),
   @JsonValue(2)
-  debito("DÉBITO", ""),
+  debito("DÉBITO", iconCartao),
   @JsonValue(3)
-  credito("CRÉDITO", "");
+  credito("CRÉDITO", iconCartao);
 
   final String name;
   final String icon;

@@ -78,7 +78,7 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                       ),
                       SizedBox(height: 1.h),
                       Text(
-                        widget.valor,
+                        doubleToFormattedReal(double.parse(widget.valor)),
                         style: const TextStyle(
                           color: primaryColor,
                           fontSize: 16,
@@ -99,9 +99,7 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
                       widget.quantidade ?? "0",
                       style: const TextStyle(color: preto, fontSize: 16),
                     ),
-                    IconButton(
-                        icon: const Icon(Icons.remove, color: Colors.grey),
-                        onPressed: widget.onTapless)
+                    IconButton(icon: const Icon(Icons.remove, color: Colors.grey), onPressed: widget.onTapless)
                   ],
                 ),
               ],

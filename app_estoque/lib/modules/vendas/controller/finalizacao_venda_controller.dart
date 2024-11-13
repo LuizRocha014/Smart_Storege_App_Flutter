@@ -25,9 +25,11 @@ class FinalizacaoVendaController extends BaseController {
   late RxList<Product> listProdutosSelecionados;
   late RxString valorCompra;
   late TextEditingController valorDesconto;
+  late Rx<TipoPagamento> tipoPagamentoSelect;
   @override
   void iniciaControlador() {
     valorCompra = RxString("0");
+    tipoPagamentoSelect = Rx<TipoPagamento>(TipoPagamento.pix);
     valorDesconto = TextEditingController(text: "");
     final controller = instanceManager.get<SelectItensController>();
     listProdutosSelecionados = RxList(controller.itemSelecionado);
@@ -61,8 +63,7 @@ class FinalizacaoVendaController extends BaseController {
       valorCompra.value = "0";
       for (var element in listProdutosSelecionados) {
         final valor = (element.numbProduct * element.price!);
-        valorCompra.value =
-            (double.parse(valorCompra.string) + valor).toString();
+        valorCompra.value = (double.parse(valorCompra.string) + valor).toString();
       }
       valorCompra.refresh();
     } catch (_) {}
@@ -75,9 +76,7 @@ class FinalizacaoVendaController extends BaseController {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-            color: branco,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
+            color: branco, borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
         width: double.infinity,
         height: 24.h,
         child: Padding(
@@ -85,8 +84,7 @@ class FinalizacaoVendaController extends BaseController {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.025),
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Atenção !",
                   fontSize: font_18,
@@ -127,9 +125,7 @@ class FinalizacaoVendaController extends BaseController {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-            color: branco,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
+            color: branco, borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
         width: double.infinity,
         height: 27.h,
         child: Padding(
@@ -137,16 +133,14 @@ class FinalizacaoVendaController extends BaseController {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.025),
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Insira o desconto desejado",
                   fontSize: font_18,
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * 0.01),
+                  padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
                   child: TextFieldWidget(
                       controller: valorDesconto,
                       internalLabel: "Insira o desconto",
@@ -170,8 +164,7 @@ class FinalizacaoVendaController extends BaseController {
 
   void createObj() async {
     if (listProdutosSelecionados.isEmpty) {
-      return poPupErrorDefault(context, "Atenção!",
-          "Nenhum produto foi selecionado, volte e selecione ao menos um produto");
+      return poPupErrorDefault(context, "Atenção!", "Nenhum produto foi selecionado, volte e selecione ao menos um produto");
     }
     final sales = Sale(
         id: const Uuid().v4(),
@@ -186,8 +179,7 @@ class FinalizacaoVendaController extends BaseController {
       list.add(Transaction(
           type: TipoTransacao.sale,
           sync: false,
-          customerId:
-              instanceManager.get<NovaVendaController>().costumerSelected?.id,
+          customerId: instanceManager.get<NovaVendaController>().costumerSelected?.id,
           productId: element.id,
           numberProd: element.numbProduct,
           saleId: sales.id,
@@ -197,24 +189,18 @@ class FinalizacaoVendaController extends BaseController {
           createdAt: DateTime.now(),
           active: true));
     }
-    await instanceManager
-        .get<ISaleRepository>()
-        .createOrReplace(sales.toJson());
-    await instanceManager
-        .get<ITransactionRepository>()
-        .createList(list.map((e) => e.toJson()));
+    await instanceManager.get<ISaleRepository>().createOrReplace(sales.toJson());
+    await instanceManager.get<ITransactionRepository>().createList(list.map((e) => e.toJson()));
     instanceManager.get<HomeController>().carregaValorVendas();
     // ignore: use_build_context_synchronously
     context.pushAndRemoveUntil(const HomePage());
   }
 
   String gerarCodigoRandomico() {
-    const caracteres =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     final random = Random();
 
-    return List.generate(
-        8, (index) => caracteres[random.nextInt(caracteres.length)]).join();
+    return List.generate(8, (index) => caracteres[random.nextInt(caracteres.length)]).join();
   }
 
   void selectTypeBuy() {
@@ -225,9 +211,7 @@ class FinalizacaoVendaController extends BaseController {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-            color: branco,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
+            color: branco, borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
         width: double.infinity,
         height: 40.h,
         child: Padding(
@@ -235,8 +219,7 @@ class FinalizacaoVendaController extends BaseController {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.025),
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Selecione a forma de pagamento",
                   fontSize: font_18,
@@ -246,13 +229,24 @@ class FinalizacaoVendaController extends BaseController {
               ...TipoPagamento.values.map((e) => Column(
                     children: [
                       const Divider(),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 1.h),
-                            child: TextWidget(e.name),
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          tipoPagamentoSelect.value = e;
+                          tipoPagamentoSelect.refresh();
+                          context.pop();
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              e.icon,
+                              height: 4.h,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 2.w),
+                              child: TextWidget(e.name),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   )),
