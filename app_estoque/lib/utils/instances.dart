@@ -44,6 +44,7 @@ import 'package:app_estoque/base/service/interface/icategory_service.dart';
 import 'package:app_estoque/base/service/interface/icostumer_service.dart';
 import 'package:app_estoque/base/service/interface/ifile_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
+import 'package:app_estoque/base/service/interface/iproduct_file_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_product_service.dart';
@@ -53,6 +54,7 @@ import 'package:app_estoque/base/service/interface/iuser_permission_service.dart
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/base/service/permission_service.dart';
 import 'package:app_estoque/base/service/procuct_service.dart';
+import 'package:app_estoque/base/service/product_file_service.dart';
 import 'package:app_estoque/base/service/shop_product_service.dart';
 import 'package:app_estoque/base/service/shop_service.dart';
 import 'package:app_estoque/base/service/shop_user_service.dart';
@@ -70,6 +72,8 @@ void initInstances() {
     instanceManager.registerLazySingleton<IUserService>(() => UserService());
     instanceManager
         .registerLazySingleton<IProductService>(() => ProductService());
+    instanceManager
+        .registerLazySingleton<IProductFileService>(() => ProductFileService());
     instanceManager
         .registerLazySingleton<ICostumerService>(() => CostumerService());
     instanceManager.registerLazySingleton<IShopCostumerService>(

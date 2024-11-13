@@ -10,9 +10,9 @@ class ProductFileService extends BaseService implements IProductFileService {
     try {
       List<ProductFile> list = [];
       final repository = instanceManager.get<IProductFileRepository>();
-      final String urlApi = "$url/api/Category/GetAll";
+      final String urlApi = "$url/api/ProductFile/GetAll";
       final retorno = await get(urlApi, query: {});
-      if (retorno.body == null) return throw Expando();
+      if (retorno.body == null) return [];
       var category = (retorno.body as List).map((e) => ProductFile.fromJson(e));
       list.addAll(category);
       await repository.createList(list.map((e) => e.toJson()));
@@ -28,7 +28,7 @@ class ProductFileService extends BaseService implements IProductFileService {
       final repository = instanceManager.get<IProductFileRepository>();
       final list = await repository.getItensSync();
       if (list.isEmpty) return false;
-      final String urlApi = "$url/api/Product/PostAll";
+      final String urlApi = "$url/api/ProductFile/PostAll";
       Future.wait(list.map((e) {
         return post(
           urlApi,

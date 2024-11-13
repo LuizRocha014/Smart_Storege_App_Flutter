@@ -16,12 +16,12 @@ class BackgroundMenuWidget extends StatefulWidget {
 }
 
 class _BackgroundMenuWidgetState extends State<BackgroundMenuWidget> {
-  late final NewMenuIncialController _controller;
+  late final HomeController _controller;
   @override
   @override
   void initState() {
     super.initState();
-    _controller = Get.put(NewMenuIncialController());
+    _controller = Get.put(HomeController());
   }
 
   @override

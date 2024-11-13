@@ -18,6 +18,10 @@ const String iconItemProduto = '$_pathPng/packaging.png';
 const String iconPhonto = '$_pathPng/photo.png';
 const String iconLogoLogin = '$_pathPng/logoMarca.png';
 const String iconCliente = '$_pathPng/patient.png';
+const String iconPix = '$_pathPng/pix.png';
+const String iconCartao = '$_pathPng/cartao.png';
+const String iconComprador = '$_pathPng/comprador.png';
+const String iconDinheiro = '$_pathPng/dinheiro.png';
 
 //Json
 const gifSinc = '$_pathJson/gifsinc.json';

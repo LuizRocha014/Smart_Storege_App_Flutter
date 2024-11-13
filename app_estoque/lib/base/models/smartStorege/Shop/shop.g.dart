@@ -11,7 +11,7 @@ Shop _$ShopFromJson(Map<String, dynamic> json) => Shop(
       createdAt: DateTime.parse(json['createdAt'] as String),
       active: fromJsonBoolean(json['active']),
       companyId: json['companyId'] as String,
-      nome: json['nome'] as String,
+      name: json['name'] as String,
       location: json['location'] as String,
       sync: fromJsonBoolean(json['sync']),
     );
@@ -22,6 +22,6 @@ Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{
       'active': instance.active,
       'sync': instance.sync,
       'companyId': instance.companyId,
-      'nome': instance.nome,
+      'name': instance.name,
       'location': instance.location,
     };

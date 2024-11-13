@@ -68,6 +68,8 @@ class _SelecaoItensPageState
                                   itemBuilder:
                                       (BuildContext context, int indexProd) =>
                                           CardItemSelectWidget(
+                                    imagem: controller.listProdutos[index]
+                                        .listProduct![indexProd].image,
                                     titulo: controller.listProdutos[index]
                                         .listProduct![indexProd].description,
                                     valor: controller.listProdutos[index]

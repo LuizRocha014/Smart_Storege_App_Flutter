@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:app_estoque/utils/assets.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
@@ -8,6 +10,7 @@ class CardItemSelectWidget extends StatefulWidget {
   final String titulo;
   final String valor;
   final String? quantidade;
+  final Uint8List? imagem;
   final void Function()? onTapMore;
   final void Function()? onTapless;
   const CardItemSelectWidget(
@@ -15,6 +18,7 @@ class CardItemSelectWidget extends StatefulWidget {
       required this.titulo,
       required this.valor,
       required this.quantidade,
+      this.imagem,
       this.onTapMore,
       this.onTapless});
 
@@ -38,15 +42,25 @@ class _CardItemSelectWidgetState extends State<CardItemSelectWidget> {
             child: Row(
               children: [
                 // Imagem do Produto
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(1.h),
-                  child: Image.asset(
-                    iconPhonto, // Altere para a URL da imagem
-                    width: 12.w,
-                    height: 6.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                widget.imagem!.isEmpty
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(1.h),
+                        child: Image.asset(
+                          iconPhonto, // Altere para a URL da imagem
+                          width: 12.w,
+                          height: 6.h,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(1.h),
+                        child: Image.memory(
+                          widget.imagem!, // Altere para a URL da imagem
+                          width: 12.w,
+                          height: 6.h,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                 SizedBox(width: 2.h),
 
                 // Nome do Produto e Preço

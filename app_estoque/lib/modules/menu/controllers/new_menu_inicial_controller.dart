@@ -17,7 +17,7 @@ import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NewMenuIncialController extends BaseController {
+class HomeController extends BaseController {
   late final RxList<ListOpcoesMenu> listMenuInicial;
   late final RxList<Product> listProduto;
   late final RxList<Sale> listSale;

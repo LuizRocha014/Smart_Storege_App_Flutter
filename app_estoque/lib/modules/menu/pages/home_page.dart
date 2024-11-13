@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_repository.dart';
+import 'package:app_estoque/base/repository/smartStorege/shop_user_repository.dart';
+import 'package:app_estoque/base/service/interface/ishop_service.dart';
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 
@@ -8,6 +11,7 @@ import 'package:app_estoque/utils/backgrounds/new_background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:app_estoque/widget/rich_text_widet.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +24,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends MState<HomePage, NewMenuIncialController> {
+class _HomePageState extends MState<HomePage, HomeController> {
   @override
   void initState() {
     super.initState();
-    super.registerController(NewMenuIncialController());
+    super.registerController(HomeController());
   }
 
   @override
@@ -53,10 +57,17 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                   ),
                 ],
               ),
-              Icon(
-                Icons.construction_rounded,
-                size: 4.h,
-                color: branco,
+              GestureDetector(
+                onTap: () async {
+                  await instanceManager.get<IShopService>().getAll();
+                  instanceManager
+                      .get<IShopUserRepository>()
+                      .getShop(loggerUser.id);
+                },
+                child: Image.asset(
+                  iconComprador,
+                  color: branco,
+                ),
               )
             ],
           ),
@@ -249,7 +260,7 @@ class _HomePageState extends MState<HomePage, NewMenuIncialController> {
                           color: branco,
                           borderRadius: BorderRadius.circular(
                               MediaQuery.of(context).size.height * 0.015),
-                          border: Border.all(color: cinzaIperClato)),
+                          border: Border.all(color: lightGray)),
                       child: Row(
                         children: [
                           Padding(

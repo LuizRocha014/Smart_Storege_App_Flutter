@@ -28,10 +28,10 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
         ),
         TextFieldWidget(
           controller: controller.controllerCnpjCpf,
-          externalLabel: "CPF/CNPJ",
+          externalLabel: "CNPJ",
           externalLabelColor: preto,
           borderColor: gray,
-          inputFormatters: [MaskCpfCnpj(false)],
+          inputFormatters: [MaskCpfCnpj(true)],
           internalLabel: 'Insira o CPF/CNPJ',
           labelInterno: '',
         ),

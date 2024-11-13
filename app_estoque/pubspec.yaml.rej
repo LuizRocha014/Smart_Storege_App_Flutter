@@ -1,0 +1,9 @@
+diff a/app_estoque/pubspec.yaml b/app_estoque/pubspec.yaml	(rejected hunks)
+@@ -30,7 +30,6 @@
+ dependencies:
+   flutter:
+     sdk: flutter
+-    path: E:/Repository/componentes_lr
+   
+ 
+   # The following adds the Cupertino Icons font to your application.

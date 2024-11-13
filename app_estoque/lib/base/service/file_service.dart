@@ -33,7 +33,7 @@ class FileService extends BaseService implements IFileService {
     try {
       List<FileIMG> list = [];
       final repository = instanceManager.get<IFileRepository>();
-      final String urlApi = "$url/api/Category/GetAll";
+      final String urlApi = "$url/api/File/GetAll";
       final retorno = await get(urlApi, query: {});
       if (retorno.body == null) return [];
       var category = (retorno.body as List).map((e) => FileIMG.fromJson(e));

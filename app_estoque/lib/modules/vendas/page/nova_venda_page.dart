@@ -3,6 +3,7 @@ import 'package:app_estoque/modules/vendas/page/finalizacao_venda_page.dart';
 
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
+import 'package:app_estoque/utils/default_popup.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:componentes_lr/componentes_lr.dart';
@@ -131,7 +132,13 @@ class _NovaVendaPageState extends MState<NovaVendaPage, NovaVendaController> {
             ),
             LoadingButtonWidget(
               title: 'PROXIMO',
-              onPressed: () => context.push(const FinalizacaoVendaPage()),
+              onPressed: () {
+                if (controller.costumerSelected == null) {
+                  return poPupErrorDefault(context, "Atenção!",
+                      "É necessário selecionar um cliente para continuar com a venda");
+                }
+                context.push(const FinalizacaoVendaPage());
+              },
               color: primaryColor,
               mostraTexto: true,
               isLoading: false,
