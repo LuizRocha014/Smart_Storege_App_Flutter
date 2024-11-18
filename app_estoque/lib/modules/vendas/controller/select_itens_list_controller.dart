@@ -27,10 +27,9 @@ class SelectItensController extends BaseController {
 
   Future<void> carregaLista() async {
     try {
-      await instanceManager
-          .get<IProductRepository>()
-          .getProdutos()
-          .then(_listProdutos.call);
+      isLoading = true;
+      await instanceManager.get<IProductRepository>().getProdutos().then(_listProdutos.call);
+      isLoading = false;
     } catch (_) {}
   }
 

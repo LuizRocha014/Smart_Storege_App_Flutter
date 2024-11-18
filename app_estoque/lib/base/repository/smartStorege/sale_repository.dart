@@ -9,8 +9,7 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
 
   @override
   Future<String> getValortotalVendas() async {
-    final query =
-        ''' SELECT SUM(SL.VALOR) as Valor FROM ${infosTableDatabase.tableName} SL
+    final query = ''' SELECT SUM(SL.VALOR) as Valor FROM ${infosTableDatabase.tableName} SL
                       ''';
     final entity = await context.rawQuery(query);
     if (entity.isEmpty) return "0";
@@ -24,6 +23,8 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
     final query = ''' SELECT c.cnpj, * FROM ${infosTableDatabase.tableName} s
                       JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
                       JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
+                      group by s.id
+                      ORDER BY S.createdAt DESC
                       ''';
     final entity = await context.rawQuery(query);
     if (entity.isEmpty) return [];

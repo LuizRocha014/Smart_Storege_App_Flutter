@@ -16,8 +16,7 @@ class SelecaoItensPage extends StatefulWidget {
   State<SelecaoItensPage> createState() => _SelecaoItensPageState();
 }
 
-class _SelecaoItensPageState
-    extends MState<SelecaoItensPage, SelectItensController> {
+class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensController> {
   @override
   void initState() {
     super.registerController(SelectItensController());
@@ -28,94 +27,85 @@ class _SelecaoItensPageState
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-        titulo: widget.tituloPage,
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.05),
-              child: Obx(
-                () => Visibility(
-                  visible: controller.listProdutos.isNotEmpty,
-                  replacement: const Center(
+      titulo: widget.tituloPage,
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+            child: Obx(
+              () => controller.listProdutos.isEmpty && !controller.isLoading
+                  ? const Center(
                       child: TextWidget(
-                    "Nenhum produto encontrado",
-                    textColor: lightGray,
-                  )),
-                  child: Obx(
-                    () => ListView.builder(
-                      itemCount: controller.listProdutos.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) => Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 2.h),
-                              child: TextWidget(
-                                fontSize: font_16,
-                                fontWeight: FontWeight.w500,
-                                controller.listProdutos[index].categoriaName!,
-                                textColor: preto,
-                              ),
-                            ),
-                          ),
-                          controller.listProdutos[index].listProduct!.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount: controller
-                                      .listProdutos[index].listProduct!.length,
-                                  shrinkWrap: true,
-                                  itemBuilder:
-                                      (BuildContext context, int indexProd) =>
-                                          CardItemSelectWidget(
-                                    imagem: controller.listProdutos[index]
-                                        .listProduct![indexProd].image,
-                                    titulo: controller.listProdutos[index]
-                                        .listProduct![indexProd].description,
-                                    valor: controller.listProdutos[index]
-                                        .listProduct![indexProd].price
-                                        .toString(),
-                                    quantidade: controller.listProdutos[index]
-                                        .listProduct![indexProd].numbProduct
-                                        .toString(),
-                                    onTapMore: () => controller
-                                        .adicionaItemCompra(index, indexProd),
-                                    onTapless: () => controller
-                                        .removeItemCompra(index, indexProd),
-                                  ),
-                                )
-                              : const Align(
-                                  alignment: Alignment.center,
-                                  child: TextWidget(
-                                    "Nenhum Produto encontrado",
-                                    textColor: lightGray,
-                                  )),
-                        ],
+                        "Nenhum produto encontrado",
+                        textColor: lightGray,
                       ),
-                    ),
+                    )
+                  : controller.listProdutos.isNotEmpty && controller.isLoading
+                      ? const CircularProgressIndicator(
+                          color: primaryColor,
+                        )
+                      : ListView.builder(
+                          itemCount: controller.listProdutos.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) => Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 2.h),
+                                  child: TextWidget(
+                                    fontSize: font_16,
+                                    fontWeight: FontWeight.w500,
+                                    controller.listProdutos[index].categoriaName!,
+                                    textColor: preto,
+                                  ),
+                                ),
+                              ),
+                              controller.listProdutos[index].listProduct!.isNotEmpty
+                                  ? ListView.builder(
+                                      itemCount: controller.listProdutos[index].listProduct!.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (BuildContext context, int indexProd) => CardItemSelectWidget(
+                                        imagem: controller.listProdutos[index].listProduct![indexProd].image,
+                                        titulo: controller.listProdutos[index].listProduct![indexProd].description,
+                                        valor: controller.listProdutos[index].listProduct![indexProd].price.toString(),
+                                        quantidade:
+                                            controller.listProdutos[index].listProduct![indexProd].numbProduct.toString(),
+                                        onTapMore: () => controller.adicionaItemCompra(index, indexProd),
+                                        onTapless: () => controller.removeItemCompra(index, indexProd),
+                                      ),
+                                    )
+                                  : const Align(
+                                      alignment: Alignment.center,
+                                      child: TextWidget(
+                                        "Nenhum Produto encontrado",
+                                        textColor: lightGray,
+                                      )),
+                            ],
+                          ),
+                        ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Obx(
+              () => Visibility(
+                visible: controller.contador > 0,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.h),
+                  child: ButtonWidget(
+                    borderRadius: 5.h,
+                    width: 60.w,
+                    onPressed: () => controller.avancaPaginaItens(),
+                    title: '(${controller.contador}) AVANÇAR',
                   ),
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Obx(
-                () => Visibility(
-                  visible: controller.contador > 0,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 1.h),
-                    child: ButtonWidget(
-                      borderRadius: 5.h,
-                      width: 60.w,
-                      onPressed: () => controller.avancaPaginaItens(),
-                      title: '(${controller.contador}) AVANÇAR',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
 

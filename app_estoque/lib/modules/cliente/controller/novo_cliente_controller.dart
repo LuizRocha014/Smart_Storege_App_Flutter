@@ -95,9 +95,7 @@ class NovoClienteControlle extends BaseController {
       //     customerId: clienteId,
       //     shopId: shopUser.shopId);
 
-      await instanceManager
-          .get<ICostumerRepository>()
-          .createOrReplace(cliente.toJson());
+      await instanceManager.get<ICostumerRepository>().createOrReplace(cliente.toJson());
       // await instanceManager
       //     .get<IShopCostumerRepository>()
       //     .createOrReplace(shopCostumer.toJson());

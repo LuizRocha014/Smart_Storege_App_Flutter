@@ -24,8 +24,8 @@ class Synchronism {
   double progressItemValue = 0.0;
 
   List<IBaseServicePostAndGet> get servicePost => [
-        instanceManager.get<ICostumerService>(),
         instanceManager.get<IProductService>(),
+        instanceManager.get<ICostumerService>(),
         instanceManager.get<IFileService>(),
         instanceManager.get<IProductFileService>(),
         instanceManager.get<ISaleService>(),
@@ -44,9 +44,7 @@ class Synchronism {
         ...servicePost,
       ];
 
-  Future<void> fullSync(
-      {bool forcaDataAlteracaoNula = false,
-      bool forcaSincronismo = false}) async {
+  Future<void> fullSync({bool forcaDataAlteracaoNula = false, bool forcaSincronismo = false}) async {
     try {
       if (busy != null) {
         await busy!.future;
@@ -126,11 +124,8 @@ class Synchronism {
     bool forcaSincronismo = false,
   }) async {
     try {
-      final lastSincDate = DateTime.tryParse(
-          sharedPreferences.getString('LastTimeUpdated') ?? "");
-      if (!forcaSincronismo &&
-          lastSincDate != null &&
-          lastSincDate.difference(DateTime.now()).inMinutes.abs() < 10) {
+      final lastSincDate = DateTime.tryParse(sharedPreferences.getString('LastTimeUpdated') ?? "");
+      if (!forcaSincronismo && lastSincDate != null && lastSincDate.difference(DateTime.now()).inMinutes.abs() < 10) {
         log("Sincronismo não necessário, foram ${lastSincDate.difference(DateTime.now()).inMinutes} de 10 minutos");
         return;
       }
@@ -155,8 +150,7 @@ class Synchronism {
           // listaSincronismo.add(sincronismo);
         }
       }
-      await iniciarSincronismoGets(
-          forcaDataAlteracaoNula: forcaDataAlteracaoNula);
+      await iniciarSincronismoGets(forcaDataAlteracaoNula: forcaDataAlteracaoNula);
       sharedPreferences.setString("LastTimeUpdated", DateTime.now().toString());
       //await secureStorage.writeSecureStorage('LastTimeUpdated', DateTime.now().toString());
     } catch (e) {
@@ -174,8 +168,7 @@ class Synchronism {
   //   log("=============================================");
   // }
 
-  Future<void> iniciarSincronismoGets(
-      {bool forcaDataAlteracaoNula = false}) async {
+  Future<void> iniciarSincronismoGets({bool forcaDataAlteracaoNula = false}) async {
     try {
       await Future.wait(
         serviceGet.map((item) {
