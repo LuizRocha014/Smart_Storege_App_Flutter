@@ -6,14 +6,12 @@ import 'dart:ui';
 
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
-import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icategory_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ifile_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
-import 'package:app_estoque/base/repository/interface/smartStorege/ishop_product_repository.dart';
 import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
@@ -24,7 +22,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:uuid/uuid.dart';
-import 'package:app_estoque/utils/infos_statica.dart' as sai;
 
 class CadastroProdutoController extends BaseController {
   final PageController pageController = PageController();
@@ -184,23 +181,24 @@ class CadastroProdutoController extends BaseController {
               .replaceAll(',', ''),
         ),
         active: true,
+        shopId: shopUser.shopId,
       );
-      final shopProduct = ShopProduct(
-          id: const Uuid().v4(),
-          createdAt: DateTime.now(),
-          active: true,
-          productId: prod.id,
-          shopId: sai.shopUser.shopId,
-          sync: false,
-          userId: sai.loggerUser.id,
-          totalAmount: int.parse(quantController.text),
-          salePrice: prod.price!);
+      // final shopProduct = ShopProduct(
+      //     id: const Uuid().v4(),
+      //     createdAt: DateTime.now(),
+      //     active: true,
+      //     productId: prod.id,
+      //     shopId: sai.shopUser.shopId,
+      //     sync: false,
+      //     userId: sai.loggerUser.id,
+      //     totalAmount: int.parse(quantController.text),
+      //     salePrice: prod.price!);
       await instanceManager
           .get<IProductRepository>()
           .createOrReplace(prod.toJson());
-      await instanceManager
-          .get<IShopProductRepository>()
-          .createOrReplace(shopProduct.toJson());
+      // await instanceManager
+      //     .get<IShopProductRepository>()
+      //     .createOrReplace(shopProduct.toJson());
       instanceManager.get<EstoqueProdutoController>().carregaDados();
       // ignore: use_build_context_synchronously
       context.pop();

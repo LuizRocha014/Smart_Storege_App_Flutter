@@ -9,6 +9,7 @@ part 'product.g.dart';
 @JsonSerializable()
 class Product extends Core {
   final String categoryId;
+  final String shopId;
   final String? storedlocation;
   final String sku;
   final String brand;
@@ -31,6 +32,7 @@ class Product extends Core {
 
   Product({
     required this.categoryId,
+    required this.shopId,
     this.storedlocation,
     required this.sku,
     required this.brand,
@@ -60,6 +62,7 @@ class Product extends Core {
   static InfosTableDatabase get table {
     final columns = {
       "Brand": "TEXT",
+      "ShopId": "TEXT",
       "Sku": "TEXT",
       "SupplierId": "TEXT",
       "Storedlocation": "TEXT",

@@ -5,7 +5,6 @@ import 'package:app_estoque/base/models/smartStorege/Shop/shop.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
-import 'package:app_estoque/base/repository/interface/smartStorege/ishop_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ishop_user_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iuser_permission_repository.dart';
 import 'package:app_estoque/modules/cliente/page/cliente_page.dart';
@@ -39,31 +38,48 @@ class HomeController extends BaseController {
     contadorValor = "0".obs;
     await carregaValorVendas();
     await carregaDados();
+    contadorValor.refresh();
+    listSale.refresh();
   }
 
   Future<void> carregaValorVendas() async {
-    contadorValor.value = await instanceManager.get<ISaleRepository>().getValortotalVendas();
-    listSale.value = await instanceManager.get<ISaleRepository>().getVendas();
-    await instanceManager.get<IShopUserRepository>().getShop(loggerUser.id).then(listShop.call);
-    contadorValor.refresh();
-    listSale.refresh();
+    contadorValor.value =
+        await instanceManager.get<ISaleRepository>().getValortotalVendas();
+    await instanceManager
+        .get<ISaleRepository>()
+        .getVendas()
+        .then(listSale.call);
+    await instanceManager
+        .get<IShopUserRepository>()
+        .getShop(loggerUser.id)
+        .then(listShop.call);
   }
 
   List<ListOpcoesMenu> get listOpcaoMenu => listMenuInicial;
   Future<void> carregaDados() async {
     try {
-      final listUsuarioAcesso = await instanceManager.get<IUserPermissionRepository>().getPermissionUser();
+      final listUsuarioAcesso = await instanceManager
+          .get<IUserPermissionRepository>()
+          .getPermissionUser();
       for (var e in listUsuarioAcesso) {
         switch (e.name) {
           case "EstoquePermission":
-            listMenuInicial.add(ListOpcoesMenu(nome: 'Estoque', gestureCommand: 'GestureEstoque', imageString: iconEstoque));
+            listMenuInicial.add(ListOpcoesMenu(
+                nome: 'Estoque',
+                gestureCommand: 'GestureEstoque',
+                imageString: iconEstoque));
             break;
           case "ProdutosPermission":
-            listMenuInicial
-                .add(ListOpcoesMenu(nome: 'Produtos', gestureCommand: 'GestureProdutos', imageString: iconProdutos));
+            listMenuInicial.add(ListOpcoesMenu(
+                nome: 'Produtos',
+                gestureCommand: 'GestureProdutos',
+                imageString: iconProdutos));
             break;
           case "ClientePermission":
-            listMenuInicial.add(ListOpcoesMenu(nome: 'Cliente', gestureCommand: 'GestureCliente', imageString: iconCliente));
+            listMenuInicial.add(ListOpcoesMenu(
+                nome: 'Cliente',
+                gestureCommand: 'GestureCliente',
+                imageString: iconCliente));
         }
       }
     } catch (_) {}
@@ -104,7 +120,9 @@ class HomeController extends BaseController {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-            color: branco, borderRadius: BorderRadius.only(topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
+            color: branco,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(2.h), topRight: Radius.circular(2.h))),
         width: double.infinity,
         height: 30.h,
         child: Padding(
@@ -113,7 +131,8 @@ class HomeController extends BaseController {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.025),
                 child: TextWidget(
                   "Selecione a loja que deseja acessar",
                   fontSize: font_18,

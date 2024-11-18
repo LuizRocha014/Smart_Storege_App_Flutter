@@ -6,7 +6,7 @@ part of 'transaction.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
+Transactions _$TransactionsFromJson(Map<String, dynamic> json) => Transactions(
       type: $enumDecode(_$TipoTransacaoEnumMap, json['type']),
       supplierId: json['supplierId'] as String?,
       customerId: json['customerId'] as String?,
@@ -24,7 +24,7 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       sync: fromJsonBoolean(json['sync']),
     );
 
-Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
+Map<String, dynamic> _$TransactionsToJson(Transactions instance) =>
     <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),

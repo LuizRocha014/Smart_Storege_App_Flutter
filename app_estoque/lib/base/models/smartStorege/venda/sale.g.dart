@@ -13,6 +13,7 @@ Sale _$SaleFromJson(Map<String, dynamic> json) => Sale(
       valor: (json['valor'] as num).toDouble(),
       codigoVenda: json['codigoVenda'] as String,
       desconto: (json['desconto'] as num?)?.toDouble(),
+      cnpj: json['cnpj'] as String? ?? ' - ',
       sync: fromJsonBoolean(json['sync']),
     );
 

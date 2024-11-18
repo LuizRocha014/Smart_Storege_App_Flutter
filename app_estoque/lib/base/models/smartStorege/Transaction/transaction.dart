@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'transaction.g.dart';
 
 @JsonSerializable()
-class Transaction extends Core {
+class Transactions extends Core {
   final TipoTransacao type; // Enum tipoTransacao
   final String? supplierId; // Usando String? para representar GUIDs
   final String? customerId;
@@ -19,7 +19,7 @@ class Transaction extends Core {
   final String? paymentMethod;
   final String? note;
 
-  Transaction({
+  Transactions({
     required this.type,
     this.supplierId,
     this.customerId,
@@ -37,10 +37,10 @@ class Transaction extends Core {
     required super.sync,
   });
 
-  factory Transaction.fromJson(Map<String, dynamic> json) =>
-      _$TransactionFromJson(fromJsonRepository(json));
+  factory Transactions.fromJson(Map<String, dynamic> json) =>
+      _$TransactionsFromJson(fromJsonRepository(json));
 
-  Map<String, dynamic> toJson() => toJsonRepository(_$TransactionToJson(this));
+  Map<String, dynamic> toJson() => toJsonRepository(_$TransactionsToJson(this));
 
   static InfosTableDatabase get table {
     final columns = {

@@ -7,6 +7,7 @@ part 'costumer.g.dart';
 @JsonSerializable()
 class Costumer extends Core {
   final String nome;
+  final String shopId;
   final String cnpj;
   final String email;
   final String address;
@@ -24,6 +25,7 @@ class Costumer extends Core {
   Costumer({
     required super.id,
     required this.nome,
+    required this.shopId,
     required this.cnpj,
     required this.email,
     required this.addressNumber,
@@ -40,6 +42,7 @@ class Costumer extends Core {
   static InfosTableDatabase get table {
     final columns = {
       "Nome": "TEXT",
+      "ShopId": "TEXT",
       "Cnpj": "TEXT",
       "Email": "TEXT",
       "Address": "TEXT",

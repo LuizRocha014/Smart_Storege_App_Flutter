@@ -37,6 +37,6 @@ class AppContext extends Context {
         ShopCostumer.table,
         Costumer.table,
         Sale.table,
-        Transaction.table
+        Transactions.table
       ];
 }

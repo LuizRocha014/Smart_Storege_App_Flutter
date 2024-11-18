@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:app_estoque/base/models/dto/product_dto/product_dto.dart';
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
-import 'package:app_estoque/base/models/smartStorege/ShopProduct/shop_product.dart';
 import 'package:app_estoque/base/models/smartStorege/category/category.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:componentes_lr/componentes_lr.dart';
@@ -21,7 +20,6 @@ class ProductRepository extends BaseRepository<Product>
       String orderBy = ""}) {
     final query = ''' SELECT $selectItens FROM ${Category.table.tableName} CT
                         JOIN ${Product.table.tableName} P ON CT.ID = P.categoryId
-                        JOIN ${ShopProduct.table.tableName} SP ON SP.productId = P.ID
                         LEFT JOIN ${ProductFile.table.tableName} PDF ON PDF.productId = P.ID
                         LEFT JOIN ${FileIMG.table.tableName} F ON PDF.fileId = F.ID
                         $where 
@@ -50,7 +48,7 @@ class ProductRepository extends BaseRepository<Product>
         final entity = await context.rawQuery(_getCategoriaProdutos(
           selectItens: "P.*, F.base64Arquiv as base64Image",
           where:
-              " WHERE SP.USERID = '${loggerUser.id}' AND SP.SHOPID = '${shopUser.shopId}' and ct.Id = '${element.categoriaId}' ",
+              " WHERE P.SHOPID = '${shopUser.shopId}' and ct.Id = '${element.categoriaId}' ",
         ));
         if (entity.isNotEmpty) {
           final entityProdutct = element.listProduct =

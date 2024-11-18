@@ -9,6 +9,7 @@ part of 'costumer.dart';
 Costumer _$CostumerFromJson(Map<String, dynamic> json) => Costumer(
       id: json['id'] as String,
       nome: json['nome'] as String,
+      shopId: json['shopId'] as String,
       cnpj: json['cnpj'] as String,
       email: json['email'] as String,
       addressNumber: json['addressNumber'] as String,
@@ -28,6 +29,7 @@ Map<String, dynamic> _$CostumerToJson(Costumer instance) => <String, dynamic>{
       'active': instance.active,
       'sync': instance.sync,
       'nome': instance.nome,
+      'shopId': instance.shopId,
       'cnpj': instance.cnpj,
       'email': instance.email,
       'address': instance.address,

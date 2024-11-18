@@ -9,6 +9,8 @@ class Sale extends Core {
   final double valor;
   final String codigoVenda;
   final double? desconto;
+  @JsonKey(includeToJson: false)
+  String cnpj;
   Sale(
       {required super.id,
       required super.createdAt,
@@ -16,6 +18,7 @@ class Sale extends Core {
       required this.valor,
       required this.codigoVenda,
       this.desconto,
+      this.cnpj = ' - ',
       required super.sync});
   factory Sale.fromJson(Map<String, dynamic> json) =>
       _$SaleFromJson(fromJsonRepository(json));

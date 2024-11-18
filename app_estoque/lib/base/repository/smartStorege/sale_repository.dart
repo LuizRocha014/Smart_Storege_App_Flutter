@@ -1,3 +1,5 @@
+import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
+import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dart';
 import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
 import 'package:componentes_lr/componentes_lr.dart';
@@ -19,12 +21,27 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
 
   @override
   Future<List<Sale>> getVendas() async {
-    final query = ''' SELECT * FROM ${infosTableDatabase.tableName} 
-                      WHERE Sync = 0
+    final query = ''' SELECT c.cnpj, * FROM ${infosTableDatabase.tableName} s
+                      JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
+                      JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
                       ''';
     final entity = await context.rawQuery(query);
     if (entity.isEmpty) return [];
     //return entity.
-    return entity.map((e) => Sale.fromJson(e)).toList();
+    final returo = entity.map((e) => Sale.fromJson(e)).toList();
+    return returo;
+  }
+
+  @override
+  Future<List<Sale>> getItensAsync() async {
+    try {
+      final query = '''SELECT * FROM ${Sale.table.tableName} WHERE Sync = 0''';
+      final entity = await context.rawQuery(query);
+      if (entity.isEmpty) return [];
+      final entityList = entity.map((e) => Sale.fromJson(e)).toList();
+      return entityList;
+    } catch (_) {
+      return [];
+    }
   }
 }
