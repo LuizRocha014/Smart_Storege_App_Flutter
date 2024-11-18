@@ -7,10 +7,11 @@ import 'package:app_estoque/base/service/interface/ifile_service.dart';
 import 'package:app_estoque/base/service/interface/ipermission_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_file_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_service.dart';
-import 'package:app_estoque/base/service/interface/ishop_costumer_service.dart';
+import 'package:app_estoque/base/service/interface/isale_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_product_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_service.dart';
 import 'package:app_estoque/base/service/interface/ishop_user_service.dart';
+import 'package:app_estoque/base/service/interface/itransaction_service.dart.dart';
 import 'package:app_estoque/base/service/interface/iuser_permission_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:componentes_lr/componentes_lr.dart';
@@ -23,12 +24,12 @@ class Synchronism {
   double progressItemValue = 0.0;
 
   List<IBaseServicePostAndGet> get servicePost => [
-        instanceManager.get<IShopCostumerService>(),
         instanceManager.get<ICostumerService>(),
         instanceManager.get<IProductService>(),
-        instanceManager.get<IShopProductService>(),
         instanceManager.get<IFileService>(),
         instanceManager.get<IProductFileService>(),
+        instanceManager.get<ISaleService>(),
+        instanceManager.get<ITransactionService>(),
       ];
 
   List<IBaseServiceGet> get serviceGet => [
