@@ -32,7 +32,7 @@ class CadastroInfosBasicasWidget extends StatelessWidget {
           externalLabelColor: preto,
           borderColor: gray,
           inputFormatters: [MaskCpfCnpj(true)],
-          internalLabel: 'Insira o CPF/CNPJ',
+          internalLabel: 'Insira o CNPJ',
           labelInterno: '',
         ),
         Padding(

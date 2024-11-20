@@ -2,7 +2,8 @@ import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/ifile_repository.dart';
 
-class FileRepository extends BaseRepository implements IFileRepository {
+class FileRepository extends BaseRepository<FileIMG>
+    implements IFileRepository {
   FileRepository(super.infosTableDatabase, super.fromJson);
   @override
   Future<List<FileIMG>> getItensSync() async {

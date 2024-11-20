@@ -8,27 +8,31 @@ part 'product.g.dart';
 
 @JsonSerializable()
 class Product extends Core {
-  final String categoryId;
-  final String shopId;
-  final String? storedlocation;
-  final String sku;
-  final String brand;
-  final String? supplierId;
-  final String? codProduct;
-  final double purchasePrice;
-  final int minimumAmount;
-  final int? quantity;
-  final double? price;
-  final double? totalValue;
-  final DateTime? expiryDate;
-  final String description;
-  final String additionalInfo;
+  late String categoryId;
+  late String shopId;
+  late String? storedlocation;
+  late String sku;
+  late String brand;
+  late String? supplierId;
+  late String? codProduct;
+  late double purchasePrice;
+  late int minimumAmount;
+  late int? quantity;
+  late double? price;
+  late double? totalValue;
+  late DateTime? expiryDate;
+  late String description;
+  late String additionalInfo;
   @JsonKey(includeToJson: false)
   late int numbProduct;
   @JsonKey(includeToJson: false, includeFromJson: false)
   late Uint8List? image;
   @JsonKey(includeToJson: false)
   final String? base64Image;
+  @JsonKey(includeToJson: false)
+  final String? categoriaName;
+  @JsonKey(includeToJson: false)
+  final String? fileId;
 
   Product({
     required this.categoryId,
@@ -37,6 +41,8 @@ class Product extends Core {
     required this.sku,
     required this.brand,
     this.supplierId,
+    this.categoriaName,
+    this.fileId,
     required this.purchasePrice,
     required this.minimumAmount,
     this.quantity,

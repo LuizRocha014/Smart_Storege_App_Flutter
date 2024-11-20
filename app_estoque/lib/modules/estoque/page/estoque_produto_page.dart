@@ -72,29 +72,37 @@ class _EstoqueProdutosPageState
                             shrinkWrap: true,
                             itemBuilder:
                                 (BuildContext context, int indexProd) =>
-                                    CardProdutoWidget(
-                                        bytes: controller.produtosEstoque[index]
-                                            .listProduct![indexProd].image!,
-                                        categoriaProduto: controller
-                                            .produtosEstoque[index]
-                                            .listProduct![indexProd]
-                                            .description,
-                                        brand: controller.produtosEstoque[index]
-                                            .listProduct![indexProd].brand,
-                                        quantidadeProduto: controller
-                                            .produtosEstoque[index]
-                                            .listProduct![indexProd]
-                                            .totalValue
-                                            .toString(),
-                                        tituloProduto: controller
-                                            .produtosEstoque[index]
-                                            .listProduct![indexProd]
-                                            .description,
-                                        valorProduto: controller
-                                            .produtosEstoque[index]
-                                            .listProduct![indexProd]
-                                            .price
-                                            .toString()),
+                                    GestureDetector(
+                              onTap: () {
+                                context.push(CadastroProdutoPage(
+                                  product: controller.produtosEstoque[index]
+                                      .listProduct![indexProd],
+                                ));
+                              },
+                              child: CardProdutoWidget(
+                                  bytes: controller.produtosEstoque[index]
+                                      .listProduct![indexProd].image!,
+                                  categoriaProduto: controller
+                                      .produtosEstoque[index]
+                                      .listProduct![indexProd]
+                                      .description,
+                                  brand: controller.produtosEstoque[index]
+                                      .listProduct![indexProd].brand,
+                                  quantidadeProduto: controller
+                                      .produtosEstoque[index]
+                                      .listProduct![indexProd]
+                                      .totalValue
+                                      .toString(),
+                                  tituloProduto: controller
+                                      .produtosEstoque[index]
+                                      .listProduct![indexProd]
+                                      .description,
+                                  valorProduto: doubleToFormattedReal(controller
+                                          .produtosEstoque[index]
+                                          .listProduct![indexProd]
+                                          .price ??
+                                      0)),
+                            ),
                           )
                         : const Align(
                             alignment: Alignment.center,

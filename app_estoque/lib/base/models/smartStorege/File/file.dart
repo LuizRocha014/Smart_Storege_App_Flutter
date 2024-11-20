@@ -7,7 +7,7 @@ part 'file.g.dart';
 @JsonSerializable()
 class FileIMG extends Core {
   final String fileName;
-  final String base64Arquiv;
+  late String base64Arquiv;
   FileIMG(
       {required super.id,
       required super.createdAt,

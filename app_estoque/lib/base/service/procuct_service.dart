@@ -3,17 +3,22 @@ import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repo
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
 class ProductService extends BaseService implements IProductService {
   @override
   Future<List<Product>> getAll({bool alteracaoNula = false}) async {
     try {
       final repository = instanceManager.get<IProductRepository>();
+      final lastUpdate =
+          sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
       final String urlApi = "$url/api/Product/GetAll";
-      final retorno = await get(urlApi, query: {});
+      final retorno = await get(urlApi, query: {"ultDate": lastUpdate});
       var itens = (retorno.body as List).map((e) => Product.fromJson(e));
       itens.map((e) => e.sync = true);
       await repository.createList(itens.map((e) => e.toJson()));
+      sharedPreferences.setString(
+          "LastUpdate$runtimeType", DateTime.now().toIso8601String());
       return [];
     } catch (_) {
       return [];

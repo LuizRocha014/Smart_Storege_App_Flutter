@@ -83,7 +83,7 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: font_16,
                                   ),
-                                  CustomRich("CPF: ",
+                                  CustomRich("CNPJ: ",
                                       controller.listCostumer[index].cnpj),
                                   CustomRich(
                                       "Telefone: ",

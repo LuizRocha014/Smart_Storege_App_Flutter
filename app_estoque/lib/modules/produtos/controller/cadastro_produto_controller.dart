@@ -26,6 +26,7 @@ import 'package:uuid/uuid.dart';
 class CadastroProdutoController extends BaseController {
   final PageController pageController = PageController();
   late QrImage qrImage;
+  late Product? product;
   late TextEditingController nomeController;
   late TextEditingController marcaController;
   late TextEditingController corController;
@@ -43,21 +44,35 @@ class CadastroProdutoController extends BaseController {
   late RxList<Category> drop;
   late Uint8List? qrImageBytes;
 
+  CadastroProdutoController(this.product);
+
   @override
   Future<void> iniciaControlador() async {
-    nomeController = TextEditingController();
-    marcaController = TextEditingController();
-    corController = TextEditingController();
-    quantController = TextEditingController();
-    skuController = TextEditingController();
-    controllerValorCompra = TextEditingController();
-    controllerValorVenda = TextEditingController();
-    codProduto = '';
+    nomeController = TextEditingController(
+        text: product != null ? product!.description : "");
+    marcaController =
+        TextEditingController(text: product != null ? product!.brand : "");
+
+    quantController = TextEditingController(
+        text: product != null
+            ? product!.totalValue.toString().replaceAll((".0"), "")
+            : "");
+    skuController =
+        TextEditingController(text: product != null ? product!.sku : "");
+    controllerValorCompra = TextEditingController(
+        text: product != null ? product!.purchasePrice.toString() : "");
+    controllerValorVenda = TextEditingController(
+        text: product != null ? product!.price.toString() : "");
+    codProduto = product != null ? product!.codProduct.toString() : "";
     camera = ImagePicker();
     imagem = File("");
-    mostraImagem = false.obs;
+    mostraImagem = product != null
+        ? product!.base64Image.isNullOrEmpty
+            ? false.obs
+            : true.obs
+        : false.obs;
     mostraQrCode = false.obs;
-    categoriaText = ''.obs;
+    categoriaText = RxString(product != null ? product!.categoriaName! : '');
     drop = RxList();
     await carregaDados();
 
@@ -125,80 +140,126 @@ class CadastroProdutoController extends BaseController {
   void cadastroProduto() async {
     try {
       isLoading = true;
-      final prodID = const Uuid().v4();
-      if (mostraImagem.value) {
-        final base64 = base64Encode(imagem!.readAsBytesSync());
-        final img = FileIMG(
-            id: const Uuid().v4(),
-            createdAt: DateTime.now(),
-            active: true,
-            fileName: 'ImagemProduto',
-            base64Arquiv: base64,
-            sync: false);
-        final producIMG = ProductFile(
-            id: const Uuid().v4(),
-            createdAt: DateTime.now(),
-            active: true,
-            productId: prodID,
-            fileId: img.id,
-            sync: false,
-            description: '');
-        await instanceManager
-            .get<IFileRepository>()
-            .createOrReplace(img.toJson());
-        await instanceManager
-            .get<IProductFileRepository>()
-            .createOrReplace(producIMG.toJson());
-      }
-      final prod = Product(
-        description: nomeController.text,
-        id: prodID,
-        createdAt: DateTime.now(),
-        brand: marcaController.text,
-        codProduct: codProduto,
-        additionalInfo: "",
-        expiryDate: null,
-        minimumAmount: 0,
-        sync: false,
-        storedlocation: shopUser.shopId,
-        numbProduct: 0,
-        sku: skuController.text,
-        supplierId: null,
-        totalValue: double.parse(quantController.text),
-        categoryId: categoriaSelect!.id,
-        purchasePrice: double.parse(
+      if (product != null) {
+        product!.description = nomeController.text;
+        product!.brand = marcaController.text;
+        product!.codProduct = codProduto;
+        product!.sku = skuController.text;
+        product!.totalValue = double.parse(quantController.text);
+        product!.purchasePrice = double.parse(
           controllerValorCompra.text
               .replaceAll('R', '')
               .replaceAll('\$', '')
               .replaceAll('.', '')
               .replaceAll(',', ''),
-        ),
-        price: double.parse(
+        );
+        product!.price = double.parse(
           controllerValorVenda.text
               .replaceAll('R', '')
               .replaceAll('\$', '')
               .replaceAll('.', '')
               .replaceAll(',', ''),
-        ),
-        active: true,
-        shopId: shopUser.shopId,
-      );
-      // final shopProduct = ShopProduct(
-      //     id: const Uuid().v4(),
-      //     createdAt: DateTime.now(),
-      //     active: true,
-      //     productId: prod.id,
-      //     shopId: sai.shopUser.shopId,
-      //     sync: false,
-      //     userId: sai.loggerUser.id,
-      //     totalAmount: int.parse(quantController.text),
-      //     salePrice: prod.price!);
-      await instanceManager
-          .get<IProductRepository>()
-          .createOrReplace(prod.toJson());
-      // await instanceManager
-      //     .get<IShopProductRepository>()
-      //     .createOrReplace(shopProduct.toJson());
+        );
+        if (!product!.fileId.isNullOrEmpty) {
+          final file = await instanceManager
+              .get<IFileRepository>()
+              .getById(product!.fileId!);
+          file!.base64Arquiv = imagem!.path.isNotEmpty
+              ? base64Encode(imagem!.readAsBytesSync())
+              : product!.base64Image!;
+          await instanceManager
+              .get<IFileRepository>()
+              .createOrReplace(product!.toJson());
+        } else if (product!.fileId == null && imagem!.path.isNotEmpty) {
+          final base64 = base64Encode(imagem!.readAsBytesSync());
+          final img = FileIMG(
+              id: const Uuid().v4(),
+              createdAt: DateTime.now(),
+              active: true,
+              fileName: 'ImagemProduto',
+              base64Arquiv: base64,
+              sync: false);
+          final producIMG = ProductFile(
+              id: const Uuid().v4(),
+              createdAt: DateTime.now(),
+              active: true,
+              productId: product!.id,
+              fileId: img.id,
+              sync: false,
+              description: '');
+          await instanceManager
+              .get<IFileRepository>()
+              .createOrReplace(img.toJson());
+          await instanceManager
+              .get<IProductFileRepository>()
+              .createOrReplace(producIMG.toJson());
+        }
+        await instanceManager
+            .get<IProductRepository>()
+            .createOrReplace(product!.toJson());
+      } else {
+        final prodID = const Uuid().v4();
+        if (mostraImagem.value) {
+          final base64 = base64Encode(imagem!.readAsBytesSync());
+          final img = FileIMG(
+              id: const Uuid().v4(),
+              createdAt: DateTime.now(),
+              active: true,
+              fileName: 'ImagemProduto',
+              base64Arquiv: base64,
+              sync: false);
+          final producIMG = ProductFile(
+              id: const Uuid().v4(),
+              createdAt: DateTime.now(),
+              active: true,
+              productId: prodID,
+              fileId: img.id,
+              sync: false,
+              description: '');
+          await instanceManager
+              .get<IFileRepository>()
+              .createOrReplace(img.toJson());
+          await instanceManager
+              .get<IProductFileRepository>()
+              .createOrReplace(producIMG.toJson());
+        }
+        final prod = Product(
+          description: nomeController.text,
+          id: prodID,
+          createdAt: DateTime.now(),
+          brand: marcaController.text,
+          codProduct: codProduto,
+          additionalInfo: "",
+          expiryDate: null,
+          minimumAmount: 0,
+          sync: false,
+          storedlocation: shopUser.shopId,
+          numbProduct: 0,
+          sku: skuController.text,
+          supplierId: null,
+          quantity: int.parse(quantController.text),
+          categoryId: categoriaSelect!.id,
+          purchasePrice: double.parse(
+            controllerValorCompra.text
+                .replaceAll('R', '')
+                .replaceAll('\$', '')
+                .replaceAll('.', '')
+                .replaceAll(',', ''),
+          ),
+          price: double.parse(
+            controllerValorVenda.text
+                .replaceAll('R', '')
+                .replaceAll('\$', '')
+                .replaceAll('.', '')
+                .replaceAll(',', ''),
+          ),
+          active: true,
+          shopId: shopUser.shopId,
+        );
+        await instanceManager
+            .get<IProductRepository>()
+            .createOrReplace(prod.toJson());
+      }
       instanceManager.get<EstoqueProdutoController>().carregaDados();
       // ignore: use_build_context_synchronously
       context.pop();

@@ -46,7 +46,8 @@ class ProductRepository extends BaseRepository<Product>
 
       for (var element in listCategory) {
         final entity = await context.rawQuery(_getCategoriaProdutos(
-          selectItens: "P.*, F.base64Arquiv as base64Image",
+          selectItens:
+              "P.*, F.base64Arquiv as base64Image , ct.description as categoriaName, PDF.fileId",
           where:
               " WHERE P.SHOPID = '${shopUser.shopId}' and ct.Id = '${element.categoriaId}' ",
         ));

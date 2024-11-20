@@ -28,7 +28,10 @@ class SelectItensController extends BaseController {
   Future<void> carregaLista() async {
     try {
       isLoading = true;
-      await instanceManager.get<IProductRepository>().getProdutos().then(_listProdutos.call);
+      await instanceManager
+          .get<IProductRepository>()
+          .getProdutos()
+          .then(_listProdutos.call);
       isLoading = false;
     } catch (_) {}
   }
@@ -36,9 +39,11 @@ class SelectItensController extends BaseController {
   void adicionaItemCompra(int index, int indexProd) {
     try {
       final item = listProdutos[index].listProduct![indexProd];
-      item.numbProduct++;
-      _contador.value++;
-      _listProdutos.refresh();
+      if (item.quantity! > item.numbProduct) {
+        item.numbProduct++;
+        _contador.value++;
+        _listProdutos.refresh();
+      }
     } catch (_) {}
   }
 

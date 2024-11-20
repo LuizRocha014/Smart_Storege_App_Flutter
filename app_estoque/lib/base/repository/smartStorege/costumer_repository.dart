@@ -12,7 +12,7 @@ class CostumerRepository extends BaseRepository<Costumer>
     try {
       final query = '''SELECT * FROM ${Costumer.table.tableName} 
                         WHERE SHOPID = '${shopUser.shopId}'
-                        ORDER BY nome desc''';
+                        ORDER BY nome ASC''';
       final entity = await context.rawQuery(query);
       if (entity.isEmpty) return [];
       final listEntity = entity.map((e) => Costumer.fromJson(e)).toList();

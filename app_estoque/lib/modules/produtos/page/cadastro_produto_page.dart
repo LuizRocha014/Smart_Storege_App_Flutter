@@ -1,3 +1,4 @@
+import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/modules/produtos/controller/cadastro_produto_controller.dart';
 
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
@@ -10,7 +11,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CadastroProdutoPage extends StatefulWidget {
-  const CadastroProdutoPage({super.key});
+  final Product? product;
+  const CadastroProdutoPage({super.key, this.product});
 
   @override
   State<CadastroProdutoPage> createState() => _CadastroProdutoState();
@@ -20,7 +22,7 @@ class _CadastroProdutoState
     extends MState<CadastroProdutoPage, CadastroProdutoController> {
   @override
   void initState() {
-    super.registerController(CadastroProdutoController());
+    super.registerController(CadastroProdutoController(widget.product));
     controller.context = context;
     super.initState();
   }
@@ -52,10 +54,15 @@ class _CadastroProdutoState
                           child: Obx(() => controller.mostraImagem.value
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(2.h),
-                                  child: Image.file(
-                                    controller.imagem!,
-                                    fit: BoxFit.fill,
-                                  ),
+                                  child: controller.product != null
+                                      ? Image.memory(
+                                          controller.product!.image!,
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Image.file(
+                                          controller.imagem!,
+                                          fit: BoxFit.fill,
+                                        ),
                                 )
                               : const Center(
                                   child: FaIcon(FontAwesomeIcons.camera))),

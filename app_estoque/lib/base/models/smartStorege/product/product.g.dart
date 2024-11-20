@@ -13,6 +13,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       sku: json['sku'] as String,
       brand: json['brand'] as String,
       supplierId: json['supplierId'] as String?,
+      categoriaName: json['categoriaName'] as String?,
+      fileId: json['fileId'] as String?,
       purchasePrice: (json['purchasePrice'] as num).toDouble(),
       minimumAmount: (json['minimumAmount'] as num).toInt(),
       quantity: (json['quantity'] as num?)?.toInt(),

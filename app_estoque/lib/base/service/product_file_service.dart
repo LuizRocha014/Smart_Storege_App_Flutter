@@ -3,6 +3,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/iproduct_file_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
 class ProductFileService extends BaseService implements IProductFileService {
   @override
@@ -10,12 +11,16 @@ class ProductFileService extends BaseService implements IProductFileService {
     try {
       List<ProductFile> list = [];
       final repository = instanceManager.get<IProductFileRepository>();
+      final lastUpdate =
+          sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
       final String urlApi = "$url/api/ProductFile/GetAll";
-      final retorno = await get(urlApi, query: {});
+      final retorno = await get(urlApi, query: {"ultDate": lastUpdate});
       if (retorno.body == null) return [];
       var category = (retorno.body as List).map((e) => ProductFile.fromJson(e));
       list.addAll(category);
       await repository.createList(list.map((e) => e.toJson()));
+      sharedPreferences.setString(
+          "LastUpdate$runtimeType", DateTime.now().toIso8601String());
       return list;
     } catch (_) {
       return [];

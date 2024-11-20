@@ -3,6 +3,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/ifile_reposit
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/ifile_service.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
+import 'package:componentes_lr/componentes_lr.dart';
 
 class FileService extends BaseService implements IFileService {
   @override
@@ -32,13 +33,17 @@ class FileService extends BaseService implements IFileService {
   Future<List<FileIMG>> getAll({bool alteracaoNula = false}) async {
     try {
       List<FileIMG> list = [];
+      final lastUpdate =
+          sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
       final repository = instanceManager.get<IFileRepository>();
       final String urlApi = "$url/api/File/GetAll";
-      final retorno = await get(urlApi, query: {});
+      final retorno = await get(urlApi, query: {"ultDate": lastUpdate});
       if (retorno.body == null) return [];
       var category = (retorno.body as List).map((e) => FileIMG.fromJson(e));
       list.addAll(category);
       await repository.createList(list.map((e) => e.toJson()));
+      sharedPreferences.setString(
+          "LastUpdate$runtimeType", DateTime.now().toIso8601String());
       return list;
     } catch (_) {
       return [];
