@@ -95,7 +95,7 @@ class NovoClienteControlle extends BaseController {
           sync: false,
           createdAt: DateTime.now(),
           active: true,
-          shopId: shopUser.shopId);
+          shopId: shopUser.id);
       // final shopCostumer = ShopCostumer(
       //     id: const Uuid().v4(),
       //     sync: false,
@@ -104,7 +104,9 @@ class NovoClienteControlle extends BaseController {
       //     customerId: clienteId,
       //     shopId: shopUser.shopId);
 
-      await instanceManager.get<ICostumerRepository>().createOrReplace(cliente.toJson());
+      await instanceManager
+          .get<ICostumerRepository>()
+          .createOrReplace(cliente.toJson());
       // await instanceManager
       //     .get<IShopCostumerRepository>()
       //     .createOrReplace(shopCostumer.toJson());

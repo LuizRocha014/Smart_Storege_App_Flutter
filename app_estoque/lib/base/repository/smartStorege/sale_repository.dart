@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
+import 'package:app_estoque/base/models/smartStorege/ShopUser/shop_user.dart';
 import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
+import 'package:app_estoque/utils/infos_statica.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 
 class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
@@ -12,7 +16,8 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
 
   @override
   Future<String> getValortotalVendas() async {
-    final query = ''' SELECT SUM(SL.VALOR) as Valor FROM ${infosTableDatabase.tableName} SL
+    final query =
+        ''' SELECT SUM(SL.VALOR) as Valor FROM ${infosTableDatabase.tableName} SL
                       ''';
     final entity = await context.rawQuery(query);
     if (entity.isEmpty) return "0";
@@ -26,6 +31,7 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
     final query = ''' SELECT c.cnpj, s.* FROM ${infosTableDatabase.tableName} s
                       JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
                       JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
+                      WHERE C.SHOPID = '${shopUser.id}'
                       group by s.id
                       ORDER BY S.createdAt DESC
                       ''';
@@ -38,7 +44,9 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
 
   @override
   Future<List<Product>> getProduct(String saleId) async {
-    final query = ''' SELECT P.*, T.numberProd AS numberProd FROM ${infosTableDatabase.tableName} s
+    final query = ''' SELECT P.*, 
+                      f.base64Arquiv as base64Image,
+                      T.numberProd AS numbProduct FROM ${infosTableDatabase.tableName} s
                       JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
                       JOIN ${Product.table.tableName} P ON T.ProductId = P.ID
                       LEFT JOIN ${ProductFile.table.tableName} PDF ON PDF.productId = P.ID
@@ -50,6 +58,13 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
     if (entity.isEmpty) return [];
     //return entity.
     final returo = entity.map((e) => Product.fromJson(e)).toList();
+
+    for (var e in returo) {
+      if (e.base64Image != null) {
+        e.image = base64Decode(e.base64Image!);
+      }
+    }
+    Future.delayed(const Duration(seconds: 2));
     return returo;
   }
 

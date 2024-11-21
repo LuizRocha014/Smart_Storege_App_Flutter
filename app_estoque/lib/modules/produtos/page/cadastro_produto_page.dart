@@ -1,5 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/modules/produtos/controller/cadastro_produto_controller.dart';
+import 'package:app_estoque/utils/assets.dart';
 
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
@@ -111,8 +112,7 @@ class _CadastroProdutoState
                               ),
                               child: Center(
                                 child: GestureDetector(
-                                    onTap: () => controller
-                                        .startBarcodeScanStream(context),
+                                    onTap: () => controller.validaCodBarras(),
                                     child: const TextWidget("Novo Código")),
                               ),
                             ),
@@ -126,10 +126,10 @@ class _CadastroProdutoState
                                 padding: EdgeInsets.symmetric(horizontal: 3.w),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(1.w),
-                                  child: Image.memory(
+                                  child: Image.asset(
                                     width: 22.w,
                                     height: 11.h,
-                                    controller.qrImageBytes!,
+                                    iconBarcode,
                                     fit: BoxFit.fill,
                                   ),
                                 ),

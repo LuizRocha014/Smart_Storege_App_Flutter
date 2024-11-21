@@ -34,7 +34,7 @@ class CadastroProdutoController extends BaseController {
   late TextEditingController skuController;
   late TextEditingController controllerValorCompra;
   late TextEditingController controllerValorVenda;
-  late String codProduto;
+  late RxString codProduto;
   late Category? categoriaSelect;
   late RxString categoriaText;
   late ImagePicker camera;
@@ -55,7 +55,7 @@ class CadastroProdutoController extends BaseController {
 
     quantController = TextEditingController(
         text: product != null
-            ? product!.totalValue.toString().replaceAll((".0"), "")
+            ? product!.quantity.toString().replaceAll((".0"), "")
             : "");
     skuController =
         TextEditingController(text: product != null ? product!.sku : "");
@@ -63,7 +63,8 @@ class CadastroProdutoController extends BaseController {
         text: product != null ? product!.purchasePrice.toString() : "");
     controllerValorVenda = TextEditingController(
         text: product != null ? product!.price.toString() : "");
-    codProduto = product != null ? product!.codProduct.toString() : "";
+    codProduto =
+        RxString(product != null ? product!.codProduct.toString() : "");
     camera = ImagePicker();
     imagem = File("");
     mostraImagem = product != null
@@ -108,7 +109,7 @@ class CadastroProdutoController extends BaseController {
       data: valor,
       errorCorrectLevel: QrErrorCorrectLevel.H,
     );
-
+    codProduto.value = qrCode.toString();
     final qrImage = QrImage(qrCode);
     final qrImageByte = await qrImage.toImageAsBytes(
       size: 512,
@@ -117,7 +118,8 @@ class CadastroProdutoController extends BaseController {
     );
     qrImageBytes = qrImageByte!.buffer
         .asUint8List(qrImageByte.offsetInBytes, qrImageByte.lengthInBytes);
-    mostraQrCode = true.obs;
+    mostraQrCode.value = true;
+    mostraQrCode.refresh();
   }
 
   void selectCategoria(String value) {
@@ -132,7 +134,8 @@ class CadastroProdutoController extends BaseController {
       final file = await camera.pickImage(source: source);
       if (file != null) {
         imagem = File(file.path);
-        mostraImagem = true.obs;
+        mostraImagem.value = true;
+        mostraImagem.refresh();
       }
     } catch (_) {}
   }
@@ -143,7 +146,7 @@ class CadastroProdutoController extends BaseController {
       if (product != null) {
         product!.description = nomeController.text;
         product!.brand = marcaController.text;
-        product!.codProduct = codProduto;
+        product!.codProduct = codProduto.value;
         product!.sku = skuController.text;
         product!.totalValue = double.parse(quantController.text);
         product!.purchasePrice = double.parse(
@@ -228,12 +231,12 @@ class CadastroProdutoController extends BaseController {
           id: prodID,
           createdAt: DateTime.now(),
           brand: marcaController.text,
-          codProduct: codProduto,
+          codProduct: codProduto.value,
           additionalInfo: "",
           expiryDate: null,
           minimumAmount: 0,
           sync: false,
-          storedlocation: shopUser.shopId,
+          storedlocation: shopUser.id,
           numbProduct: 0,
           sku: skuController.text,
           supplierId: null,
@@ -254,7 +257,7 @@ class CadastroProdutoController extends BaseController {
                 .replaceAll(',', ''),
           ),
           active: true,
-          shopId: shopUser.shopId,
+          shopId: shopUser.id,
         );
         await instanceManager
             .get<IProductRepository>()
@@ -267,5 +270,10 @@ class CadastroProdutoController extends BaseController {
     } finally {
       isLoading = false;
     }
+  }
+
+  void validaCodBarras() async {
+    geraQrCode(codProduto.value);
+    codProduto.refresh();
   }
 }

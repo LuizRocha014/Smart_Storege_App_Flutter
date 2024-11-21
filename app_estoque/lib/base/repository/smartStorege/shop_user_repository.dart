@@ -8,11 +8,12 @@ class ShopUserRepository extends BaseRepository<ShopUser>
   ShopUserRepository(super.infosTableDatabase, super.fromJson);
 
   @override
-  Future<ShopUser> getShopUserId(String userId) async {
-    final query = '''SELECT * FROM ${ShopUser.table.tableName} 
-                     WHERE USERID = '$userId' and userMainShop = 1 ''';
+  Future<Shop> getShopUserId(String userId) async {
+    final query = '''SELECT S.* FROM ${ShopUser.table.tableName} US
+                    JOIN ${Shop.table.tableName} S ON US.shopId = S.ID
+                     WHERE us.USERID = '$userId' and us.userMainShop = 1 ''';
     final entity = await context.rawQuery(query);
-    return ShopUser.fromJson(entity.first);
+    return Shop.fromJson(entity.first);
   }
 
   @override

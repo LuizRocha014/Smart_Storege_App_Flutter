@@ -11,7 +11,7 @@ class CostumerRepository extends BaseRepository<Costumer>
   Future<List<Costumer>> getCostumers() async {
     try {
       final query = '''SELECT * FROM ${Costumer.table.tableName} 
-                        WHERE SHOPID = '${shopUser.shopId}'
+                        WHERE SHOPID = '${shopUser.id}'
                         ORDER BY nome ASC''';
       final entity = await context.rawQuery(query);
       if (entity.isEmpty) return [];

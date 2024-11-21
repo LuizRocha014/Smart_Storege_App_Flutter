@@ -22,6 +22,7 @@ const String iconPix = '$_pathPng/pix.png';
 const String iconCartao = '$_pathPng/cartao.png';
 const String iconComprador = '$_pathPng/comprador.png';
 const String iconDinheiro = '$_pathPng/dinheiro.png';
+const String iconBarcode = '$_pathPng/barcode.png';
 
 //Json
 const gifSinc = '$_pathJson/gifsinc.json';

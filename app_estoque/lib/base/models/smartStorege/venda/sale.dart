@@ -1,4 +1,5 @@
 import 'package:app_estoque/base/models/smartStorege/Core/core.dart';
+import 'package:app_estoque/utils/enuns.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,6 +10,7 @@ class Sale extends Core {
   final double valor;
   final String codigoVenda;
   final double? desconto;
+  final TipoPagamento tipoPagamento;
   @JsonKey(includeToJson: false)
   String cnpj;
   Sale(
@@ -17,6 +19,7 @@ class Sale extends Core {
       required super.active,
       required this.valor,
       required this.codigoVenda,
+      this.tipoPagamento = TipoPagamento.pix,
       this.desconto,
       this.cnpj = ' - ',
       required super.sync});
@@ -30,6 +33,7 @@ class Sale extends Core {
       "Valor": "INTEGER",
       "Desconto": "INTEGER",
       "CodigoVenda": "TEXT",
+      "TipoPagamento": "INTEGER",
     };
     columns.addAll(Core.table.columns);
     return InfosTableDatabase(tableName: 'Sale', columns: columns);

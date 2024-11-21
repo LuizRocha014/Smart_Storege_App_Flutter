@@ -41,10 +41,10 @@ class LoginController extends BaseController {
       sai.loggerUser = retorno;
       await instanceManager.get<Synchronism>().fullSync(forcaSincronismo: true);
 
-      final shopUser = await instanceManager
+      final shop = await instanceManager
           .get<IShopUserRepository>()
           .getShopUserId(retorno.id);
-      sai.shopUser = shopUser;
+      sai.shopUser = shop;
       // ignore: use_build_context_synchronously
       context.push(const HomePage());
       isLoading = false;

@@ -49,7 +49,7 @@ class ProductRepository extends BaseRepository<Product>
           selectItens:
               "P.*, F.base64Arquiv as base64Image , ct.description as categoriaName, PDF.fileId",
           where:
-              " WHERE P.SHOPID = '${shopUser.shopId}' and ct.Id = '${element.categoriaId}' ",
+              " WHERE P.SHOPID = '${shopUser.id}' and ct.Id = '${element.categoriaId}' ",
         ));
         if (entity.isNotEmpty) {
           final entityProdutct = element.listProduct =

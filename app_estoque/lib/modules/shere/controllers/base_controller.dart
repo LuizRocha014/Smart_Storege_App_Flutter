@@ -24,16 +24,12 @@ abstract class BaseController extends GetxController {
   bool get formKeyValidate => formKey.currentState?.validate() ?? false;
   set isLoading(bool value) => _isLoading.value = value;
 
-  Future<void> startBarcodeScanStream(BuildContext context) async {
-    FlutterBarcodeScanner.scanBarcode(
+  Future<String> startBarcodeScanStream(BuildContext context) async {
+    return await FlutterBarcodeScanner.scanBarcode(
       '#f97516',
       'CANCELAR',
       true,
       ScanMode.BARCODE,
-    ).then(
-      (barcode) async {
-        log(barcode);
-      },
     );
   }
 }

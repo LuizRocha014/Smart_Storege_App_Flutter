@@ -12,8 +12,8 @@ class ShopCustomerService extends BaseService implements IShopCostumerService {
       final repository = instanceManager.get<IShopCostumerRepository>();
       final String urlApi = "$url/api/ShopCustomer/GetAll";
       //final shopId = sharedPreferences.getString("ShopId");
-      if (shopUser.shopId.isEmpty) return [];
-      final retorno = await get(urlApi, query: {'shopId': shopUser.shopId});
+      if (shopUser.id.isEmpty) return [];
+      final retorno = await get(urlApi, query: {'shopId': shopUser.id});
       var itens = (retorno.body as List).map((e) => ShopCostumer.fromJson(e));
       itens.map((e) => e.sync = true);
       await repository.createList(itens.map((e) => e.toJson()));
