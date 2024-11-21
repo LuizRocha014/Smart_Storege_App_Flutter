@@ -34,19 +34,15 @@ class CostumerService extends BaseService implements ICostumerService {
   Future<List<Costumer>> getAll({bool alteracaoNula = false}) async {
     try {
       final repository = instanceManager.get<ICostumerRepository>();
-      final lastUpdate =
-          sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
+      final lastUpdate = sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
       final String urlApi = "$url/api/Costumer/GetAllShopId";
-      final retorno = await get(urlApi,
-          query: {'shopId': shopUser.shopId, 'ultDate': lastUpdate});
+      final retorno = await get(urlApi, query: {'shopId': shopUser.shopId, 'ultDate': lastUpdate});
       if (retorno.body == null) return throw Expando();
-      var category =
-          (retorno.body as List).map((e) => Costumer.fromJson(e)).toList();
+      var category = (retorno.body as List).map((e) => Costumer.fromJson(e)).toList();
       category.map((e) => e.sync = true);
       await repository.createList(category.map((e) => e.toJson()));
-      sharedPreferences.setString(
-          "LastUpdate$runtimeType", DateTime.now().toIso8601String());
-      return [];
+      sharedPreferences.setString("LastUpdate$runtimeType", DateTime.now().toIso8601String());
+      return category;
     } catch (_) {
       return [];
     }

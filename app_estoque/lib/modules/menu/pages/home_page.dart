@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
+import 'package:app_estoque/modules/vendas/page/finalizacao_venda_page.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';
 
 import 'package:app_estoque/utils/assets.dart';
@@ -47,8 +48,7 @@ class _HomePageState extends MState<HomePage, HomeController> {
                       width: MediaQuery.of(context).size.width * 0.08,
                       iconApp),
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.02),
+                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.02),
                     child: TextWidget(
                       "Bem Vindo ${loggerUser.name}",
                       fontSize: font_16,
@@ -59,9 +59,7 @@ class _HomePageState extends MState<HomePage, HomeController> {
               ),
               GestureDetector(
                 onTap: () async {
-                  await instanceManager
-                      .get<IUserService>()
-                      .carregaCep("17055205");
+                  await instanceManager.get<IUserService>().carregaCep("17055205");
                 },
                 child: Image.asset(
                   height: 4.h,
@@ -72,8 +70,7 @@ class _HomePageState extends MState<HomePage, HomeController> {
             ],
           ),
           Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.08),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.08),
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.13,
@@ -83,8 +80,7 @@ class _HomePageState extends MState<HomePage, HomeController> {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.04,
-                    top: MediaQuery.of(context).size.width * 0.0),
+                    left: MediaQuery.of(context).size.width * 0.04, top: MediaQuery.of(context).size.width * 0.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -100,16 +96,14 @@ class _HomePageState extends MState<HomePage, HomeController> {
                             alignment: Alignment.centerLeft,
                             child: Obx(
                               () => TextWidget(
-                                doubleToFormattedReal(double.parse(
-                                    controller.contadorValor.value)),
+                                doubleToFormattedReal(double.parse(controller.contadorValor.value)),
                                 fontSize: font_28,
                               ),
                             )),
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.04),
+                      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.04),
                       child: GestureDetector(
                         onTap: () => context.push(const SelecaoItensPage(
                           tituloPage: "Produtos",
@@ -119,8 +113,7 @@ class _HomePageState extends MState<HomePage, HomeController> {
                           width: MediaQuery.of(context).size.height * 0.05,
                           decoration: BoxDecoration(
                             border: Border.all(color: lightGray),
-                            borderRadius: BorderRadius.circular(
-                                MediaQuery.of(context).size.height * 0.01),
+                            borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.01),
                           ),
                           child: Image.asset(
                               height: MediaQuery.of(context).size.height * 0.01,
@@ -135,13 +128,11 @@ class _HomePageState extends MState<HomePage, HomeController> {
             ),
           ),
           Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.05),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.05),
             child: TextField(
               decoration: InputDecoration(
                 filled: true,
-                fillColor: secundaryColor
-                    .withOpacity(0.9), // Cor de fundo similar à da imagem
+                fillColor: secundaryColor.withOpacity(0.9), // Cor de fundo similar à da imagem
                 hintText: 'Busque uma venda',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: GestureDetector(
@@ -153,8 +144,7 @@ class _HomePageState extends MState<HomePage, HomeController> {
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
+                contentPadding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
               ),
             ),
           ),
@@ -194,21 +184,15 @@ class _HomePageState extends MState<HomePage, HomeController> {
                     crossAxisCount: 3,
                   ),
                   itemCount: controller.listMenuInicial.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      GestureDetector(
-                    onTap: () => controller.acessaPagina(
-                        controller.listMenuInicial[index].gestureCommand,
-                        context),
+                  itemBuilder: (BuildContext context, int index) => GestureDetector(
+                    onTap: () => controller.acessaPagina(controller.listMenuInicial[index].gestureCommand, context),
                     child: Padding(
-                      padding: EdgeInsets.all(
-                          MediaQuery.of(context).size.height * 0.015),
+                      padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.015),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.01,
                         width: MediaQuery.of(context).size.width * 0.01,
                         decoration: BoxDecoration(
-                            color: branco,
-                            border: Border.all(color: lightGray),
-                            borderRadius: BorderRadius.circular(20)),
+                            color: branco, border: Border.all(color: lightGray), borderRadius: BorderRadius.circular(20)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -258,59 +242,51 @@ class _HomePageState extends MState<HomePage, HomeController> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: controller.listSale.length,
                       itemBuilder: (BuildContext context, int index) => Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical:
-                                MediaQuery.of(context).size.height * 0.01),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.11,
-                          decoration: BoxDecoration(
-                              color: branco,
-                              borderRadius: BorderRadius.circular(
-                                  MediaQuery.of(context).size.height * 0.015),
-                              border: Border.all(color: lightGray)),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        MediaQuery.of(context).size.height *
-                                            0.02),
-                                child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    color: secundaryColor,
-                                    borderRadius: BorderRadius.circular(
-                                        MediaQuery.of(context).size.height *
-                                            0.01),
-                                    border: Border.all(color: secundaryColor),
-                                  ),
-                                  child: Image.asset(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                      iconItemProduto),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: MediaQuery.of(context).size.height *
-                                        0.02),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextWidget(
-                                      controller.listSale[index].codigoVenda
-                                          .toUpperCase(),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: font_14,
+                        padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                        child: GestureDetector(
+                          onTap: () {
+                            context.push(FinalizacaoVendaPage(
+                              saleId: controller.listSale[index].id,
+                              resume: true,
+                            ));
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.11,
+                            decoration: BoxDecoration(
+                                color: branco,
+                                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.015),
+                                border: Border.all(color: lightGray)),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.02),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: secundaryColor,
+                                      borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.01),
+                                      border: Border.all(color: secundaryColor),
                                     ),
-                                    CustomRich("Cliente: ",
-                                        controller.listSale[index].cnpj),
-                                  ],
+                                    child: Image.asset(height: MediaQuery.of(context).size.height * 0.05, iconItemProduto),
+                                  ),
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      TextWidget(
+                                        controller.listSale[index].codigoVenda.toUpperCase(),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: font_14,
+                                      ),
+                                      CustomRich("Cliente: ", controller.listSale[index].cnpj),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

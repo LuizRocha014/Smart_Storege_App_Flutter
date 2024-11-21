@@ -1,5 +1,8 @@
 import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
+import 'package:app_estoque/base/models/smartStorege/File/file.dart';
+import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
 import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dart';
+import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
 import 'package:componentes_lr/componentes_lr.dart';
@@ -20,7 +23,7 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
 
   @override
   Future<List<Sale>> getVendas() async {
-    final query = ''' SELECT c.cnpj, * FROM ${infosTableDatabase.tableName} s
+    final query = ''' SELECT c.cnpj, s.* FROM ${infosTableDatabase.tableName} s
                       JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
                       JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
                       group by s.id
@@ -30,6 +33,23 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
     if (entity.isEmpty) return [];
     //return entity.
     final returo = entity.map((e) => Sale.fromJson(e)).toList();
+    return returo;
+  }
+
+  @override
+  Future<List<Product>> getProduct(String saleId) async {
+    final query = ''' SELECT P.*, T.numberProd AS numberProd FROM ${infosTableDatabase.tableName} s
+                      JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
+                      JOIN ${Product.table.tableName} P ON T.ProductId = P.ID
+                      LEFT JOIN ${ProductFile.table.tableName} PDF ON PDF.productId = P.ID
+                      LEFT JOIN ${FileIMG.table.tableName} F ON PDF.fileId = F.ID
+                      WHERE S.ID = '$saleId'
+                      ORDER BY S.createdAt DESC
+                      ''';
+    final entity = await context.rawQuery(query);
+    if (entity.isEmpty) return [];
+    //return entity.
+    final returo = entity.map((e) => Product.fromJson(e)).toList();
     return returo;
   }
 

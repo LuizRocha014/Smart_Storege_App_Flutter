@@ -1,5 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icostumer_repository.dart';
+import 'package:app_estoque/base/service/interface/icostumer_service.dart';
 import 'package:app_estoque/modules/cliente/page/novo_cliente_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/synchronize.dart';
@@ -21,8 +22,8 @@ class ClienteController extends BaseController {
 
   Future<void> carregaDados() async {
     try {
-      listCostumer.value =
-          await instanceManager.get<ICostumerRepository>().getCostumers();
+      await instanceManager.get<ICostumerService>().getAll();
+      listCostumer.value = await instanceManager.get<ICostumerRepository>().getCostumers();
       listCostumer.refresh();
       instanceManager.get<Synchronism>().fullSync();
     } catch (_) {}

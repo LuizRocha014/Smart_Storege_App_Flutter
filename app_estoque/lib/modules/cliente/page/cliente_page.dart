@@ -41,8 +41,7 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                 ))
               : ListView.builder(
                   itemCount: controller.listCostumer.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      GestureDetector(
+                  itemBuilder: (BuildContext context, int index) => GestureDetector(
                     onTap: () {
                       if (widget.selectItem) {
                         controller.selectItem(controller.listCostumer[index]);
@@ -59,13 +58,10 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                               Container(
                                 height: 8.h,
                                 width: 16.w,
-                                decoration: BoxDecoration(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.circular(1.h)),
+                                decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(1.h)),
                                 child: Center(
                                   child: TextWidget(
-                                    returnInitialsName(
-                                        controller.listCostumer[index].nome),
+                                    returnInitialsName(controller.listCostumer[index].nome),
                                     fontSize: font_18,
                                     fontWeight: FontWeight.w500,
                                     textColor: branco,
@@ -83,12 +79,8 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: font_16,
                                   ),
-                                  CustomRich("CNPJ: ",
-                                      controller.listCostumer[index].cnpj),
-                                  CustomRich(
-                                      "Telefone: ",
-                                      controller.listCostumer[index].phone ??
-                                          " - "),
+                                  CustomRich("CNPJ: ", controller.listCostumer[index].cnpj),
+                                  CustomRich("Telefone: ", controller.listCostumer[index].phone ?? " - "),
                                 ],
                               )
                             ],

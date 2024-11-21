@@ -1,5 +1,6 @@
 import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/icostumer_repository.dart';
+import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/cliente/controller/cliente_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
@@ -68,6 +69,14 @@ class NovoClienteControlle extends BaseController {
           _textButton.refresh();
           break;
       }
+    }
+  }
+
+  void carregaCep(String cep) async {
+    final endereco = await instanceManager.get<IUserService>().carregaCep(cep);
+    if (endereco != null) {
+      controllerBairro.text = endereco.bairro;
+      controllerEndereco.text = endereco.logradouro;
     }
   }
 

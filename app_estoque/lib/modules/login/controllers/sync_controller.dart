@@ -18,9 +18,7 @@ class SyncController extends BaseController {
     try {
       await instanceManager.get<Synchronism>().fullSync(forcaSincronismo: true);
       if (!teveErro.value) {
-        Future.delayed(const Duration(seconds: 1), () {
-          context.pushAndRemoveUntil(const HomePage());
-        });
+        context.pushAndRemoveUntil(const HomePage());
       }
     } catch (e) {
       teveErro.value = true;
@@ -32,8 +30,7 @@ class SyncController extends BaseController {
 
   Future<void> backButton() async {
     try {
-      final lastTimeUpdated =
-          await secureStorage.readSecureStorage('LastTimeUpdated') ?? "";
+      final lastTimeUpdated = await secureStorage.readSecureStorage('LastTimeUpdated') ?? "";
       if (lastTimeUpdated.isNotEmpty) {
         context.pushAndRemoveUntil(const HomePage());
       } else {

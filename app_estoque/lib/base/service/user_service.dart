@@ -1,3 +1,4 @@
+import 'package:app_estoque/base/models/dto/endereco/endereco_dto.dart';
 import 'package:app_estoque/base/service/base_service.dart';
 import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/base/models/smartStorege/user/user.dart';
@@ -18,13 +19,14 @@ class UserService extends BaseService implements IUserService {
   }
 
   @override
-  Future<String?> carregaCep(String cep) async {
+  Future<Endereco?> carregaCep(String cep) async {
     try {
-      final String urlApi = "https://viacep.com.br/ws/${cep}/json/";
+      final String urlApi = "https://viacep.com.br/ws/$cep/json/";
       final retorno = await get(urlApi, query: {});
       if (temErroRequisicao(retorno)) throw Exception();
       if (retorno.body.toString().isEmpty) throw Exception();
-      return retorno.body;
+      final endereco = Endereco.fromJson(retorno.body);
+      return endereco;
     } catch (_) {
       return null;
     }

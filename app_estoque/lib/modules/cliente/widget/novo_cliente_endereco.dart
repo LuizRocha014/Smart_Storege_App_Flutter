@@ -24,6 +24,7 @@ class NovoClienteEndereco extends StatelessWidget {
             borderColor: gray,
             internalLabel: 'Insira o CEP',
             labelInterno: '',
+            onTapOutside: (value) async => controller.carregaCep(controller.controllerCep.text),
             inputFormatters: [CepInputFormatter()],
           ),
         ),

@@ -9,7 +9,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/state_manager.dart';
 
 class FinalizacaoVendaPage extends StatefulWidget {
-  const FinalizacaoVendaPage({super.key});
+  final String? saleId;
+  final bool resume;
+  const FinalizacaoVendaPage({super.key, this.saleId, this.resume = false});
 
   @override
   State<FinalizacaoVendaPage> createState() => _MyWidgetState();
@@ -18,7 +20,7 @@ class FinalizacaoVendaPage extends StatefulWidget {
 class _MyWidgetState extends MState<FinalizacaoVendaPage, FinalizacaoVendaController> {
   @override
   void initState() {
-    super.registerController(FinalizacaoVendaController());
+    super.registerController(FinalizacaoVendaController(saleId: widget.saleId, resume: widget.resume));
 
     super.initState();
   }
