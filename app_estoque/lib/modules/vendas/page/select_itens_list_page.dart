@@ -36,7 +36,6 @@ class _SelecaoItensPageState
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      icon: Icons.qr_code_scanner,
       titulo: widget.tituloPage,
       child: Stack(
         children: [
@@ -79,6 +78,8 @@ class _SelecaoItensPageState
                               controller.listProdutos[index].listProduct!
                                       .isNotEmpty
                                   ? ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       itemCount: controller.listProdutos[index]
                                           .listProduct!.length,
                                       shrinkWrap: true,

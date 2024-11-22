@@ -46,7 +46,7 @@ class Synchronism {
 
   Future<void> fullSync(
       {bool forcaDataAlteracaoNula = false,
-      bool forcaSincronismo = true}) async {
+      bool forcaSincronismo = false}) async {
     try {
       if (busy != null) {
         await busy!.future;

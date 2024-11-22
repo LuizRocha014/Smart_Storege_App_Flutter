@@ -195,6 +195,7 @@ class FinalizacaoVendaController extends BaseController {
   }
 
   void createObj() async {
+    isLoading = true;
     if (listProdutosSelecionados.isEmpty) {
       return poPupErrorDefault(context, "Atenção!",
           "Nenhum produto foi selecionado, volte e selecione ao menos um produto");
@@ -239,6 +240,7 @@ class FinalizacaoVendaController extends BaseController {
     // ignore: use_build_context_synchronously
     //instanceManager.get<HomeController>().carregaDados();
     context.pushAndRemoveUntil(const HomePage());
+    isLoading = false;
   }
 
   String gerarCodigoRandomico() {

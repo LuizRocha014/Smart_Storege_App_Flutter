@@ -37,7 +37,7 @@ class FileService extends BaseService implements IFileService {
           sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
       final repository = instanceManager.get<IFileRepository>();
       final String urlApi = "$url/api/File/GetAll";
-      final retorno = await get(urlApi, query: {"ultDate": lastUpdate});
+      final retorno = await get(urlApi, query: {"ultDate": ""});
       if (retorno.body == null) return [];
       var category = (retorno.body as List).map((e) => FileIMG.fromJson(e));
       list.addAll(category);

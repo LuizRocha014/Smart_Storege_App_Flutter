@@ -18,9 +18,6 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
     try {
       final query = '''
         SELECT SUM(S.VALOR) as Valor FROM ${infosTableDatabase.tableName} s
-                      JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
-                      JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
-                      WHERE C.SHOPID = '${shopUser.id}'
                       ''';
       final entity = await context.rawQuery(query);
       if (entity.isEmpty) return "0";

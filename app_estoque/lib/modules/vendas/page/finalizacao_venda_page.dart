@@ -204,13 +204,15 @@ class _MyWidgetState
             padding: EdgeInsets.symmetric(vertical: 1.h),
             child: Align(
               alignment: AlignmentDirectional.bottomCenter,
-              child: LoadingButtonWidget(
-                  title: "FINALIZAR",
-                  color: secundaryColor,
-                  onPressed:
-                      !widget.resume ? () => controller.createObj() : () {},
-                  mostraTexto: !controller.isLoading,
-                  isLoading: controller.isLoading),
+              child: Obx(
+                () => LoadingButtonWidget(
+                    title: "FINALIZAR",
+                    color: secundaryColor,
+                    onPressed:
+                        !widget.resume ? () => controller.createObj() : () {},
+                    mostraTexto: !controller.isLoading,
+                    isLoading: controller.isLoading),
+              ),
             ),
           )
         ],

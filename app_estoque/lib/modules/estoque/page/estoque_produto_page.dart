@@ -29,7 +29,7 @@ class _EstoqueProdutosPageState
 
   @override
   void dispose() {
-    instanceManager.get<Synchronism>().fullSync();
+    instanceManager.get<Synchronism>().fullSync(forcaSincronismo: true);
     super.dispose();
   }
 
@@ -81,6 +81,7 @@ class _EstoqueProdutosPageState
                           controller.produtosEstoque[index].listProduct!
                                   .isNotEmpty
                               ? ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount: controller.produtosEstoque[index]
                                       .listProduct!.length,
                                   shrinkWrap: true,

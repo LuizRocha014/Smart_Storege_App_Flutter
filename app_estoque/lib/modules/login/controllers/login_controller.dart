@@ -28,7 +28,7 @@ class LoginController extends BaseController {
   void iniciaControlador() {
     userName = TextEditingController();
     passWord = TextEditingController();
-    mostraSenha = RxBool(false);
+    mostraSenha = RxBool(true);
     userName.text = "LuizRocha";
     passWord.text = "Aplicativo@2024";
   }

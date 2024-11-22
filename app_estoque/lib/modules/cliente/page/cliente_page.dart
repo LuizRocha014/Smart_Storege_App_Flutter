@@ -93,10 +93,15 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      TextWidget(
-                                        controller.listCostumer[index].nome,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: font_16,
+                                      SizedBox(
+                                        width: 65.w,
+                                        child: TextWidget(
+                                          overflow: TextOverflow.visible,
+                                          maxLines: 2,
+                                          controller.listCostumer[index].nome,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: font_16,
+                                        ),
                                       ),
                                       CustomRich("CNPJ: ",
                                           controller.listCostumer[index].cnpj),

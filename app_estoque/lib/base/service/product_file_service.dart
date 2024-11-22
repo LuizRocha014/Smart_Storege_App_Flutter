@@ -14,7 +14,7 @@ class ProductFileService extends BaseService implements IProductFileService {
       final lastUpdate =
           sharedPreferences.getString("LastUpdate$runtimeType") ?? "";
       final String urlApi = "$url/api/ProductFile/GetAll";
-      final retorno = await get(urlApi, query: {"ultDate": lastUpdate});
+      final retorno = await get(urlApi, query: {"ultDate": ""});
       if (retorno.body == null) return [];
       var category = (retorno.body as List).map((e) => ProductFile.fromJson(e));
       list.addAll(category);
