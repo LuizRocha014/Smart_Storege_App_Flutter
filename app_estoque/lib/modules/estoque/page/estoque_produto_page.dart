@@ -5,6 +5,8 @@ import 'package:app_estoque/modules/produtos/widget/card_produto_widget.dart';
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/synchronize.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,12 +20,17 @@ class EstoqueProdutosPage extends StatefulWidget {
 
 class _EstoqueProdutosPageState
     extends MState<EstoqueProdutosPage, EstoqueProdutoController> {
-  int quantity = 1;
   @override
   void initState() {
     super.registerController(EstoqueProdutoController());
     controller.context = context;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    instanceManager.get<Synchronism>().fullSync();
+    super.dispose();
   }
 
   @override
@@ -40,81 +47,89 @@ class _EstoqueProdutosPageState
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.05),
         child: Obx(
-          () => Visibility(
-            visible: controller.produtosEstoque.isNotEmpty,
-            replacement: const Center(
-                child: TextWidget(
-              "Nenhum produto encontrado",
-              textColor: lightGray,
-            )),
-            child: Obx(
-              () => ListView.builder(
-                itemCount: controller.produtosEstoque.length,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) => Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 2.h),
-                        child: TextWidget(
-                          fontSize: font_16,
-                          fontWeight: FontWeight.w500,
-                          controller.produtosEstoque[index].categoriaName!,
-                          textColor: preto,
-                        ),
+          () => controller.produtosEstoque.isEmpty && !controller.isLoading
+              ? const Center(
+                  child: TextWidget(
+                    "Nenhum produto encontrado",
+                    textColor: lightGray,
+                  ),
+                )
+              : controller.produtosEstoque.isEmpty && controller.isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
                       ),
-                    ),
-                    controller.produtosEstoque[index].listProduct!.isNotEmpty
-                        ? ListView.builder(
-                            itemCount: controller
-                                .produtosEstoque[index].listProduct!.length,
-                            shrinkWrap: true,
-                            itemBuilder:
-                                (BuildContext context, int indexProd) =>
-                                    GestureDetector(
-                              onTap: () {
-                                context.push(CadastroProdutoPage(
-                                  product: controller.produtosEstoque[index]
-                                      .listProduct![indexProd],
-                                ));
-                              },
-                              child: CardProdutoWidget(
-                                  bytes: controller.produtosEstoque[index]
-                                      .listProduct![indexProd].image!,
-                                  categoriaProduto: controller
-                                      .produtosEstoque[index]
-                                      .listProduct![indexProd]
-                                      .description,
-                                  brand: controller.produtosEstoque[index]
-                                      .listProduct![indexProd].brand,
-                                  quantidadeProduto: controller
-                                      .produtosEstoque[index]
-                                      .listProduct![indexProd]
-                                      .totalValue
-                                      .toString(),
-                                  tituloProduto: controller
-                                      .produtosEstoque[index]
-                                      .listProduct![indexProd]
-                                      .description,
-                                  valorProduto: doubleToFormattedReal(controller
+                    )
+                  : ListView.builder(
+                      itemCount: controller.produtosEstoque.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) => Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 2.h),
+                              child: TextWidget(
+                                fontSize: font_16,
+                                fontWeight: FontWeight.w500,
+                                controller
+                                    .produtosEstoque[index].categoriaName!,
+                                textColor: preto,
+                              ),
+                            ),
+                          ),
+                          controller.produtosEstoque[index].listProduct!
+                                  .isNotEmpty
+                              ? ListView.builder(
+                                  itemCount: controller.produtosEstoque[index]
+                                      .listProduct!.length,
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int indexProd) =>
+                                          GestureDetector(
+                                    onTap: () {
+                                      context.push(CadastroProdutoPage(
+                                        product: controller
+                                            .produtosEstoque[index]
+                                            .listProduct![indexProd],
+                                      ));
+                                    },
+                                    child: CardProdutoWidget(
+                                      bytes: controller.produtosEstoque[index]
+                                          .listProduct![indexProd].image!,
+                                      categoriaProduto: controller
                                           .produtosEstoque[index]
                                           .listProduct![indexProd]
-                                          .price ??
-                                      0)),
-                            ),
-                          )
-                        : const Align(
-                            alignment: Alignment.center,
-                            child: TextWidget(
-                              "Nenhum Produto encontrado",
-                              textColor: lightGray,
-                            )),
-                  ],
-                ),
-              ),
-            ),
-          ),
+                                          .description,
+                                      brand: controller.produtosEstoque[index]
+                                          .listProduct![indexProd].brand,
+                                      quantidadeProduto: controller
+                                          .produtosEstoque[index]
+                                          .listProduct![indexProd]
+                                          .totalValue
+                                          .toString(),
+                                      tituloProduto: controller
+                                          .produtosEstoque[index]
+                                          .listProduct![indexProd]
+                                          .description,
+                                      valorProduto: doubleToFormattedReal(
+                                          controller
+                                                  .produtosEstoque[index]
+                                                  .listProduct![indexProd]
+                                                  .price ??
+                                              0),
+                                    ),
+                                  ),
+                                )
+                              : const Align(
+                                  alignment: Alignment.center,
+                                  child: TextWidget(
+                                    "Nenhum Produto encontrado",
+                                    textColor: lightGray,
+                                  )),
+                        ],
+                      ),
+                    ),
         ),
       ),
     );

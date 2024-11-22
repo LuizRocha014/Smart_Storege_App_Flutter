@@ -13,10 +13,12 @@ import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:app_estoque/utils/infos_statica.dart' as sai;
+import 'package:get/get.dart';
 
 class LoginController extends BaseController {
-  late TextEditingController userName;
   late TextEditingController passWord;
+  late TextEditingController userName;
+  late RxBool mostraSenha;
   late User usuarioLogin;
   late BoletoUtils boletoUtils;
   BoletoValidado? boletoValidado;
@@ -26,9 +28,14 @@ class LoginController extends BaseController {
   void iniciaControlador() {
     userName = TextEditingController();
     passWord = TextEditingController();
-
+    mostraSenha = RxBool(false);
     userName.text = "LuizRocha";
     passWord.text = "Aplicativo@2024";
+  }
+
+  void flagSenha() {
+    mostraSenha.value = !mostraSenha.value;
+    mostraSenha.refresh();
   }
 
   Future<void> login() async {

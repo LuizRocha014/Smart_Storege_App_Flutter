@@ -5,6 +5,7 @@ import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/state_manager.dart';
 
 class LoginPage extends StatefulWidget {
@@ -68,16 +69,23 @@ class _LoginPageState extends MState<LoginPage, LoginController> {
                 SizedBox(
                   height: 2.h,
                 ),
-                TextFieldWidget(
-                  borderColor: gray,
-                  controller: controller.passWord,
-                  labelInterno: "Senha",
-                  color: branco,
-                  textColor: preto,
-                  externalLabelColor: preto,
-                  externalLabel: "Senha",
-                  externalLabelFontWeight: FontWeight.w500,
-                  internalLabel: '',
+                Obx(
+                  () => TextFieldWidget(
+                    borderColor: gray,
+                    controller: controller.passWord,
+                    labelInterno: "Senha",
+                    color: branco,
+                    textColor: preto,
+                    externalLabelColor: preto,
+                    externalLabel: "Senha",
+                    externalLabelFontWeight: FontWeight.w500,
+                    internalLabel: '',
+                    suffixIcon: controller.mostraSenha.value
+                        ? FontAwesomeIcons.eye
+                        : FontAwesomeIcons.eyeSlash,
+                    onTapSuffixIcon: () => controller.flagSenha(),
+                    obscureText: controller.mostraSenha.value,
+                  ),
                 ),
                 SizedBox(
                   height: 2.h,

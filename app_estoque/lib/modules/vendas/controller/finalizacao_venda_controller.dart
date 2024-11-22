@@ -6,6 +6,7 @@ import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/isale_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/itransaction_repository.dart';
+import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/modules/menu/pages/home_page.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/modules/vendas/controller/nova_venda_controller.dart';
@@ -85,12 +86,8 @@ class FinalizacaoVendaController extends BaseController {
         valorCompra.value =
             (double.parse(valorCompra.string) + valor).toString();
       }
-      if (valorDesconto.text != "0") {
-        valorCompra.value = (double.parse(valorCompra.value) *
-                (double.parse(valorDesconto.text) / 100))
-            .toString();
-        valorCompra.refresh();
-      }
+
+      valorCompra.refresh();
     } catch (_) {}
   }
 
@@ -227,9 +224,11 @@ class FinalizacaoVendaController extends BaseController {
           createdAt: DateTime.now(),
           active: true));
       element.quantity = (element.quantity! - element.numbProduct);
+      element.sync = false;
       await instanceManager
           .get<IProductRepository>()
           .createOrReplace(element.toJson());
+      await instanceManager.get<IProductService>().updateItem(element);
     }
     await instanceManager
         .get<ISaleRepository>()

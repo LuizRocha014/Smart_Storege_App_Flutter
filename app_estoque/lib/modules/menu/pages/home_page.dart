@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:app_estoque/base/service/interface/iuser_service.dart';
 import 'package:app_estoque/modules/menu/controllers/new_menu_inicial_controller.dart';
 import 'package:app_estoque/modules/vendas/page/finalizacao_venda_page.dart';
 import 'package:app_estoque/modules/vendas/page/select_itens_list_page.dart';

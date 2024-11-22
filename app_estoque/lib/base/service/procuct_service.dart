@@ -48,4 +48,25 @@ class ProductService extends BaseService implements IProductService {
       return false;
     }
   }
+
+  @override
+  Future<bool> updateItem(Product item) async {
+    try {
+      final repository = instanceManager.get<IProductRepository>();
+      final String urlApi = "$url/api/Product/AddProductShop";
+
+      await post(
+        urlApi,
+        item.toJson(),
+      ).then((retorno) async {
+        if (!temErroRequisicao(retorno)) {
+          item.sync = true;
+          repository.createOrReplace(item.toJson());
+        }
+      });
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }

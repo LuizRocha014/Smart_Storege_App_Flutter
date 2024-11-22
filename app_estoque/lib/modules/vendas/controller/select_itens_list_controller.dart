@@ -8,14 +8,17 @@ import 'package:app_estoque/modules/vendas/page/nova_venda_page.dart';
 import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:get/get.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class SelectItensController extends BaseController {
   late RxList<ProdutctDto> _listProdutos;
   late List<Product> _itensSelecionados;
   late RxInt _contador;
+  late RxBool filtro;
   @override
   Future<void> iniciaControlador() async {
     _listProdutos = RxList();
+    filtro = RxBool(false);
     _itensSelecionados = [];
     _contador = 0.obs;
     carregaLista();
@@ -32,8 +35,10 @@ class SelectItensController extends BaseController {
           .get<IProductRepository>()
           .getProdutos()
           .then(_listProdutos.call);
+    } catch (_) {
+    } finally {
       isLoading = false;
-    } catch (_) {}
+    }
   }
 
   void adicionaItemCompra(int index, int indexProd) {
@@ -69,5 +74,15 @@ class SelectItensController extends BaseController {
     } catch (e) {
       log(e.toString());
     }
+  }
+
+  void buscaProduto() async {
+    await startBarcodeScanStream(context);
+    final qrCode = QrCode.fromData(
+      data: "",
+      errorCorrectLevel: QrErrorCorrectLevel.H,
+    );
+    _listProdutos.where((e) => e.codProduct == qrCode.toString());
+    _listProdutos.refresh();
   }
 }

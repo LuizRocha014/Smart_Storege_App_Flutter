@@ -23,6 +23,12 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
     super.initState();
   }
 
+  // @override
+  // void dispose() {
+  //   instanceManager.get<Synchronism>().fullSync();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
@@ -32,66 +38,84 @@ class _ClientePageState extends MState<ClientePage, ClienteController> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
         child: Obx(
-          () => controller.listCostumer.isEmpty
+          () => controller.listCostumer.isEmpty && !controller.isLoading
               ? Center(
                   child: TextWidget(
                   "Nenhum cliente encontrado",
                   textColor: lightGray,
                   fontSize: font_14,
                 ))
-              : ListView.builder(
-                  itemCount: controller.listCostumer.length,
-                  itemBuilder: (BuildContext context, int index) => GestureDetector(
-                    onTap: () {
-                      if (widget.selectItem) {
-                        controller.selectItem(controller.listCostumer[index]);
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 1.h,
+              : controller.listCostumer.isEmpty && controller.isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
                       ),
-                      child: Column(
-                        children: [
-                          Row(
+                    )
+                  : ListView.builder(
+                      itemCount: controller.listCostumer.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          GestureDetector(
+                        onTap: () {
+                          if (widget.selectItem) {
+                            controller
+                                .selectItem(controller.listCostumer[index]);
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 1.h,
+                          ),
+                          child: Column(
                             children: [
-                              Container(
-                                height: 8.h,
-                                width: 16.w,
-                                decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(1.h)),
-                                child: Center(
-                                  child: TextWidget(
-                                    returnInitialsName(controller.listCostumer[index].nome),
-                                    fontSize: font_18,
-                                    fontWeight: FontWeight.w500,
-                                    textColor: branco,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  TextWidget(
-                                    controller.listCostumer[index].nome,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: font_16,
+                                  Container(
+                                    height: 8.h,
+                                    width: 16.w,
+                                    decoration: BoxDecoration(
+                                        color: primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(1.h)),
+                                    child: Center(
+                                      child: TextWidget(
+                                        returnInitialsName(controller
+                                            .listCostumer[index].nome),
+                                        fontSize: font_18,
+                                        fontWeight: FontWeight.w500,
+                                        textColor: branco,
+                                      ),
+                                    ),
                                   ),
-                                  CustomRich("CNPJ: ", controller.listCostumer[index].cnpj),
-                                  CustomRich("Telefone: ", controller.listCostumer[index].phone ?? " - "),
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextWidget(
+                                        controller.listCostumer[index].nome,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: font_16,
+                                      ),
+                                      CustomRich("CNPJ: ",
+                                          controller.listCostumer[index].cnpj),
+                                      CustomRich(
+                                          "Telefone: ",
+                                          controller
+                                                  .listCostumer[index].phone ??
+                                              " - "),
+                                    ],
+                                  )
                                 ],
-                              )
+                              ),
+                              SizedBox(height: 2.h),
+                              const Divider()
                             ],
                           ),
-                          SizedBox(height: 2.h),
-                          const Divider()
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
         ),
       ),
     );

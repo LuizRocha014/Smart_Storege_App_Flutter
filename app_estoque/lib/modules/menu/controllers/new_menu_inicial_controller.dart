@@ -155,6 +155,7 @@ class HomeController extends BaseController {
                         shopUser = e;
                         iniciaControlador();
                         await carregaValorVendas();
+                        context.pop();
                       },
                       child: SizedBox(
                           child: Padding(

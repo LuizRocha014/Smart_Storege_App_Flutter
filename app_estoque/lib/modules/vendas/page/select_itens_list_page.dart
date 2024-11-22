@@ -4,6 +4,8 @@ import 'package:app_estoque/modules/vendas/controller/select_itens_list_controll
 import 'package:app_estoque/utils/backgrounds/background_principal.dart';
 import 'package:app_estoque/utils/cores_do_aplicativo.dart';
 import 'package:app_estoque/utils/fonts.dart';
+import 'package:app_estoque/utils/synchronize.dart';
+import 'package:app_estoque/utils/utils_exports.dart';
 import 'package:componentes_lr/componentes_lr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,8 @@ class SelecaoItensPage extends StatefulWidget {
   State<SelecaoItensPage> createState() => _SelecaoItensPageState();
 }
 
-class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensController> {
+class _SelecaoItensPageState
+    extends MState<SelecaoItensPage, SelectItensController> {
   @override
   void initState() {
     super.registerController(SelectItensController());
@@ -24,14 +27,22 @@ class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensControl
     deleteController = true;
   }
 
+  // @override
+  // void dispose() {
+  //   instanceManager.get<Synchronism>().fullSync();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
+      icon: Icons.qr_code_scanner,
       titulo: widget.tituloPage,
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.05),
             child: Obx(
               () => controller.listProdutos.isEmpty && !controller.isLoading
                   ? const Center(
@@ -40,14 +51,17 @@ class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensControl
                         textColor: lightGray,
                       ),
                     )
-                  : controller.listProdutos.isNotEmpty && controller.isLoading
-                      ? const CircularProgressIndicator(
-                          color: primaryColor,
+                  : controller.listProdutos.isEmpty && controller.isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,
+                          ),
                         )
                       : ListView.builder(
                           itemCount: controller.listProdutos.length,
                           shrinkWrap: true,
-                          itemBuilder: (BuildContext context, int index) => Column(
+                          itemBuilder: (BuildContext context, int index) =>
+                              Column(
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
@@ -56,23 +70,40 @@ class _SelecaoItensPageState extends MState<SelecaoItensPage, SelectItensControl
                                   child: TextWidget(
                                     fontSize: font_16,
                                     fontWeight: FontWeight.w500,
-                                    controller.listProdutos[index].categoriaName!,
+                                    controller
+                                        .listProdutos[index].categoriaName!,
                                     textColor: preto,
                                   ),
                                 ),
                               ),
-                              controller.listProdutos[index].listProduct!.isNotEmpty
+                              controller.listProdutos[index].listProduct!
+                                      .isNotEmpty
                                   ? ListView.builder(
-                                      itemCount: controller.listProdutos[index].listProduct!.length,
+                                      itemCount: controller.listProdutos[index]
+                                          .listProduct!.length,
                                       shrinkWrap: true,
-                                      itemBuilder: (BuildContext context, int indexProd) => CardItemSelectWidget(
-                                        imagem: controller.listProdutos[index].listProduct![indexProd].image,
-                                        titulo: controller.listProdutos[index].listProduct![indexProd].description,
-                                        valor: controller.listProdutos[index].listProduct![indexProd].price.toString(),
-                                        quantidade:
-                                            controller.listProdutos[index].listProduct![indexProd].numbProduct.toString(),
-                                        onTapMore: () => controller.adicionaItemCompra(index, indexProd),
-                                        onTapless: () => controller.removeItemCompra(index, indexProd),
+                                      itemBuilder: (BuildContext context,
+                                              int indexProd) =>
+                                          CardItemSelectWidget(
+                                        imagem: controller.listProdutos[index]
+                                            .listProduct![indexProd].image,
+                                        titulo: controller
+                                            .listProdutos[index]
+                                            .listProduct![indexProd]
+                                            .description,
+                                        valor: controller.listProdutos[index]
+                                            .listProduct![indexProd].price
+                                            .toString(),
+                                        quantidade: controller
+                                            .listProdutos[index]
+                                            .listProduct![indexProd]
+                                            .numbProduct
+                                            .toString(),
+                                        onTapMore: () =>
+                                            controller.adicionaItemCompra(
+                                                index, indexProd),
+                                        onTapless: () => controller
+                                            .removeItemCompra(index, indexProd),
                                       ),
                                     )
                                   : const Align(

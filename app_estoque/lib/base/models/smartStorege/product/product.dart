@@ -25,8 +25,8 @@ class Product extends Core {
   late String additionalInfo;
   @JsonKey(includeToJson: false)
   late int numbProduct;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  late Uint8List? image;
+  @JsonKey(includeToJson: false, includeFromJson: false, defaultValue: null)
+  late Uint8List? image = Uint8List(0);
   @JsonKey(includeToJson: false)
   final String? base64Image;
   @JsonKey(includeToJson: false)

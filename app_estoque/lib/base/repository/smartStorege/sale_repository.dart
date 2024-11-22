@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:app_estoque/base/models/smartStorege/Customer/costumer.dart';
 import 'package:app_estoque/base/models/smartStorege/File/file.dart';
 import 'package:app_estoque/base/models/smartStorege/ProductFile/product_file.dart';
-import 'package:app_estoque/base/models/smartStorege/ShopUser/shop_user.dart';
 import 'package:app_estoque/base/models/smartStorege/Transaction/transaction.dart';
 import 'package:app_estoque/base/models/smartStorege/product/product.dart';
 import 'package:app_estoque/base/models/smartStorege/venda/sale.dart';
@@ -16,19 +15,26 @@ class SaleRepository extends BaseRepository<Sale> implements ISaleRepository {
 
   @override
   Future<String> getValortotalVendas() async {
-    final query =
-        ''' SELECT SUM(SL.VALOR) as Valor FROM ${infosTableDatabase.tableName} SL
+    try {
+      final query = '''
+        SELECT SUM(S.VALOR) as Valor FROM ${infosTableDatabase.tableName} s
+                      JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
+                      JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
+                      WHERE C.SHOPID = '${shopUser.id}'
                       ''';
-    final entity = await context.rawQuery(query);
-    if (entity.isEmpty) return "0";
-    //return entity.
-    final retorn = entity.first['Valor'].toString();
-    return retorn.contains("null") ? "0" : retorn;
+      final entity = await context.rawQuery(query);
+      if (entity.isEmpty) return "0";
+      //return entity.
+      final retorn = entity.first['Valor'].toString();
+      return retorn.contains("null") ? "0" : retorn;
+    } catch (_) {
+      return "0";
+    }
   }
 
   @override
   Future<List<Sale>> getVendas() async {
-    final query = ''' SELECT c.cnpj, s.* FROM ${infosTableDatabase.tableName} s
+    final query = ''' SELECT  c.cnpj, s.* FROM ${infosTableDatabase.tableName} s
                       JOIN ${Transactions.table.tableName} t on t.SaleId = s.id
                       JOIN ${Costumer.table.tableName} c on t.CustomerId = c.id
                       WHERE C.SHOPID = '${shopUser.id}'

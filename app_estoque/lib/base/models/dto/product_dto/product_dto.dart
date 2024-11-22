@@ -8,6 +8,7 @@ part 'product_dto.g.dart';
 class ProdutctDto {
   final String? categoriaName;
   final String? categoriaId;
+  final String? codProduct;
   @JsonKey(includeFromJson: false, includeToJson: false)
   List<Product>? listProduct;
 
@@ -15,6 +16,7 @@ class ProdutctDto {
     List<Product>? listProduct,
     this.categoriaName,
     this.categoriaId,
+    this.codProduct,
   }) : listProduct = listProduct ?? [];
 
   factory ProdutctDto.fromJson(Map<String, dynamic> json) =>

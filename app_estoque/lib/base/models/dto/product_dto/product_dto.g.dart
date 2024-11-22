@@ -9,10 +9,12 @@ part of 'product_dto.dart';
 ProdutctDto _$ProdutctDtoFromJson(Map<String, dynamic> json) => ProdutctDto(
       categoriaName: json['categoriaName'] as String?,
       categoriaId: json['categoriaId'] as String?,
+      codProduct: json['codProduct'] as String?,
     );
 
 Map<String, dynamic> _$ProdutctDtoToJson(ProdutctDto instance) =>
     <String, dynamic>{
       'categoriaName': instance.categoriaName,
       'categoriaId': instance.categoriaId,
+      'codProduct': instance.codProduct,
     };

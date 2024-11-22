@@ -12,6 +12,7 @@ import 'package:app_estoque/base/repository/interface/smartStorege/icategory_rep
 import 'package:app_estoque/base/repository/interface/smartStorege/ifile_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_file_repository.dart';
 import 'package:app_estoque/base/repository/interface/smartStorege/iproduct_repository.dart';
+import 'package:app_estoque/base/service/interface/iproduct_service.dart';
 import 'package:app_estoque/modules/estoque/controller/estoque_produto_controller.dart';
 import 'package:app_estoque/modules/shere/controllers/base_controller.dart';
 import 'package:app_estoque/utils/infos_statica.dart';
@@ -148,7 +149,7 @@ class CadastroProdutoController extends BaseController {
         product!.brand = marcaController.text;
         product!.codProduct = codProduto.value;
         product!.sku = skuController.text;
-        product!.totalValue = double.parse(quantController.text);
+        product!.quantity = int.parse(quantController.text);
         product!.purchasePrice = double.parse(
           controllerValorCompra.text
               .replaceAll('R', '')
@@ -200,6 +201,7 @@ class CadastroProdutoController extends BaseController {
         await instanceManager
             .get<IProductRepository>()
             .createOrReplace(product!.toJson());
+        await instanceManager.get<IProductService>().updateItem(product!);
       } else {
         final prodID = const Uuid().v4();
         if (mostraImagem.value) {
